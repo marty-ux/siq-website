@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trust &amp; Security | Scalient IQ — Built to SOC 2 Type II Controls</title>
+<meta name="description" content="Scalient IQ security posture: SOC 2 Type II controls aligned (audit in progress), CCPA-compliant, AES-256 encryption, AWS US, read-only OAuth, HITL governance, sub-processor transparency.">
+<link rel="canonical" href="https://scalientiq.com/trust.html">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://scalientiq.com/trust.html">
+<meta property="og:title" content="Trust &amp; Security | Scalient IQ">
+<meta property="og:description" content="Built to SOC 2 Type II controls. Read-only OAuth. HITL governance. Customer controls every permission scope.">
+<meta property="og:image" content="https://scalientiq.com/og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Trust & Security | Scalient IQ",
+  "url": "https://scalientiq.com/trust.html",
+  "description": "Scalient IQ security and data handling overview — SOC 2 Type II controls aligned, CCPA-compliant, encryption standards, sub-processor transparency, and HITL governance.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Scalient IQ"
+  }
+}
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><span class="scalient">Scalient</span><span class="iq">IQ</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="solutions.html">Solutions</a></li>
+      <li><a href="assessment.html">Assessment</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="insights.html">Insights</a></li>
+      <li><a href="trust.html" class="active">Trust</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="contact.html" class="btn btn-ghost">Contact</a>
+      <a href="assessment.html" class="btn btn-primary">Book Signal Review</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <span class="eyebrow">Trust &amp; Security</span>
+      <h1>Built for InfoSec.<br>Engineered for Trust.</h1>
+      <p class="hero-subhead">Scalient IQ runs against your real revenue data — but never inside your environment. Read-only OAuth, AES-256 encryption, AWS US infrastructure, and SOC 2 Type II controls aligned with formal audit in progress. Every external action requires human approval through the HITL Approval Queue.</p>
+      <div class="hero-cta">
+        <a href="#download" class="btn btn-primary btn-lg">Get the Security Overview</a>
+        <a href="contact.html" class="btn btn-secondary btn-lg">Talk to InfoSec</a>
+      </div>
+    </div>
+
+    <div class="badge-strip" style="margin-top: var(--sp-16);">
+      <a href="#compliance" class="badge">SOC 2 Type II <span class="badge-status">Audit in Progress</span></a>
+      <a href="#compliance" class="badge">CCPA Compliant</a>
+      <a href="#compliance" class="badge">GDPR-Ready</a>
+      <a href="#data-handling" class="badge">AES-256 at Rest</a>
+      <a href="#data-handling" class="badge">TLS 1.2+ in Transit</a>
+      <a href="#infrastructure" class="badge">AWS US</a>
+    </div>
+  </div>
+</section>
+
+<section style="background: var(--siq-bg-elevated);">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Engagement Modes</span>
+      <h2>Two Modes. Two Distinct Data-Access Profiles.</h2>
+      <p>SiQ engagements operate in two modes with very different access scopes. Both start read-only.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-icon">01</div>
+        <h3>Assessment Mode</h3>
+        <p><strong>Strictly read-only.</strong> All OAuth scopes are read-only. SiQ cannot write, modify, or delete data in client systems. Output is delivered as a Signal Health Report — no actions are ever taken in your CRM or stack.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">02</div>
+        <h3>Platform Mode</h3>
+        <p><strong>Read access plus optional, customer-authorized write-back.</strong> Any write action (CRM field updates, outbound communications, play triggers) requires a separate OAuth grant and passes through the HITL Approval Queue before execution. No write action fires without explicit human approval.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <span class="trust-section-label">Connection Architecture</span>
+    <h2>How We Connect</h2>
+    <table class="trust-table">
+      <tbody>
+        <tr>
+          <th>Authentication</th>
+          <td>OAuth 2.0 with PKCE (where supported). Standard vendor OAuth flows identical to HubSpot, Salesforce, Gong, and Outreach integrations.</td>
+        </tr>
+        <tr>
+          <th>Access Level</th>
+          <td><strong>Assessment engagement:</strong> strictly read-only. All OAuth scopes are read-only; SiQ cannot write, modify, or delete data in client systems.<br><br><strong>Platform engagement:</strong> read access plus optional write-back capabilities. Any write scope requires separate customer authorization, and every write action passes through the HITL Approval Queue before execution.</td>
+        </tr>
+        <tr>
+          <th>Connection Method</th>
+          <td>REST API over TLS 1.2+ encrypted connections. No direct database access. No VPN tunnels. No agents or code installed in client environments.</td>
+        </tr>
+        <tr>
+          <th>Scope Transparency</th>
+          <td>Full list of OAuth scopes provided before authorization. Client reviews and approves each scope explicitly.</td>
+        </tr>
+        <tr>
+          <th>Revocation</th>
+          <td>Client can revoke API access at any time from their CRM admin panel. Revocation is immediate and requires no SiQ involvement.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section style="background: var(--siq-bg-elevated);" id="data-handling">
+  <div class="container">
+    <span class="trust-section-label">Data Handling &amp; Processing</span>
+    <h2>How We Handle Your Data</h2>
+    <table class="trust-table">
+      <tbody>
+        <tr>
+          <th>Data in Transit</th>
+          <td>All data transmitted over TLS 1.2+ encrypted connections. No unencrypted data transfer at any point.</td>
+        </tr>
+        <tr>
+          <th>Data at Rest</th>
+          <td>Encrypted using <strong>AES-256</strong>. All client data stored in isolated, logically separated environments.</td>
+        </tr>
+        <tr>
+          <th>Data Residency</th>
+          <td>Client data processed and stored within US-based cloud infrastructure (AWS). No cross-border data transfer without explicit client consent.</td>
+        </tr>
+        <tr>
+          <th>Data Retention</th>
+          <td>Assessment data retained for 90 days post-delivery for support purposes, then permanently deleted. Platform clients: data retained for duration of contract + 30-day grace period.</td>
+        </tr>
+        <tr>
+          <th>Data Deletion</th>
+          <td>Client can request full data deletion at any time. Deletion completed within 14 business days with written confirmation.</td>
+        </tr>
+        <tr>
+          <th>PII Handling</th>
+          <td>SiQ Cortex processes business contact records (name, email, title, company) as provided by the client's CRM. <strong>No consumer PII. No financial data. No health data.</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="infrastructure">
+  <div class="container">
+    <span class="trust-section-label">Infrastructure &amp; Security Controls</span>
+    <h2>How We Defend It</h2>
+    <table class="trust-table">
+      <tbody>
+        <tr>
+          <th>Cloud Provider</th>
+          <td>Amazon Web Services (AWS), US regions.</td>
+        </tr>
+        <tr>
+          <th>SOC 2 Alignment</th>
+          <td>Security controls aligned to <strong>SOC 2 Type II framework</strong>. Formal audit in progress.<span class="status-pill">Audit in Progress</span></td>
+        </tr>
+        <tr>
+          <th>Access Control</th>
+          <td>Role-based access (RBAC). All internal access requires MFA. Principle of least privilege enforced.</td>
+        </tr>
+        <tr>
+          <th>Logging &amp; Monitoring</th>
+          <td>All API access logged with timestamps, user identity, and action type. Anomaly detection active on all client data endpoints.</td>
+        </tr>
+        <tr>
+          <th>Incident Response</th>
+          <td>Documented incident response plan. Client notification within <strong>72 hours</strong> of confirmed breach involving their data.</td>
+        </tr>
+        <tr>
+          <th>Vulnerability Management</th>
+          <td>Regular dependency scanning and patching. No software installed in client environments. No VPN tunnels. No direct database access. All integrations are customer-authorized, outbound API connections from SiQ infrastructure.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section style="background: var(--siq-bg-elevated);">
+  <div class="container">
+    <span class="trust-section-label">HITL Governance</span>
+    <h2>AI Recommends. Human Approves.</h2>
+    <div style="max-width: 800px; margin: 0 auto;">
+      <p style="margin-bottom: var(--sp-4); font-size: var(--fs-md);">SiQ Cortex uses AI agents to analyze signals, score pipeline, and generate recommendations. In <strong>Assessment Mode</strong>, all output is delivered as a read-only report — no actions are taken in client systems.</p>
+      <p style="margin-bottom: var(--sp-4); font-size: var(--fs-md);">In <strong>Platform Mode</strong>, any external-facing action (outbound communications, CRM write operations, stakeholder alerts) requires explicit human approval through the HITL Approval Queue before execution.</p>
+      <p style="font-size: var(--fs-md);">HITL governance is a <strong>core architectural pattern, not an optional feature.</strong> It applies to every AI-generated recommendation that would result in a write action or external communication, including our AI SDR agent, Gage. No automated action fires without a human reviewing and approving it.</p>
+    </div>
+  </div>
+</section>
+
+<section id="compliance">
+  <div class="container">
+    <span class="trust-section-label">Compliance &amp; Privacy</span>
+    <h2>Frameworks We Operate Against</h2>
+    <table class="trust-table">
+      <tbody>
+        <tr>
+          <th>SOC 2 Type II</th>
+          <td>Controls aligned; formal audit in progress.<span class="status-pill">Audit in Progress</span></td>
+        </tr>
+        <tr>
+          <th>CCPA</th>
+          <td>Compliant. No sale of personal information. Deletion requests honored within 14 business days.<span class="status-pill status-pill-ok">Compliant</span></td>
+        </tr>
+        <tr>
+          <th>GDPR</th>
+          <td>Not currently processing EU personal data. Framework in place for future EU expansion.<span class="status-pill">Ready</span></td>
+        </tr>
+        <tr>
+          <th>Data Processing Agreement</th>
+          <td>Available on request. Standard DPA covering processing scope, sub-processors, and deletion obligations.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="download">
+  <div class="container">
+    <div class="cta-banner">
+      <span class="eyebrow">Resources</span>
+      <h2>Want the Full Security Overview?</h2>
+      <p>The Scalient IQ Security &amp; Data Handling Overview (v1.1, April 2026) is available on request. PDF, formatted for InfoSec / IT review. We're also happy to jump on a call with your security team to walk through any of the above in detail.</p>
+      <div class="hero-cta">
+        <a href="mailto:info@scalientiq.com?subject=Security%20%26%20Data%20Handling%20Overview%20Request" class="btn btn-primary btn-lg">Request the PDF</a>
+        <a href="contact.html" class="btn btn-secondary btn-lg">Schedule InfoSec Call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><span class="scalient">Scalient</span><span class="iq">IQ</span></a>
+        <p>The GTM Signal OS for mid-market to enterprise B2B SaaS. SiQ Cortex sits on top of your existing stack and decides who to prioritize, why now, and what play to run.</p>
+      </div>
+      <div class="footer-col"><h4>Product</h4><ul><li><a href="solutions.html">Solutions</a></li><li><a href="assessment.html">GTM Signal Assessment</a></li><li><a href="results.html">Results</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="insights.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Connect</h4><ul><li><a href="mailto:info@scalientiq.com">info@scalientiq.com</a></li><li><a href="https://www.linkedin.com/company/scalient-iq" rel="noopener">LinkedIn</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Scalient IQ. All rights reserved.</span>
+      <span>Built for revenue teams who'd rather know than guess.</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
