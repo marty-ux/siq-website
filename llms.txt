@@ -38,6 +38,14 @@ A 30-day paid diagnostic. The assessment IS SiQ Cortex running against the prosp
 **Deliverable:** Signal Health Report including Signal Coverage Analysis, Signal Leakage Score, CRM Fidelity Score, Prioritized Play Map, Tech Stack Efficiency Rating, and a Prioritized GTM Action Plan.
 **Pricing:** Conversation-based. Procurable inside a CRO's discretionary spend.
 
+## Free Lead Magnet: GTM Maturity Index
+
+A free 5-minute, 12-question self-assessment that scores a B2B revenue team's GTM maturity across four dimensions: Signal Coverage, Stakeholder Intelligence, CRM Fidelity, and Orchestration & Action. Results assign one of four stages (Stage 1–Stage 4), surface the top dimensions to address, and route prospects toward the paid GTM Signal Assessment.
+
+**URL:** https://scalientiq.com/gtm-maturity.html
+**Audience:** VP Sales / CRO / RevOps at mid-market B2B SaaS
+**Position vs. paid product:** The Maturity Index is self-reported and directional — a free pulse. The paid GTM Signal Assessment is SiQ Cortex running against the prospect's real data — definitive.
+
 ## Ideal Customer Profile
 
 - B2B SaaS / modern services firms
@@ -75,6 +83,7 @@ A 30-day paid diagnostic. The assessment IS SiQ Cortex running against the prosp
 - Homepage: https://scalientiq.com
 - About: https://scalientiq.com/about.html
 - Solutions: https://scalientiq.com/solutions.html
+- GTM Maturity Index (free lead magnet): https://scalientiq.com/gtm-maturity.html
 - GTM Signal Assessment (lead product): https://scalientiq.com/assessment.html
 - Results: https://scalientiq.com/results.html
 - Insights blog: https://scalientiq.com/insights.html

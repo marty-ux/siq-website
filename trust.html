@@ -7,18 +7,15 @@
 <meta name="description" content="Scalient IQ security posture: SOC 2 Type II controls aligned (audit in progress), CCPA-compliant, AES-256 encryption, AWS US, read-only OAuth, HITL governance, sub-processor transparency.">
 <link rel="canonical" href="https://scalientiq.com/trust.html">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://scalientiq.com/trust.html">
 <meta property="og:title" content="Trust &amp; Security | Scalient IQ">
 <meta property="og:description" content="Built to SOC 2 Type II controls. Read-only OAuth. HITL governance. Customer controls every permission scope.">
 <meta property="og:image" content="https://scalientiq.com/og-image.png">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -38,7 +35,6 @@
 <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/51005472.js"></script>
 </head>
 <body>
-
 <nav class="nav">
   <div class="nav-inner">
     <a href="index.html" class="logo"><img src="/logo.svg" alt="Scalient IQ"></a>
@@ -49,6 +45,7 @@
       <li><a href="assessment.html">Assessment</a></li>
       <li><a href="results.html">Results</a></li>
       <li><a href="insights.html">Insights</a></li>
+      <li><a href="gtm-maturity.html">GTM Maturity</a></li>
       <li><a href="trust.html" class="active">Trust</a></li>
     </ul>
     <div class="nav-cta">
@@ -57,7 +54,6 @@
     </div>
   </div>
 </nav>
-
 <section class="hero">
   <div class="container">
     <div class="hero-inner">
@@ -69,7 +65,6 @@
         <a href="contact.html" class="btn btn-secondary btn-lg">Talk to InfoSec</a>
       </div>
     </div>
-
     <div class="badge-strip" style="margin-top: var(--sp-16);">
       <a href="#compliance" class="badge">SOC 2 Type II <span class="badge-status">Audit in Progress</span></a>
       <a href="#compliance" class="badge">CCPA Compliant</a>
@@ -80,7 +75,6 @@
     </div>
   </div>
 </section>
-
 <section style="background: var(--siq-bg-elevated);">
   <div class="container">
     <div class="section-header">
@@ -88,7 +82,6 @@
       <h2>Two Modes. Two Distinct Data-Access Profiles.</h2>
       <p>SiQ engagements operate in two modes with very different access scopes. Both start read-only.</p>
     </div>
-
     <div class="grid-2">
       <div class="card">
         <div class="card-icon">01</div>
@@ -103,7 +96,6 @@
     </div>
   </div>
 </section>
-
 <section>
   <div class="container">
     <span class="trust-section-label">Connection Architecture</span>
@@ -134,7 +126,6 @@
     </table>
   </div>
 </section>
-
 <section style="background: var(--siq-bg-elevated);" id="data-handling">
   <div class="container">
     <span class="trust-section-label">Data Handling &amp; Processing</span>
@@ -169,7 +160,6 @@
     </table>
   </div>
 </section>
-
 <section id="infrastructure">
   <div class="container">
     <span class="trust-section-label">Infrastructure &amp; Security Controls</span>
@@ -204,7 +194,6 @@
     </table>
   </div>
 </section>
-
 <section style="background: var(--siq-bg-elevated);">
   <div class="container">
     <span class="trust-section-label">HITL Governance</span>
@@ -216,7 +205,6 @@
     </div>
   </div>
 </section>
-
 <section id="compliance">
   <div class="container">
     <span class="trust-section-label">Compliance &amp; Privacy</span>
@@ -243,7 +231,6 @@
     </table>
   </div>
 </section>
-
 <section id="download">
   <div class="container">
     <div class="cta-banner">
@@ -251,13 +238,12 @@
       <h2>Want the Full Security Overview?</h2>
       <p>The Scalient IQ Security &amp; Data Handling Overview (v1.1, April 2026) is available on request. PDF, formatted for InfoSec / IT review. We're also happy to jump on a call with your security team to walk through any of the above in detail.</p>
       <div class="hero-cta">
-        <a href="mailto:info@scalientiq.com?subject=Security%20%26%20Data%20Handling%20Overview%20Request" class="btn btn-primary btn-lg">Request the PDF</a>
+        <button type="button" class="btn btn-primary btn-lg" onclick="SecurityPdfGate.open()">Request the PDF</button>
         <a href="contact.html" class="btn btn-secondary btn-lg">Schedule InfoSec Call</a>
       </div>
     </div>
   </div>
 </section>
-
 <footer>
   <div class="container">
     <div class="footer-grid">
@@ -265,7 +251,8 @@
         <a href="index.html" class="logo"><img src="/logo.svg" alt="Scalient IQ"></a>
         <p>The GTM Signal OS for mid-market to enterprise B2B SaaS. SiQ Cortex sits on top of your existing stack and decides who to prioritize, why now, and what play to run.</p>
       </div>
-      <div class="footer-col"><h4>Product</h4><ul><li><a href="solutions.html">Solutions</a></li><li><a href="assessment.html">GTM Signal Assessment</a></li><li><a href="results.html">Results</a></li></ul></div>
+      <div class="footer-col"><h4>Product</h4><ul><li><a href="solutions.html">Solutions</a></li>
+          <li><a href="gtm-maturity.html">GTM Maturity Index</a></li><li><a href="assessment.html">GTM Signal Assessment</a></li><li><a href="results.html">Results</a></li></ul></div>
       <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="insights.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
       <div class="footer-col"><h4>Connect</h4><ul><li><a href="mailto:info@scalientiq.com">info@scalientiq.com</a></li><li><a href="https://www.linkedin.com/company/scalient-iq" rel="noopener">LinkedIn</a></li></ul></div>
     </div>
@@ -275,5 +262,129 @@
     </div>
   </div>
 </footer>
+
+<!-- ============ Security PDF gated download modal ============ -->
+<div id="security-pdf-modal" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(10,22,40,0.85); align-items:center; justify-content:center; padding:var(--sp-6);">
+  <div style="max-width:540px; width:100%; background:var(--siq-bg-elevated); border:1px solid var(--siq-border); padding:var(--sp-12); position:relative;">
+    <button type="button" onclick="SecurityPdfGate.close()" aria-label="Close" style="position:absolute; top:var(--sp-4); right:var(--sp-4); background:transparent; border:none; color:var(--siq-text-muted); font-size:var(--fs-xl); cursor:pointer; padding:var(--sp-2);">&times;</button>
+
+    <div id="security-pdf-form-stage">
+      <span style="display:inline-block; font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:0.16em; color:var(--siq-orange); background:rgba(255,102,0,0.1); padding:var(--sp-2) var(--sp-3); margin-bottom:var(--sp-4);">Resource Request</span>
+      <h3 style="font-size:var(--fs-xl); font-weight:600; margin-bottom:var(--sp-3);">Request the Security &amp; Data Handling Overview</h3>
+      <p style="color:var(--siq-text-secondary); margin-bottom:var(--sp-6); font-size:var(--fs-sm);">PDF, formatted for InfoSec / IT review. We'll keep your info on file in case your security team has follow-up questions.</p>
+
+      <form class="form" id="security-pdf-form" onsubmit="SecurityPdfGate.submit(event)" novalidate>
+        <div class="form-group">
+          <label for="sp-firstname">Name</label>
+          <input id="sp-firstname" name="firstname" type="text" required autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="sp-email">Work email</label>
+          <input id="sp-email" name="email" type="email" required autocomplete="email" placeholder="you@company.com">
+        </div>
+        <div class="form-group">
+          <label for="sp-company">Company</label>
+          <input id="sp-company" name="company" type="text" required autocomplete="organization">
+        </div>
+        <div id="sp-error" style="color:var(--siq-danger); font-size:var(--fs-sm); min-height:1.4em;"></div>
+        <button type="submit" class="btn btn-primary btn-lg" id="sp-submit">Get the PDF</button>
+        <p style="font-size:var(--fs-xs); color:var(--siq-text-muted); margin-top:var(--sp-2);">We'll never share your email. Powered by SiQ Cortex.</p>
+      </form>
+    </div>
+
+    <div id="security-pdf-success-stage" style="display:none; text-align:center;">
+      <span style="display:inline-block; font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:0.16em; color:var(--siq-success); background:rgba(22,163,74,0.1); padding:var(--sp-2) var(--sp-3); margin-bottom:var(--sp-4);">Ready</span>
+      <h3 style="font-size:var(--fs-xl); font-weight:600; margin-bottom:var(--sp-4);">Your PDF is ready.</h3>
+      <p style="color:var(--siq-text-secondary); margin-bottom:var(--sp-6); font-size:var(--fs-sm);">Click below to download the Security &amp; Data Handling Overview (v1.1, April 2026). We've also logged your request — feel free to forward this directly to your InfoSec team.</p>
+      <a href="/SiQ-Security-Data-Handling-Overview.pdf" download class="btn btn-primary btn-lg" onclick="SecurityPdfGate.close();">Download the PDF</a>
+      <p style="font-size:var(--fs-xs); color:var(--siq-text-muted); margin-top:var(--sp-6);">Need to walk through it together? <a href="contact.html" style="color:var(--siq-orange);">Schedule an InfoSec call</a>.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const SecurityPdfGate = {
+  N8N_WEBHOOK_URL: 'https://scalientiq.app.n8n.cloud/webhook/website-leads',
+  LEAD_SOURCE: 'Security PDF Request',
+
+  open() {
+    document.getElementById('security-pdf-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('sp-firstname').focus(), 100);
+  },
+
+  close() {
+    document.getElementById('security-pdf-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  },
+
+  async submit(e) {
+    e.preventDefault();
+    const errEl = document.getElementById('sp-error');
+    errEl.textContent = '';
+
+    const firstname = document.getElementById('sp-firstname').value.trim();
+    const email     = document.getElementById('sp-email').value.trim();
+    const company   = document.getElementById('sp-company').value.trim();
+
+    if (!firstname || !email || !company) {
+      errEl.textContent = 'Please fill in all fields.';
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errEl.textContent = 'Please enter a valid work email.';
+      return;
+    }
+
+    const submitBtn = document.getElementById('sp-submit');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting…';
+
+    const payload = {
+      firstname, email, company,
+      lead_source_detail: this.LEAD_SOURCE,
+      asset_requested: 'SiQ Security & Data Handling Overview v1.1',
+      submitted_at: new Date().toISOString(),
+      page_url: window.location.href
+    };
+
+    // HubSpot identify via sitewide tracking pixel
+    try {
+      window._hsq = window._hsq || [];
+      _hsq.push(['identify', {
+        email, firstname, company,
+        siq_lead_source_detail: payload.lead_source_detail
+      }]);
+      _hsq.push(['trackCustomBehavioralEvent', {
+        name: 'security_pdf_requested',
+        properties: { asset: payload.asset_requested }
+      }]);
+      _hsq.push(['trackPageView']);
+    } catch (e) { console.warn('HubSpot identify failed (non-fatal):', e); }
+
+    // n8n webhook
+    try {
+      await fetch(this.N8N_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        mode: 'no-cors'
+      });
+    } catch (e) { console.warn('n8n webhook failed (non-fatal):', e); }
+
+    document.getElementById('security-pdf-form-stage').style.display = 'none';
+    document.getElementById('security-pdf-success-stage').style.display = 'block';
+  }
+};
+
+// Close modal on backdrop click or ESC
+document.getElementById('security-pdf-modal').addEventListener('click', (e) => {
+  if (e.target.id === 'security-pdf-modal') SecurityPdfGate.close();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && document.getElementById('security-pdf-modal').style.display === 'flex') SecurityPdfGate.close();
+});
+</script>
+
 </body>
 </html>

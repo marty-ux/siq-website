@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GTM Maturity Index | Scalient IQ — Free 5-Minute Self-Assessment</title>
+<meta name="description" content="Where does your revenue engine actually stand? Free 5-minute GTM Maturity Index. 12 questions across Signal Coverage, Stakeholder Intelligence, CRM Fidelity, and Orchestration. Get your stage and your top fixes.">
+<link rel="canonical" href="https://scalientiq.com/gtm-maturity.html">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://scalientiq.com/gtm-maturity.html">
+<meta property="og:title" content="GTM Maturity Index | Scalient IQ">
+<meta property="og:description" content="Free 5-minute self-assessment. 12 questions. Find out which of 4 stages your revenue engine sits at, and the top fixes to move up.">
+<meta property="og:image" content="https://scalientiq.com/og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Quiz",
+  "name": "GTM Maturity Index",
+  "about": "A self-assessment of mid-market B2B GTM maturity across Signal Coverage, Stakeholder Intelligence, CRM Fidelity, and Orchestration & Action.",
+  "provider": { "@type": "Organization", "name": "Scalient IQ", "url": "https://scalientiq.com" },
+  "audience": { "@type": "BusinessAudience", "audienceType": "Mid-market B2B SaaS CROs and VPs of Sales" }
+}
+</script>
+<!-- Leadpipe pixel -->
+<script src="https://leadpipe.aws53.cloud/p/3d0178c9-0b3c-4d48-bf12-e0c5f8c7e76c.js" async></script>
+<!-- HubSpot tracking pixel -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/51005472.js"></script>
+
+<style>
+  /* ============ GTM MATURITY INDEX (page-local) ============ */
+  .mi-stage { display: none; }
+  .mi-stage.active { display: block; }
+
+  .mi-progress-wrap {
+    max-width: 720px;
+    margin: 0 auto var(--sp-12);
+  }
+  .mi-progress-track {
+    height: 4px;
+    background: var(--siq-border);
+    position: relative;
+  }
+  .mi-progress-fill {
+    height: 100%;
+    background: var(--siq-orange);
+    width: 0%;
+    transition: width 300ms ease;
+  }
+  .mi-progress-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--fs-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--siq-text-muted);
+    margin-top: var(--sp-3);
+  }
+
+  .mi-card {
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--siq-bg-elevated);
+    border: 1px solid var(--siq-border);
+    padding: var(--sp-12);
+  }
+  @media (max-width: 768px) {
+    .mi-card { padding: var(--sp-6); }
+  }
+
+  .mi-eyebrow {
+    display: inline-block;
+    font-size: var(--fs-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--siq-orange);
+    background: rgba(255, 102, 0, 0.1);
+    padding: var(--sp-2) var(--sp-3);
+    margin-bottom: var(--sp-4);
+  }
+
+  .mi-question {
+    font-size: var(--fs-2xl);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: var(--sp-8);
+  }
+
+  .mi-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+
+  .mi-option {
+    width: 100%;
+    text-align: left;
+    background: var(--siq-bg);
+    border: 1px solid var(--siq-border);
+    color: var(--siq-text-primary);
+    padding: var(--sp-4) var(--sp-6);
+    font-family: var(--font-sans);
+    font-size: var(--fs-base);
+    line-height: 1.5;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  .mi-option:hover {
+    border-color: var(--siq-orange);
+    background: var(--siq-bg-surface);
+    transform: translateX(4px);
+  }
+  .mi-option:focus {
+    outline: none;
+    border-color: var(--siq-orange);
+    background: var(--siq-bg-surface);
+  }
+
+  .mi-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--sp-8);
+  }
+  .mi-back {
+    background: transparent;
+    border: none;
+    color: var(--siq-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    padding: var(--sp-2) 0;
+  }
+  .mi-back:hover { color: var(--siq-orange); }
+  .mi-back[disabled] { opacity: 0.3; cursor: not-allowed; }
+
+  .mi-dim-tag {
+    display: inline-block;
+    font-size: var(--fs-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--siq-blue);
+    margin-bottom: var(--sp-3);
+  }
+
+  /* Result screen */
+  .mi-result-stage {
+    font-size: var(--fs-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--siq-orange);
+    margin-bottom: var(--sp-3);
+  }
+  .mi-result-badge {
+    font-size: var(--fs-5xl);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--siq-text-primary);
+    margin-bottom: var(--sp-4);
+  }
+  .mi-result-score {
+    font-size: var(--fs-md);
+    color: var(--siq-text-muted);
+    margin-bottom: var(--sp-8);
+  }
+  .mi-result-headline {
+    font-size: var(--fs-xl);
+    font-weight: 600;
+    color: var(--siq-orange);
+    margin-bottom: var(--sp-4);
+  }
+  .mi-result-copy {
+    font-size: var(--fs-md);
+    color: var(--siq-text-secondary);
+    margin-bottom: var(--sp-12);
+    line-height: 1.6;
+  }
+
+  .mi-bars {
+    display: grid;
+    gap: var(--sp-4);
+    margin-bottom: var(--sp-12);
+  }
+  .mi-bar-row { display: grid; grid-template-columns: 1fr auto; gap: var(--sp-4); align-items: center; }
+  .mi-bar-label { font-size: var(--fs-sm); color: var(--siq-text-secondary); }
+  .mi-bar-track {
+    grid-column: 1 / -1;
+    height: 8px;
+    background: var(--siq-border);
+    position: relative;
+  }
+  .mi-bar-fill {
+    height: 100%;
+    background: var(--siq-blue);
+    transition: width 600ms ease;
+  }
+  .mi-bar-score {
+    font-size: var(--fs-sm);
+    color: var(--siq-text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .mi-cta-box {
+    background: var(--siq-bg);
+    border: 1px solid var(--siq-orange);
+    padding: var(--sp-8);
+    text-align: center;
+  }
+  .mi-cta-headline {
+    font-size: var(--fs-lg);
+    font-weight: 600;
+    margin-bottom: var(--sp-3);
+  }
+  .mi-cta-sub {
+    font-size: var(--fs-sm);
+    color: var(--siq-text-secondary);
+    margin-bottom: var(--sp-6);
+  }
+  .mi-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    justify-content: center;
+  }
+
+  /* Intro screen */
+  .mi-intro-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-6);
+    margin-top: var(--sp-6);
+    margin-bottom: var(--sp-8);
+  }
+  .mi-intro-meta-item {
+    font-size: var(--fs-sm);
+    color: var(--siq-text-muted);
+  }
+  .mi-intro-meta-item strong {
+    color: var(--siq-text-primary);
+    display: block;
+    font-size: var(--fs-lg);
+    font-weight: 600;
+    margin-bottom: var(--sp-1);
+  }
+
+  /* Email gate */
+  .mi-gate-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+    margin-top: var(--sp-6);
+  }
+  .mi-gate-error {
+    color: var(--siq-danger);
+    font-size: var(--fs-sm);
+    min-height: 1.4em;
+  }
+
+  .mi-loading {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: mi-spin 600ms linear infinite;
+    margin-left: var(--sp-2);
+    vertical-align: middle;
+  }
+  @keyframes mi-spin { to { transform: rotate(360deg); } }
+</style>
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><img src="/logo.svg" alt="Scalient IQ"></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="solutions.html">Solutions</a></li>
+      <li><a href="assessment.html">Assessment</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="insights.html">Insights</a></li>
+      <li><a href="gtm-maturity.html" class="active">GTM Maturity</a></li>
+      <li><a href="trust.html">Trust</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="contact.html" class="btn btn-ghost">Contact</a>
+      <a href="https://calendly.com/marty-scalientiq/gtm-signal-review" target="_blank" rel="noopener" class="btn btn-primary">Book Signal Review</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" style="padding-bottom: var(--sp-12);">
+  <div class="container">
+    <div class="hero-inner">
+      <span class="eyebrow">Free Self-Assessment</span>
+      <h1>The GTM Maturity Index</h1>
+      <p class="hero-subhead">Where does your revenue engine actually stand? 12 questions across the four dimensions that separate top revenue teams from the rest. Get your stage, your top fixes, and a benchmark in 5 minutes.</p>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top: 0;">
+  <div class="container">
+
+    <div class="mi-progress-wrap" id="mi-progress" style="display: none;">
+      <div class="mi-progress-track"><div class="mi-progress-fill" id="mi-progress-fill"></div></div>
+      <div class="mi-progress-meta">
+        <span id="mi-progress-current">Question 1 of 12</span>
+        <span id="mi-progress-dim">Signal Coverage</span>
+      </div>
+    </div>
+
+    <!-- ============ STAGE: INTRO ============ -->
+    <div class="mi-stage active" id="mi-stage-intro">
+      <div class="mi-card">
+        <span class="mi-eyebrow">Start Here</span>
+        <h2 style="font-size: var(--fs-2xl); font-weight: 600; margin-bottom: var(--sp-3);">A 5-minute pulse on your GTM maturity.</h2>
+        <p style="color: var(--siq-text-secondary);">No deck. No pitch. 12 short questions across the four dimensions that decide whether your revenue engine is reactive, connected, orchestrated, or predictive. Your results stay private — we use them to send you a personalized diagnostic and benchmark you against mid-market peers.</p>
+
+        <div class="mi-intro-meta">
+          <div class="mi-intro-meta-item"><strong>5 min</strong>Avg. completion time</div>
+          <div class="mi-intro-meta-item"><strong>12 questions</strong>Across 4 dimensions</div>
+          <div class="mi-intro-meta-item"><strong>4 stages</strong>Where do you land?</div>
+        </div>
+
+        <button class="btn btn-primary btn-lg" onclick="MI.start()">Start Assessment</button>
+      </div>
+    </div>
+
+    <!-- ============ STAGE: QUESTIONS (rendered by JS) ============ -->
+    <div class="mi-stage" id="mi-stage-question">
+      <div class="mi-card">
+        <span class="mi-dim-tag" id="mi-q-dim">Signal Coverage</span>
+        <h2 class="mi-question" id="mi-q-text">Question goes here</h2>
+        <div class="mi-options" id="mi-q-options"></div>
+        <div class="mi-nav">
+          <button class="mi-back" id="mi-back" onclick="MI.back()">&larr; Back</button>
+          <span style="color: var(--siq-text-muted); font-size: var(--fs-sm);">Pick the one closest to true</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ STAGE: EMAIL GATE ============ -->
+    <div class="mi-stage" id="mi-stage-gate">
+      <div class="mi-card">
+        <span class="mi-eyebrow">One last thing</span>
+        <h2 style="font-size: var(--fs-2xl); font-weight: 600; margin-bottom: var(--sp-3);">Where should we send your results?</h2>
+        <p style="color: var(--siq-text-secondary);">We'll show your stage and diagnostic on this page right after, and email a copy you can share with your team.</p>
+
+        <form class="mi-gate-form" id="mi-gate-form" onsubmit="MI.submitGate(event)" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="mi-firstname">First name</label>
+              <input id="mi-firstname" name="firstname" type="text" required autocomplete="given-name">
+            </div>
+            <div class="form-group">
+              <label for="mi-lastname">Last name</label>
+              <input id="mi-lastname" name="lastname" type="text" required autocomplete="family-name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="mi-email">Work email</label>
+            <input id="mi-email" name="email" type="email" required autocomplete="email" placeholder="you@company.com">
+          </div>
+          <div class="form-group">
+            <label for="mi-company">Company</label>
+            <input id="mi-company" name="company" type="text" required autocomplete="organization">
+          </div>
+          <div class="form-group">
+            <label for="mi-role">Role (optional)</label>
+            <select id="mi-role" name="jobtitle">
+              <option value="">Choose one</option>
+              <option>CRO / VP Sales</option>
+              <option>VP Marketing / CMO</option>
+              <option>RevOps / Sales Ops</option>
+              <option>Founder / CEO</option>
+              <option>Customer Success / VP CS</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="mi-gate-error" id="mi-gate-error" role="alert"></div>
+          <button type="submit" class="btn btn-primary btn-lg" id="mi-gate-submit">Show My Results</button>
+          <p style="font-size: var(--fs-xs); color: var(--siq-text-muted); margin-top: var(--sp-2);">We'll never share your email. Powered by SiQ Cortex.</p>
+        </form>
+      </div>
+    </div>
+
+    <!-- ============ STAGE: RESULT (populated by JS) ============ -->
+    <div class="mi-stage" id="mi-stage-result">
+      <div class="mi-card">
+        <span class="mi-result-stage" id="mi-r-stage">Stage 2</span>
+        <div class="mi-result-badge" id="mi-r-badge">Stage 2</div>
+        <div class="mi-result-score" id="mi-r-score">Your score: 24 / 48</div>
+
+        <h3 class="mi-result-headline" id="mi-r-headline">You've made the investment. Now make it talk.</h3>
+        <p class="mi-result-copy" id="mi-r-copy">Diagnostic copy here.</p>
+
+        <h4 style="font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.12em; color: var(--siq-text-muted); margin-bottom: var(--sp-4);">Score by dimension</h4>
+        <div class="mi-bars" id="mi-r-bars"></div>
+
+        <div class="mi-cta-box">
+          <div class="mi-cta-headline" id="mi-r-cta-headline">Book a 30-min Signal Review</div>
+          <p class="mi-cta-sub" id="mi-r-cta-sub">We'll show you what a GTM Signal Assessment would surface in your data.</p>
+          <div class="mi-cta-row">
+            <a id="mi-r-calendly" href="https://calendly.com/marty-scalientiq/gtm-signal-review" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Book Signal Review</a>
+            <a href="assessment.html" class="btn btn-secondary btn-lg">See the Full Assessment</a>
+          </div>
+        </div>
+
+        <p style="font-size: var(--fs-xs); color: var(--siq-text-muted); margin-top: var(--sp-8); text-align: center;">Want to retake it? <a href="gtm-maturity.html" style="color: var(--siq-orange);">Start over</a>.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><img src="/logo.svg" alt="Scalient IQ"></a>
+        <p>The GTM Signal OS for mid-market to enterprise B2B SaaS. SiQ Cortex sits on top of your existing stack and decides who to prioritize, why now, and what play to run.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="solutions.html">Solutions</a></li>
+          <li><a href="gtm-maturity.html">GTM Maturity Index</a></li>
+          <li><a href="assessment.html">GTM Signal Assessment</a></li>
+          <li><a href="results.html">Results</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:info@scalientiq.com">info@scalientiq.com</a></li>
+          <li><a href="https://www.linkedin.com/company/scalient-iq" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Scalient IQ. All rights reserved.</span>
+      <span>Built for revenue teams who'd rather know than guess.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============ GTM MATURITY INDEX — quiz logic ============ */
+
+const MI_CONFIG = {
+  // n8n webhook for HubSpot create_contact + Slack #siq-website-leads notify.
+  // Wire this up in next session — frontend captures via HubSpot _hsq fallback regardless.
+  N8N_WEBHOOK_URL: 'https://scalientiq.app.n8n.cloud/webhook/website-leads',
+  CALENDLY_URL: 'https://calendly.com/marty-scalientiq/gtm-signal-review',
+  HUBSPOT_PORTAL_ID: '51005472',
+  LEAD_SOURCE: 'GTM Maturity Index'
+};
+
+const MI_QUESTIONS = [
+  // ---------- Dimension 1: Signal Coverage ----------
+  { dim: 'Signal Coverage', dimKey: 'signal_coverage',
+    text: 'How are you capturing buyer intent today?',
+    options: [
+      { label: 'Mostly form fills and outbound — we don\'t have intent data', score: 1 },
+      { label: 'We have intent data (Bombora, 6sense, G2) but reps don\'t use it consistently', score: 2 },
+      { label: 'Intent flows into the CRM and we run plays for tier-1 accounts', score: 3 },
+      { label: 'Every signal source — intent, web, AEO/GEO, conversation — feeds a single account score', score: 4 }
+    ]
+  },
+  { dim: 'Signal Coverage', dimKey: 'signal_coverage',
+    text: 'How fast does a high-intent signal turn into a rep action?',
+    options: [
+      { label: 'Days, if it ever surfaces', score: 1 },
+      { label: '24–48 hours via a manual report or queue', score: 2 },
+      { label: 'Same day, triggered by automation', score: 3 },
+      { label: 'Real-time, with the right play recommended for the rep', score: 4 }
+    ]
+  },
+  { dim: 'Signal Coverage', dimKey: 'signal_coverage',
+    text: 'Are you tracking your visibility on AI search engines (ChatGPT, Perplexity, Gemini, Claude)?',
+    options: [
+      { label: 'Not at all — no idea if we\'re being mentioned', score: 1 },
+      { label: 'Manual checks every few weeks', score: 2 },
+      { label: 'We monitor visibility but it\'s not in our scoring', score: 3 },
+      { label: 'AEO/GEO signals feed our account scoring continuously', score: 4 }
+    ]
+  },
+
+  // ---------- Dimension 2: Stakeholder Intelligence ----------
+  { dim: 'Stakeholder Intelligence', dimKey: 'stakeholder_intel',
+    text: 'On a typical late-stage deal, how many stakeholders are actively engaged on the buying side?',
+    options: [
+      { label: '1 — our champion, mostly', score: 1 },
+      { label: '2–3 — champion plus their boss', score: 2 },
+      { label: '4+ across functions, but not always the economic buyer', score: 3 },
+      { label: 'Full committee mapped: economic buyer, champion, technical, user, ratifier', score: 4 }
+    ]
+  },
+  { dim: 'Stakeholder Intelligence', dimKey: 'stakeholder_intel',
+    text: 'How do you identify the buying committee on an account?',
+    options: [
+      { label: 'We don\'t formally — reps figure it out as they go', score: 1 },
+      { label: 'Manual research per deal in LinkedIn', score: 2 },
+      { label: 'We map roles in the CRM but it\'s reactive', score: 3 },
+      { label: 'Conversation intelligence auto-detects roles and surfaces gaps', score: 4 }
+    ]
+  },
+  { dim: 'Stakeholder Intelligence', dimKey: 'stakeholder_intel',
+    text: 'Do reps walk into customer meetings with a pre-meeting brief covering stakeholder context, recent signals, and a recommended strategy?',
+    options: [
+      { label: 'No — they wing it from CRM notes', score: 1 },
+      { label: 'Sometimes, when the deal is big enough', score: 2 },
+      { label: 'Yes, but reps assemble it manually', score: 3 },
+      { label: 'Auto-generated brief in their inbox before every meeting', score: 4 }
+    ]
+  },
+
+  // ---------- Dimension 3: CRM Fidelity ----------
+  { dim: 'CRM Fidelity', dimKey: 'crm_fidelity',
+    text: 'What % of your closed-won deals have complete, accurate stage history in the CRM?',
+    options: [
+      { label: 'Honestly? Less than 50%', score: 1 },
+      { label: '50–75%', score: 2 },
+      { label: '75–90%', score: 3 },
+      { label: '90%+ and we audit regularly', score: 4 }
+    ]
+  },
+  { dim: 'CRM Fidelity', dimKey: 'crm_fidelity',
+    text: 'How does meeting context (notes, action items, stakeholder changes) get into the CRM?',
+    options: [
+      { label: 'Reps type it in — when they remember', score: 1 },
+      { label: 'Reps log calls but skip the detail', score: 2 },
+      { label: 'Conversation intelligence auto-summarizes and reps approve into CRM', score: 3 },
+      { label: 'CI → CRM is fully automated with HITL review for accuracy', score: 4 }
+    ]
+  },
+  { dim: 'CRM Fidelity', dimKey: 'crm_fidelity',
+    text: 'How quickly do you detect deal stage drift, missing follow-ups, or stale close dates?',
+    options: [
+      { label: 'When the forecast call exposes them', score: 1 },
+      { label: 'Weekly during a manager review', score: 2 },
+      { label: 'Daily via a dashboard', score: 3 },
+      { label: 'Real-time — system flags drift and recommends a fix', score: 4 }
+    ]
+  },
+
+  // ---------- Dimension 4: Orchestration & Action ----------
+  { dim: 'Orchestration & Action', dimKey: 'orchestration',
+    text: 'How well integrated is your GTM stack?',
+    options: [
+      { label: 'Tools are mostly siloed — data doesn\'t flow between them', score: 1 },
+      { label: 'Point-to-point integrations exist but break often', score: 2 },
+      { label: 'Consolidated stack with an orchestration layer covering the big tools', score: 3 },
+      { label: 'Full stack unified through a single GTM brain above the execution layer', score: 4 }
+    ]
+  },
+  { dim: 'Orchestration & Action', dimKey: 'orchestration',
+    text: 'When a high-intent signal hits, who decides which play to run?',
+    options: [
+      { label: 'The rep, based on their gut', score: 1 },
+      { label: 'A playbook the rep has to remember', score: 2 },
+      { label: 'A workflow auto-assigns the play', score: 3 },
+      { label: 'AI recommends the play, the human approves, system executes', score: 4 }
+    ]
+  },
+  { dim: 'Orchestration & Action', dimKey: 'orchestration',
+    text: 'How much of your GTM execution involves automated outbound that nobody approves before sending?',
+    options: [
+      { label: 'A lot — autonomous AI SDRs run unchecked', score: 1 },
+      { label: 'Some — we caught issues so we added manual review', score: 2 },
+      { label: 'High-stakes actions get approved, the rest is autonomous', score: 3 },
+      { label: 'Every external action goes through a Human-in-the-Loop Approval Queue', score: 4 }
+    ]
+  }
+];
+
+const MI_STAGES = [
+  { min: 12, max: 21, num: 1, headline: 'Signals are everywhere — your team just can\'t see them.',
+    copy: 'You\'re capturing some signals, but most plays still happen on instinct. Your reps are doing heroic work without the system to back them up. The fastest unlock is unifying your existing data into a single signal feed before adding more tools.',
+    ctaHeadline: 'Book a 30-min Signal Review',
+    ctaSub: 'We\'ll walk through what a unified signal layer would look like on your stack.'
+  },
+  { min: 22, max: 30, num: 2, headline: 'You\'ve made the investment. Now make it talk.',
+    copy: 'You have the tools. What you don\'t have is a single system that reads all your signals and tells you which accounts to focus on this week. The data is there — it\'s just not connected. The next move is an orchestration layer above the stack.',
+    ctaHeadline: 'Book a 30-min Signal Review',
+    ctaSub: 'We\'ll show you what a GTM Signal Assessment would surface in your data.'
+  },
+  { min: 31, max: 40, num: 3, headline: 'Your stack is humming. Time to scale the motion.',
+    copy: 'Signals reach the right rep at the right time for your tier-1 accounts. The opportunity is scaling that motion across the full pipeline and tightening CRM fidelity so the system gets smarter every week.',
+    ctaHeadline: 'Book a 30-min Signal Review',
+    ctaSub: 'Let\'s pressure-test the gaps and see what a benchmarked Signal Health Report would tell you.'
+  },
+  { min: 41, max: 48, num: 4, headline: 'You\'re operating like a top 5% revenue team.',
+    copy: 'Your moat is execution speed and stakeholder intelligence. The next move is benchmarking against peers, protecting the lead, and looking at where AEO/GEO signals can give you visibility your competitors don\'t have yet.',
+    ctaHeadline: 'Book a 30-min Signal Review',
+    ctaSub: 'Let\'s compare your numbers to top-quartile mid-market revenue teams.'
+  }
+];
+
+const MI = {
+  state: {
+    answers: [],          // index of selected option per question
+    qIndex: 0,
+    leadData: null,
+    submitted: false
+  },
+
+  // ---------- stage navigation ----------
+  show(stageId) {
+    document.querySelectorAll('.mi-stage').forEach(el => el.classList.remove('active'));
+    document.getElementById('mi-stage-' + stageId).classList.add('active');
+    document.getElementById('mi-progress').style.display = (stageId === 'question') ? 'block' : 'none';
+    window.scrollTo({ top: document.querySelector('.hero').offsetHeight - 40, behavior: 'smooth' });
+  },
+
+  start() {
+    this.state.answers = [];
+    this.state.qIndex = 0;
+    this.renderQuestion();
+    this.show('question');
+  },
+
+  // ---------- question rendering ----------
+  renderQuestion() {
+    const q = MI_QUESTIONS[this.state.qIndex];
+    document.getElementById('mi-q-dim').textContent = q.dim;
+    document.getElementById('mi-q-text').textContent = q.text;
+    const opts = document.getElementById('mi-q-options');
+    opts.innerHTML = '';
+    q.options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'mi-option';
+      btn.type = 'button';
+      btn.textContent = opt.label;
+      btn.onclick = () => this.answer(i);
+      opts.appendChild(btn);
+    });
+
+    const pct = ((this.state.qIndex) / MI_QUESTIONS.length) * 100;
+    document.getElementById('mi-progress-fill').style.width = pct + '%';
+    document.getElementById('mi-progress-current').textContent = `Question ${this.state.qIndex + 1} of ${MI_QUESTIONS.length}`;
+    document.getElementById('mi-progress-dim').textContent = q.dim;
+
+    document.getElementById('mi-back').disabled = (this.state.qIndex === 0);
+  },
+
+  answer(optIdx) {
+    this.state.answers[this.state.qIndex] = optIdx;
+    if (this.state.qIndex < MI_QUESTIONS.length - 1) {
+      this.state.qIndex++;
+      this.renderQuestion();
+    } else {
+      // last question — go to gate
+      document.getElementById('mi-progress-fill').style.width = '100%';
+      this.show('gate');
+    }
+  },
+
+  back() {
+    if (this.state.qIndex > 0) {
+      this.state.qIndex--;
+      this.renderQuestion();
+    }
+  },
+
+  // ---------- scoring ----------
+  computeScores() {
+    const dimScores = { signal_coverage: 0, stakeholder_intel: 0, crm_fidelity: 0, orchestration: 0 };
+    let total = 0;
+    this.state.answers.forEach((optIdx, qIdx) => {
+      const q = MI_QUESTIONS[qIdx];
+      const score = q.options[optIdx].score;
+      dimScores[q.dimKey] += score;
+      total += score;
+    });
+    const stage = MI_STAGES.find(s => total >= s.min && total <= s.max) || MI_STAGES[0];
+    return { total, dimScores, stage };
+  },
+
+  // ---------- email gate ----------
+  async submitGate(e) {
+    e.preventDefault();
+    const errEl = document.getElementById('mi-gate-error');
+    errEl.textContent = '';
+
+    const firstname = document.getElementById('mi-firstname').value.trim();
+    const lastname  = document.getElementById('mi-lastname').value.trim();
+    const email     = document.getElementById('mi-email').value.trim();
+    const company   = document.getElementById('mi-company').value.trim();
+    const jobtitle  = document.getElementById('mi-role').value;
+
+    if (!firstname || !lastname || !email || !company) {
+      errEl.textContent = 'Please fill in your name, email, and company.';
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errEl.textContent = 'Please enter a valid work email.';
+      return;
+    }
+
+    const submitBtn = document.getElementById('mi-gate-submit');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Submitting<span class="mi-loading"></span>';
+
+    const scores = this.computeScores();
+    const payload = {
+      firstname, lastname, email, company, jobtitle,
+      lead_source_detail: MI_CONFIG.LEAD_SOURCE,
+      maturity_score_total: scores.total,
+      maturity_score_stage: 'Stage ' + scores.stage.num,
+      maturity_score_signal_coverage: scores.dimScores.signal_coverage,
+      maturity_score_stakeholder_intel: scores.dimScores.stakeholder_intel,
+      maturity_score_crm_fidelity: scores.dimScores.crm_fidelity,
+      maturity_score_orchestration: scores.dimScores.orchestration,
+      submitted_at: new Date().toISOString(),
+      page_url: window.location.href,
+      raw_answers: this.state.answers.map((idx, qIdx) => ({
+        question: MI_QUESTIONS[qIdx].text,
+        answer: MI_QUESTIONS[qIdx].options[idx].label,
+        score: MI_QUESTIONS[qIdx].options[idx].score
+      }))
+    };
+
+    this.state.leadData = payload;
+
+    // Fire HubSpot identify (uses sitewide tracking pixel)
+    try {
+      window._hsq = window._hsq || [];
+      _hsq.push(['identify', {
+        email,
+        firstname,
+        lastname,
+        company,
+        jobtitle: jobtitle || undefined,
+        siq_lead_source_detail: payload.lead_source_detail,
+        siq_gtm_maturity_score: payload.maturity_score_stage,
+        siq_gtm_maturity_score_numeric: payload.maturity_score_total,
+        siq_gtm_maturity_signal_coverage: payload.maturity_score_signal_coverage,
+        siq_gtm_maturity_stakeholder_intel: payload.maturity_score_stakeholder_intel,
+        siq_gtm_maturity_crm_fidelity: payload.maturity_score_crm_fidelity,
+        siq_gtm_maturity_orchestration: payload.maturity_score_orchestration
+      }]);
+      _hsq.push(['trackCustomBehavioralEvent', {
+        name: 'gtm_maturity_index_completed',
+        properties: { stage: payload.maturity_score_stage, score: payload.maturity_score_total }
+      }]);
+      _hsq.push(['trackPageView']);
+    } catch (e) { console.warn('HubSpot identify failed (non-fatal):', e); }
+
+    // Fire n8n webhook (HubSpot custom property write + Slack post handled there)
+    try {
+      await fetch(MI_CONFIG.N8N_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        mode: 'no-cors'  // n8n returns CORS-restricted responses; we don't need to read the response
+      });
+    } catch (e) { console.warn('n8n webhook failed (non-fatal):', e); }
+
+    this.state.submitted = true;
+    this.renderResult(scores);
+    this.show('result');
+  },
+
+  // ---------- result rendering ----------
+  renderResult(scores) {
+    document.getElementById('mi-r-stage').textContent = 'Your GTM Maturity';
+    document.getElementById('mi-r-badge').textContent = 'Stage ' + scores.stage.num;
+    document.getElementById('mi-r-score').textContent = `Your score: ${scores.total} / 48`;
+    document.getElementById('mi-r-headline').textContent = scores.stage.headline;
+    document.getElementById('mi-r-copy').textContent = scores.stage.copy;
+    document.getElementById('mi-r-cta-headline').textContent = scores.stage.ctaHeadline;
+    document.getElementById('mi-r-cta-sub').textContent = scores.stage.ctaSub;
+    document.getElementById('mi-r-calendly').href = MI_CONFIG.CALENDLY_URL;
+
+    const bars = document.getElementById('mi-r-bars');
+    bars.innerHTML = '';
+    const dims = [
+      { key: 'signal_coverage', label: 'Signal Coverage' },
+      { key: 'stakeholder_intel', label: 'Stakeholder Intelligence' },
+      { key: 'crm_fidelity', label: 'CRM Fidelity' },
+      { key: 'orchestration', label: 'Orchestration & Action' }
+    ];
+    dims.forEach(d => {
+      const score = scores.dimScores[d.key];
+      const pct = (score / 12) * 100;
+      const row = document.createElement('div');
+      row.innerHTML = `
+        <div class="mi-bar-row">
+          <span class="mi-bar-label">${d.label}</span>
+          <span class="mi-bar-score">${score} / 12</span>
+        </div>
+        <div class="mi-bar-track"><div class="mi-bar-fill" style="width:${pct}%;"></div></div>
+      `;
+      bars.appendChild(row);
+    });
+  }
+};
+
+// Initial render
+document.addEventListener('DOMContentLoaded', () => {
+  // No-op — intro is already visible by default
+});
+</script>
+
+</body>
+</html>
