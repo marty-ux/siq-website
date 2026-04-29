@@ -161,6 +161,7 @@ p { color: var(--siq-text-secondary); }
   font-size: var(--fs-sm);
   font-weight: 500;
   transition: color var(--transition);
+  white-space: nowrap;
 }
 .nav-links a:hover, .nav-links a.active { color: var(--siq-text-primary); }
 
