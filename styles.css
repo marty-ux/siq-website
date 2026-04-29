@@ -225,6 +225,30 @@ p { color: var(--siq-text-secondary); }
 }
 .hero-cta { display: flex; justify-content: center; gap: var(--sp-4); flex-wrap: wrap; }
 
+/* ============ HERO PULL-QUOTE ============ */
+.hero-quote {
+  max-width: 720px;
+  margin: var(--sp-8) auto var(--sp-8);
+  padding: var(--sp-6) var(--sp-8);
+  background: var(--siq-bg-elevated);
+  border-left: 3px solid var(--siq-orange);
+  text-align: left;
+}
+.hero-quote p {
+  margin: 0 0 var(--sp-3);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--siq-text-primary);
+}
+.hero-quote cite {
+  display: block;
+  font-size: var(--fs-sm);
+  font-style: normal;
+  color: var(--siq-text-secondary);
+  letter-spacing: 0.02em;
+}
+
 /* ============ STAT STRIPS ============ */
 .stats {
   display: grid;
