@@ -153,6 +153,7 @@ p { color: var(--siq-text-secondary); }
   display: flex;
   gap: var(--sp-8);
   list-style: none;
+  margin-left: var(--sp-12);
 }
 
 .nav-links a {
