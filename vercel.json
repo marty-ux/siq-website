@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/gtm-maturity",
-      "destination": "/gtm-readiness",
+      "destination": "/gtm-readiness.html",
       "permanent": true
     },
     {
