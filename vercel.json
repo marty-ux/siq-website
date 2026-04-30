@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/gtm-maturity",
+      "destination": "/gtm-readiness",
+      "permanent": true
+    },
+    {
+      "source": "/gtm-maturity.html",
+      "destination": "/gtm-readiness.html",
+      "permanent": true
+    }
+  ]
+}
