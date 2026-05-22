@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SiQ Cortex — Client Onboarding Intake (v3)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+  [data-theme="dark"] {
+    --canvas: #0A1628; --surface: #0E1D33; --surface-2: #11233D;
+    --border: #1F3352; --border-strong: #2B4265;
+    --text-primary: #F5F7FA; --text-secondary: #B8C5D6; --text-tertiary: #8FA3BF;
+    --brand-blue: #0073E6; --brand-orange: #FF6600; --input-bg: #0A1628;
+    --warn: #E0A800; --warn-tint: rgba(224,168,0,0.10);
+    --ok: #2BB673; --ok-tint: rgba(43,182,115,0.10);
+    --overlay: rgba(5,11,22,0.72);
+  }
+  [data-theme="light"] {
+    --canvas: #F4F6F9; --surface: #FFFFFF; --surface-2: #F8FAFC;
+    --border: #E2E8F0; --border-strong: #CBD5E1;
+    --text-primary: #0A1628; --text-secondary: #475569; --text-tertiary: #7C8AA0;
+    --brand-blue: #0073E6; --brand-orange: #FF6600; --input-bg: #FFFFFF;
+    --warn: #B57F00; --warn-tint: rgba(224,168,0,0.14);
+    --ok: #1E9E61; --ok-tint: rgba(43,182,115,0.12);
+    --overlay: rgba(10,22,40,0.45);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--canvas); color: var(--text-primary); line-height: 1.55;
+    -webkit-font-smoothing: antialiased; transition: background 0.2s ease, color 0.2s ease;
+  }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 28px 96px; }
+  .topbar {
+    position: sticky; top: 0; z-index: 50; background: var(--canvas);
+    border-bottom: 1px solid var(--border); display: flex; align-items: center;
+    justify-content: space-between; padding: 16px 28px; max-width: 940px; margin: 0 auto; gap: 16px;
+  }
+  .wordmark { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; white-space: nowrap; }
+  .wordmark .blue { color: var(--brand-blue); }
+  .wordmark .orange { color: var(--brand-orange); }
+  .wordmark .sub { font-size: 12px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.12em; margin-left: 10px; }
+  .topbar-logo { flex: 1; display: flex; justify-content: center; align-items: center; min-width: 0; }
+  .topbar-logo img { display: none; max-width: 200px; max-height: 32px; width: auto; height: auto; object-fit: contain; background: #fff; padding: 4px 8px; border: 1px solid var(--border); }
+  .bar-right { display: flex; align-items: center; gap: 12px; }
+  .toggle { display: inline-flex; border: 1px solid var(--border-strong); }
+  .toggle button { font-family: inherit; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 7px 14px; background: transparent; color: var(--text-tertiary); border: none; cursor: pointer; transition: all 0.15s ease; }
+  .toggle button.active { background: var(--brand-blue); color: #fff; }
+  .btn-export { font-family: inherit; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 8px 16px; border: none; cursor: pointer; background: var(--brand-orange); color: #fff; }
+  .btn-export:hover { background: #E65C00; }
+  .btn-export.lg { padding: 12px 26px; font-size: 13px; }
+  .intro { margin-top: 26px; }
+  .intro .eyebrow { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: var(--brand-blue); margin-bottom: 10px; }
+  .intro h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.16; }
+  .intro p { font-size: 14.5px; color: var(--text-secondary); margin-top: 12px; max-width: 780px; }
+  .intro p b { color: var(--text-primary); font-weight: 600; }
+  .assets { margin-top: 26px; border: 1px solid var(--border-strong); background: var(--surface-2); padding: 22px 22px; }
+  .assets h2 { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+  .assets .assets-sub { font-size: 13px; color: var(--text-tertiary); margin-bottom: 18px; }
+  .asset-block { padding: 16px 0; border-top: 1px solid var(--border); }
+  .asset-block:first-of-type { border-top: none; padding-top: 0; }
+  .asset-block .a-label { font-size: 13.5px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+  .asset-block .a-help { font-size: 12px; color: var(--text-tertiary); margin-bottom: 10px; }
+  .dropzone { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .btn-upload { font-family: inherit; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 9px 16px; border: 1px solid var(--brand-blue); background: transparent; color: var(--brand-blue); cursor: pointer; transition: all 0.15s ease; }
+  .btn-upload:hover { background: var(--brand-blue); color: #fff; }
+  .file-hint { font-size: 11.5px; color: var(--text-tertiary); }
+  input[type="file"] { display: none; }
+  .file-list { list-style: none; margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .file-row { display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--border); padding: 9px 12px; font-size: 13px; }
+  .file-row .fr-name { font-weight: 600; color: var(--text-primary); word-break: break-all; }
+  .file-row .fr-meta { color: var(--text-tertiary); font-size: 11.5px; white-space: nowrap; }
+  .file-row .fr-status { color: var(--brand-blue); font-size: 11.5px; font-weight: 600; margin-left: auto; white-space: nowrap; }
+  .file-row.is-warn .fr-status { color: var(--warn); }
+  .row-x { font-family: inherit; font-size: 16px; line-height: 1; border: none; background: transparent; color: var(--text-tertiary); cursor: pointer; padding: 2px 6px; }
+  .row-x:hover { color: var(--brand-orange); }
+  .prefill-note { margin-top: 12px; font-size: 12px; color: var(--text-secondary); background: var(--warn-tint); border-left: 3px solid var(--warn); padding: 9px 12px; }
+  .identity { margin-top: 22px; border: 1px solid var(--border-strong); background: var(--surface-2); padding: 18px 20px; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; gap: 16px; }
+  .tier { margin-top: 40px; display: flex; align-items: center; gap: 12px; }
+  .tier .bar { height: 2px; background: var(--brand-orange); flex: 1; }
+  .tier h3 { margin:0; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; color: var(--brand-orange); white-space: nowrap; }
+  section { margin-top: 18px; border: 1px solid var(--border); background: var(--surface); padding: 24px 26px; }
+  .sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+  .sec-num { font-size: 12px; font-weight: 700; color: var(--brand-blue); border: 1px solid var(--brand-blue); padding: 2px 8px; letter-spacing: 0.05em; }
+  .sec-head h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+  .sec-sub { font-size: 13px; color: var(--text-tertiary); margin-bottom: 18px; }
+  .field { margin-bottom: 20px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label { display: block; font-size: 14.5px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+  .field .help { font-size: 12.5px; color: var(--text-tertiary); margin-bottom: 8px; }
+  .field .example { font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; }
+  .field .example b { color: var(--brand-blue); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-size: 10.5px; }
+  input[type="text"], input[type="email"], input[type="url"], input[type="date"], input[type="number"], textarea, select {
+    width: 100%; font-family: inherit; font-size: 14px; color: var(--text-primary);
+    background: var(--input-bg); border: 1px solid var(--border-strong);
+    padding: 10px 12px; outline: none; transition: border-color 0.15s ease; border-radius: 0;
+  }
+  input:focus, textarea:focus, select:focus { border-color: var(--brand-blue); }
+  textarea { resize: vertical; min-height: 78px; line-height: 1.55; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .checks { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  .checks label { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 500; color: var(--text-secondary); cursor: pointer; }
+  .checks input { width: 16px; height: 16px; accent-color: var(--brand-blue); cursor: pointer; }
+  .field.unfilled input, .field.unfilled textarea, .field.unfilled select { border-color: var(--warn); background: var(--warn-tint); }
+  .manual-badge { display: inline-block; margin-left: 8px; font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: var(--warn); padding: 2px 6px; vertical-align: middle; }
+  .auto-badge { display: inline-block; margin-left: 8px; font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: var(--ok); padding: 2px 6px; vertical-align: middle; }
+  .rowset { display: flex; flex-direction: column; gap: 12px; margin-top: 6px; }
+  .dyn-row { display: grid; gap: 12px; align-items: end; background: var(--surface-2); border: 1px solid var(--border); padding: 14px; }
+  .ae-row { grid-template-columns: 1fr 1.2fr 1.2fr auto; }
+  .sh-row { grid-template-columns: 1fr 1.2fr 0.9fr auto; }
+  .dyn-row .mini-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); margin-bottom: 4px; display: block; }
+  .dyn-row input[readonly] { color: var(--text-secondary); background: var(--surface); cursor: not-allowed; }
+  .dyn-remove { align-self: end; }
+  .btn-mini { font-family: inherit; font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 9px 14px; border: 1px solid var(--brand-blue); background: transparent; color: var(--brand-blue); cursor: pointer; }
+  .btn-mini:hover:not(:disabled) { background: var(--brand-blue); color: #fff; }
+  .btn-mini:disabled { opacity: 0.4; cursor: not-allowed; }
+  .count-row { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+  .count-row .field { margin-bottom: 0; max-width: 240px; }
+  .gage-note { font-size: 11.5px; color: var(--text-tertiary); margin-top: 8px; }
+  .metrics-scroll { overflow-x: auto; margin-top: 8px; }
+  table.metrics { width: 100%; border-collapse: collapse; min-width: 640px; }
+  table.metrics th, table.metrics td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; }
+  table.metrics th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-tertiary); background: var(--surface-2); }
+  table.metrics td.metric-name { font-size: 13px; font-weight: 600; color: var(--text-primary); white-space: nowrap; }
+  table.metrics input { border: 1px solid var(--border); padding: 7px 9px; font-size: 13px; }
+  .reminder { margin-top: 10px; font-size: 12.5px; color: var(--text-secondary); background: var(--surface-2); border-left: 3px solid var(--brand-blue); padding: 9px 12px; }
+  .modal-overlay { position: fixed; inset: 0; background: var(--overlay); display: none; align-items: center; justify-content: center; z-index: 200; padding: 24px; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--surface); border: 1px solid var(--border-strong); max-width: 560px; width: 100%; padding: 26px; }
+  .modal .m-eyebrow { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--brand-orange); margin-bottom: 8px; }
+  .modal h3 { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 6px; }
+  .modal .m-sub { font-size: 13px; color: var(--text-tertiary); margin-bottom: 18px; }
+  .modal .m-field { font-size: 13px; font-weight: 700; color: var(--brand-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 14px; }
+  .m-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 22px; }
+  .m-col { border: 1px solid var(--border); padding: 12px; }
+  .m-col .m-col-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-tertiary); margin-bottom: 8px; }
+  .m-col .m-col-val { font-size: 13px; color: var(--text-primary); max-height: 160px; overflow-y: auto; white-space: pre-wrap; }
+  .m-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-solid { font-family: inherit; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 11px 18px; border: none; cursor: pointer; background: var(--brand-orange); color: #fff; }
+  .btn-solid:hover { background: #E65C00; }
+  .btn-ghost { font-family: inherit; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 11px 18px; border: 1px solid var(--border-strong); cursor: pointer; background: transparent; color: var(--text-primary); }
+  .btn-ghost:hover { border-color: var(--brand-blue); color: var(--brand-blue); }
+  .foot { margin-top: 34px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .foot .note { font-size: 12px; color: var(--text-tertiary); }
+  @media (max-width: 760px) {
+    .identity { grid-template-columns: 1fr 1fr; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .topbar, .wrap { padding-left: 18px; padding-right: 18px; }
+    .topbar-logo { display: none; }
+    .ae-row, .sh-row { grid-template-columns: 1fr; }
+    .m-compare { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body data-theme="dark">
+  <div class="topbar">
+    <div class="wordmark"><span class="blue">Scalient</span><span class="orange">IQ</span><span class="sub">Cortex</span></div>
+    <div class="topbar-logo"><img id="brandLogo" alt="Client logo"></div>
+    <div class="bar-right">
+      <button class="btn-export" onclick="exportProfile()">Export Profile</button>
+      <div class="toggle" role="tablist" aria-label="Theme">
+        <button class="active" data-theme-btn="dark">Dark</button>
+        <button data-theme-btn="light">Light</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <div class="intro">
+      <div class="eyebrow">Client Onboarding · GTM Profile + Outbound</div>
+      <h1>The inputs Cortex needs to run your GTM</h1>
+      <p>The more detail you give us, the faster Cortex gets to work. Your answers configure how Cortex <b>scores fit, maps buying committees, reads signals, and pre-loads objections and plays</b> — and they give Gage, your AI SDR, everything it needs to run outbound with your voice and your guardrails. Examples under each question are SiQ defaults to react to, not rules. Already have a GTM strategy doc? <b>Drop it below and we'll pre-fill what we can</b> — you confirm everything before it's saved. When you're done, hit <b>Export Profile</b> to hand the answers back as your GTM config. (Billing and contracting details are handled separately on the Engagement Setup checklist.)</p>
+    </div>
+
+    <div class="assets">
+      <h2>Jump-start &amp; assets</h2>
+      <div class="assets-sub">Optional, but it saves you typing. Everything you upload stays a draft until you confirm it.</div>
+
+      <div class="asset-block">
+        <div class="a-label">Company logo</div>
+        <div class="a-help">PNG, JPG, or SVG. Shows in the header of your profile.</div>
+        <div class="dropzone">
+          <button type="button" class="btn-upload" onclick="document.getElementById('logoInput').click()">Upload logo</button>
+          <span class="file-hint" id="logoName">No file selected</span>
+        </div>
+        <input type="file" id="logoInput" accept=".png,.jpg,.jpeg,.svg,image/png,image/jpeg,image/svg+xml">
+      </div>
+
+      <div class="asset-block">
+        <div class="a-label">GTM documents — pre-fill the form</div>
+        <div class="a-help">PDF, DOCX, or XLSX, up to 50&nbsp;MB each. We extract what we can and pre-fill matching fields below. Anything we can't read stays blank and gets flagged for manual entry.</div>
+        <div class="dropzone">
+          <button type="button" class="btn-upload" onclick="document.getElementById('docInput').click()">Upload documents</button>
+          <span class="file-hint">PDF · DOCX · XLSX · max 50 MB</span>
+        </div>
+        <input type="file" id="docInput" accept=".pdf,.docx,.xlsx,.xls" multiple>
+        <ul class="file-list" id="docList"></ul>
+        <div class="prefill-note" id="prefillNote" style="display:none;">Pre-filled fields are tagged <b>AUTO-FILLED</b>. Fields we couldn't fill are tagged <b>MANUAL ENTRY</b> and outlined — please review and complete them. Edit any field to clear its flag.</div>
+      </div>
+
+      <div class="asset-block">
+        <div class="a-label">Call recordings</div>
+        <div class="a-help">Discovery or strategy calls — MP3, M4A, WAV, MP4, or MOV, up to 500&nbsp;MB each. Typically 3–5 calls. No auto-transcription in this version; add context in the notes.</div>
+        <div class="dropzone">
+          <button type="button" class="btn-upload" onclick="document.getElementById('callInput').click()">Upload recordings</button>
+          <span class="file-hint">MP3 · M4A · WAV · MP4 · MOV · max 500 MB each</span>
+        </div>
+        <input type="file" id="callInput" accept=".mp3,.m4a,.wav,.mp4,.mov,audio/*,video/*" multiple>
+        <ul class="file-list" id="callList"></ul>
+        <div class="field" style="margin-top:14px;margin-bottom:0;">
+          <label for="callNotes" style="font-size:13px;">Notes on these calls (optional)</label>
+          <textarea id="callNotes" data-field="call_notes" placeholder="e.g., Call 1 = discovery with Megan; Call 3 = pricing pushback worth flagging" style="min-height:60px;"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="identity">
+      <div class="field" style="margin:0;"><label>Client</label><input type="text" data-field="client_name" placeholder="Romify"></div>
+      <div class="field" style="margin:0;"><label>Website</label><input type="text" data-field="website" placeholder="romify.io"></div>
+      <div class="field" style="margin:0;"><label>Completed by</label><input type="text" id="completedBy" data-field="completed_by" placeholder="Name"></div>
+      <div class="field" style="margin:0;"><label>Role / title</label><input type="text" data-field="role" placeholder="Head of Growth"></div>
+      <div class="field" style="margin:0;"><label>Date</label><input type="text" data-field="date" placeholder="May 21, 2026"></div>
+    </div>
+
+    <div class="tier"><h3>Strategy &amp; Brain</h3><div class="bar"></div></div>
+
+    <section>
+      <div class="sec-head"><span class="sec-num">01</span><h3>Company &amp; GTM Motion</h3></div>
+      <div class="sec-sub">The shape of your revenue engine today.</div>
+      <div class="field">
+        <label>In one or two sentences, what do you do and who for?</label>
+        <div class="help">Like you'd explain it at a networking event.</div>
+        <input type="text" data-field="one_liner" placeholder="e.g., We help [buyer] do [outcome] without [pain]">
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>Average contract value (ACV)</label><input type="text" data-field="acv" placeholder="e.g., $18k/yr"></div>
+        <div class="field"><label>Typical sales cycle</label><input type="text" data-field="cycle" placeholder="e.g., 45–60 days"></div>
+      </div>
+      <div class="field">
+        <label>Which GTM motions do you run?</label>
+        <div class="help">And which is primary.</div>
+        <input type="text" data-field="motions" placeholder="e.g., Outbound (primary) + inbound; partner channel emerging">
+      </div>
+      <div class="field">
+        <label>Who owns Sales, RevOps, Marketing, and CS?</label>
+        <input type="text" data-field="team" placeholder="e.g., Sarah Kim (CEO), Megan Reddy (Head of Growth)...">
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>Primary CRM</label>
+          <select data-field="crm"><option value="">Select…</option><option>HubSpot</option><option>Salesforce</option><option>Other</option></select>
+        </div>
+        <div class="field"><label>Key GTM tools today</label>
+          <div class="help">Intent, conversation intelligence, sales engagement, enrichment.</div>
+          <input type="text" data-field="stack" placeholder="e.g., HubSpot, Apollo, Gong, Bombora">
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="sec-num">02</span><h3>Offer, Differentiation &amp; Proof</h3></div>
+      <div class="sec-sub">What we lead with, why you win, and the proof that backs it.</div>
+      <div class="field">
+        <label>What's the core offer we should generate leads for?</label>
+        <div class="help">If you have several, the one to prioritize first.</div>
+        <input type="text" data-field="core_offer" placeholder="e.g., the full Suite at $24k/yr — not the Starter plan">
+      </div>
+      <div class="field">
+        <label>What makes you different? Why choose you over the alternatives?</label>
+        <div class="help">Don't be modest — this is what makes outreach stand out.</div>
+        <textarea data-field="differentiators" placeholder="The 2–3 things only you can say…"></textarea>
+      </div>
+      <div class="field">
+        <label>Name 3 competitors — what you like / dislike about each</label>
+        <textarea data-field="competitors" placeholder="1. … 2. … 3. …"></textarea>
+      </div>
+      <div class="field">
+        <label>What social proof can we use?</label>
+        <div class="checks">
+          <label><input type="checkbox" data-field="social_proof" value="Case studies">Case studies with results</label>
+          <label><input type="checkbox" data-field="social_proof" value="Logos">Client logos we can name</label>
+          <label><input type="checkbox" data-field="social_proof" value="Testimonials">Testimonials / quotes</label>
+          <label><input type="checkbox" data-field="social_proof" value="Awards">Awards / certifications</label>
+          <label><input type="checkbox" data-field="social_proof" value="Press">Media / press</label>
+          <label><input type="checkbox" data-field="social_proof" value="None yet">None yet — help us build it</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Name the specifics</label>
+        <div class="help">Which logos can we drop, which case studies, which press.</div>
+        <input type="text" data-field="social_proof_detail" placeholder="e.g., logos: Acme, Globex; 3 case studies; featured in SaaStr">
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="sec-num">03</span><h3>Ideal Customer Profile (ICP)</h3></div>
+      <div class="sec-sub">The most important section. The tighter this is, the better your results — and the heart of the Fit Score.</div>
+      <div class="field">
+        <label>Top 3–5 target industries / verticals</label>
+        <input type="text" data-field="icp_industries" placeholder="e.g., D2C e-commerce, omnichannel retail, subscription">
+      </div>
+      <div class="field">
+        <label>Target company size (employees)</label>
+        <div class="checks">
+          <label><input type="checkbox" data-field="icp_size" value="1-10">1–10</label>
+          <label><input type="checkbox" data-field="icp_size" value="11-50">11–50</label>
+          <label><input type="checkbox" data-field="icp_size" value="51-200">51–200</label>
+          <label><input type="checkbox" data-field="icp_size" value="201-1000">201–1,000</label>
+          <label><input type="checkbox" data-field="icp_size" value="1000+">1,000+</label>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>Target revenue range</label><input type="text" data-field="icp_revenue" placeholder="e.g., $5M–$20M ARR"></div>
+        <div class="field"><label>Target geographies (and any to exclude)</label><input type="text" data-field="icp_geo" placeholder="e.g., US + Canada; exclude EE"></div>
+      </div>
+      <div class="field">
+        <label>Firmographic / tech must-haves</label>
+        <input type="text" data-field="icp_musthaves" placeholder="e.g., runs Shopify; has a dedicated ops team">
+      </div>
+      <div class="field">
+        <label>Exclusions / suppression — who to explicitly leave out</label>
+        <div class="help">Current customers, active pipeline, anti-ICP, named competitors' customers.</div>
+        <textarea data-field="icp_disqualifiers" placeholder="e.g., all current customers (list to follow), active deals, pure B2B wholesale…"></textarea>
+      </div>
+      <div class="field">
+        <label>Name 3–5 dream clients — the perfect fit</label>
+        <textarea data-field="dream_clients" placeholder="1. … 2. … 3. …"></textarea>
+      </div>
+      <div class="field">
+        <label>Name 3–5 of your best current customers — what do they have in common?</label>
+        <div class="help">These become our lookalike anchors for list-building.</div>
+        <textarea data-field="best_customers" placeholder="e.g., all D2C, 100–300 employees, $10M–$80M, had an ops team of 3–8…"></textarea>
+      </div>
+      <div class="field">
+        <label>What makes a Tier 1 account vs Tier 2?</label>
+        <div class="example"><b>SiQ default</b> &nbsp;Tier 1 = perfect firmographic match + active intent + named champion. Tier 2 = good fit, no active signal yet.</div>
+        <textarea data-field="icp_tiers" placeholder="Describe your Tier 1 vs Tier 2…"></textarea>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="sec-num">04</span><h3>Personas &amp; Buying Committee</h3></div>
+      <div class="sec-sub">Who sits in your deals. Cortex uses this to detect roles and build the Stakeholder map.</div>
+      <div class="field">
+        <label>Top 3–5 decision-maker titles to reach</label>
+        <input type="text" data-field="persona_primary" placeholder="e.g., Head of Ops, COO, Director of E-commerce">
+      </div>
+      <div class="field">
+        <label>Secondary / influencer titles worth engaging</label>
+        <div class="help">Not the final decision-maker, but they feel the pain and can champion you.</div>
+        <input type="text" data-field="persona_secondary" placeholder="e.g., Ops Managers, E-commerce Managers; CTO for integrations">
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>Economic buyer (who signs)</label><input type="text" data-field="persona_economic" placeholder="e.g., CRO / CEO"></div>
+        <div class="field"><label>Typical buying committee size</label><input type="text" data-field="committee_size" placeholder="e.g., 3–5"></div>
+      </div>
+      <div class="field">
+        <label>Other roles typically in the deal</label>
+        <div class="help">Champion, technical evaluator, blocker, end user — and who tends to play them.</div>
+        <input type="text" data-field="persona_committee" placeholder="e.g., RevOps (evaluator), Finance (blocker), SDR lead (end user)">
+      </div>
+      <div class="field">
+        <label>The #1 pain point your ideal customer is dealing with right now</label>
+        <textarea data-field="icp_pain" placeholder="What's keeping them up at night that you solve?"></textarea>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="sec-num">05</span><h3>Signals &amp; Sources</h3></div>
+      <div class="sec-sub">What "why now" means for you, and where the signal comes from.</div>
+      <div class="field">
+        <label>What signals tell you a good-fit account is in-market?</label>
+        <input type="text" data-field="signals_inmarket" placeholder="e.g., pricing-page visits, new VP Sales hire, intent on 'AI SDR'">
+      </div>
+      <div class="field">
+        <label>In-market triggers to watch</label>
+        <div class="help">Used for list-building and enrichment (not the main outreach hook).</div>
+        <div class="checks">
+          <label><input type="checkbox" data-field="in_market_triggers" value="Funding">Recently raised funding</label>
+          <label><input type="checkbox" data-field="in_market_triggers" value="Hiring">Hiring for specific roles</label>
+          <label><input type="checkbox" data-field="in_market_triggers" value="New product/market">New product or market</label>
+          <label><input type="checkbox" data-field="in_market_triggers" value="Leadership change">Leadership change</label>
+          <label><input type="checkbox" data-field="in_market_triggers" value="Tech stack change">Tech stack change</label>
+          <label><input type="checkbox" data-field="in_market_triggers" value="Headcount growth">Rapid headcount growth</label>
+          <label><input type="checkbox" data-field="in_market_triggers" value="Regulatory">Regulatory change</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Which signal sources do you have or want?</label>
+        <input type="text" data-field="signal_sources" placeholder="e.g., Apollo + Bombora + HubSpot; want product usage">
+      </div>
+      <div class="field">
+        <label>What's a "hot" signal versus noise?</label>
+        <textarea data-field="signal_hot_vs_noise" placeholder="e.g., 3+ pricing visits in a week = hot; a single blog read = noise"></textarea>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="sec-num">06</span><h3>Fit-Score Weights</h3></div>
+      <div class="sec-sub">How the headline score on each brief is calculated.</div>
+      <div class="field">
+        <label>Rank what matters most for fit</label>
+        <div class="example"><b>SiQ default</b> &nbsp;ICP match 40% · intent 25% · engagement 20% · persona seniority 15%.</div>
+        <input type="text" data-field="weights" placeholder="e.g., ICP 40 / intent 25 / engagement 20 / seniority 15">
+      </div>
+      <div class="field">
+        <label>What should count as Green / Yellow / Red?</label>
+        <div class="example"><b>SiQ default</b> &nbsp;Green 75+ · Yellow 60–74 · Red under 60.</div>
+        <input type="text" data-field="thresholds" placeholder="e.g., Green 75+, Yellow 60–74, Red <60">
+      </div>
+    </section>
+    <div class="tier"><h3>Messaging &amp; Execution</h3><div class="bar"></div></div>
+
+    <section>
+      <div class="sec-head"><span class="sec-num">07</span><h3>Messaging &amp; Positioning</h3></div>
+      <div class="sec-sub">So everything Gage sends sounds like you and lands.</div>
+      <div class="field">
+        <label>Your primary value proposition — the core promise</label>
+        <textarea data-field="value_prop" placeholder="e.g., reclaim 15+ hrs/week by automating the manual work, no devs, no 6-month rollout"></textarea>
+      </div>
+      <div class="field">
+        <label>A specific result / metric we can lead with</label>
+        <div class="help">"We helped X achieve Y in Z timeframe."</div>
+        <input type="text" data-field="proof_metric" placeholder="e.g., cut order-processing time 62% in 45 days">
+      </div>
+      <div class="field">
+        <label>Brand tone of voice</label>
+        <div class="checks">
+          <label><input type="checkbox" data-field="voice" value="Professional">Professional / formal</label>
+          <label><input type="checkbox" data-field="voice" value="Friendly">Friendly / conversational</label>
+          <label><input type="checkbox" data-field="voice" value="Bold">Bold / direct</label>
+          <label><input type="checkbox" data-field="voice" value="Witty">Witty / playful</label>
+          <label><input type="checkbox" data-field="voice" value="Technical">Technical / authoritative</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Words, phrases, or claims to avoid</label>
+        <input type="text" data-field="avoid" placeholder="e.g., no 'synergy'/'cutting-edge'; don't promise ROI without a case study">
+      </div>
+      <div class="field">
+        <label>Have you done cold outreach before? What worked / didn't?</label>
+        <textarea data-field="prior_outbound" placeholder="e.g., No, first time — or: tried it, subject-line X worked, long emails didn't"></textarea>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>Desired action (CTA)</label>
+          <select data-field="cta"><option value="">Select…</option><option>Book a call / demo</option><option>Start a free trial</option><option>Download a resource</option><option>Reply to start a conversation</option><option>Other</option></select>
+        </div>
+        <div class="field"><label>Default booking link</label><input type="text" data-field="booking_link" placeholder="e.g., meetings.hubspot.com/…"></div>
+      </div>
+      <div class="field">
+        <label>Sender identity / signature for outbound</label>
+        <input type="text" data-field="sender" placeholder="e.g., from the AE, signed first name + Romify">
+      </div>
+      <div class="field" style="margin-bottom:0;">
+        <label>AE / seller booking links</label>
+        <div class="help">Gage books meetings straight onto the right rep's calendar. Add a row per seller — each gets a dedicated Gage sending identity (provisioned at setup) so replies route correctly.</div>
+        <div class="count-row">
+          <div class="field">
+            <span class="mini-label">How many AEs / sellers will engage leads? (1–10)</span>
+            <input type="number" id="aeCount" min="1" max="10" value="1">
+          </div>
+          <button type="button" class="btn-mini" id="aeAdd">+ Add AE</button>
+        </div>
+        <div class="rowset" id="aeRows"></div>
+        <div class="gage-note">Gage email addresses are shown for reference and are not editable — they're provisioned on a neutral sending domain at setup, with no client or vendor branding.</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="sec-num">08</span><h3>Objection Library</h3></div>
+      <div class="sec-sub">Cortex pre-loads these into the brief's objection-prep section.</div>
+      <div class="field">
+        <label>Top 3–5 objections your reps hear, with the reframe that works</label>
+        <div class="help">One per line: the objection, then how your best rep handles it.</div>
+        <textarea data-field="objections" placeholder="e.g.&#10;'We already have a tool for this' → reframe from point tool to orchestration&#10;'Not a priority right now' → tie to a live signal / cost of inaction"></textarea>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="sec-num">09</span><h3>Plays Library &amp; HITL</h3></div>
+      <div class="sec-sub">Your standard motions. Cortex recommends; a human approves the consequential ones.</div>
+      <div class="field">
+        <label>Your standard plays / sequences by scenario</label>
+        <div class="help">New inbound, cold outbound, re-engagement, expansion — name, trigger, channel.</div>
+        <textarea data-field="plays" placeholder="e.g.&#10;Cold outbound (intent spike) → 5-touch Gage sequence, email-first&#10;Re-engagement (gone dark 21d) → break-up email + LinkedIn"></textarea>
+      </div>
+      <div class="field">
+        <label>Which actions must a human approve vs run automatically?</label>
+        <div class="example"><b>SiQ default</b> &nbsp;Enrichment + low-risk CRM hygiene auto; outbound sends, CRM writes, and stage changes route for approval.</div>
+        <input type="text" data-field="hitl" placeholder="e.g., approve all first-touch sends; auto-log activity">
+      </div>
+    </section>
+
+    <div class="tier"><h3>Process, Network &amp; Systems</h3><div class="bar"></div></div>
+
+    <section>
+      <div class="sec-head"><span class="sec-num">10</span><h3>Lead Handling &amp; Sales Process</h3></div>
+      <div class="sec-sub">Generating leads is half the job — let's make sure nothing falls through.</div>
+      <div class="field">
+        <label>Who responds to leads and books calls? (name, role, response time)</label>
+        <input type="text" data-field="lead_owner" placeholder="e.g., Megan Reddy — within 2 hrs business hours; CEO backup">
+      </div>
+      <div class="field">
+        <label>Your sales process once a lead is qualified</label>
+        <textarea data-field="sales_process" placeholder="e.g., Discovery (30m) → technical deep-dive → proposal in 48h → procurement → signed → CS handoff"></textarea>
+      </div>
+      <div class="field">
+        <label>What does a "qualified lead" mean to you? When do we hand it over?</label>
+        <textarea data-field="qualified_def" placeholder="e.g., matches ICP + expressed interest + decision-maker/intro + budget + willing to take a 30-min call within 2 weeks"></textarea>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="sec-num">11</span><h3>Goals &amp; Expectations</h3></div>
+      <div class="sec-sub">What success looks like — and what failure looks like.</div>
+      <div class="field">
+        <label>If we could improve ONE metric in the next 90 days, what is it?</label>
+        <select data-field="goal_metric"><option value="">Select…</option><option>Qualified meetings booked</option><option>Pipeline value</option><option>New clients closed</option><option>Brand awareness / visibility</option><option>Other</option></select>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>Target qualified meetings per month</label><input type="text" data-field="target_meetings" placeholder="e.g., 8–12"></div>
+        <div class="field"><label>Current monthly run-rate</label><input type="text" data-field="current_meetings" placeholder="e.g., 2–4 from inbound + referrals"></div>
+      </div>
+      <div class="field">
+        <label>What would make this a failure after 90 days?</label>
+        <div class="help">Be honest — it sets the right expectations.</div>
+        <textarea data-field="failure_def" placeholder="e.g., fewer than ~7 qualified meetings/month by month 3, or off-ICP leads"></textarea>
+      </div>
+      <div class="field">
+        <label>Anything else that would help us build a better strategy?</label>
+        <textarea data-field="anything_else" placeholder="Launches, events, competitor moves, languages, timing…"></textarea>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="sec-num">12</span><h3>Warm Network &amp; Referrals</h3></div>
+      <div class="sec-sub">Often the highest-converting channel. Let's map it.</div>
+      <div class="grid-2">
+        <div class="field"><label>Do you ask clients/partners for referrals?</label>
+          <select data-field="referral_process"><option value="">Select…</option><option>Yes, systematically</option><option>Sometimes, informally</option><option>Rarely or never</option></select>
+        </div>
+        <div class="field"><label>How many active clients do you have?</label><input type="text" data-field="active_clients" placeholder="e.g., 47 active + 8 onboarding"></div>
+      </div>
+      <div class="field">
+        <label>Do you have strategic partners, resellers, or referral sources?</label>
+        <div class="help">Who, and how formal is the relationship?</div>
+        <input type="text" data-field="partners" placeholder="e.g., 2 Shopify Plus agencies (informal), ~3–4 referrals each">
+      </div>
+      <div class="field">
+        <label>Open to a referral incentive program?</label>
+        <select data-field="referral_incentive"><option value="">Select…</option><option>Yes</option><option>Maybe — tell me more</option><option>No</option></select>
+      </div>
+      <div class="field">
+        <label>Communities, associations, Slack groups, or events where your ICP gathers</label>
+        <textarea data-field="communities" placeholder="e.g., Pavilion, Ecommerce Operators Slack, SaaStr, key newsletters/events"></textarea>
+      </div>
+      <div class="field">
+        <label>Team members with strong personal networks in your market</label>
+        <textarea data-field="team_networks" placeholder="e.g., CEO well-connected in US scene; sales lead strong in UK; investor makes warm intros"></textarea>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="sec-num">13</span><h3>CRM &amp; Field Mapping</h3></div>
+      <div class="sec-sub">Keeps the system of record honest and the data contracts clean.</div>
+      <div class="field">
+        <label>Your lifecycle / deal stages</label>
+        <input type="text" data-field="lifecycle_stages" placeholder="e.g., Lead → MQL → SQL → Discovery → Proposal → Closed">
+      </div>
+      <div class="field">
+        <label>Key CRM properties you rely on (and naming conventions)</label>
+        <input type="text" data-field="key_fields" placeholder="e.g., account_tier, next_step, intent_score">
+      </div>
+      <div class="field">
+        <label>Source of truth for each object</label>
+        <div class="help">Where contacts, companies, and deals are mastered.</div>
+        <input type="text" data-field="sot" placeholder="e.g., HubSpot masters all three; enrichment flows in from Apollo">
+      </div>
+    </section>
+    <div class="tier"><h3>Onboarding &amp; Success</h3><div class="bar"></div></div>
+
+    <section>
+      <div class="sec-head"><span class="sec-num">14</span><h3>Onboarding Stakeholders &amp; Timeline</h3></div>
+      <div class="sec-sub">Who we keep in the loop, and when this intake is due.</div>
+
+      <div class="field">
+        <label>Primary stakeholder</label>
+        <div class="help">Pulled from "Completed by" above — the owner of this intake.</div>
+        <div class="grid-2">
+          <input type="text" id="primaryName" readonly placeholder="(fill in 'Completed by' above)">
+          <input type="email" id="primaryEmail" placeholder="primary@company.com (for reminders)">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Additional stakeholders to notify</label>
+        <div class="help">Optional — up to 4 more (5 total). They receive intake reminders and the GTM Profile when it's confirmed.</div>
+        <div class="rowset" id="shRows"></div>
+        <button type="button" class="btn-mini" id="shAdd" style="margin-top:12px;">+ Add stakeholder</button>
+      </div>
+
+      <div class="field" style="margin-bottom:0;">
+        <label>Intake deadline</label>
+        <div class="help">When this profile needs to be completed by.</div>
+        <input type="date" id="intakeDeadline" data-field="intake_deadline_display" style="max-width:240px;">
+        <div class="reminder">Reminders will be sent at 7 days, 3 days, and 1 day before the deadline.</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="sec-num">15</span><h3>Success Metrics &amp; Targets</h3></div>
+      <div class="sec-sub">Optional. Set a baseline and where you want each metric in 30 / 60 / 90 days. These anchor how we report progress.</div>
+      <div class="metrics-scroll">
+        <table class="metrics">
+          <thead>
+            <tr>
+              <th>Metric</th><th>Baseline (today)</th><th>30-day target</th><th>60-day target</th><th>90-day target</th>
+            </tr>
+          </thead>
+          <tbody id="metricsBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="foot">
+      <button class="btn-export lg" onclick="exportProfile()">Export Profile</button>
+      <span class="note">Downloads a GTM Profile (.json) Cortex uses to configure your briefs, scoring, plays, and Gage's outbound — including your uploads, AE links, stakeholders, targets, and the review trail.</span>
+    </div>
+
+  </div>
+
+  <div class="modal-overlay" id="hitlModal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="hitlTitle">
+      <div class="m-eyebrow">Human-in-the-loop · Review needed</div>
+      <h3 id="hitlTitle">A document conflicts with what you typed</h3>
+      <div class="m-sub">You'd already filled this in. The uploaded document has something different. Which version should we keep?</div>
+      <div class="m-field" id="hitlField">Field</div>
+      <div class="m-compare">
+        <div class="m-col">
+          <div class="m-col-label">Your entry</div>
+          <div class="m-col-val" id="hitlCurrent"></div>
+        </div>
+        <div class="m-col">
+          <div class="m-col-label">From document</div>
+          <div class="m-col-val" id="hitlExtracted"></div>
+        </div>
+      </div>
+      <div class="m-actions">
+        <button type="button" class="btn-ghost" id="hitlKeep">Accept client version</button>
+        <button type="button" class="btn-solid" id="hitlReplace">Accept extracted</button>
+      </div>
+    </div>
+  </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  var body = document.body;
+  var themeButtons = document.querySelectorAll('[data-theme-btn]');
+  function applyTheme(t){
+    body.setAttribute('data-theme', t);
+    themeButtons.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-theme-btn') === t); });
+  }
+  themeButtons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var t = btn.getAttribute('data-theme-btn');
+      applyTheme(t);
+      try { localStorage.setItem('siq_intake_theme', t); } catch(e){}
+    });
+  });
+  try { var saved = localStorage.getItem('siq_intake_theme'); if (saved) applyTheme(saved); } catch(e){}
+
+  var SIQ = { documents: [], callRecordings: [], hitlAudit: [] };
+  var clientLogoDataUrl = '';
+  if (window.pdfjsLib) { pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'; }
+  function ext(name){ var m = (name||'').toLowerCase().match(/\.([a-z0-9]+)$/); return m ? m[1] : ''; }
+  function hashCode(s){ var h=0; for(var i=0;i<s.length;i++){ h=((h<<5)-h)+s.charCodeAt(i); h|=0; } return h; }
+
+  var logoInput = document.getElementById('logoInput');
+  var brandLogo = document.getElementById('brandLogo');
+  var logoName = document.getElementById('logoName');
+  logoInput.addEventListener('change', function(e){
+    var f = e.target.files[0];
+    if (!f) return;
+    if (!/\.(png|jpe?g|svg)$/i.test(f.name)) { alert('Logo must be a PNG, JPG, or SVG.'); logoInput.value=''; return; }
+    var reader = new FileReader();
+    reader.onload = function(ev){ clientLogoDataUrl = ev.target.result; brandLogo.src = clientLogoDataUrl; brandLogo.style.display = 'block'; logoName.textContent = f.name; };
+    reader.readAsDataURL(f);
+  });
+
+  function fieldWrap(el){ return el.closest('.field') || el.parentElement; }
+  function labelEl(w){ return w ? w.querySelector('label') : null; }
+  function setBadge(w, cls, text){
+    var lbl = labelEl(w); if (!lbl) return;
+    lbl.querySelectorAll('.manual-badge,.auto-badge').forEach(function(b){ b.remove(); });
+    var span = document.createElement('span'); span.className = cls; span.textContent = text; lbl.appendChild(span);
+  }
+  function clearBadge(w){ var lbl = labelEl(w); if (lbl) lbl.querySelectorAll('.manual-badge,.auto-badge').forEach(function(b){ b.remove(); }); }
+  function markUnfilled(el){ var w = fieldWrap(el); w.classList.add('unfilled'); setBadge(w, 'manual-badge', 'Manual entry'); }
+  function markFilled(el){ var w = fieldWrap(el); w.classList.remove('unfilled'); setBadge(w, 'auto-badge', 'Auto-filled'); }
+  document.addEventListener('input', function(e){
+    var t = e.target; if (!t || !t.closest) return;
+    var w = t.closest('.field');
+    if (w && (w.classList.contains('unfilled') || (labelEl(w) && labelEl(w).querySelector('.auto-badge,.manual-badge')))) { w.classList.remove('unfilled'); clearBadge(w); }
+  });
+
+  var AUTOFILL_MAP = {
+    one_liner:        ['we help','what we do','our mission','elevator','one-liner','we are a','we provide'],
+    differentiators:  ['differentiat','what makes us','unique','why choose','sets us apart','our advantage'],
+    competitors:      ['competitor','competition','alternative to','versus',' vs '],
+    icp_industries:   ['target industr','vertical','ideal customer','icp','target market','we sell to'],
+    icp_revenue:      ['arr','annual recurring','revenue range','company revenue','revenue band'],
+    dream_clients:    ['dream client','dream account','target account','wish list','dream logo'],
+    best_customers:   ['best customer','flagship customer','reference customer','top account','marquee'],
+    persona_primary:  ['decision maker','decision-maker','target persona','buyer persona','buyer title','target title'],
+    icp_pain:         ['pain point','key challenge','biggest challenge','struggle with','problem they','frustration'],
+    value_prop:       ['value proposition','core promise','our promise','value prop','we deliver'],
+    proof_metric:     ['resulted in','increased by','reduced by','case study','roi of',' roi ','% improvement'],
+    objections:       ['objection','common pushback','concern raised','they say','rebuttal'],
+    plays:            ['play','sequence','cadence','outreach motion','campaign structure'],
+    sales_process:    ['sales process','deal stages','pipeline stage','stages are','sales motion'],
+    communities:      ['community','association','slack group','industry event','conference','meetup']
+  };
+  function paragraphs(text){
+    return (text || '').replace(/\r/g,'\n').split(/\n+|(?<=\.)\s{2,}|•/).map(function(s){ return s.trim().replace(/\s+/g,' '); }).filter(function(s){ return s.length > 24; });
+  }
+  function findMatch(paras, keywords){
+    for (var i=0;i<paras.length;i++){ var low = paras[i].toLowerCase(); for (var k=0;k<keywords.length;k++){ if (low.indexOf(keywords[k]) > -1) return paras[i].slice(0, 500); } }
+    return null;
+  }
+  function labelText(field){
+    var el = document.querySelector('[data-field="'+field+'"]'); if (!el) return field;
+    var w = fieldWrap(el), lbl = labelEl(w); return (lbl && lbl.childNodes[0]) ? lbl.childNodes[0].textContent.trim() : field;
+  }
+  async function extractText(file){
+    var name = file.name.toLowerCase(); var buf = await file.arrayBuffer();
+    if (name.endsWith('.pdf')) {
+      if (!window.pdfjsLib) throw new Error('PDF parser unavailable');
+      var pdf = await pdfjsLib.getDocument({ data: buf }).promise; var txt = '';
+      for (var i=1;i<=pdf.numPages;i++){ var page = await pdf.getPage(i); var content = await page.getTextContent(); txt += content.items.map(function(it){ return it.str; }).join(' ') + '\n'; }
+      return txt;
+    } else if (name.endsWith('.docx')) {
+      if (!window.mammoth) throw new Error('DOCX parser unavailable');
+      var r = await mammoth.extractRawText({ arrayBuffer: buf }); return r.value;
+    } else if (name.endsWith('.xlsx') || name.endsWith('.xls')) {
+      if (!window.XLSX) throw new Error('XLSX parser unavailable');
+      var wb = XLSX.read(buf, { type: 'array' }); var out = '';
+      wb.SheetNames.forEach(function(sn){ out += XLSX.utils.sheet_to_csv(wb.Sheets[sn]) + '\n'; }); return out;
+    }
+    throw new Error('Unsupported file type');
+  }
+  var conflictQueue = [];
+  function autoFillFromText(text, sourceName){
+    var paras = paragraphs(text); var filled = []; var conflicts = [];
+    Object.keys(AUTOFILL_MAP).forEach(function(field){
+      var el = document.querySelector('[data-field="'+field+'"]'); if (!el) return;
+      var match = findMatch(paras, AUTOFILL_MAP[field]); var hasVal = el.value && el.value.trim();
+      if (match){ if (hasVal && el.value.trim() !== match){ conflicts.push({ field: field, el: el, current: el.value, extracted: match }); } else if (!hasVal){ el.value = match; markFilled(el); filled.push(field); } }
+      else if (!hasVal){ markUnfilled(el); }
+    });
+    SIQ.documents.push({ filename: sourceName, upload_date: new Date().toISOString(), extraction_source: ext(sourceName), extracted_sections: filled });
+    if (conflicts.length){ conflictQueue = conflictQueue.concat(conflicts); showNextConflict(); }
+    return filled;
+  }
+
+  var hitlModal = document.getElementById('hitlModal');
+  function showNextConflict(){
+    if (!conflictQueue.length){ hitlModal.classList.remove('open'); return; }
+    var c = conflictQueue[0];
+    document.getElementById('hitlField').textContent = labelText(c.field);
+    document.getElementById('hitlCurrent').textContent = c.current;
+    document.getElementById('hitlExtracted').textContent = c.extracted;
+    hitlModal.classList.add('open');
+  }
+  function resolveConflict(useExtracted){
+    var c = conflictQueue.shift();
+    if (c){ SIQ.hitlAudit.push({ timestamp: new Date().toISOString(), field: c.field, original_value: c.current, action: useExtracted ? 'replaced_with_extracted' : 'kept_client_version', decision: useExtracted ? 'Accept Extracted' : 'Accept Client Version' }); if (useExtracted){ c.el.value = c.extracted; markFilled(c.el); } }
+    showNextConflict();
+  }
+  document.getElementById('hitlKeep').addEventListener('click', function(){ resolveConflict(false); });
+  document.getElementById('hitlReplace').addEventListener('click', function(){ resolveConflict(true); });
+
+  var docInput = document.getElementById('docInput');
+  var docList = document.getElementById('docList');
+  var prefillNote = document.getElementById('prefillNote');
+  function addDocRow(file){
+    var li = document.createElement('li'); li.className = 'file-row'; li.setAttribute('data-name', file.name);
+    var name = document.createElement('span'); name.className = 'fr-name'; name.textContent = file.name;
+    var status = document.createElement('span'); status.className = 'fr-status'; status.textContent = 'Reading…';
+    var x = document.createElement('button'); x.type='button'; x.className='row-x'; x.setAttribute('aria-label','Remove'); x.textContent = '×';
+    li.appendChild(name); li.appendChild(status); li.appendChild(x); docList.appendChild(li);
+    x.addEventListener('click', function(){ li.remove(); SIQ.documents = SIQ.documents.filter(function(d){ return d.filename !== file.name; }); });
+    return { li: li, status: status };
+  }
+  docInput.addEventListener('change', async function(e){
+    var files = Array.prototype.slice.call(e.target.files);
+    for (var i=0;i<files.length;i++){
+      var f = files[i];
+      if (!/\.(pdf|docx|xlsx|xls)$/i.test(f.name)){ alert(f.name + ': use PDF, DOCX, or XLSX.'); continue; }
+      if (f.size > 50*1024*1024){ alert(f.name + ' exceeds the 50 MB limit.'); continue; }
+      prefillNote.style.display = 'block';
+      var row = addDocRow(f);
+      try { var text = await extractText(f); var filled = autoFillFromText(text, f.name); row.status.textContent = filled.length ? ('Pre-filled ' + filled.length + ' field(s)') : 'No fields matched — manual entry'; if (!filled.length) row.li.classList.add('is-warn'); }
+      catch(err){ console.error('Extraction failed for ' + f.name, err); row.status.textContent = 'Could not read — fill manually'; row.li.classList.add('is-warn'); SIQ.documents.push({ filename: f.name, upload_date: new Date().toISOString(), extraction_source: ext(f.name), extracted_sections: [], error: 'extraction_failed' }); }
+    }
+    docInput.value = '';
+  });
+
+  var callInput = document.getElementById('callInput');
+  var callList = document.getElementById('callList');
+  callInput.addEventListener('change', function(e){
+    var files = Array.prototype.slice.call(e.target.files);
+    files.forEach(function(f){
+      if (!/\.(mp3|m4a|wav|mp4|mov)$/i.test(f.name)){ alert(f.name + ': use MP3, M4A, WAV, MP4, or MOV.'); return; }
+      if (f.size > 500*1024*1024){ alert(f.name + ' exceeds the 500 MB per-file limit.'); return; }
+      var sizeMb = +(f.size/1024/1024).toFixed(1);
+      var li = document.createElement('li'); li.className = 'file-row';
+      var name = document.createElement('span'); name.className='fr-name'; name.textContent = f.name;
+      var meta = document.createElement('span'); meta.className='fr-meta'; meta.style.marginLeft='auto'; meta.textContent = sizeMb + ' MB';
+      var x = document.createElement('button'); x.type='button'; x.className='row-x'; x.setAttribute('aria-label','Remove'); x.textContent='×';
+      li.appendChild(name); li.appendChild(meta); li.appendChild(x); callList.appendChild(li);
+      var rec = { filename: f.name, upload_date: new Date().toISOString(), file_size_mb: sizeMb };
+      SIQ.callRecordings.push(rec);
+      x.addEventListener('click', function(){ li.remove(); var idx = SIQ.callRecordings.indexOf(rec); if (idx > -1) SIQ.callRecordings.splice(idx, 1); });
+    });
+    callInput.value = '';
+  });
+
+  var GAGE_DOMAIN = 'gtm-relay.net';
+  var aeData = [{ name: '', booking_url: '' }];
+  var aeRows = document.getElementById('aeRows');
+  var aeCount = document.getElementById('aeCount');
+  var aeAdd = document.getElementById('aeAdd');
+  function gageEmail(name, idx){
+    var slug = (name || 'ae').toLowerCase().replace(/[^a-z0-9]+/g,'').slice(0,14) || 'ae';
+    var h = Math.abs(hashCode(slug + '|' + idx)) % 9000 + 1000;
+    return 'gage.' + slug + '-' + h + '@' + GAGE_DOMAIN;
+  }
+  function readAeRows(){
+    var rows = aeRows.querySelectorAll('.ae-row');
+    aeData = Array.prototype.map.call(rows, function(r){ return { name: r.querySelector('.ae-name').value, booking_url: r.querySelector('.ae-book').value }; });
+    if (!aeData.length) aeData = [{ name:'', booking_url:'' }];
+  }
+  function renderAeRows(){
+    aeRows.innerHTML = '';
+    aeData.forEach(function(d, i){
+      var row = document.createElement('div'); row.className = 'dyn-row ae-row';
+      row.innerHTML = '<div><span class="mini-label">AE / seller name</span><input type="text" class="ae-name" placeholder="e.g., Megan Reddy"></div>' + '<div><span class="mini-label">Gage sending identity</span><input type="email" class="ae-mail" readonly tabindex="-1"></div>' + '<div><span class="mini-label">Booking link</span><input type="text" class="ae-book" placeholder="e.g., cal.com/megan/30min"></div>' + '<div class="dyn-remove"><button type="button" class="btn-mini ae-x">×</button></div>';
+      row.querySelector('.ae-name').value = d.name || '';
+      row.querySelector('.ae-book').value = d.booking_url || '';
+      row.querySelector('.ae-mail').value = gageEmail(d.name, i);
+      row.querySelector('.ae-name').addEventListener('input', function(){ row.querySelector('.ae-mail').value = gageEmail(this.value, i); d.name = this.value; });
+      row.querySelector('.ae-book').addEventListener('input', function(){ d.booking_url = this.value; });
+      row.querySelector('.ae-x').addEventListener('click', function(){ readAeRows(); if (aeData.length <= 1){ aeData = [{ name:'', booking_url:'' }]; } else { aeData.splice(i, 1); } syncAeCount(); renderAeRows(); });
+      aeRows.appendChild(row);
+    });
+  }
+  function syncAeCount(){ aeCount.value = Math.min(10, Math.max(1, aeData.length)); aeAdd.disabled = aeData.length >= 10; }
+  aeCount.addEventListener('change', function(){
+    var n = Math.min(10, Math.max(1, parseInt(this.value,10) || 1));
+    readAeRows(); while (aeData.length < n) aeData.push({ name:'', booking_url:'' }); while (aeData.length > n) aeData.pop(); syncAeCount(); renderAeRows();
+  });
+  aeAdd.addEventListener('click', function(){ readAeRows(); if (aeData.length >= 10) return; aeData.push({ name:'', booking_url:'' }); syncAeCount(); renderAeRows(); });
+  syncAeCount(); renderAeRows();
+
+  var completedBy = document.getElementById('completedBy');
+  var primaryName = document.getElementById('primaryName');
+  completedBy.addEventListener('input', function(){ primaryName.value = this.value; });
+  var ROLES = ['VP Sales','CRO','RevOps','Marketing','Customer Success','Sales Ops','Founder / CEO','Custom'];
+  var shData = [];
+  var shRows = document.getElementById('shRows');
+  var shAdd = document.getElementById('shAdd');
+  function readShRows(){
+    var rows = shRows.querySelectorAll('.sh-row');
+    shData = Array.prototype.map.call(rows, function(r){ return { name: r.querySelector('.sh-name').value, email: r.querySelector('.sh-mail').value, role: r.querySelector('.sh-role').value }; });
+  }
+  function renderShRows(){
+    shRows.innerHTML = '';
+    shData.forEach(function(d, i){
+      var row = document.createElement('div'); row.className = 'dyn-row sh-row';
+      var opts = ROLES.map(function(r){ return '<option' + (r===d.role?' selected':'') + '>' + r + '</option>'; }).join('');
+      row.innerHTML = '<div><span class="mini-label">Name</span><input type="text" class="sh-name" placeholder="Full name"></div>' + '<div><span class="mini-label">Email</span><input type="email" class="sh-mail" placeholder="name@company.com"></div>' + '<div><span class="mini-label">Role</span><select class="sh-role"><option value="">Select…</option>' + opts + '</select></div>' + '<div class="dyn-remove"><button type="button" class="btn-mini sh-x">×</button></div>';
+      row.querySelector('.sh-name').value = d.name || ''; row.querySelector('.sh-mail').value = d.email || '';
+      row.querySelector('.sh-name').addEventListener('input', function(){ d.name = this.value; });
+      row.querySelector('.sh-mail').addEventListener('input', function(){ d.email = this.value; });
+      row.querySelector('.sh-role').addEventListener('change', function(){ d.role = this.value; });
+      row.querySelector('.sh-x').addEventListener('click', function(){ readShRows(); shData.splice(i,1); renderShRows(); updateShAdd(); });
+      shRows.appendChild(row);
+    });
+  }
+  function updateShAdd(){ shAdd.disabled = shData.length >= 4; shAdd.textContent = shData.length >= 4 ? 'Maximum 5 stakeholders' : '+ Add stakeholder'; }
+  shAdd.addEventListener('click', function(){ readShRows(); if (shData.length >= 4) return; shData.push({ name:'', email:'', role:'' }); renderShRows(); updateShAdd(); });
+  updateShAdd();
+
+  var deadline = document.getElementById('intakeDeadline');
+  (function(){ var d = new Date(Date.now() + 14*24*60*60*1000); var iso = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); deadline.value = iso; })();
+
+  var METRICS = [['conversion_rate','Conversion Rate'],['deal_velocity','Deal Velocity'],['cac','CAC'],['roas','ROAS'],['response_rate','Response Rate'],['win_rate','Win Rate'],['sales_cycle','Sales Cycle'],['pipeline_velocity','Pipeline Velocity'],['quota_attainment','Quota Attainment']];
+  (function(){
+    var tb = document.getElementById('metricsBody'); var windows = ['baseline','target_30','target_60','target_90'];
+    METRICS.forEach(function(m){
+      var tr = document.createElement('tr'); var td0 = document.createElement('td'); td0.className = 'metric-name'; td0.textContent = m[1]; tr.appendChild(td0);
+      windows.forEach(function(w){ var td = document.createElement('td'); var inp = document.createElement('input'); inp.type = 'text'; inp.setAttribute('data-metric', m[0]); inp.setAttribute('data-window', w); inp.placeholder = w === 'baseline' ? 'today' : ''; td.appendChild(inp); tr.appendChild(td); });
+      tb.appendChild(tr);
+    });
+  })();
+
+  window.exportProfile = function(){
+    var data = {};
+    document.querySelectorAll('[data-field]').forEach(function(el){
+      var key = el.getAttribute('data-field');
+      if (el.type === 'checkbox'){ if (!Array.isArray(data[key])) data[key] = []; if (el.checked) data[key].push(el.value); } else { data[key] = el.value; }
+    });
+    readAeRows();
+    var ae_links = aeData.map(function(r, i){ return { name: r.name, email: gageEmail(r.name, i), booking_url: r.booking_url }; });
+    readShRows();
+    var stakeholders = [{ name: (completedBy.value || ''), email: (document.getElementById('primaryEmail').value || ''), role: 'Primary' }];
+    shData.forEach(function(s){ if (s.name || s.email || s.role) stakeholders.push({ name: s.name, email: s.email, role: s.role }); });
+    var success_metrics = {};
+    document.querySelectorAll('[data-metric]').forEach(function(el){ var m = el.getAttribute('data-metric'), w = el.getAttribute('data-window'); if (!success_metrics[m]) success_metrics[m] = { baseline:'', target_30:'', target_60:'', target_90:'' }; success_metrics[m][w] = el.value; });
+    var client = (data['client_name'] || 'client').toString().trim() || 'client';
+    var out = {
+      meta: { client: client, generated: new Date().toISOString(), source: 'SiQ Client Onboarding Intake v3', form_version: 'v3', completed_by: data['completed_by'] || '', completed_date: data['date'] || new Date().toISOString().slice(0,10), intake_deadline: deadline.value || '', client_logo_url: clientLogoDataUrl || '' },
+      profile: data, ae_links: ae_links, stakeholders: stakeholders, success_metrics: success_metrics, documents: SIQ.documents, call_recordings: SIQ.callRecordings, hitl_audit_trail: SIQ.hitlAudit
+    };
+    var blob = new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'GTM-Profile-' + client.replace(/[^a-z0-9]+/gi,'-') + '.json'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  };
+})();
+</script>
+</body>
+</html>
