@@ -9,6 +9,11 @@
       "source": "/gtm-maturity.html",
       "destination": "/gtm-readiness.html",
       "permanent": true
+    },
+    {
+      "source": "/romify-intake.html",
+      "destination": "/client-intake.html",
+      "permanent": true
     }
   ]
 }
