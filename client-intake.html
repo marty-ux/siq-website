@@ -33,6 +33,7 @@
     -webkit-font-smoothing: antialiased; transition: background 0.2s ease, color 0.2s ease;
   }
   .wrap { max-width: 960px; margin: 0 auto; padding: 0 28px 96px; }
+
   .topbar {
     position: sticky; top: 0; z-index: 50; background: var(--canvas);
     border-bottom: 1px solid var(--border); display: flex; align-items: center;
@@ -53,11 +54,14 @@
   .btn-export { font-family: inherit; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 11px 18px; border: none; cursor: pointer; background: var(--brand-orange); color: #fff; }
   .btn-export:hover { background: #E65C00; }
   .btn-export.lg { padding: 15px 30px; font-size: 16px; }
+
   .intro { margin-top: 30px; }
   .intro .eyebrow { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: var(--brand-blue); margin-bottom: 12px; }
   .intro h1 { font-size: 36px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.18; }
   .intro p { font-size: 18px; color: var(--text-secondary); margin-top: 16px; max-width: 760px; line-height: 1.6; }
   .intro p b { color: var(--text-primary); font-weight: 600; }
+
+  /* ---------- Pre-fill / assets panel ---------- */
   .assets { margin-top: 30px; border: 1px solid var(--border-strong); background: var(--surface-2); padding: 26px 26px; }
   .assets h2 { font-size: 21px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 6px; }
   .assets .assets-sub { font-size: 16px; color: var(--text-tertiary); margin-bottom: 22px; }
@@ -82,15 +86,19 @@
   .row-x { font-family: inherit; font-size: 18px; line-height: 1; border: none; background: transparent; color: var(--text-tertiary); cursor: pointer; padding: 2px 6px; }
   .row-x:hover { color: var(--brand-orange); }
   .prefill-note { margin-top: 14px; font-size: 15px; color: var(--text-secondary); background: var(--warn-tint); border-left: 3px solid var(--warn); padding: 11px 14px; line-height: 1.5; }
+
   .identity { margin-top: 24px; border: 1px solid var(--border-strong); background: var(--surface-2); padding: 22px 24px; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; gap: 18px; }
+
   .tier { margin-top: 46px; display: flex; align-items: center; gap: 12px; }
   .tier .bar { height: 2px; background: var(--brand-orange); flex: 1; }
   .tier h3 { margin:0; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; color: var(--brand-orange); white-space: nowrap; }
+
   section { margin-top: 20px; border: 1px solid var(--border); background: var(--surface); padding: 28px 30px; }
   .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 6px; }
   .sec-num { font-size: 15px; font-weight: 700; color: var(--brand-blue); border: 1px solid var(--brand-blue); padding: 3px 10px; letter-spacing: 0.05em; }
   .sec-head h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.01em; }
   .sec-sub { font-size: 16px; color: var(--text-tertiary); margin-bottom: 22px; line-height: 1.5; }
+
   .field { margin-bottom: 24px; }
   .field:last-child { margin-bottom: 0; }
   .field label { display: block; font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; letter-spacing: -0.01em; }
@@ -105,12 +113,17 @@
   input:focus, textarea:focus, select:focus { border-color: var(--brand-blue); }
   textarea { resize: vertical; min-height: 92px; line-height: 1.55; }
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
   .checks { display: flex; flex-wrap: wrap; gap: 10px 20px; }
   .checks label { display: flex; align-items: center; gap: 9px; font-size: 16px; font-weight: 500; color: var(--text-secondary); cursor: pointer; }
   .checks input { width: 18px; height: 18px; accent-color: var(--brand-blue); cursor: pointer; }
+
+  /* ---------- field flags ---------- */
   .field.unfilled input, .field.unfilled textarea, .field.unfilled select { border-color: var(--warn); background: var(--warn-tint); }
   .manual-badge { display: inline-block; margin-left: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: var(--warn); padding: 2px 7px; vertical-align: middle; }
   .auto-badge { display: inline-block; margin-left: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: var(--ok); padding: 2px 7px; vertical-align: middle; }
+
+  /* ---------- dynamic rows (AE + stakeholders) ---------- */
   .rowset { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
   .dyn-row { display: grid; gap: 14px; align-items: end; background: var(--surface-2); border: 1px solid var(--border); padding: 16px; }
   .ae-row { grid-template-columns: 1fr 1.2fr 1.2fr auto; }
@@ -124,13 +137,19 @@
   .count-row { display: flex; align-items: flex-end; gap: 18px; flex-wrap: wrap; }
   .count-row .field { margin-bottom: 0; max-width: 260px; }
   .gage-note { font-size: 14px; color: var(--text-tertiary); margin-top: 10px; line-height: 1.5; }
+
+  /* ---------- success metrics table ---------- */
   .metrics-scroll { overflow-x: auto; margin-top: 10px; }
   table.metrics { width: 100%; border-collapse: collapse; min-width: 680px; }
   table.metrics th, table.metrics td { border: 1px solid var(--border); padding: 11px 13px; text-align: left; }
   table.metrics th { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); background: var(--surface-2); }
   table.metrics td.metric-name { font-size: 16px; font-weight: 600; color: var(--text-primary); white-space: nowrap; }
   table.metrics input { border: 1px solid var(--border); padding: 9px 11px; font-size: 16px; }
+
+  /* ---------- reminder banner ---------- */
   .reminder { margin-top: 12px; font-size: 16px; color: var(--text-secondary); background: var(--surface-2); border-left: 3px solid var(--brand-blue); padding: 11px 14px; line-height: 1.5; }
+
+  /* ---------- HITL modal ---------- */
   .modal-overlay { position: fixed; inset: 0; background: var(--overlay); display: none; align-items: center; justify-content: center; z-index: 200; padding: 24px; }
   .modal-overlay.open { display: flex; }
   .modal { background: var(--surface); border: 1px solid var(--border-strong); max-width: 580px; width: 100%; padding: 30px; }
@@ -147,8 +166,10 @@
   .btn-solid:hover { background: #E65C00; }
   .btn-ghost { font-family: inherit; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 13px 20px; border: 1px solid var(--border-strong); cursor: pointer; background: transparent; color: var(--text-primary); }
   .btn-ghost:hover { border-color: var(--brand-blue); color: var(--brand-blue); }
+
   .foot { margin-top: 38px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
   .foot .note { font-size: 15px; color: var(--text-tertiary); line-height: 1.5; }
+
   @media (max-width: 760px) {
     .identity { grid-template-columns: 1fr 1fr; }
     .grid-2 { grid-template-columns: 1fr; }
@@ -169,7 +190,7 @@
       <img id="brandLogo" alt="Client logo" style="display:none">
     </div>
     <div class="bar-right">
-      <button class="btn-export" onclick="exportProfile()">Export Profile</button>
+      <button class="btn-export" onclick="submitProfile()">Submit Intake</button>
       <div class="toggle" role="tablist" aria-label="Theme">
         <button class="active" data-theme-btn="dark">Dark</button>
         <button data-theme-btn="light">Light</button>
@@ -185,6 +206,7 @@
       <p>Your answers configure Cortex and Gage, your AI SDR — <b>who to target, why now, and how to reach them in your voice</b>. More detail means we go live faster. Already have a GTM doc? Drop it in below to auto-fill the form; you confirm every field before it's saved.</p>
     </div>
 
+    <!-- ======================= ASSETS & PRE-FILL ======================= -->
     <div class="assets">
       <h2>Jump-start &amp; assets</h2>
       <div class="assets-sub">Optional, but it saves you typing. Everything you upload stays a draft until you confirm it.</div>
@@ -235,6 +257,7 @@
       <div class="field" style="margin:0;"><label>Date</label><input type="text" data-field="date" placeholder="May 21, 2026"></div>
     </div>
 
+    <!-- ======================= TIER 1 ======================= -->
     <div class="tier"><h3>Strategy &amp; Brain</h3><div class="bar"></div></div>
 
     <section>
@@ -421,6 +444,8 @@
         <input type="text" data-field="thresholds" placeholder="e.g., Green 75+, Yellow 60–74, Red <60">
       </div>
     </section>
+
+    <!-- ======================= TIER 2 ======================= -->
     <div class="tier"><h3>Messaging &amp; Execution</h3><div class="bar"></div></div>
 
     <section>
@@ -503,6 +528,7 @@
       </div>
     </section>
 
+    <!-- ======================= TIER 3 ======================= -->
     <div class="tier"><h3>Process, Network &amp; Systems</h3><div class="bar"></div></div>
 
     <section>
@@ -589,6 +615,8 @@
         <input type="text" data-field="sot" placeholder="e.g., HubSpot masters all three; enrichment flows in from Apollo">
       </div>
     </section>
+
+    <!-- ======================= TIER 4 ======================= -->
     <div class="tier"><h3>Onboarding &amp; Success</h3><div class="bar"></div></div>
 
     <section>
@@ -635,12 +663,13 @@
     </section>
 
     <div class="foot">
-      <button class="btn-export lg" onclick="exportProfile()">Export Profile</button>
-      <span class="note">Downloads a GTM Profile (.json) Cortex uses to configure your briefs, scoring, plays, and Gage's outbound — including your uploads, AE links, stakeholders, targets, and the review trail.</span>
+      <button class="btn-export lg" onclick="submitProfile()">Submit Intake</button>
+      <span class="note">Sends your responses straight to your Scalient IQ team — including your uploads, AE links, stakeholders, targets, and the review trail. You'll get a confirmation and can download a copy for your records.</span>
     </div>
 
   </div>
 
+  <!-- ======================= HITL CONFLICT MODAL ======================= -->
   <div class="modal-overlay" id="hitlModal">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="hitlTitle">
       <div class="m-eyebrow">Human-in-the-loop · Review needed</div>
@@ -663,16 +692,28 @@
       </div>
     </div>
   </div>
+
+<!-- Parsers (loaded from CDN, run client-side only) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 (function(){
   "use strict";
+
   var body = document.body;
   var themeButtons = document.querySelectorAll('[data-theme-btn]');
-  function applyTheme(t){ body.setAttribute('data-theme', t); themeButtons.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-theme-btn') === t); }); }
-  themeButtons.forEach(function(btn){ btn.addEventListener('click', function(){ var t = btn.getAttribute('data-theme-btn'); applyTheme(t); try { localStorage.setItem('siq_intake_theme', t); } catch(e){} }); });
+  function applyTheme(t){
+    body.setAttribute('data-theme', t);
+    themeButtons.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-theme-btn') === t); });
+  }
+  themeButtons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var t = btn.getAttribute('data-theme-btn');
+      applyTheme(t);
+      try { localStorage.setItem('siq_intake_theme', t); } catch(e){}
+    });
+  });
   try { var saved = localStorage.getItem('siq_intake_theme'); if (saved) applyTheme(saved); } catch(e){}
 
   var SIQ = { documents: [], callRecordings: [], hitlAudit: [] };
@@ -690,43 +731,75 @@
     if (!f) return;
     if (!/\.(png|jpe?g|svg)$/i.test(f.name)) { alert('Logo must be a PNG, JPG, or SVG.'); logoInput.value=''; return; }
     var reader = new FileReader();
-    reader.onload = function(ev){ clientLogoDataUrl = ev.target.result; brandLogo.src = clientLogoDataUrl; brandLogo.style.display = 'block'; if (defaultLogo) defaultLogo.style.display = 'none'; logoName.textContent = f.name; };
+    reader.onload = function(ev){
+      clientLogoDataUrl = ev.target.result;
+      brandLogo.src = clientLogoDataUrl;
+      brandLogo.style.display = 'block';
+      if (defaultLogo) defaultLogo.style.display = 'none';
+      logoName.textContent = f.name;
+    };
     reader.readAsDataURL(f);
   });
 
   function fieldWrap(el){ return el.closest('.field') || el.parentElement; }
   function labelEl(w){ return w ? w.querySelector('label') : null; }
-  function setBadge(w, cls, text){ var lbl = labelEl(w); if (!lbl) return; lbl.querySelectorAll('.manual-badge,.auto-badge').forEach(function(b){ b.remove(); }); var span = document.createElement('span'); span.className = cls; span.textContent = text; lbl.appendChild(span); }
+  function setBadge(w, cls, text){
+    var lbl = labelEl(w); if (!lbl) return;
+    lbl.querySelectorAll('.manual-badge,.auto-badge').forEach(function(b){ b.remove(); });
+    var span = document.createElement('span'); span.className = cls; span.textContent = text; lbl.appendChild(span);
+  }
   function clearBadge(w){ var lbl = labelEl(w); if (lbl) lbl.querySelectorAll('.manual-badge,.auto-badge').forEach(function(b){ b.remove(); }); }
   function markUnfilled(el){ var w = fieldWrap(el); w.classList.add('unfilled'); setBadge(w, 'manual-badge', 'Manual entry'); }
   function markFilled(el){ var w = fieldWrap(el); w.classList.remove('unfilled'); setBadge(w, 'auto-badge', 'Auto-filled'); }
-  document.addEventListener('input', function(e){ var t = e.target; if (!t || !t.closest) return; var w = t.closest('.field'); if (w && (w.classList.contains('unfilled') || (labelEl(w) && labelEl(w).querySelector('.auto-badge,.manual-badge')))) { w.classList.remove('unfilled'); clearBadge(w); } });
+  document.addEventListener('input', function(e){
+    var t = e.target; if (!t || !t.closest) return;
+    var w = t.closest('.field');
+    if (w && (w.classList.contains('unfilled') || (labelEl(w) && labelEl(w).querySelector('.auto-badge,.manual-badge')))) { w.classList.remove('unfilled'); clearBadge(w); }
+  });
 
   var AUTOFILL_MAP = {
-    one_liner: ['we help','what we do','our mission','elevator','one-liner','we are a','we provide'],
-    differentiators: ['differentiat','what makes us','unique','why choose','sets us apart','our advantage'],
-    competitors: ['competitor','competition','alternative to','versus',' vs '],
-    icp_industries: ['target industr','vertical','ideal customer','icp','target market','we sell to'],
-    icp_revenue: ['arr','annual recurring','revenue range','company revenue','revenue band'],
-    dream_clients: ['dream client','dream account','target account','wish list','dream logo'],
-    best_customers: ['best customer','flagship customer','reference customer','top account','marquee'],
-    persona_primary: ['decision maker','decision-maker','target persona','buyer persona','buyer title','target title'],
-    icp_pain: ['pain point','key challenge','biggest challenge','struggle with','problem they','frustration'],
-    value_prop: ['value proposition','core promise','our promise','value prop','we deliver'],
-    proof_metric: ['resulted in','increased by','reduced by','case study','roi of',' roi ','% improvement'],
-    objections: ['objection','common pushback','concern raised','they say','rebuttal'],
-    plays: ['play','sequence','cadence','outreach motion','campaign structure'],
-    sales_process: ['sales process','deal stages','pipeline stage','stages are','sales motion'],
-    communities: ['community','association','slack group','industry event','conference','meetup']
+    one_liner:        ['we help','what we do','our mission','elevator','one-liner','we are a','we provide'],
+    differentiators:  ['differentiat','what makes us','unique','why choose','sets us apart','our advantage'],
+    competitors:      ['competitor','competition','alternative to','versus',' vs '],
+    icp_industries:   ['target industr','vertical','ideal customer','icp','target market','we sell to'],
+    icp_revenue:      ['arr','annual recurring','revenue range','company revenue','revenue band'],
+    dream_clients:    ['dream client','dream account','target account','wish list','dream logo'],
+    best_customers:   ['best customer','flagship customer','reference customer','top account','marquee'],
+    persona_primary:  ['decision maker','decision-maker','target persona','buyer persona','buyer title','target title'],
+    icp_pain:         ['pain point','key challenge','biggest challenge','struggle with','problem they','frustration'],
+    value_prop:       ['value proposition','core promise','our promise','value prop','we deliver'],
+    proof_metric:     ['resulted in','increased by','reduced by','case study','roi of',' roi ','% improvement'],
+    objections:       ['objection','common pushback','concern raised','they say','rebuttal'],
+    plays:            ['play','sequence','cadence','outreach motion','campaign structure'],
+    sales_process:    ['sales process','deal stages','pipeline stage','stages are','sales motion'],
+    communities:      ['community','association','slack group','industry event','conference','meetup']
   };
-  function paragraphs(text){ return (text || '').replace(/\r/g,'\n').split(/\n+|(?<=\.)\s{2,}|•/).map(function(s){ return s.trim().replace(/\s+/g,' '); }).filter(function(s){ return s.length > 24; }); }
-  function findMatch(paras, keywords){ for (var i=0;i<paras.length;i++){ var low = paras[i].toLowerCase(); for (var k=0;k<keywords.length;k++){ if (low.indexOf(keywords[k]) > -1) return paras[i].slice(0, 500); } } return null; }
-  function labelText(field){ var el = document.querySelector('[data-field="'+field+'"]'); if (!el) return field; var w = fieldWrap(el), lbl = labelEl(w); return (lbl && lbl.childNodes[0]) ? lbl.childNodes[0].textContent.trim() : field; }
+  function paragraphs(text){
+    return (text || '').replace(/\r/g,'\n').split(/\n+|(?<=\.)\s{2,}|•/).map(function(s){ return s.trim().replace(/\s+/g,' '); }).filter(function(s){ return s.length > 24; });
+  }
+  function findMatch(paras, keywords){
+    for (var i=0;i<paras.length;i++){ var low = paras[i].toLowerCase(); for (var k=0;k<keywords.length;k++){ if (low.indexOf(keywords[k]) > -1) return paras[i].slice(0, 500); } }
+    return null;
+  }
+  function labelText(field){
+    var el = document.querySelector('[data-field="'+field+'"]'); if (!el) return field;
+    var w = fieldWrap(el), lbl = labelEl(w); return (lbl && lbl.childNodes[0]) ? lbl.childNodes[0].textContent.trim() : field;
+  }
   async function extractText(file){
     var name = file.name.toLowerCase(); var buf = await file.arrayBuffer();
-    if (name.endsWith('.pdf')) { if (!window.pdfjsLib) throw new Error('PDF parser unavailable'); var pdf = await pdfjsLib.getDocument({ data: buf }).promise; var txt = ''; for (var i=1;i<=pdf.numPages;i++){ var page = await pdf.getPage(i); var content = await page.getTextContent(); txt += content.items.map(function(it){ return it.str; }).join(' ') + '\n'; } return txt; }
-    else if (name.endsWith('.docx')) { if (!window.mammoth) throw new Error('DOCX parser unavailable'); var r = await mammoth.extractRawText({ arrayBuffer: buf }); return r.value; }
-    else if (name.endsWith('.xlsx') || name.endsWith('.xls')) { if (!window.XLSX) throw new Error('XLSX parser unavailable'); var wb = XLSX.read(buf, { type: 'array' }); var out = ''; wb.SheetNames.forEach(function(sn){ out += XLSX.utils.sheet_to_csv(wb.Sheets[sn]) + '\n'; }); return out; }
+    if (name.endsWith('.pdf')) {
+      if (!window.pdfjsLib) throw new Error('PDF parser unavailable');
+      var pdf = await pdfjsLib.getDocument({ data: buf }).promise; var txt = '';
+      for (var i=1;i<=pdf.numPages;i++){ var page = await pdf.getPage(i); var content = await page.getTextContent(); txt += content.items.map(function(it){ return it.str; }).join(' ') + '\n'; }
+      return txt;
+    } else if (name.endsWith('.docx')) {
+      if (!window.mammoth) throw new Error('DOCX parser unavailable');
+      var r = await mammoth.extractRawText({ arrayBuffer: buf }); return r.value;
+    } else if (name.endsWith('.xlsx') || name.endsWith('.xls')) {
+      if (!window.XLSX) throw new Error('XLSX parser unavailable');
+      var wb = XLSX.read(buf, { type: 'array' }); var out = '';
+      wb.SheetNames.forEach(function(sn){ out += XLSX.utils.sheet_to_csv(wb.Sheets[sn]) + '\n'; }); return out;
+    }
     throw new Error('Unsupported file type');
   }
   var conflictQueue = [];
@@ -744,8 +817,19 @@
   }
 
   var hitlModal = document.getElementById('hitlModal');
-  function showNextConflict(){ if (!conflictQueue.length){ hitlModal.classList.remove('open'); return; } var c = conflictQueue[0]; document.getElementById('hitlField').textContent = labelText(c.field); document.getElementById('hitlCurrent').textContent = c.current; document.getElementById('hitlExtracted').textContent = c.extracted; hitlModal.classList.add('open'); }
-  function resolveConflict(useExtracted){ var c = conflictQueue.shift(); if (c){ SIQ.hitlAudit.push({ timestamp: new Date().toISOString(), field: c.field, original_value: c.current, action: useExtracted ? 'replaced_with_extracted' : 'kept_client_version', decision: useExtracted ? 'Accept Extracted' : 'Accept Client Version' }); if (useExtracted){ c.el.value = c.extracted; markFilled(c.el); } } showNextConflict(); }
+  function showNextConflict(){
+    if (!conflictQueue.length){ hitlModal.classList.remove('open'); return; }
+    var c = conflictQueue[0];
+    document.getElementById('hitlField').textContent = labelText(c.field);
+    document.getElementById('hitlCurrent').textContent = c.current;
+    document.getElementById('hitlExtracted').textContent = c.extracted;
+    hitlModal.classList.add('open');
+  }
+  function resolveConflict(useExtracted){
+    var c = conflictQueue.shift();
+    if (c){ SIQ.hitlAudit.push({ timestamp: new Date().toISOString(), field: c.field, original_value: c.current, action: useExtracted ? 'replaced_with_extracted' : 'kept_client_version', decision: useExtracted ? 'Accept Extracted' : 'Accept Client Version' }); if (useExtracted){ c.el.value = c.extracted; markFilled(c.el); } }
+    showNextConflict();
+  }
   document.getElementById('hitlKeep').addEventListener('click', function(){ resolveConflict(false); });
   document.getElementById('hitlReplace').addEventListener('click', function(){ resolveConflict(true); });
 
@@ -800,14 +884,24 @@
   var aeRows = document.getElementById('aeRows');
   var aeCount = document.getElementById('aeCount');
   var aeAdd = document.getElementById('aeAdd');
-  function gageEmail(name, idx){ var slug = (name || 'ae').toLowerCase().replace(/[^a-z0-9]+/g,'').slice(0,14) || 'ae'; var h = Math.abs(hashCode(slug + '|' + idx)) % 9000 + 1000; return 'gage.' + slug + '-' + h + '@' + GAGE_DOMAIN; }
-  function readAeRows(){ var rows = aeRows.querySelectorAll('.ae-row'); aeData = Array.prototype.map.call(rows, function(r){ return { name: r.querySelector('.ae-name').value, booking_url: r.querySelector('.ae-book').value }; }); if (!aeData.length) aeData = [{ name:'', booking_url:'' }]; }
+  function gageEmail(name, idx){
+    var slug = (name || 'ae').toLowerCase().replace(/[^a-z0-9]+/g,'').slice(0,14) || 'ae';
+    var h = Math.abs(hashCode(slug + '|' + idx)) % 9000 + 1000;
+    return 'gage.' + slug + '-' + h + '@' + GAGE_DOMAIN;
+  }
+  function readAeRows(){
+    var rows = aeRows.querySelectorAll('.ae-row');
+    aeData = Array.prototype.map.call(rows, function(r){ return { name: r.querySelector('.ae-name').value, booking_url: r.querySelector('.ae-book').value }; });
+    if (!aeData.length) aeData = [{ name:'', booking_url:'' }];
+  }
   function renderAeRows(){
     aeRows.innerHTML = '';
     aeData.forEach(function(d, i){
       var row = document.createElement('div'); row.className = 'dyn-row ae-row';
       row.innerHTML = '<div><span class="mini-label">AE / seller name</span><input type="text" class="ae-name" placeholder="e.g., Megan Reddy"></div>' + '<div><span class="mini-label">Gage sending identity</span><input type="email" class="ae-mail" readonly tabindex="-1"></div>' + '<div><span class="mini-label">Booking link</span><input type="text" class="ae-book" placeholder="e.g., cal.com/megan/30min"></div>' + '<div class="dyn-remove"><button type="button" class="btn-mini ae-x">×</button></div>';
-      row.querySelector('.ae-name').value = d.name || ''; row.querySelector('.ae-book').value = d.booking_url || ''; row.querySelector('.ae-mail').value = gageEmail(d.name, i);
+      row.querySelector('.ae-name').value = d.name || '';
+      row.querySelector('.ae-book').value = d.booking_url || '';
+      row.querySelector('.ae-mail').value = gageEmail(d.name, i);
       row.querySelector('.ae-name').addEventListener('input', function(){ row.querySelector('.ae-mail').value = gageEmail(this.value, i); d.name = this.value; });
       row.querySelector('.ae-book').addEventListener('input', function(){ d.booking_url = this.value; });
       row.querySelector('.ae-x').addEventListener('click', function(){ readAeRows(); if (aeData.length <= 1){ aeData = [{ name:'', booking_url:'' }]; } else { aeData.splice(i, 1); } syncAeCount(); renderAeRows(); });
@@ -815,7 +909,10 @@
     });
   }
   function syncAeCount(){ aeCount.value = Math.min(10, Math.max(1, aeData.length)); aeAdd.disabled = aeData.length >= 10; }
-  aeCount.addEventListener('change', function(){ var n = Math.min(10, Math.max(1, parseInt(this.value,10) || 1)); readAeRows(); while (aeData.length < n) aeData.push({ name:'', booking_url:'' }); while (aeData.length > n) aeData.pop(); syncAeCount(); renderAeRows(); });
+  aeCount.addEventListener('change', function(){
+    var n = Math.min(10, Math.max(1, parseInt(this.value,10) || 1));
+    readAeRows(); while (aeData.length < n) aeData.push({ name:'', booking_url:'' }); while (aeData.length > n) aeData.pop(); syncAeCount(); renderAeRows();
+  });
   aeAdd.addEventListener('click', function(){ readAeRows(); if (aeData.length >= 10) return; aeData.push({ name:'', booking_url:'' }); syncAeCount(); renderAeRows(); });
   syncAeCount(); renderAeRows();
 
@@ -826,7 +923,10 @@
   var shData = [];
   var shRows = document.getElementById('shRows');
   var shAdd = document.getElementById('shAdd');
-  function readShRows(){ var rows = shRows.querySelectorAll('.sh-row'); shData = Array.prototype.map.call(rows, function(r){ return { name: r.querySelector('.sh-name').value, email: r.querySelector('.sh-mail').value, role: r.querySelector('.sh-role').value }; }); }
+  function readShRows(){
+    var rows = shRows.querySelectorAll('.sh-row');
+    shData = Array.prototype.map.call(rows, function(r){ return { name: r.querySelector('.sh-name').value, email: r.querySelector('.sh-mail').value, role: r.querySelector('.sh-role').value }; });
+  }
   function renderShRows(){
     shRows.innerHTML = '';
     shData.forEach(function(d, i){
@@ -867,9 +967,14 @@
     });
   })();
 
-  window.exportProfile = function(){
+  var SIQ_WEBHOOK = 'https://scalientiq.app.n8n.cloud/webhook/siq-intake';
+
+  function buildProfile(){
     var data = {};
-    document.querySelectorAll('[data-field]').forEach(function(el){ var key = el.getAttribute('data-field'); if (el.type === 'checkbox'){ if (!Array.isArray(data[key])) data[key] = []; if (el.checked) data[key].push(el.value); } else { data[key] = el.value; } });
+    document.querySelectorAll('[data-field]').forEach(function(el){
+      var key = el.getAttribute('data-field');
+      if (el.type === 'checkbox'){ if (!Array.isArray(data[key])) data[key] = []; if (el.checked) data[key].push(el.value); } else { data[key] = el.value; }
+    });
     readAeRows();
     var ae_links = aeData.map(function(r, i){ return { name: r.name, email: gageEmail(r.name, i), booking_url: r.booking_url }; });
     readShRows();
@@ -878,9 +983,73 @@
     var success_metrics = {};
     document.querySelectorAll('[data-metric]').forEach(function(el){ var m = el.getAttribute('data-metric'), w = el.getAttribute('data-window'); if (!success_metrics[m]) success_metrics[m] = { baseline:'', target_30:'', target_60:'', target_90:'' }; success_metrics[m][w] = el.value; });
     var client = (data['client_name'] || 'client').toString().trim() || 'client';
-    var out = { meta: { client: client, generated: new Date().toISOString(), source: 'SiQ Client Onboarding Intake v3', form_version: 'v3', completed_by: data['completed_by'] || '', completed_date: data['date'] || new Date().toISOString().slice(0,10), intake_deadline: deadline.value || '', client_logo_url: clientLogoDataUrl || '' }, profile: data, ae_links: ae_links, stakeholders: stakeholders, success_metrics: success_metrics, documents: SIQ.documents, call_recordings: SIQ.callRecordings, hitl_audit_trail: SIQ.hitlAudit };
-    var blob = new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' });
-    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'GTM-Profile-' + client.replace(/[^a-z0-9]+/gi,'-') + '.json'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    return {
+      meta: { client: client, generated: new Date().toISOString(), source: 'SiQ Client Onboarding Intake v3', form_version: 'v3', completed_by: data['completed_by'] || '', completed_date: data['date'] || new Date().toISOString().slice(0,10), intake_deadline: deadline.value || '', client_logo_url: clientLogoDataUrl || '' },
+      profile: data, ae_links: ae_links, stakeholders: stakeholders, success_metrics: success_metrics, documents: SIQ.documents, call_recordings: SIQ.callRecordings, hitl_audit_trail: SIQ.hitlAudit
+    };
+  }
+
+  window.submitProfile = function(){
+    var out = buildProfile();
+    window.__siqSubmission = out;
+    var btns = document.querySelectorAll('.btn-export');
+    btns.forEach(function(b){ b.disabled = true; b.dataset.lbl = b.textContent; b.textContent = 'Submitting…'; });
+    var done = false, restore = function(){ btns.forEach(function(b){ b.disabled = false; b.textContent = b.dataset.lbl || 'Submit Intake'; }); };
+    fetch(SIQ_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(out) })
+      .then(function(r){ done = true; if (!r.ok) throw new Error('HTTP ' + r.status); showConfirmation(out, true); })
+      .catch(function(){ if (!done) { restore(); } showConfirmation(out, false); });
+  };
+  window.exportProfile = window.submitProfile;
+
+  function showConfirmation(out, ok){
+    if (document.getElementById('siqConfirm')) return;
+    var deadlineTxt = (out.meta && out.meta.intake_deadline) ? out.meta.intake_deadline : 'shortly';
+    var ov = document.createElement('div');
+    ov.id = 'siqConfirm';
+    ov.setAttribute('style', 'position:fixed;inset:0;z-index:99999;background:#0A1628;color:#fff;display:flex;align-items:center;justify-content:center;padding:24px;overflow:auto;');
+    var btn = '<button onclick="downloadCopy()" style="background:#FF6600;color:#fff;border:0;border-radius:0;text-transform:uppercase;font-weight:700;letter-spacing:1px;padding:14px 26px;font-size:14px;cursor:pointer;font-family:inherit;">Download a copy of your responses</button>';
+    var inner = ok
+      ? '<div style="max-width:560px;text-align:center;font-family:\'DM Sans\',Arial,sans-serif;">' +
+          '<div style="font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#FF6600;margin-bottom:14px;">Submission received</div>' +
+          '<h1 style="font-size:34px;margin:0 0 16px;line-height:1.2;font-weight:700;">Thanks — your Scalient IQ team has it.</h1>' +
+          '<p style="font-size:17px;line-height:1.6;color:#c7d0db;margin:0 0 28px;">We\'ll review your onboarding details and follow up by <b style="color:#fff;">' + deadlineTxt + '</b>. If anything needs clarifying before then, we\'ll reach out directly.</p>' +
+          btn +
+        '</div>'
+      : '<div style="max-width:560px;text-align:center;font-family:\'DM Sans\',Arial,sans-serif;">' +
+          '<div style="font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#FF6600;margin-bottom:14px;">Almost there</div>' +
+          '<h1 style="font-size:30px;margin:0 0 16px;line-height:1.2;font-weight:700;">We couldn\'t auto-submit your responses.</h1>' +
+          '<p style="font-size:17px;line-height:1.6;color:#c7d0db;margin:0 0 28px;">Please download a copy below and email it to <b style="color:#fff;">marty@scalientiq.com</b> — we\'ll take it from there.</p>' +
+          btn +
+        '</div>';
+    ov.innerHTML = inner;
+    document.body.appendChild(ov);
+  }
+
+  window.downloadCopy = function(){
+    var out = window.__siqSubmission; if (!out) return;
+    var P = out.profile || {}, META = out.meta || {};
+    var esc = function(s){ return (s == null ? '' : String(s)).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
+    var human = function(k){ return k.replace(/_/g, ' ').replace(/\b\w/g, function(c){ return c.toUpperCase(); }); };
+    var row = function(l, v){ return '<tr><td class="l">' + esc(l) + '</td><td>' + (esc(v) || '<span style="color:#999">&mdash;</span>') + '</td></tr>'; };
+    var pr = '';
+    Object.keys(P).forEach(function(k){ var v = Array.isArray(P[k]) ? P[k].join(', ') : P[k]; if (v != null && String(v).trim() !== '') pr += row(human(k), v); });
+    var st = (out.stakeholders || []).filter(function(s){ return s.name || s.email; }).map(function(s){ return esc(s.name || '') + ' &mdash; ' + esc(s.email || '') + (s.role ? (' (' + esc(s.role) + ')') : ''); }).join('<br>');
+    var ae = (out.ae_links || []).filter(function(a){ return a.name || a.booking_url; }).map(function(a){ return esc(a.name || '') + ' &mdash; ' + esc(a.booking_url || ''); }).join('<br>');
+    var sm = '';
+    var smObj = out.success_metrics || {};
+    Object.keys(smObj).forEach(function(k){ var m = smObj[k]; if (m && (m.baseline || m.target_30 || m.target_60 || m.target_90)) sm += '<tr><td class="l">' + esc(human(k)) + '</td><td>' + esc(m.baseline || '—') + '</td><td>' + esc(m.target_30 || '—') + '</td><td>' + esc(m.target_60 || '—') + '</td><td>' + esc(m.target_90 || '—') + '</td></tr>'; });
+    var content = '<h1>GTM Onboarding — ' + (esc(META.client) || 'Your responses') + '</h1>' +
+      '<p class="sub">Scalient IQ &middot; Submitted ' + esc((META.completed_date || '')) + (META.intake_deadline ? (' &middot; Review by ' + esc(META.intake_deadline)) : '') + '</p>' +
+      '<h2>Your responses</h2><table>' + pr + '</table>' +
+      (st ? ('<h2>Stakeholders</h2><p>' + st + '</p>') : '') +
+      (ae ? ('<h2>Booking links</h2><p>' + ae + '</p>') : '') +
+      (sm ? ('<h2>Success metrics</h2><table><tr><td class="l">Metric</td><td><b>Baseline</b></td><td><b>30-day</b></td><td><b>60-day</b></td><td><b>90-day</b></td></tr>' + sm + '</table>') : '');
+    var html = '<!doctype html><html><head><meta charset="utf-8"><title>GTM Onboarding — ' + (esc(META.client) || '') + '</title>' +
+      '<style>body{font-family:Arial,Helvetica,sans-serif;color:#0A1628;margin:36px;line-height:1.45;} h1{font-size:24px;margin:0 0 2px;} h2{font-size:15px;color:#0073E6;margin:22px 0 8px;border-bottom:2px solid #0073E6;padding-bottom:3px;} .sub{color:#666;margin:0 0 18px;font-size:13px;} table{border-collapse:collapse;width:100%;font-size:13px;margin-bottom:6px;} td{border:1px solid #ddd;padding:6px 9px;vertical-align:top;} td.l{background:#f2f5f8;font-weight:bold;width:32%;} @media print{.np{display:none}}</style>' +
+      '</head><body>' + content + '<p class="np" style="margin-top:24px;color:#999;font-size:12px;">Tip: choose &ldquo;Save as PDF&rdquo; as the destination to keep a copy.</p><\/body><\/html>';
+    var w = window.open('', '_blank');
+    if (!w) { return; }
+    w.document.write(html); w.document.close(); w.focus(); setTimeout(function(){ try { w.print(); } catch (e) {} }, 400);
   };
 })();
 </script>
