@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SiQ Cortex â Client Onboarding Runbook</title>
+<title>SiQ Cortex - Client Onboarding Runbook</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
@@ -185,14 +185,14 @@
 
   <!-- PHASE 5 TASK TABLE -->
   <section>
-    <div class="sec-h"><div class="num">03</div><h2>Engagement Setup â task tracker</h2></div>
+    <div class="sec-h"><div class="num">03</div><h2>Engagement Setup - task tracker</h2></div>
     <p style="font-size:15px;color:var(--text-secondary);margin-bottom:18px">Everything that must be true before sequences fire on pilot launch day.</p>
     <table class="task-table" id="task-table"><thead><tr><th>Task</th><th>Owner</th><th>Due</th><th>Status</th></tr></thead><tbody></tbody></table>
   </section>
 
   <!-- PHASE 6 LAUNCH TIMELINE -->
   <section>
-    <div class="sec-h"><div class="num">04</div><h2>Live pilot launch â timeline</h2></div>
+    <div class="sec-h"><div class="num">04</div><h2>Live pilot launch - timeline</h2></div>
     <ul id="launch-timeline" class="path"></ul>
   </section>
 
@@ -220,7 +220,7 @@
 
 <!-- ============== CLIENT CONFIG + DATA ============== -->
 <script>
-/* CLIENT CONFIGS â extend this object to support new clients.
+/* CLIENT CONFIGS - extend this object to support new clients.
    Add `?c=<slug>` to URL to load. Passphrase hashed sha256 of cleartext. */
 const CLIENTS = {
   romify: {
@@ -230,43 +230,43 @@ const CLIENTS = {
     pilotStart: "Monday, June 22, 2026",
     asOf: "2026-06-04",
     owner: "Marty Berman, SiQ",
-    statusLabel: "ONBOARDING â 4 of 6 phases complete; phases 5 + 6 in flight",
-    gngWhen: "Thursday June 18 â 48 hours before pilot start",
+    statusLabel: "ONBOARDING - 4 of 6 phases complete; phases 5 + 6 in flight",
+    gngWhen: "Thursday June 18 - 48 hours before pilot start",
     phases: [
-      ["1","Intake â client provides GTM context via hosted form","done","client-intake.html submission (Megan, May 2026); raw JSON in HubSpot"],
-      ["2","GTM Profile â synthesized client snapshot","done","Romify-GTM-Profile.docx (rev 2026-06-01b)"],
-      ["3","List Strategy â ICP definition + list-build plan","done","Romify-List-Strategy.docx"],
-      ["4","Pilot Commits â locked metrics, scope, plays, fees","done","Pilot Commits locked 2026-06-01: 30/15%/4/$60K; Plays A+B"],
-      ["5","Engagement Setup â calendar/CRM wiring, sequences, blockers cleared","flight","Sequences drafted; calendar handoff + Hermes fix + HubSpot scope pending"],
-      ["6","Live Pilot Launch â first sequences fire, weekly cadence active","pending","Target: Monday June 22, 2026"]
+      ["1","Intake - client provides GTM context via hosted form","done","client-intake.html submission (Megan, May 2026); raw JSON in HubSpot"],
+      ["2","GTM Profile - synthesized client snapshot","done","Romify-GTM-Profile.docx (rev 2026-06-01b)"],
+      ["3","List Strategy - ICP definition + list-build plan","done","Romify-List-Strategy.docx"],
+      ["4","Pilot Commits - locked metrics, scope, plays, fees","done","Pilot Commits locked 2026-06-01: 30/15%/4/$60K; Plays A+B"],
+      ["5","Engagement Setup - calendar/CRM wiring, sequences, blockers cleared","flight","Sequences drafted; calendar handoff + Hermes fix + HubSpot scope pending"],
+      ["6","Live Pilot Launch - first sequences fire, weekly cadence active","pending","Target: Monday June 22, 2026"]
     ],
     phaseDetails: [
-      { title: "Phase 1 â Intake  Â·  DONE", bullets: [
+      { title: "Phase 1 - Intake  /  DONE", bullets: [
         "<b>Owner:</b> Megan (Romify) submitted via client-intake.html",
-        "<b>Trigger fired:</b> form submission â SiQ-Intake-Receiver n8n workflow (emails LIVE; Slack + HubSpot routes still pending)",
+        "<b>Trigger fired:</b> form submission -> SiQ-Intake-Receiver n8n workflow (emails LIVE; Slack + HubSpot routes still pending)",
         "<b>Open:</b> Slack + HubSpot creds and upload storage. Doesn't block Romify pilot start; affects future client intakes."
       ]},
-      { title: "Phase 2 â GTM Profile  Â·  DONE", bullets: [
-        "<b>Owner:</b> SiQ (Marty) â built off intake submission + Romify source files",
-        "<b>Artifact:</b> Romify-GTM-Profile.docx (rev 2026-06-01b) â locked pilot commits + messaging wedge",
+      { title: "Phase 2 - GTM Profile  /  DONE", bullets: [
+        "<b>Owner:</b> SiQ (Marty) - built off intake submission + Romify source files",
+        "<b>Artifact:</b> Romify-GTM-Profile.docx (rev 2026-06-01b) - locked pilot commits + messaging wedge",
         "<b>Confirmed</b> with Megan during 2026-06-01 call"
       ]},
-      { title: "Phase 3 â List Strategy  Â·  DONE", bullets: [
+      { title: "Phase 3 - List Strategy  /  DONE", bullets: [
         "<b>Owner:</b> SiQ",
-        "<b>Artifact:</b> Romify-List-Strategy.docx â ICP defined, list-build motion = exhibitor scraping + Apollo enrichment; same list recycled across Plays A + B (budget unlock)",
+        "<b>Artifact:</b> Romify-List-Strategy.docx - ICP defined, list-build motion = exhibitor scraping + Apollo enrichment; same list recycled across Plays A + B (budget unlock)",
         "<b>Validated</b> against Romify Event Participation MASTER sheet (300+ rows)"
       ]},
-      { title: "Phase 4 â Pilot Commits  Â·  DONE â Locked 2026-06-01", bullets: [
+      { title: "Phase 4 - Pilot Commits  /  DONE - Locked 2026-06-01", bullets: [
         "60 days, $3,500 all-in, 9 dedicated AI SDRs (Gage), email-only",
-        "Commits: 30 meetings Â· 15% meetingâopp Â· 4 qualified opps Â· $60K pipeline ($15K ACV)",
+        "Commits: 30 meetings / 15% meeting->opp / 4 qualified opps / $60K pipeline ($15K ACV)",
         "Plays A (pre-event booth meetings) + B (post-event follow-up disaster); same list runs both",
-        "Conversion trigger: hit commit â full Cortex deployment at full ACV"
+        "Conversion trigger: hit commit -> full Cortex deployment at full ACV"
       ]},
-      { title: "Phase 5 â Engagement Setup  Â·  IN FLIGHT  Â·  see task tracker below", bullets: [
-        "11 operational tasks tracked in Â§03 below â owners, due dates, status",
+      { title: "Phase 5 - Engagement Setup  /  IN FLIGHT  /  see task tracker below", bullets: [
+        "11 operational tasks tracked in Sec.03 below - owners, due dates, status",
         "Critical path runs through Hermes-AI-SDR-V3 workflow fix (longest pole)"
       ]},
-      { title: "Phase 6 â Live Pilot Launch  Â·  PENDING â Monday June 22, 2026", bullets: [
+      { title: "Phase 6 - Live Pilot Launch  /  PENDING - Monday June 22, 2026", bullets: [
         "Day 0: Play A sequences fire (Bio International + Automate prospect lists)",
         "Day 0: Play B sequences fire (ACT Expo + EEI non-responders / exhibitor lists)",
         "Day 1: first hot-reply daily report to Sean + Ian",
@@ -276,34 +276,34 @@ const CLIENTS = {
       ]}
     ],
     tasks: [
-      ["Exhibitor lists scraped + scored (Bio, Automate, ACT, EEI)","SiQ","Done","done","DONE â 3,190 companies analyzed; 40 ICP-fit picked; 134 contacts surfaced"],
-      ["Apollo enrichment â 25 verified emails (demo batch)","SiQ","Done","done","DONE â visible in Romify-Exhibitor-Intel-LiveDemo"],
-      ["Apollo enrichment â remaining ~110 contacts","SiQ","Jun 10","flight","IN FLIGHT â queued"],
-      ["Hermes-AI-SDR-V3 workflow fix (100% errors)","SiQ","Jun 13","block","BLOCKER â must fix before any sequence fires"],
-      ["HubSpot OAuth scope add (crm.objects.contacts.read)","SiQ","Jun 10","flight","PENDING â add to SiQ Cortex Dashboard app"],
-      ["Sean's HubSpot booking link â Gage wired","SiQ + Sean","Jun 15","flight","PENDING â verify end-to-end"],
-      ["Ian's EU HubSpot booking link â Gage wired","SiQ + Ian","Jun 15","flight","PENDING â verify end-to-end"],
-      ["Reply routing rules in Gage","SiQ","Jun 18","flight","PENDING â depends on Friday 6/5 decision"],
-      ["Sequence copy reviewed by Megan in Romify voice","Megan","Jun 18","flight","PENDING â Romify-AISDR-Sequence-Samples drafted"],
-      ["Suppression list loaded (Romify lost accounts)","Romify â SiQ","Jun 15","flight","PENDING â needs Megan to pull from HubSpot"],
-      ["Slack alerting wired (#siq-key-accounts â Romify thread)","SiQ","Jun 18","flight","PENDING â needs n8n Slack cred resolved"]
+      ["Exhibitor lists scraped + scored (Bio, Automate, ACT, EEI)","SiQ","Done","done","DONE - 3,190 companies analyzed; 40 ICP-fit picked; 134 contacts surfaced"],
+      ["Apollo enrichment - 25 verified emails (demo batch)","SiQ","Done","done","DONE - visible in Romify-Exhibitor-Intel-LiveDemo"],
+      ["Apollo enrichment - remaining ~110 contacts","SiQ","Jun 10","flight","IN FLIGHT - queued"],
+      ["Hermes-AI-SDR-V3 workflow fix (100% errors)","SiQ","Jun 13","block","BLOCKER - must fix before any sequence fires"],
+      ["HubSpot OAuth scope add (crm.objects.contacts.read)","SiQ","Jun 10","flight","PENDING - add to SiQ Cortex Dashboard app"],
+      ["Sean's HubSpot booking link -> Gage wired","SiQ + Sean","Jun 15","flight","PENDING - verify end-to-end"],
+      ["Ian's EU HubSpot booking link -> Gage wired","SiQ + Ian","Jun 15","flight","PENDING - verify end-to-end"],
+      ["Reply routing rules in Gage","SiQ","Jun 18","flight","PENDING - depends on Friday 6/5 decision"],
+      ["Sequence copy reviewed by Megan in Romify voice","Megan","Jun 18","flight","PENDING - Romify-AISDR-Sequence-Samples drafted"],
+      ["Suppression list loaded (Romify lost accounts)","Romify -> SiQ","Jun 15","flight","PENDING - needs Megan to pull from HubSpot"],
+      ["Slack alerting wired (#siq-key-accounts -> Romify thread)","SiQ","Jun 18","flight","PENDING - needs n8n Slack cred resolved"]
     ],
     launchTimeline: [
       "<b>Day 0 (Mon 6/22):</b> First Play A sequences fire to Bio International + Automate prospect lists",
       "<b>Day 0 (Mon 6/22):</b> First Play B sequences fire to ACT Expo + EEI non-responders / exhibitor lists",
       "<b>Day 1 (Tue 6/23):</b> First hot-reply daily report to Sean + Ian",
-      "<b>Day 7 (Mon 6/29):</b> First weekly metrics readout â meetings booked, reply rates, sequence health",
-      "<b>Day 30 (Mon 7/20):</b> Mid-pilot review â pace vs. commit, scope tweaks, blocker review",
-      "<b>Day 60 (Mon 8/18):</b> Pilot end review â commit verification + extension contract conversation"
+      "<b>Day 7 (Mon 6/29):</b> First weekly metrics readout - meetings booked, reply rates, sequence health",
+      "<b>Day 30 (Mon 7/20):</b> Mid-pilot review - pace vs. commit, scope tweaks, blocker review",
+      "<b>Day 60 (Mon 8/18):</b> Pilot end review - commit verification + extension contract conversation"
     ],
     criticalPath: [
-      "<b>Jun 10</b> â Apollo enrichment complete on remaining ~110 contacts",
-      "<b>Jun 10</b> â HubSpot scope added (unblocks contact reads)",
-      "<b>Jun 13</b> â Hermes-AI-SDR-V3 fixed (the longest pole)",
-      "<b>Jun 15</b> â Both AE booking links verified end-to-end with Gage",
-      "<b>Jun 18</b> â Sequences reviewed by Megan; reply routing rules deployed; suppression list loaded; Slack alerts live",
-      "<b>Jun 19 (Fri)</b> â Pre-launch standup with Sean + Ian + Megan (~30 min)",
-      "<b>Jun 22 (Mon)</b> â Pilot launch. First sequences fire 9am CT"
+      "<b>Jun 10</b> - Apollo enrichment complete on remaining ~110 contacts",
+      "<b>Jun 10</b> - HubSpot scope added (unblocks contact reads)",
+      "<b>Jun 13</b> - Hermes-AI-SDR-V3 fixed (the longest pole)",
+      "<b>Jun 15</b> - Both AE booking links verified end-to-end with Gage",
+      "<b>Jun 18</b> - Sequences reviewed by Megan; reply routing rules deployed; suppression list loaded; Slack alerts live",
+      "<b>Jun 19 (Fri)</b> - Pre-launch standup with Sean + Ian + Megan (~30 min)",
+      "<b>Jun 22 (Mon)</b> - Pilot launch. First sequences fire 9am CT"
     ],
     risks: [
       ["Hermes-AI-SDR-V3 not fixed by Jun 13","med","high","Daily check; if not fixed by 6/15, escalate to alternative routing"],
@@ -321,7 +321,7 @@ const CLIENTS = {
       "<b>Slack alerts</b> firing to #siq-key-accounts",
       "<b>Weekly cadence</b> calendar invite sent to Sean + Ian + Megan"
     ],
-    footer: "Companion docs: <b>Romify-Exhibitor-Intel-LiveDemo.html</b> Â· <b>Romify-WorkingSession-Agenda.docx</b> Â· <b>Romify-Exhibitor-Intel-TalkTrack.docx</b> Â· <b>Romify-GTM-Profile.docx</b> Â· <b>Romify-List-Strategy.docx</b><br>Built 2026-06-04 Â· Owner Marty Berman, SiQ Â· Updated every Monday during the pilot"
+    footer: "Companion docs: <b>Romify-Exhibitor-Intel-LiveDemo.html</b> / <b>Romify-WorkingSession-Agenda.docx</b> / <b>Romify-Exhibitor-Intel-TalkTrack.docx</b> / <b>Romify-GTM-Profile.docx</b> / <b>Romify-List-Strategy.docx</b><br>Built 2026-06-04 / Owner Marty Berman, SiQ / Updated every Monday during the pilot"
   }
 };
 
@@ -360,7 +360,7 @@ if (!client) {
   document.getElementById('gate-pass').style.display = 'none';
   document.getElementById('gate-btn').style.display = 'none';
 } else {
-  document.getElementById('gate-client').textContent = client.name.toUpperCase() + ' â ONBOARDING RUNBOOK';
+  document.getElementById('gate-client').textContent = client.name.toUpperCase() + ' - ONBOARDING RUNBOOK';
   /* Track that the page loaded for this client */
   trackEvent('client_runbook_view', { client_slug: slug, client_name: client.name });
 
@@ -402,13 +402,13 @@ function reveal() {
 function render() {
   /* INTRO */
   document.getElementById('i-eyebrow').textContent = client.name.toUpperCase() + ' AI SDR PILOT';
-  document.getElementById('i-h1').textContent = client.name + ' â Client Onboarding Runbook';
+  document.getElementById('i-h1').textContent = client.name + ' - Client Onboarding Runbook';
   document.getElementById('i-start').textContent = client.pilotStart;
   document.getElementById('i-asof').textContent = client.asOf;
   document.getElementById('i-owner').textContent = client.owner;
   document.getElementById('i-status').textContent = client.statusLabel;
   document.getElementById('gng-when').textContent = client.gngWhen;
-  document.title = client.name + ' â SiQ Client Onboarding Runbook';
+  document.title = client.name + ' - SiQ Client Onboarding Runbook';
 
   /* PHASE OVERVIEW */
   const pillFor = (s) => `<span class="pill pill-${s === 'done' ? 'done' : s === 'flight' ? 'flight' : 'pending'}">${s === 'done' ? 'Done' : s === 'flight' ? 'In flight' : 'Pending'}</span>`;
