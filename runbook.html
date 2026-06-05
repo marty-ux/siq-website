@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SiQ Cortex â Client Onboarding Runbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+  [data-theme="dark"] {
+    --canvas:#0A1628; --surface:#0E1D33; --surface-2:#11233D;
+    --border:#1F3352; --border-strong:#2B4265;
+    --text-primary:#F5F7FA; --text-secondary:#B8C5D6; --text-tertiary:#8FA3BF;
+    --brand-blue:#0073E6; --brand-orange:#FF6600;
+    --ok:#2BB673; --ok-tint:rgba(43,182,115,0.14);
+    --warn:#E0A800; --warn-tint:rgba(224,168,0,0.14);
+    --block:#E04E4E; --block-tint:rgba(224,78,78,0.14);
+    --overlay:rgba(5,11,22,0.82);
+  }
+  [data-theme="light"] {
+    --canvas:#F4F6F9; --surface:#FFFFFF; --surface-2:#F8FAFC;
+    --border:#E2E8F0; --border-strong:#CBD5E1;
+    --text-primary:#0A1628; --text-secondary:#475569; --text-tertiary:#64748B;
+    --brand-blue:#0073E6; --brand-orange:#FF6600;
+    --ok:#1E9E61; --ok-tint:rgba(43,182,115,0.16);
+    --warn:#B57F00; --warn-tint:rgba(224,168,0,0.18);
+    --block:#C2271F; --block-tint:rgba(224,78,78,0.16);
+    --overlay:rgba(10,22,40,0.55);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--canvas);color:var(--text-primary);line-height:1.55;-webkit-font-smoothing:antialiased;transition:background .2s,color .2s}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px 96px}
+
+  /* Passphrase overlay */
+  .gate{position:fixed;inset:0;background:var(--overlay);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:1000;padding:24px}
+  .gate.hidden{display:none}
+  .gate-card{background:var(--surface);border:1px solid var(--border-strong);padding:36px 36px;max-width:440px;width:100%}
+  .gate-card h2{font-size:22px;font-weight:700;letter-spacing:-0.01em;margin-bottom:8px}
+  .gate-card p{font-size:15px;color:var(--text-secondary);margin-bottom:22px}
+  .gate-card .gate-client{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--brand-orange);margin-bottom:18px}
+  .gate-card input{width:100%;font-family:inherit;font-size:16px;padding:13px 14px;background:var(--canvas);color:var(--text-primary);border:1px solid var(--border-strong);outline:none;letter-spacing:0.04em}
+  .gate-card input:focus{border-color:var(--brand-blue)}
+  .gate-card button{margin-top:14px;width:100%;font-family:inherit;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:14px 18px;background:var(--brand-orange);color:#fff;border:none;cursor:pointer}
+  .gate-card button:hover{background:#E65C00}
+  .gate-err{margin-top:12px;font-size:14px;color:var(--block);min-height:20px}
+
+  /* Topbar */
+  .topbar{position:sticky;top:0;z-index:50;background:var(--canvas);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:18px 28px;max-width:1080px;margin:0 auto;gap:16px}
+  .wordmark{font-size:22px;font-weight:700;letter-spacing:-0.02em;white-space:nowrap}
+  .wordmark .blue{color:var(--brand-blue)}
+  .wordmark .orange{color:var(--brand-orange)}
+  .wordmark .sub{font-size:13px;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:0.12em;margin-left:10px}
+  .topbar-logo{flex:1;display:flex;justify-content:center;align-items:center;min-width:0}
+  .topbar-logo .logo-chip{background:#fff;padding:6px 11px;border:1px solid var(--border);display:inline-flex;align-items:center}
+  .topbar-logo .logo-chip svg{height:36px;width:auto;display:block}
+  .bar-right{display:flex;align-items:center;gap:12px}
+  .toggle{display:inline-flex;border:1px solid var(--border-strong)}
+  .toggle button{font-family:inherit;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;padding:9px 14px;background:transparent;color:var(--text-tertiary);border:none;cursor:pointer;transition:all .15s}
+  .toggle button.active{background:var(--brand-blue);color:#fff}
+
+  /* Intro */
+  .intro{margin-top:34px;border-left:4px solid var(--brand-orange);padding:6px 0 6px 22px}
+  .intro .eyebrow{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:var(--brand-blue);margin-bottom:10px}
+  .intro h1{font-size:38px;font-weight:700;letter-spacing:-0.02em;line-height:1.14}
+  .intro .meta{display:flex;flex-wrap:wrap;gap:18px;margin-top:18px;font-size:15px;color:var(--text-secondary)}
+  .intro .meta b{color:var(--text-primary);font-weight:600}
+  .intro .status{margin-top:14px;display:inline-block;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:7px 14px;background:var(--warn-tint);color:var(--warn);border-left:3px solid var(--warn)}
+
+  section{margin-top:32px;border:1px solid var(--border);background:var(--surface);padding:28px 30px}
+  .sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+  .sec-h .num{font-size:13px;font-weight:700;color:var(--brand-blue);border:1px solid var(--brand-blue);padding:4px 11px;letter-spacing:0.06em}
+  .sec-h h2{font-size:24px;font-weight:700;letter-spacing:-0.01em}
+
+  /* Phase overview table */
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  th{text-align:left;font-size:12px;font-weight:700;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:0.1em;padding:12px 14px;border-bottom:1px solid var(--border-strong);background:var(--surface-2)}
+  td{padding:14px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-secondary)}
+  td.num{font-weight:700;color:var(--brand-blue);width:48px}
+  td.title{font-weight:600;color:var(--text-primary);width:38%}
+  .pill{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:4px 10px;white-space:nowrap}
+  .pill-done{background:var(--ok-tint);color:var(--ok)}
+  .pill-flight{background:var(--warn-tint);color:var(--warn)}
+  .pill-pending{background:var(--block-tint);color:var(--block)}
+
+  /* Phase detail blocks */
+  .phase{padding:22px 0;border-bottom:1px dashed var(--border)}
+  .phase:last-child{border-bottom:none}
+  .phase-h{display:flex;align-items:baseline;gap:14px;margin-bottom:10px}
+  .phase-h h3{font-size:20px;font-weight:700;color:var(--brand-orange);letter-spacing:-0.01em}
+  .phase p{font-size:15px;color:var(--text-secondary);margin-bottom:10px}
+  .phase ul{margin:8px 0 0 22px;font-size:15px;color:var(--text-secondary)}
+  .phase ul li{margin-bottom:6px;line-height:1.55}
+  .phase ul li b{color:var(--text-primary);font-weight:600}
+
+  /* Critical path */
+  .path{list-style:none;counter-reset:step;margin-top:6px}
+  .path li{counter-increment:step;position:relative;padding:14px 14px 14px 56px;border-left:3px solid var(--brand-orange);margin-bottom:8px;background:var(--surface-2);font-size:15px;color:var(--text-secondary)}
+  .path li::before{content:counter(step);position:absolute;left:14px;top:50%;transform:translateY(-50%);width:30px;height:30px;background:var(--brand-orange);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .path li b{color:var(--text-primary);font-weight:600}
+
+  /* Risk register */
+  .risk-low{color:var(--ok);font-weight:700}
+  .risk-med{color:var(--warn);font-weight:700}
+  .risk-high{color:var(--block);font-weight:700}
+
+  /* Go/No-Go */
+  .checklist{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;margin-top:8px}
+  .checklist li{padding:11px 14px;background:var(--surface-2);border-left:3px solid var(--brand-blue);font-size:15px;color:var(--text-secondary)}
+  .checklist li b{color:var(--text-primary);font-weight:600}
+
+  /* Footer */
+  footer{margin-top:48px;padding-top:22px;border-top:1px solid var(--border);font-size:13px;color:var(--text-tertiary);line-height:1.55}
+  footer b{color:var(--text-secondary);font-weight:600}
+
+  /* Phase task table small adjustments */
+  .task-table td.task-status{white-space:nowrap;font-weight:700;font-size:13px}
+  .task-status.s-done{color:var(--ok)}
+  .task-status.s-flight{color:var(--warn)}
+  .task-status.s-block{color:var(--block);text-transform:uppercase;letter-spacing:0.08em}
+
+  @media (max-width:760px){
+    .intro h1{font-size:28px}
+    .checklist{grid-template-columns:1fr}
+    .topbar{flex-wrap:wrap}
+    .topbar-logo{order:3;width:100%;justify-content:flex-start;padding-top:10px}
+    section{padding:22px 18px}
+    table{font-size:13px}
+    th,td{padding:10px 8px}
+  }
+</style>
+</head>
+<body data-theme="dark">
+
+<!-- ============== PASSPHRASE GATE ============== -->
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <div class="gate-client" id="gate-client">CLIENT RUNBOOK</div>
+    <h2>Enter passphrase to view</h2>
+    <p>This onboarding runbook is private. Enter the passphrase shared with you by your SiQ contact.</p>
+    <input type="password" id="gate-pass" placeholder="Passphrase" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+    <button id="gate-btn" type="button">Unlock</button>
+    <div class="gate-err" id="gate-err">&nbsp;</div>
+  </div>
+</div>
+
+<!-- ============== TOPBAR ============== -->
+<div class="topbar">
+  <div class="wordmark"><span class="blue">Scalient</span><span class="orange">IQ</span><span class="sub">Cortex</span></div>
+  <div class="topbar-logo" id="topbar-logo"></div>
+  <div class="bar-right">
+    <div class="toggle" role="group" aria-label="Theme">
+      <button id="t-dark" class="active" type="button">Dark</button>
+      <button id="t-light" type="button">Light</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap" id="wrap" style="display:none;">
+
+  <!-- INTRO -->
+  <div class="intro">
+    <div class="eyebrow" id="i-eyebrow">CLIENT ONBOARDING RUNBOOK</div>
+    <h1 id="i-h1">Client Onboarding Runbook</h1>
+    <div class="meta">
+      <span><b>Pilot start:</b> <span id="i-start"></span></span>
+      <span><b>As of:</b> <span id="i-asof"></span></span>
+      <span><b>Owner:</b> <span id="i-owner"></span></span>
+    </div>
+    <div class="status" id="i-status">Onboarding</div>
+  </div>
+
+  <!-- PHASE OVERVIEW -->
+  <section>
+    <div class="sec-h"><div class="num">01</div><h2>The 6-phase onboarding model</h2></div>
+    <p style="font-size:15px;color:var(--text-secondary);margin-bottom:18px">Every SiQ client onboarding moves through 6 phases. This runbook tracks where the pilot stands against each.</p>
+    <table id="phase-overview"><thead><tr><th>#</th><th>Phase</th><th>Status</th><th>Artifact / Evidence</th></tr></thead><tbody></tbody></table>
+  </section>
+
+  <!-- PHASE DETAILS -->
+  <section>
+    <div class="sec-h"><div class="num">02</div><h2>Phase detail + responsibilities</h2></div>
+    <div id="phase-details"></div>
+  </section>
+
+  <!-- PHASE 5 TASK TABLE -->
+  <section>
+    <div class="sec-h"><div class="num">03</div><h2>Engagement Setup â task tracker</h2></div>
+    <p style="font-size:15px;color:var(--text-secondary);margin-bottom:18px">Everything that must be true before sequences fire on pilot launch day.</p>
+    <table class="task-table" id="task-table"><thead><tr><th>Task</th><th>Owner</th><th>Due</th><th>Status</th></tr></thead><tbody></tbody></table>
+  </section>
+
+  <!-- PHASE 6 LAUNCH TIMELINE -->
+  <section>
+    <div class="sec-h"><div class="num">04</div><h2>Live pilot launch â timeline</h2></div>
+    <ul id="launch-timeline" class="path"></ul>
+  </section>
+
+  <!-- CRITICAL PATH -->
+  <section>
+    <div class="sec-h"><div class="num">05</div><h2>Critical path to launch</h2></div>
+    <ol class="path" id="crit-path" style="counter-reset:step"></ol>
+  </section>
+
+  <!-- RISK REGISTER -->
+  <section>
+    <div class="sec-h"><div class="num">06</div><h2>Risk register</h2></div>
+    <table id="risk-table"><thead><tr><th>Risk</th><th>Likelihood</th><th>Impact</th><th>Mitigation</th></tr></thead><tbody></tbody></table>
+  </section>
+
+  <!-- GO/NO-GO -->
+  <section>
+    <div class="sec-h"><div class="num">07</div><h2>Go / no-go gate</h2></div>
+    <p style="font-size:15px;color:var(--text-secondary);margin-bottom:14px"><b id="gng-when">48 hours before pilot start</b>, SiQ runs the readiness check. Every item green = launch on schedule. Any red = launch delays 48 hours.</p>
+    <ul class="checklist" id="gng-list"></ul>
+  </section>
+
+  <footer id="footer"></footer>
+</div>
+
+<!-- ============== CLIENT CONFIG + DATA ============== -->
+<script>
+/* CLIENT CONFIGS â extend this object to support new clients.
+   Add `?c=<slug>` to URL to load. Passphrase hashed sha256 of cleartext. */
+const CLIENTS = {
+  romify: {
+    name: "Romify",
+    logo: `<span class="logo-chip"><svg xmlns="http://www.w3.org/2000/svg" viewBox="80 396 956 286"><style>.rst0{fill:#18273D}.rst1{fill:url(#RGRAD1)}</style><g><path class="rst0" d="M457.74,503.54c-2.32,0-4.41,0.07-6.25,0.2c-1.85,0.14-3.59,0.27-5.23,0.41v38.53h9.02c12.02,0,20.63-1.5,25.82-4.51c5.19-3,7.79-8.13,7.79-15.37c0-6.97-2.63-11.92-7.89-14.86C475.73,505.01,467.98,503.54,457.74,503.54 M455.89,476.28c21.31,0,37.64,3.79,48.98,11.37c11.34,7.59,17.01,19.37,17.01,35.35c0,9.98-2.29,18.07-6.86,24.29c-4.58,6.22-11.17,11.1-19.78,14.65c2.87,3.55,5.87,7.62,9.02,12.2c3.14,4.58,6.25,9.36,9.33,14.35c3.08,4.99,6.05,10.18,8.91,15.57c2.87,5.4,5.54,10.69,7.99,15.88h-35.74c-2.61-4.64-5.25-9.36-7.92-14.14s-5.41-9.43-8.23-13.94c-2.81-4.51-5.59-8.78-8.33-12.81c-2.74-4.03-5.49-7.69-8.23-10.97h-15.78v51.85h-31.97V479.97c6.97-1.37,14.17-2.32,21.62-2.87C443.35,476.56,450.02,476.28,455.89,476.28"/><path class="rst0" d="M595.26,565.84c0-9.43-1.88-16.84-5.64-22.24c-3.76-5.4-9.12-8.1-16.09-8.1c-6.97,0-12.37,2.7-16.19,8.1c-3.83,5.4-5.74,12.81-5.74,22.24s1.91,16.91,5.74,22.44c3.82,5.54,9.22,8.3,16.19,8.3c6.97,0,12.33-2.77,16.09-8.3C593.38,582.75,595.26,575.27,595.26,565.84 M626.41,565.84c0,8.47-1.23,16.23-3.69,23.26c-2.46,7.04-6.01,13.05-10.66,18.04c-4.65,4.99-10.22,8.85-16.7,11.58c-6.49,2.73-13.77,4.1-21.83,4.1c-7.92,0-15.13-1.37-21.62-4.1s-12.06-6.59-16.7-11.58c-4.65-4.99-8.27-11-10.86-18.04c-2.6-7.03-3.9-14.79-3.9-23.26c0-8.47,1.33-16.19,4-23.16c2.66-6.97,6.35-12.91,11.07-17.83c4.71-4.92,10.32-8.74,16.81-11.48c6.49-2.73,13.56-4.1,21.21-4.1c7.79,0,14.93,1.37,21.42,4.1c6.49,2.73,12.06,6.56,16.7,11.48s8.27,10.86,10.86,17.83C625.1,549.65,626.41,557.37,626.41,565.84"/><path class="rst0" d="M690.76,562.77c0-9.84-1.27-16.81-3.79-20.9c-2.53-4.1-6.86-6.15-13.01-6.15c-1.92,0-3.9,0.1-5.94,0.31c-2.05,0.2-4.03,0.45-5.94,0.72v83.21h-30.54V515.84c2.59-0.68,5.64-1.4,9.12-2.15s7.17-1.43,11.07-2.05c3.89-0.61,7.89-1.09,11.99-1.43s8.13-0.51,12.09-0.51c7.79,0,14.11,0.99,18.96,2.97c4.85,1.98,8.85,4.34,11.99,7.07c4.37-3.14,9.39-5.6,15.06-7.38c5.67-1.77,10.9-2.66,15.68-2.66c8.61,0,15.68,1.2,21.21,3.59s9.94,5.77,13.22,10.14c3.28,4.38,5.53,9.57,6.76,15.58s1.84,12.71,1.84,20.09v60.87h-30.54v-57.18c0-9.84-1.27-16.81-3.79-20.9c-2.53-4.1-6.87-6.15-13.02-6.15c-1.64,0-3.93,0.41-6.86,1.23c-2.94,0.82-5.36,1.84-7.27,3.07c0.95,3.15,1.57,6.46,1.84,9.94s0.41,7.21,0.41,11.17v58.82h-30.54L690.76,562.77z"/><path class="rst0" d="M820.29,619.95h-30.54v-107.8h30.54V619.95z M823.16,481c0,5.61-1.81,10.01-5.43,13.22s-7.89,4.82-12.81,4.82s-9.19-1.6-12.81-4.82c-3.62-3.21-5.43-7.61-5.43-13.22c0-5.6,1.81-10.01,5.43-13.22s7.89-4.82,12.81-4.82s9.19,1.61,12.81,4.82C821.35,470.99,823.16,475.4,823.16,481"/><path class="rst0" d="M877.47,460.91c5.74,0,11,0.58,15.78,1.74s8.47,2.29,11.07,3.38l-5.94,24.39c-2.74-1.23-5.71-2.15-8.92-2.77c-3.21-0.61-6.18-0.92-8.91-0.92c-3.69,0-6.8,0.51-9.33,1.54s-4.51,2.43-5.94,4.2c-1.44,1.78-2.46,3.89-3.07,6.35c-0.62,2.46-0.92,5.12-0.92,7.99v5.33h18.94l6.38,25.41h-25.32v82.39h-30.54V506.41c0-13.93,3.92-25,11.78-33.2C850.38,465.01,862.02,460.91,877.47,460.91"/><path class="rst0" d="M992.09,512.15c-6.17,20.77-12.6,40.24-19.31,58.41s-14.04,35.8-21.99,52.88c-2.88,6.15-5.75,11.37-8.62,15.68c-2.88,4.3-6.02,7.85-9.45,10.66c-3.42,2.8-7.28,4.85-11.6,6.15c-4.31,1.3-9.34,1.95-15.08,1.95c-4.79,0-9.21-0.45-13.24-1.33c-4.04-0.89-7.35-1.88-9.95-2.97l5.33-24.39c3.15,1.09,5.95,1.84,8.41,2.25c2.46,0.41,5.06,0.62,7.79,0.62c5.47,0,9.67-1.47,12.61-4.41s5.44-7,7.49-12.2c-6.98-13.66-13.95-29-20.92-46.01s-18.48-57.28-18.48-57.28h31.18c1.37,5.33,2.98,11.1,4.84,17.32c1.85,6.22,3.81,12.5,5.87,18.85c2.05,6.35,4.15,12.54,6.28,18.55s4.15,11.48,6.08,16.4c1.78-4.92,3.64-10.38,5.55-16.4c1.92-6.01,3.81-12.19,5.66-18.55c1.85-6.35,3.64-12.64,5.35-18.85c1.71-6.22,3.26-11.99,4.63-17.32h31.57V512.15z"/></g><g><path class="rst0" d="M310.08,674.75H140.54c-27.53,0-50.05-22.52-50.05-50.05V455.16c0-27.53,22.52-50.05,50.05-50.05h169.54c27.53,0,50.05,22.52,50.05,50.05v169.54C360.13,652.23,337.6,674.75,310.08,674.75z"/><linearGradient id="RGRAD1" gradientUnits="userSpaceOnUse" x1="154.6461" y1="546.5493" x2="304.7506" y2="546.5493"><stop offset="0" style="stop-color:#7F47DD"/><stop offset="0.7197" style="stop-color:#FBAE17"/><stop offset="1" style="stop-color:#FBAE17"/></linearGradient><path class="rst1" d="M154.82,540.68c2.43-36.22,32.56-64.83,69.38-64.83h1.16v71.86c0,38.41-31.14,69.56-69.56,69.56h-1.16v-70.71L154.82,540.68z M239.92,475.94c36.22,2.43,64.83,32.56,64.83,69.38v1.16h-70.7v-70.58"/></g></svg></span>`,
+    passHash: "ab6dc8d322af1ee38270c3fcd4341769486b446db2a01d99d8b9158ce3457b1d",
+    pilotStart: "Monday, June 22, 2026",
+    asOf: "2026-06-04",
+    owner: "Marty Berman, SiQ",
+    statusLabel: "ONBOARDING â 4 of 6 phases complete; phases 5 + 6 in flight",
+    gngWhen: "Thursday June 18 â 48 hours before pilot start",
+    phases: [
+      ["1","Intake â client provides GTM context via hosted form","done","client-intake.html submission (Megan, May 2026); raw JSON in HubSpot"],
+      ["2","GTM Profile â synthesized client snapshot","done","Romify-GTM-Profile.docx (rev 2026-06-01b)"],
+      ["3","List Strategy â ICP definition + list-build plan","done","Romify-List-Strategy.docx"],
+      ["4","Pilot Commits â locked metrics, scope, plays, fees","done","Pilot Commits locked 2026-06-01: 30/15%/4/$60K; Plays A+B"],
+      ["5","Engagement Setup â calendar/CRM wiring, sequences, blockers cleared","flight","Sequences drafted; calendar handoff + Hermes fix + HubSpot scope pending"],
+      ["6","Live Pilot Launch â first sequences fire, weekly cadence active","pending","Target: Monday June 22, 2026"]
+    ],
+    phaseDetails: [
+      { title: "Phase 1 â Intake  Â·  DONE", bullets: [
+        "<b>Owner:</b> Megan (Romify) submitted via client-intake.html",
+        "<b>Trigger fired:</b> form submission â SiQ-Intake-Receiver n8n workflow (emails LIVE; Slack + HubSpot routes still pending)",
+        "<b>Open:</b> Slack + HubSpot creds and upload storage. Doesn't block Romify pilot start; affects future client intakes."
+      ]},
+      { title: "Phase 2 â GTM Profile  Â·  DONE", bullets: [
+        "<b>Owner:</b> SiQ (Marty) â built off intake submission + Romify source files",
+        "<b>Artifact:</b> Romify-GTM-Profile.docx (rev 2026-06-01b) â locked pilot commits + messaging wedge",
+        "<b>Confirmed</b> with Megan during 2026-06-01 call"
+      ]},
+      { title: "Phase 3 â List Strategy  Â·  DONE", bullets: [
+        "<b>Owner:</b> SiQ",
+        "<b>Artifact:</b> Romify-List-Strategy.docx â ICP defined, list-build motion = exhibitor scraping + Apollo enrichment; same list recycled across Plays A + B (budget unlock)",
+        "<b>Validated</b> against Romify Event Participation MASTER sheet (300+ rows)"
+      ]},
+      { title: "Phase 4 â Pilot Commits  Â·  DONE â Locked 2026-06-01", bullets: [
+        "60 days, $3,500 all-in, 9 dedicated AI SDRs (Gage), email-only",
+        "Commits: 30 meetings Â· 15% meetingâopp Â· 4 qualified opps Â· $60K pipeline ($15K ACV)",
+        "Plays A (pre-event booth meetings) + B (post-event follow-up disaster); same list runs both",
+        "Conversion trigger: hit commit â full Cortex deployment at full ACV"
+      ]},
+      { title: "Phase 5 â Engagement Setup  Â·  IN FLIGHT  Â·  see task tracker below", bullets: [
+        "11 operational tasks tracked in Â§03 below â owners, due dates, status",
+        "Critical path runs through Hermes-AI-SDR-V3 workflow fix (longest pole)"
+      ]},
+      { title: "Phase 6 â Live Pilot Launch  Â·  PENDING â Monday June 22, 2026", bullets: [
+        "Day 0: Play A sequences fire (Bio International + Automate prospect lists)",
+        "Day 0: Play B sequences fire (ACT Expo + EEI non-responders / exhibitor lists)",
+        "Day 1: first hot-reply daily report to Sean + Ian",
+        "Day 7: first weekly metrics readout",
+        "Day 30: mid-pilot review",
+        "Day 60: pilot end review + extension contract conversation"
+      ]}
+    ],
+    tasks: [
+      ["Exhibitor lists scraped + scored (Bio, Automate, ACT, EEI)","SiQ","Done","done","DONE â 3,190 companies analyzed; 40 ICP-fit picked; 134 contacts surfaced"],
+      ["Apollo enrichment â 25 verified emails (demo batch)","SiQ","Done","done","DONE â visible in Romify-Exhibitor-Intel-LiveDemo"],
+      ["Apollo enrichment â remaining ~110 contacts","SiQ","Jun 10","flight","IN FLIGHT â queued"],
+      ["Hermes-AI-SDR-V3 workflow fix (100% errors)","SiQ","Jun 13","block","BLOCKER â must fix before any sequence fires"],
+      ["HubSpot OAuth scope add (crm.objects.contacts.read)","SiQ","Jun 10","flight","PENDING â add to SiQ Cortex Dashboard app"],
+      ["Sean's HubSpot booking link â Gage wired","SiQ + Sean","Jun 15","flight","PENDING â verify end-to-end"],
+      ["Ian's EU HubSpot booking link â Gage wired","SiQ + Ian","Jun 15","flight","PENDING â verify end-to-end"],
+      ["Reply routing rules in Gage","SiQ","Jun 18","flight","PENDING â depends on Friday 6/5 decision"],
+      ["Sequence copy reviewed by Megan in Romify voice","Megan","Jun 18","flight","PENDING â Romify-AISDR-Sequence-Samples drafted"],
+      ["Suppression list loaded (Romify lost accounts)","Romify â SiQ","Jun 15","flight","PENDING â needs Megan to pull from HubSpot"],
+      ["Slack alerting wired (#siq-key-accounts â Romify thread)","SiQ","Jun 18","flight","PENDING â needs n8n Slack cred resolved"]
+    ],
+    launchTimeline: [
+      "<b>Day 0 (Mon 6/22):</b> First Play A sequences fire to Bio International + Automate prospect lists",
+      "<b>Day 0 (Mon 6/22):</b> First Play B sequences fire to ACT Expo + EEI non-responders / exhibitor lists",
+      "<b>Day 1 (Tue 6/23):</b> First hot-reply daily report to Sean + Ian",
+      "<b>Day 7 (Mon 6/29):</b> First weekly metrics readout â meetings booked, reply rates, sequence health",
+      "<b>Day 30 (Mon 7/20):</b> Mid-pilot review â pace vs. commit, scope tweaks, blocker review",
+      "<b>Day 60 (Mon 8/18):</b> Pilot end review â commit verification + extension contract conversation"
+    ],
+    criticalPath: [
+      "<b>Jun 10</b> â Apollo enrichment complete on remaining ~110 contacts",
+      "<b>Jun 10</b> â HubSpot scope added (unblocks contact reads)",
+      "<b>Jun 13</b> â Hermes-AI-SDR-V3 fixed (the longest pole)",
+      "<b>Jun 15</b> â Both AE booking links verified end-to-end with Gage",
+      "<b>Jun 18</b> â Sequences reviewed by Megan; reply routing rules deployed; suppression list loaded; Slack alerts live",
+      "<b>Jun 19 (Fri)</b> â Pre-launch standup with Sean + Ian + Megan (~30 min)",
+      "<b>Jun 22 (Mon)</b> â Pilot launch. First sequences fire 9am CT"
+    ],
+    risks: [
+      ["Hermes-AI-SDR-V3 not fixed by Jun 13","med","high","Daily check; if not fixed by 6/15, escalate to alternative routing"],
+      ["Lower-than-expected reply rates Week 1","med","med","Pre-built A/B subject line tests in week 1; iterate based on day 3 data"],
+      ["Sean or Ian out during pilot start week","low","med","Confirm calendars Friday 6/5; backup contact identified"],
+      ["Apollo email bounces above 5%","low","low","Auto-suppression + re-find via alt source; built into Gage"],
+      ["Megan unavailable for sequence sign-off by Jun 18","low","med","Surface in Friday 6/5; pre-approve Romify voice patterns"]
+    ],
+    gng: [
+      "<b>Hermes workflow</b> green for 24 consecutive hours",
+      "<b>Both AE booking links</b> accept Gage-initiated invites end-to-end",
+      "<b>Sequence copy</b> approved by Megan",
+      "<b>Suppression list</b> loaded",
+      "<b>Reply routing</b> tested with internal dummy reply",
+      "<b>Slack alerts</b> firing to #siq-key-accounts",
+      "<b>Weekly cadence</b> calendar invite sent to Sean + Ian + Megan"
+    ],
+    footer: "Companion docs: <b>Romify-Exhibitor-Intel-LiveDemo.html</b> Â· <b>Romify-WorkingSession-Agenda.docx</b> Â· <b>Romify-Exhibitor-Intel-TalkTrack.docx</b> Â· <b>Romify-GTM-Profile.docx</b> Â· <b>Romify-List-Strategy.docx</b><br>Built 2026-06-04 Â· Owner Marty Berman, SiQ Â· Updated every Monday during the pilot"
+  }
+};
+
+/* ============== UTILS ============== */
+async function sha256(s) {
+  const enc = new TextEncoder().encode(s);
+  const buf = await crypto.subtle.digest('SHA-256', enc);
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+function getClientSlug() {
+  const u = new URL(location.href);
+  return (u.searchParams.get('c') || u.searchParams.get('client') || '').toLowerCase().trim();
+}
+function trackEvent(name, payload) {
+  /* Push custom event to HubSpot if available */
+  try {
+    window._hsq = window._hsq || [];
+    window._hsq.push(['trackCustomBehavioralEvent', { name, properties: payload }]);
+  } catch(e) {}
+  /* Push to Leadpipe / generic dataLayer if available */
+  try {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: name, ...payload });
+  } catch(e) {}
+}
+
+/* ============== INIT ============== */
+const slug = getClientSlug();
+const client = CLIENTS[slug];
+
+/* If no slug or unknown client, show a friendly message */
+if (!client) {
+  document.getElementById('gate-client').textContent = 'NO CLIENT SPECIFIED';
+  document.querySelector('.gate-card h2').textContent = 'Client runbook not found';
+  document.querySelector('.gate-card p').textContent = 'Add ?c=<client-slug> to the URL to load a runbook. Contact your SiQ rep if you need access.';
+  document.getElementById('gate-pass').style.display = 'none';
+  document.getElementById('gate-btn').style.display = 'none';
+} else {
+  document.getElementById('gate-client').textContent = client.name.toUpperCase() + ' â ONBOARDING RUNBOOK';
+  /* Track that the page loaded for this client */
+  trackEvent('client_runbook_view', { client_slug: slug, client_name: client.name });
+
+  /* Inject client logo into topbar (SVG or img HTML) */
+  const topLogo = document.getElementById('topbar-logo');
+  topLogo.innerHTML = client.logo;
+
+  /* Wire passphrase */
+  const tryUnlock = async () => {
+    const input = document.getElementById('gate-pass').value || '';
+    const hash = await sha256(input);
+    if (hash === client.passHash) {
+      sessionStorage.setItem('siq-runbook-unlocked-' + slug, '1');
+      reveal();
+    } else {
+      document.getElementById('gate-err').textContent = 'Incorrect passphrase. Try again.';
+      document.getElementById('gate-pass').select();
+    }
+  };
+  document.getElementById('gate-btn').addEventListener('click', tryUnlock);
+  document.getElementById('gate-pass').addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+
+  /* Auto-unlock if already passed this session */
+  if (sessionStorage.getItem('siq-runbook-unlocked-' + slug) === '1') {
+    reveal();
+  } else {
+    setTimeout(() => document.getElementById('gate-pass').focus(), 50);
+  }
+}
+
+/* ============== RENDER ============== */
+function reveal() {
+  document.getElementById('gate').classList.add('hidden');
+  document.getElementById('wrap').style.display = 'block';
+  trackEvent('client_runbook_unlocked', { client_slug: slug, client_name: client.name });
+  render();
+}
+
+function render() {
+  /* INTRO */
+  document.getElementById('i-eyebrow').textContent = client.name.toUpperCase() + ' AI SDR PILOT';
+  document.getElementById('i-h1').textContent = client.name + ' â Client Onboarding Runbook';
+  document.getElementById('i-start').textContent = client.pilotStart;
+  document.getElementById('i-asof').textContent = client.asOf;
+  document.getElementById('i-owner').textContent = client.owner;
+  document.getElementById('i-status').textContent = client.statusLabel;
+  document.getElementById('gng-when').textContent = client.gngWhen;
+  document.title = client.name + ' â SiQ Client Onboarding Runbook';
+
+  /* PHASE OVERVIEW */
+  const pillFor = (s) => `<span class="pill pill-${s === 'done' ? 'done' : s === 'flight' ? 'flight' : 'pending'}">${s === 'done' ? 'Done' : s === 'flight' ? 'In flight' : 'Pending'}</span>`;
+  document.querySelector('#phase-overview tbody').innerHTML = client.phases.map(p => `<tr><td class="num">${p[0]}</td><td class="title">${p[1]}</td><td>${pillFor(p[2])}</td><td>${p[3]}</td></tr>`).join('');
+
+  /* PHASE DETAILS */
+  document.getElementById('phase-details').innerHTML = client.phaseDetails.map(p => `
+    <div class="phase"><div class="phase-h"><h3>${p.title}</h3></div><ul>${p.bullets.map(b => '<li>'+b+'</li>').join('')}</ul></div>`).join('');
+
+  /* TASK TABLE */
+  const statusCls = (s) => s === 'done' ? 's-done' : s === 'block' ? 's-block' : 's-flight';
+  document.querySelector('#task-table tbody').innerHTML = client.tasks.map(t => `<tr><td class="title">${t[0]}</td><td>${t[1]}</td><td>${t[2]}</td><td class="task-status ${statusCls(t[3])}">${t[4]}</td></tr>`).join('');
+
+  /* LAUNCH TIMELINE */
+  document.getElementById('launch-timeline').innerHTML = client.launchTimeline.map(t => '<li>'+t+'</li>').join('');
+
+  /* CRITICAL PATH */
+  document.getElementById('crit-path').innerHTML = client.criticalPath.map(t => '<li>'+t+'</li>').join('');
+
+  /* RISKS */
+  const riskCls = (r) => r === 'low' ? 'risk-low' : r === 'med' ? 'risk-med' : 'risk-high';
+  const riskLabel = (r) => r === 'low' ? 'Low' : r === 'med' ? 'Medium' : 'High';
+  document.querySelector('#risk-table tbody').innerHTML = client.risks.map(r => `<tr><td class="title">${r[0]}</td><td class="${riskCls(r[1])}">${riskLabel(r[1])}</td><td class="${riskCls(r[2])}">${riskLabel(r[2])}</td><td>${r[3]}</td></tr>`).join('');
+
+  /* GO/NO-GO */
+  document.getElementById('gng-list').innerHTML = client.gng.map(t => '<li>'+t+'</li>').join('');
+
+  /* FOOTER */
+  document.getElementById('footer').innerHTML = client.footer;
+}
+
+/* THEME TOGGLE */
+const setTheme = (t) => {
+  document.body.setAttribute('data-theme', t);
+  document.getElementById('t-dark').classList.toggle('active', t === 'dark');
+  document.getElementById('t-light').classList.toggle('active', t === 'light');
+  try { localStorage.setItem('siq-runbook-theme', t); } catch(e) {}
+};
+document.getElementById('t-dark').addEventListener('click', () => setTheme('dark'));
+document.getElementById('t-light').addEventListener('click', () => setTheme('light'));
+try { const saved = localStorage.getItem('siq-runbook-theme'); if (saved) setTheme(saved); } catch(e) {}
+</script>
+
+<!-- HubSpot + Leadpipe tracking (matches scalientiq.com pattern) -->
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/51005472.js"></script>
+<!-- End of HubSpot Embed Code -->
+<!-- Leadpipe -->
+<script>!function(t,e,n,a,r,i,c){t.LeadpipeObject=r,t[r]=t[r]||function(){(t[r].q=t[r].q||[]).push(arguments)},i=e.createElement(n),c=e.getElementsByTagName(n)[0],i.async=1,i.src=a,c.parentNode.insertBefore(i,c)}(window,document,"script","https://cdn.leadpipe.com/lp.js","lp");lp("init","lp_5e7f1d3a4c9b2");lp("page");</script>
+</body>
+</html>
