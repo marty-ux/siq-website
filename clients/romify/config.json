@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "name": "Romify",
+  "slug": "romify",
+  "passHash": "ab6dc8d322af1ee38270c3fcd4341769486b446db2a01d99d8b9158ce3457b1d",
+  "logo": "<span class=\"logo-chip\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"80 396 956 286\"><style>.rst0{fill:#18273D}.rst1{fill:url(#RGRAD1)}</style><g><path class=\"rst0\" d=\"M457.74,503.54c-2.32,0-4.41,0.07-6.25,0.2c-1.85,0.14-3.59,0.27-5.23,0.41v38.53h9.02c12.02,0,20.63-1.5,25.82-4.51c5.19-3,7.79-8.13,7.79-15.37c0-6.97-2.63-11.92-7.89-14.86C475.73,505.01,467.98,503.54,457.74,503.54 M455.89,476.28c21.31,0,37.64,3.79,48.98,11.37c11.34,7.59,17.01,19.37,17.01,35.35c0,9.98-2.29,18.07-6.86,24.29c-4.58,6.22-11.17,11.1-19.78,14.65c2.87,3.55,5.87,7.62,9.02,12.2c3.14,4.58,6.25,9.36,9.33,14.35c3.08,4.99,6.05,10.18,8.91,15.57c2.87,5.4,5.54,10.69,7.99,15.88h-35.74c-2.61-4.64-5.25-9.36-7.92-14.14s-5.41-9.43-8.23-13.94c-2.81-4.51-5.59-8.78-8.33-12.81c-2.74-4.03-5.49-7.69-8.23-10.97h-15.78v51.85h-31.97V479.97c6.97-1.37,14.17-2.32,21.62-2.87C443.35,476.56,450.02,476.28,455.89,476.28\"/><path class=\"rst0\" d=\"M595.26,565.84c0-9.43-1.88-16.84-5.64-22.24c-3.76-5.4-9.12-8.1-16.09-8.1c-6.97,0-12.37,2.7-16.19,8.1c-3.83,5.4-5.74,12.81-5.74,22.24s1.91,16.91,5.74,22.44c3.82,5.54,9.22,8.3,16.19,8.3c6.97,0,12.33-2.77,16.09-8.3C593.38,582.75,595.26,575.27,595.26,565.84 M626.41,565.84c0,8.47-1.23,16.23-3.69,23.26c-2.46,7.04-6.01,13.05-10.66,18.04c-4.65,4.99-10.22,8.85-16.7,11.58c-6.49,2.73-13.77,4.1-21.83,4.1c-7.92,0-15.13-1.37-21.62-4.1s-12.06-6.59-16.7-11.58c-4.65-4.99-8.27-11-10.86-18.04c-2.6-7.03-3.9-14.79-3.9-23.26c0-8.47,1.33-16.19,4-23.16c2.66-6.97,6.35-12.91,11.07-17.83c4.71-4.92,10.32-8.74,16.81-11.48c6.49-2.73,13.56-4.1,21.21-4.1c7.79,0,14.93,1.37,21.42,4.1c6.49,2.73,12.06,6.56,16.7,11.48s8.27,10.86,10.86,17.83C625.1,549.65,626.41,557.37,626.41,565.84\"/><path class=\"rst0\" d=\"M690.76,562.77c0-9.84-1.27-16.81-3.79-20.9c-2.53-4.1-6.86-6.15-13.01-6.15c-1.92,0-3.9,0.1-5.94,0.31c-2.05,0.2-4.03,0.45-5.94,0.72v83.21h-30.54V515.84c2.59-0.68,5.64-1.4,9.12-2.15s7.17-1.43,11.07-2.05c3.89-0.61,7.89-1.09,11.99-1.43s8.13-0.51,12.09-0.51c7.79,0,14.11,0.99,18.96,2.97c4.85,1.98,8.85,4.34,11.99,7.07c4.37-3.14,9.39-5.6,15.06-7.38c5.67-1.77,10.9-2.66,15.68-2.66c8.61,0,15.68,1.2,21.21,3.59s9.94,5.77,13.22,10.14c3.28,4.38,5.53,9.57,6.76,15.58s1.84,12.71,1.84,20.09v60.87h-30.54v-57.18c0-9.84-1.27-16.81-3.79-20.9c-2.53-4.1-6.87-6.15-13.02-6.15c-1.64,0-3.93,0.41-6.86,1.23c-2.94,0.82-5.36,1.84-7.27,3.07c0.95,3.15,1.57,6.46,1.84,9.94s0.41,7.21,0.41,11.17v58.82h-30.54L690.76,562.77z\"/><path class=\"rst0\" d=\"M820.29,619.95h-30.54v-107.8h30.54V619.95z M823.16,481c0,5.61-1.81,10.01-5.43,13.22s-7.89,4.82-12.81,4.82s-9.19-1.6-12.81-4.82c-3.62-3.21-5.43-7.61-5.43-13.22c0-5.6,1.81-10.01,5.43-13.22s7.89-4.82,12.81-4.82s9.19,1.61,12.81,4.82C821.35,470.99,823.16,475.4,823.16,481\"/><path class=\"rst0\" d=\"M877.47,460.91c5.74,0,11,0.58,15.78,1.74s8.47,2.29,11.07,3.38l-5.94,24.39c-2.74-1.23-5.71-2.15-8.92-2.77c-3.21-0.61-6.18-0.92-8.91-0.92c-3.69,0-6.8,0.51-9.33,1.54s-4.51,2.43-5.94,4.2c-1.44,1.78-2.46,3.89-3.07,6.35c-0.62,2.46-0.92,5.12-0.92,7.99v5.33h18.94l6.38,25.41h-25.32v82.39h-30.54V506.41c0-13.93,3.92-25,11.78-33.2C850.38,465.01,862.02,460.91,877.47,460.91\"/><path class=\"rst0\" d=\"M992.09,512.15c-6.17,20.77-12.6,40.24-19.31,58.41s-14.04,35.8-21.99,52.88c-2.88,6.15-5.75,11.37-8.62,15.68c-2.88,4.3-6.02,7.85-9.45,10.66c-3.42,2.8-7.28,4.85-11.6,6.15c-4.31,1.3-9.34,1.95-15.08,1.95c-4.79,0-9.21-0.45-13.24-1.33c-4.04-0.89-7.35-1.88-9.95-2.97l5.33-24.39c3.15,1.09,5.95,1.84,8.41,2.25c2.46,0.41,5.06,0.62,7.79,0.62c5.47,0,9.67-1.47,12.61-4.41s5.44-7,7.49-12.2c-6.98-13.66-13.95-29-20.92-46.01s-18.48-57.28-18.48-57.28h31.18c1.37,5.33,2.98,11.1,4.84,17.32c1.85,6.22,3.81,12.5,5.87,18.85c2.05,6.35,4.15,12.54,6.28,18.55s4.15,11.48,6.08,16.4c1.78-4.92,3.64-10.38,5.55-16.4c1.92-6.01,3.81-12.19,5.66-18.55c1.85-6.35,3.64-12.64,5.35-18.85c1.71-6.22,3.26-11.99,4.63-17.32h31.57V512.15z\"/></g><g><path class=\"rst0\" d=\"M310.08,674.75H140.54c-27.53,0-50.05-22.52-50.05-50.05V455.16c0-27.53,22.52-50.05,50.05-50.05h169.54c27.53,0,50.05,22.52,50.05,50.05v169.54C360.13,652.23,337.6,674.75,310.08,674.75z\"/><linearGradient id=\"RGRAD1\" gradientUnits=\"userSpaceOnUse\" x1=\"154.6461\" y1=\"546.5493\" x2=\"304.7506\" y2=\"546.5493\"><stop offset=\"0\" style=\"stop-color:#7F47DD\"/><stop offset=\"0.7197\" style=\"stop-color:#FBAE17\"/><stop offset=\"1\" style=\"stop-color:#FBAE17\"/></linearGradient><path class=\"rst1\" d=\"M154.82,540.68c2.43-36.22,32.56-64.83,69.38-64.83h1.16v71.86c0,38.41-31.14,69.56-69.56,69.56h-1.16v-70.71L154.82,540.68z M239.92,475.94c36.22,2.43,64.83,32.56,64.83,69.38v1.16h-70.7v-70.58\"/></g></svg></span>",
+  "pilotStart": "Wednesday, June 10, 2026",
+  "asOf": "2026-06-08",
+  "owner": "Marty Berman, SiQ",
+  "statusLabel_client": "ONBOARDING - LAUNCHING WEDNESDAY",
+  "statusLabel_internal": "ONBOARDING - 4 of 6 phases done; engagement setup in flight; launch Wed Jun 10",
+  "gngWhen_client": "Monday June 8 - readiness check before launch",
+  "gngWhen_internal": "Monday June 8 - readiness check before Wed launch",
+  "phases": [
+    {
+      "num": "1",
+      "title": "Intake - client provides GTM context",
+      "status": "done",
+      "artifact_client": "GTM intake submitted",
+      "artifact_internal": "client-intake.html submission (Megan, May 2026); raw JSON in HubSpot",
+      "audience": "both"
+    },
+    {
+      "num": "2",
+      "title": "GTM Profile - synthesized client snapshot",
+      "status": "done",
+      "artifact_client": "Romify-GTM-Profile.docx delivered",
+      "artifact_internal": "Romify-GTM-Profile.docx (rev 2026-06-01b)",
+      "audience": "both"
+    },
+    {
+      "num": "3",
+      "title": "List Strategy - ICP definition + list-build plan",
+      "status": "done",
+      "artifact_client": "Romify-List-Strategy.docx delivered",
+      "artifact_internal": "Romify-List-Strategy.docx",
+      "audience": "both"
+    },
+    {
+      "num": "4",
+      "title": "Pilot Commits - locked metrics, scope, plays, fees",
+      "status": "done",
+      "artifact_client": "30 meetings / 15% / 4 opps / $60K pipeline; Plays A+B",
+      "artifact_internal": "Pilot Commits locked 2026-06-01: 30/15%/4/$60K; Plays A+B",
+      "audience": "both"
+    },
+    {
+      "num": "5",
+      "title": "Engagement Setup - calendars, sequences, ready-to-fire",
+      "status": "flight",
+      "artifact_client": "Final sequence approvals + calendar wiring this week",
+      "artifact_internal": "Sequences drafted; AE booking links + Hermes fix + HubSpot scope pending",
+      "audience": "both"
+    },
+    {
+      "num": "6",
+      "title": "Live Pilot Launch - first sequences fire, weekly cadence active",
+      "status": "pending",
+      "artifact_client": "Target: Wednesday June 10, 2026",
+      "artifact_internal": "Target: Wednesday June 10, 2026",
+      "audience": "both"
+    }
+  ],
+  "phaseDetails": [
+    {
+      "title": "Phase 1 - Intake  /  DONE",
+      "bullets_client": [
+        "<b>What you did:</b> Megan submitted the SiQ intake form with Romify's GTM context.",
+        "<b>What we did:</b> received, parsed, routed for synthesis."
+      ],
+      "bullets_internal": [
+        "<b>Owner:</b> Megan (Romify) submitted via client-intake.html",
+        "<b>Trigger fired:</b> form submission -> SiQ-Intake-Receiver n8n workflow (emails LIVE; Slack + HubSpot routes still pending)",
+        "<b>Open:</b> Slack + HubSpot creds and upload storage. Doesn't block Romify pilot start; affects future client intakes."
+      ],
+      "audience": "both"
+    },
+    {
+      "title": "Phase 2 - GTM Profile  /  DONE",
+      "bullets_client": [
+        "<b>Delivered:</b> Romify-GTM-Profile.docx with messaging wedge + pilot scope.",
+        "<b>Confirmed</b> with Megan on the 6/1 call."
+      ],
+      "bullets_internal": [
+        "<b>Owner:</b> SiQ (Marty) - built off intake submission + Romify source files",
+        "<b>Artifact:</b> Romify-GTM-Profile.docx (rev 2026-06-01b) - locked pilot commits + messaging wedge",
+        "<b>Confirmed</b> with Megan during 2026-06-01 call"
+      ],
+      "audience": "both"
+    },
+    {
+      "title": "Phase 3 - List Strategy  /  DONE",
+      "bullets_client": [
+        "<b>Delivered:</b> Romify-List-Strategy.docx - ICP defined; list-build motion = exhibitor scraping + verified contact enrichment; one list runs both Plays A + B.",
+        "<b>Validated</b> against Romify's Event Participation MASTER sheet."
+      ],
+      "bullets_internal": [
+        "<b>Owner:</b> SiQ",
+        "<b>Artifact:</b> Romify-List-Strategy.docx - ICP defined, list-build motion = exhibitor scraping + Apollo enrichment; same list recycled across Plays A + B (budget unlock)",
+        "<b>Validated</b> against Romify Event Participation MASTER sheet (300+ rows)"
+      ],
+      "audience": "both"
+    },
+    {
+      "title": "Phase 4 - Pilot Commits  /  DONE - Locked 2026-06-01",
+      "bullets_client": [
+        "60 days, $3,500 all-in, 9 dedicated AI SDRs, email-only",
+        "Commits: 30 meetings / 15% meeting-to-opp / 4 qualified opps / $60K pipeline at $15K ACV",
+        "Plays A (pre-event booth meetings) + B (post-event follow-up); same list runs both",
+        "Conversion trigger: hit commit -> full Cortex deployment"
+      ],
+      "bullets_internal": [
+        "60 days, $3,500 all-in, 9 dedicated AI SDRs (Gage), email-only",
+        "Commits: 30 meetings / 15% meeting-to-opp / 4 qualified opps / $60K pipeline ($15K ACV)",
+        "Plays A (pre-event booth meetings) + B (post-event follow-up disaster); same list runs both",
+        "Conversion trigger: hit commit -> full Cortex deployment at full ACV"
+      ],
+      "audience": "both"
+    },
+    {
+      "title": "Phase 5 - Engagement Setup  /  IN FLIGHT",
+      "bullets_client": [
+        "Final sequence copy review + AE calendar wiring + suppression list pull this week",
+        "Pre-launch standup Tuesday June 9 (~30 min)"
+      ],
+      "bullets_internal": [
+        "11 operational tasks tracked in the task tracker below - owners, due dates, status",
+        "Critical path runs through Hermes-AI-SDR-V3 workflow fix (longest pole)",
+        "HubSpot OAuth scope add (crm.objects.contacts.read) + AE booking link verification + n8n Slack cred resolution"
+      ],
+      "audience": "both"
+    },
+    {
+      "title": "Phase 6 - Live Pilot Launch  /  PENDING - Wednesday June 10, 2026",
+      "bullets_client": [
+        "Day 0 (Wed 6/10): first Play A sequences fire to Bio International + Automate prospect lists",
+        "Day 0 (Wed 6/10): first Play B sequences fire to ACT Expo + EEI exhibitor lists",
+        "Day 1 (Thu 6/11): first hot-reply daily report to Sean + Ian",
+        "Day 7 (Wed 6/17): first weekly metrics readout",
+        "Day 30 (Fri 7/10): mid-pilot review",
+        "Day 60 (Sun 8/9): pilot end review + extension conversation"
+      ],
+      "bullets_internal": [
+        "Day 0 (Wed 6/10): Play A sequences fire (Bio International + Automate prospect lists)",
+        "Day 0 (Wed 6/10): Play B sequences fire (ACT Expo + EEI non-responders / exhibitor lists)",
+        "Day 1 (Thu 6/11): first hot-reply daily report to Sean + Ian",
+        "Day 7 (Wed 6/17): first weekly metrics readout",
+        "Day 30 (Fri 7/10): mid-pilot review",
+        "Day 60 (Sun 8/9): pilot end review + extension contract conversation"
+      ],
+      "audience": "both"
+    }
+  ],
+  "tasks": [
+    {"task": "Exhibitor lists scraped + scored (Bio, Automate, ACT, EEI)", "owner": "SiQ", "due": "Done", "status": "done", "note": "DONE - 3,190 companies analyzed; 40 ICP-fit picked; 134 contacts surfaced", "audience": "both"},
+    {"task": "Verified emails enriched (25 demo batch)", "owner": "SiQ", "due": "Done", "status": "done", "note": "DONE - visible in Romify-Exhibitor-Intel-LiveDemo", "audience": "both"},
+    {"task": "Remaining ~110 contacts enriched", "owner": "SiQ", "due": "Jun 9", "status": "flight", "note": "In flight - queued", "audience": "both"},
+    {"task": "Hermes-AI-SDR-V3 workflow fix (100% errors)", "owner": "SiQ", "due": "Jun 9", "status": "block", "note": "BLOCKER - must fix before any sequence fires; investigation in flight", "audience": "internal"},
+    {"task": "HubSpot OAuth scope add (crm.objects.contacts.read)", "owner": "SiQ", "due": "Jun 9", "status": "flight", "note": "PENDING - add to SiQ Cortex Dashboard app", "audience": "internal"},
+    {"task": "Sean's HubSpot booking link wired to Gage", "owner": "SiQ + Sean", "due": "Jun 9", "status": "flight", "note": "PENDING - verify end-to-end", "audience": "both"},
+    {"task": "Ian's EU HubSpot booking link wired to Gage", "owner": "SiQ + Ian", "due": "Jun 9", "status": "flight", "note": "PENDING - verify end-to-end", "audience": "both"},
+    {"task": "Reply routing rules set in Gage", "owner": "SiQ", "due": "Jun 9", "status": "flight", "note": "PENDING - direct to AE inbox, Megan cc'd", "audience": "both"},
+    {"task": "Sequence copy reviewed by Megan in Romify voice", "owner": "Megan", "due": "Jun 9", "status": "flight", "note": "PENDING - Romify-AISDR-Sequence-Samples drafted", "audience": "both"},
+    {"task": "Suppression list pulled (Romify lost accounts)", "owner": "Megan", "due": "Jun 9", "status": "flight", "note": "PENDING - pull from HubSpot", "audience": "both"},
+    {"task": "Slack alerting wired (#siq-key-accounts -> Romify thread)", "owner": "SiQ", "due": "Jun 9", "status": "flight", "note": "PENDING - needs n8n Slack cred resolved", "audience": "internal"}
+  ],
+  "launchTimeline_client": [
+    "<b>Day 0 (Wed 6/10):</b> First Play A sequences fire to Bio International + Automate prospect lists",
+    "<b>Day 0 (Wed 6/10):</b> First Play B sequences fire to ACT Expo + EEI exhibitor lists",
+    "<b>Day 1 (Thu 6/11):</b> First hot-reply daily report to Sean + Ian",
+    "<b>Day 7 (Wed 6/17):</b> First weekly metrics readout",
+    "<b>Day 30 (Fri 7/10):</b> Mid-pilot review",
+    "<b>Day 60 (Sun 8/9):</b> Pilot end review + extension conversation"
+  ],
+  "launchTimeline_internal": [
+    "<b>Day 0 (Wed 6/10):</b> Play A sequences fire (Bio International + Automate)",
+    "<b>Day 0 (Wed 6/10):</b> Play B sequences fire (ACT Expo + EEI)",
+    "<b>Day 1 (Thu 6/11):</b> First hot-reply daily report to Sean + Ian",
+    "<b>Day 7 (Wed 6/17):</b> First weekly metrics readout",
+    "<b>Day 30 (Fri 7/10):</b> Mid-pilot review",
+    "<b>Day 60 (Sun 8/9):</b> Pilot end review + extension contract conversation"
+  ],
+  "criticalPath_client": [
+    "<b>Mon Jun 8:</b> Final sequence approvals from Megan",
+    "<b>Mon Jun 8:</b> AE booking links confirmed live (Sean + Ian)",
+    "<b>Mon Jun 8:</b> Suppression list pulled from HubSpot",
+    "<b>Tue Jun 9 (AM):</b> Pre-launch standup with Sean + Ian + Megan (~30 min)",
+    "<b>Tue Jun 9 (PM):</b> Readiness check - all systems green",
+    "<b>Wed Jun 10 (9am CT):</b> Pilot launch - first sequences fire"
+  ],
+  "criticalPath_internal": [
+    "<b>Mon Jun 8:</b> Hermes-AI-SDR-V3 fixed + HubSpot scope added + AE booking links verified end-to-end",
+    "<b>Mon Jun 8:</b> Sequence copy approved by Megan; reply routing rules deployed; suppression list loaded; Slack alerts wired",
+    "<b>Tue Jun 9 (AM):</b> Pre-launch standup with Sean + Ian + Megan (~30 min)",
+    "<b>Tue Jun 9 (PM):</b> Go/no-go readiness check - all systems green for 24 consecutive hours",
+    "<b>Wed Jun 10 (9am CT):</b> Pilot launch - first sequences fire"
+  ],
+  "risks": [
+    {"risk": "Sean or Ian out during pilot start week", "likelihood": "low", "impact": "med", "mitigation": "Confirm calendars Mon Jun 8; backup contact identified", "audience": "both"},
+    {"risk": "Lower-than-expected reply rates Week 1", "likelihood": "med", "impact": "med", "mitigation": "Pre-built A/B subject line tests in week 1; iterate based on day 3 data", "audience": "both"},
+    {"risk": "Megan unavailable for sequence sign-off by Jun 9", "likelihood": "low", "impact": "med", "mitigation": "Pre-approved Romify voice patterns; backup approval path", "audience": "both"},
+    {"risk": "Email bounces above 5%", "likelihood": "low", "impact": "low", "mitigation": "Auto-suppression + re-find via alt source; built in", "audience": "both"},
+    {"risk": "Hermes-AI-SDR-V3 not fixed by Jun 9", "likelihood": "med", "impact": "high", "mitigation": "Investigation in flight; if not fixed by Jun 9 EOD, escalate to alternative routing path", "audience": "internal"},
+    {"risk": "HubSpot OAuth scope add not approved", "likelihood": "low", "impact": "med", "mitigation": "Pre-approved in HubSpot dashboard; just needs save", "audience": "internal"}
+  ],
+  "gng_client": [
+    "<b>Both AE booking links</b> accept invites end-to-end",
+    "<b>Sequence copy</b> approved by Megan",
+    "<b>Suppression list</b> loaded",
+    "<b>Reply routing</b> tested with internal dummy reply",
+    "<b>Weekly cadence</b> calendar invite sent to Sean + Ian + Megan"
+  ],
+  "gng_internal": [
+    "<b>Hermes workflow</b> green for 24 consecutive hours",
+    "<b>Both AE booking links</b> accept Gage-initiated invites end-to-end",
+    "<b>Sequence copy</b> approved by Megan",
+    "<b>Suppression list</b> loaded into Gage",
+    "<b>Reply routing</b> tested with internal dummy reply",
+    "<b>Slack alerts</b> firing to #siq-key-accounts",
+    "<b>Weekly cadence</b> calendar invite sent to Sean + Ian + Megan"
+  ],
+  "footer_client": "Companion docs: <b>Romify-Exhibitor-Intel-LiveDemo.html</b> / <b>Romify-GTM-Profile.docx</b> / <b>Romify-List-Strategy.docx</b> / <b>Romify-AISDR-Sequence-Samples.html</b><br>Updated dynamically. Last edit: <span id='last-edit'>-</span>",
+  "footer_internal": "Companion docs: <b>Romify-Exhibitor-Intel-LiveDemo.html</b> / <b>Romify-WorkingSession-Agenda.docx</b> / <b>Romify-Exhibitor-Intel-TalkTrack.docx</b> / <b>Romify-GTM-Profile.docx</b> / <b>Romify-List-Strategy.docx</b><br>Owner Marty Berman, SiQ / Updated via admin edit mode / Last edit: <span id='last-edit'>-</span>",
+  "lastEditedBy": "system",
+  "lastEditedAt": "2026-06-08T13:00:00Z"
+}
