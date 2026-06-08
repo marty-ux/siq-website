@@ -45,6 +45,7 @@
   .gate-card input:focus{border-color:var(--brand-blue)}
   .gate-card button{margin-top:8px;width:100%;font-family:inherit;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:14px 18px;background:var(--brand-orange);color:#fff;border:none;cursor:pointer}
   .gate-card button:hover{background:#E65C00}
+  .gate-card button:disabled{background:var(--text-tertiary);cursor:wait}
   .gate-err{margin-top:12px;font-size:14px;color:var(--block);min-height:20px}
 
   /* Topbar */
@@ -59,10 +60,31 @@
   .topbar-logo{flex:1;display:flex;justify-content:center;align-items:center;min-width:0}
   .topbar-logo .logo-chip{background:#fff;padding:6px 11px;border:1px solid var(--border);display:inline-flex;align-items:center}
   .topbar-logo .logo-chip svg{height:36px;width:auto;display:block}
-  .bar-right{display:flex;align-items:center;gap:12px}
+  .bar-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}
   .toggle{display:inline-flex;border:1px solid var(--border-strong)}
   .toggle button{font-family:inherit;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;padding:9px 14px;background:transparent;color:var(--text-tertiary);border:none;cursor:pointer;transition:all .15s}
   .toggle button.active{background:var(--brand-blue);color:#fff}
+
+  /* View toggle (admin only) */
+  .view-toggle{display:none;border:1px solid var(--brand-orange)}
+  .view-toggle.visible{display:inline-flex}
+  .view-toggle button{font-family:inherit;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:9px 14px;background:transparent;color:var(--brand-orange);border:none;cursor:pointer;transition:all .15s}
+  .view-toggle button:hover{background:var(--edit-highlight)}
+  .view-toggle button.active{background:var(--brand-orange);color:#fff}
+
+  /* Edit-name modal */
+  .edit-modal{position:fixed;inset:0;background:var(--overlay);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:900;padding:24px}
+  .edit-modal.visible{display:flex}
+  .edit-modal .card{background:var(--surface);border:1px solid var(--border-strong);padding:30px;max-width:400px;width:100%}
+  .edit-modal h3{font-size:18px;font-weight:700;margin-bottom:8px}
+  .edit-modal p{font-size:14px;color:var(--text-secondary);margin-bottom:18px}
+  .edit-modal input{width:100%;font-family:inherit;font-size:16px;padding:12px 14px;background:var(--canvas);color:var(--text-primary);border:1px solid var(--border-strong);outline:none;margin-bottom:14px}
+  .edit-modal input:focus{border-color:var(--brand-blue)}
+  .edit-modal .btn-row{display:flex;gap:10px}
+  .edit-modal button{flex:1;font-family:inherit;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:12px 16px;border:none;cursor:pointer}
+  .edit-modal .btn-go{background:var(--brand-orange);color:#fff}
+  .edit-modal .btn-go:hover{background:#E65C00}
+  .edit-modal .btn-cancel{background:transparent;color:var(--text-tertiary);border:1px solid var(--border-strong)}
 
   /* Intro */
   .intro{margin-top:34px;border-left:4px solid var(--brand-orange);padding:6px 0 6px 22px}
@@ -89,7 +111,7 @@
   .pill-block{background:var(--block-tint);color:var(--block)}
   .pill-pending{background:var(--block-tint);color:var(--block)}
   body.edit-mode .pill{cursor:pointer;outline:1px dashed transparent;transition:outline .15s}
-  body.edit-mode .pill:hover{ooutline-color:var(--brand-orange)}
+  body.edit-mode .pill:hover{outline-color:var(--brand-orange)}
 
   /* Phase detail blocks */
   .phase{padding:22px 0;border-bottom:1px dashed var(--border)}
@@ -128,7 +150,6 @@
   body.edit-mode [contenteditable="true"]{outline:1px dashed transparent;padding:2px 4px;margin:-2px -4px;transition:outline .15s,background .15s;border-radius:2px}
   body.edit-mode [contenteditable="true"]:hover{outline-color:var(--brand-orange);background:var(--edit-highlight)}
   body.edit-mode [contenteditable="true"]:focus{outline:1px solid var(--brand-orange);background:var(--edit-highlight)}
-  body.edit-mode input[type="date"]{font-family:inherit;font-size:inherit;color:var(--text-primary);background:var(--surface-2);border:1px solid var(--brand-orange);padding:2px 6px}
   .edit-add-btn{font-family:inherit;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:6px 12px;background:transparent;color:var(--brand-orange);border:1px dashed var(--brand-orange);cursor:pointer;margin-top:8px;display:none}
   body.edit-mode .edit-add-btn{display:inline-block}
   body.edit-mode .edit-add-btn:hover{background:var(--brand-orange);color:#fff}
@@ -165,16 +186,28 @@
 </head>
 <body data-theme="dark">
 
-<!-- ============== GATE (client OR admin) ============== -->
+<!-- ============== GATE ============== -->
 <div class="gate" id="gate">
   <div class="gate-card">
     <div class="gate-client" id="gate-label">CLIENT RUNBOOK</div>
     <h2 id="gate-h2">Enter passphrase to view</h2>
-    <p id="gate-p">This runbook is private. Enter the passphrase shared with you by your SiQ contact.</p>
+    <p id="gate-p">This runbook is private. Enter the passphrase shared with you.</p>
     <input type="password" id="gate-pass" placeholder="Passphrase" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
-    <input type="text" id="gate-editor" placeholder="Your name (for audit log)" style="display:none" autocomplete="off">
     <button id="gate-btn" type="button">Unlock</button>
     <div class="gate-err" id="gate-err">&nbsp;</div>
+  </div>
+</div>
+
+<!-- ============== EDIT-NAME MODAL ============== -->
+<div class="edit-modal" id="edit-modal">
+  <div class="card">
+    <h3>Enable edit mode</h3>
+    <p>Your name will appear in the audit log of every save.</p>
+    <input type="text" id="edit-name-input" placeholder="Your name" autocomplete="off">
+    <div class="btn-row">
+      <button class="btn-cancel" id="edit-cancel" type="button">Cancel</button>
+      <button class="btn-go" id="edit-go" type="button">Start editing</button>
+    </div>
   </div>
 </div>
 
@@ -187,6 +220,11 @@
   </div>
   <div class="topbar-logo" id="topbar-logo"></div>
   <div class="bar-right">
+    <div class="view-toggle" id="view-toggle" role="group" aria-label="View">
+      <button id="v-client" type="button">Client</button>
+      <button id="v-internal" class="active" type="button">Internal</button>
+      <button id="v-edit" type="button">Edit</button>
+    </div>
     <div class="toggle" role="group" aria-label="Theme">
       <button id="t-dark" class="active" type="button">Dark</button>
       <button id="t-light" type="button">Light</button>
@@ -261,23 +299,17 @@
 
 <script>
 /* ============== STATE ============== */
-const ADMIN_PASS_HASH = "c396ec00848e1c04ff30bb9fd924edeb1aae36915f68db30da44b2b2c2f9f6a8";
 let CONFIG = null;
 let ORIGINAL = null;
 let VIEW = 'client';
+let IS_ADMIN = false;
 let EDIT_MODE = false;
 let ADMIN_PASS = null;
 let EDITOR_NAME = null;
 let DIRTY = false;
 const SLUG = (new URL(location.href).searchParams.get('c') || '').toLowerCase().trim();
-const EDIT_REQ = !!new URL(location.href).searchParams.get('edit');
 
 /* ============== UTILS ============== */
-async function sha256(s){
-  const enc = new TextEncoder().encode(s);
-  const buf = await crypto.subtle.digest('SHA-256', enc);
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
-}
 function trackEvent(name, payload){
   try{ window._hsq = window._hsq || []; window._hsq.push(['trackCustomBehavioralEvent', {name, properties: payload}]); } catch(e){}
   try{ window.dataLayer = window.dataLayer || []; window.dataLayer.push({event: name, ...payload}); } catch(e){}
@@ -312,83 +344,122 @@ async function init(){
     document.getElementById('gate-btn').style.display = 'none';
     return;
   }
-  try {
-    const res = await fetch(`/clients/${SLUG}/config.json?t=${Date.now()}`);
-    if (!res.ok) throw new Error('config fetch failed: ' + res.status);
-    CONFIG = await res.json();
-    ORIGINAL = JSON.parse(JSON.stringify(CONFIG));
-  } catch(e) {
-    document.getElementById('gate-label').textContent = 'CLIENT NOT FOUND';
-    document.getElementById('gate-h2').textContent = 'Could not load runbook';
-    document.getElementById('gate-p').textContent = e.message;
-    document.getElementById('gate-pass').style.display = 'none';
-    document.getElementById('gate-btn').style.display = 'none';
-    return;
-  }
-  /* parse view */
-  const url = new URL(location.href);
-  VIEW = (url.searchParams.get('v') === 'internal') ? 'internal' : 'client';
-
-  /* Set gate state */
-  document.getElementById('gate-label').textContent = CONFIG.name.toUpperCase() + (EDIT_REQ ? ' - ADMIN EDIT' : (VIEW === 'internal' ? ' - INTERNAL VIEW' : ' - ONBOARDING RUNBOOK'));
-  if (EDIT_REQ) {
-    document.getElementById('gate-h2').textContent = 'Admin edit mode';
-    document.getElementById('gate-p').textContent = 'Enter the admin passphrase to enable click-to-edit.';
-    document.getElementById('gate-editor').style.display = 'block';
-  }
-
-  /* Logo */
-  document.getElementById('topbar-logo').innerHTML = CONFIG.logo;
-
-  /* View badge */
-  const badge = document.getElementById('view-badge');
-  if (EDIT_REQ) { badge.className = 'view-badge edit'; badge.textContent = 'EDIT MODE'; }
-  else if (VIEW === 'internal') { badge.className = 'view-badge internal'; badge.textContent = 'INTERNAL VIEW'; }
-  else { badge.className = 'view-badge'; badge.textContent = 'CLIENT VIEW'; }
-
-  /* Title */
-  document.title = CONFIG.name + ' - SiQ Client Onboarding Runbook' + (EDIT_REQ ? ' [EDIT]' : '');
-
-  /* Track view */
-  trackEvent(VIEW === 'internal' ? 'siq_internal_runbook_view' : 'client_runbook_view', {client_slug: SLUG, client_name: CONFIG.name});
 
   /* Wire gate */
   const tryUnlock = async () => {
+    const btn = document.getElementById('gate-btn');
+    const errEl = document.getElementById('gate-err');
     const input = document.getElementById('gate-pass').value || '';
-    const hash = await sha256(input);
-    const expected = EDIT_REQ ? ADMIN_PASS_HASH : CONFIG.passHash;
-    if (hash === expected) {
-      if (EDIT_REQ) {
-        const editor = (document.getElementById('gate-editor').value || '').trim();
-        if (!editor) { document.getElementById('gate-err').textContent = 'Enter your name for the audit log.'; return; }
-        ADMIN_PASS = input;
-        EDITOR_NAME = editor;
-        EDIT_MODE = true;
-        document.body.classList.add('edit-mode');
-        VIEW = 'internal'; /* edit mode forces internal view to see all fields */
+    if (!input) { errEl.textContent = 'Enter a passphrase.'; return; }
+    btn.disabled = true;
+    btn.textContent = 'Checking...';
+    errEl.textContent = '';
+    try {
+      const res = await fetch('/api/get-runbook', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({slug: SLUG, passphrase: input})
+      });
+      const j = await res.json();
+      if (j.ok) {
+        CONFIG = j.config;
+        ORIGINAL = JSON.parse(JSON.stringify(CONFIG));
+        IS_ADMIN = !!j.admin;
+        if (IS_ADMIN) {
+          ADMIN_PASS = input;
+          VIEW = 'internal'; /* admin lands on internal */
+        } else {
+          VIEW = 'client';
+        }
+        sessionStorage.setItem('siq-runbook-' + SLUG, JSON.stringify({admin: IS_ADMIN}));
+        reveal();
+      } else {
+        errEl.textContent = j.error === 'invalid passphrase' ? 'Incorrect passphrase. Try again.' : ('Error: ' + j.error);
+        document.getElementById('gate-pass').select();
       }
-      sessionStorage.setItem('siq-runbook-unlocked-' + SLUG + '-' + VIEW, '1');
-      reveal();
-    } else {
-      document.getElementById('gate-err').textContent = 'Incorrect passphrase. Try again.';
-      document.getElementById('gate-pass').select();
+    } catch(e) {
+      errEl.textContent = 'Network error: ' + e.message;
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Unlock';
     }
   };
   document.getElementById('gate-btn').addEventListener('click', tryUnlock);
   document.getElementById('gate-pass').addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
-
-  /* Auto-unlock (not for edit mode - always require fresh pass) */
-  if (!EDIT_REQ && sessionStorage.getItem('siq-runbook-unlocked-' + SLUG + '-' + VIEW) === '1') {
-    reveal();
-  } else {
-    setTimeout(() => document.getElementById('gate-pass').focus(), 50);
-  }
+  setTimeout(() => document.getElementById('gate-pass').focus(), 50);
 }
 
 function reveal(){
   document.getElementById('gate').classList.add('hidden');
   document.getElementById('wrap').style.display = 'block';
-  trackEvent(EDIT_MODE ? 'siq_runbook_edit_unlocked' : 'client_runbook_unlocked', {client_slug: SLUG, client_name: CONFIG.name, editor: EDITOR_NAME || null});
+  document.getElementById('topbar-logo').innerHTML = CONFIG.logo || '';
+  document.title = CONFIG.name + ' - SiQ Client Onboarding Runbook';
+
+  /* Show view toggle if admin */
+  if (IS_ADMIN) {
+    document.getElementById('view-toggle').classList.add('visible');
+    setActiveToggleButton();
+  }
+
+  trackEvent(IS_ADMIN ? 'siq_internal_runbook_view' : 'client_runbook_view', {client_slug: SLUG, client_name: CONFIG.name});
+  render();
+}
+
+/* ============== VIEW TOGGLE ============== */
+function setActiveToggleButton(){
+  ['v-client','v-internal','v-edit'].forEach(id => document.getElementById(id).classList.remove('active'));
+  const map = {client:'v-client', internal:'v-internal'};
+  if (EDIT_MODE) document.getElementById('v-edit').classList.add('active');
+  else if (map[VIEW]) document.getElementById(map[VIEW]).classList.add('active');
+  /* Badge */
+  const badge = document.getElementById('view-badge');
+  if (EDIT_MODE) { badge.className = 'view-badge edit'; badge.textContent = 'EDIT MODE'; }
+  else if (VIEW === 'internal') { badge.className = 'view-badge internal'; badge.textContent = 'INTERNAL VIEW'; }
+  else { badge.className = 'view-badge'; badge.textContent = 'CLIENT VIEW'; }
+}
+
+function setView(v){
+  if (!IS_ADMIN) return; /* only admin can toggle */
+  if (DIRTY && !confirm('You have unsaved changes. Switch view and discard them?')) return;
+  EDIT_MODE = false;
+  document.body.classList.remove('edit-mode');
+  document.getElementById('savebar').classList.remove('visible');
+  CONFIG = JSON.parse(JSON.stringify(ORIGINAL));
+  DIRTY = false;
+  VIEW = v;
+  setActiveToggleButton();
+  render();
+}
+
+function enterEditMode(){
+  if (!IS_ADMIN) return;
+  if (EDITOR_NAME) {
+    /* Already have editor name - just toggle */
+    EDIT_MODE = true;
+    VIEW = 'internal';
+    document.body.classList.add('edit-mode');
+    setActiveToggleButton();
+    render();
+    return;
+  }
+  /* Show name modal */
+  document.getElementById('edit-modal').classList.add('visible');
+  setTimeout(() => document.getElementById('edit-name-input').focus(), 50);
+}
+
+function confirmEditMode(){
+  const name = (document.getElementById('edit-name-input').value || '').trim();
+  if (!name) {
+    document.getElementById('edit-name-input').focus();
+    return;
+  }
+  EDITOR_NAME = name;
+  document.getElementById('edit-modal').classList.remove('visible');
+  EDIT_MODE = true;
+  VIEW = 'internal';
+  document.body.classList.add('edit-mode');
+  setActiveToggleButton();
+  trackEvent('siq_runbook_edit_unlocked', {client_slug: SLUG, client_name: CONFIG.name, editor: EDITOR_NAME});
   render();
 }
 
@@ -400,8 +471,8 @@ function render(){
   document.getElementById('i-start').textContent = CONFIG.pilotStart;
   document.getElementById('i-asof').textContent = CONFIG.asOf;
   document.getElementById('i-owner').textContent = CONFIG.owner;
-  document.getElementById('i-status').textContent = (VIEW === 'internal') ? CONFIG.statusLabel_internal : CONFIG.statusLabel_client;
-  document.getElementById('gng-when').textContent = (VIEW === 'internal') ? CONFIG.gngWhen_internal : CONFIG.gngWhen_client;
+  document.getElementById('i-status').textContent = (VIEW === 'internal') ? (CONFIG.statusLabel_internal || CONFIG.statusLabel_client) : CONFIG.statusLabel_client;
+  document.getElementById('gng-when').textContent = (VIEW === 'internal') ? (CONFIG.gngWhen_internal || CONFIG.gngWhen_client) : CONFIG.gngWhen_client;
 
   /* Task table title differs */
   if (VIEW === 'client') {
@@ -418,14 +489,14 @@ function render(){
     return `<span class="pill pill-${s}" data-status="${s}" data-jsonpath="phases.STATUS_IDX">${map[s] || 'Pending'}</span>`;
   };
   const phaseRows = CONFIG.phases.filter(p => audienceMatch(p.audience)).map((p, i) => {
-    const art = (VIEW === 'internal') ? p.artifact_internal : p.artifact_client;
+    const art = (VIEW === 'internal' && p.artifact_internal) ? p.artifact_internal : p.artifact_client;
     return `<tr data-phase-idx="${i}"><td class="num">${p.num}</td><td class="title" data-edit="text" data-path="phases.${i}.title">${p.title}</td><td>${pillFor(p.status).replace('STATUS_IDX', i)}</td><td data-edit="text" data-path="phases.${i}.artifact_${VIEW}">${art}</td></tr>`;
   }).join('');
   document.querySelector('#phase-overview tbody').innerHTML = phaseRows;
 
   /* PHASE DETAILS */
   document.getElementById('phase-details').innerHTML = CONFIG.phaseDetails.filter(p => audienceMatch(p.audience)).map((p, i) => {
-    const bullets = (VIEW === 'internal') ? p.bullets_internal : p.bullets_client;
+    const bullets = (VIEW === 'internal' && p.bullets_internal) ? p.bullets_internal : p.bullets_client;
     const bulletItems = bullets.map((b, bi) => `<li data-edit="html" data-path="phaseDetails.${i}.bullets_${VIEW}.${bi}">${b}${EDIT_MODE ? ' <button class="edit-remove-btn" data-action="rm-bullet" data-i="' + i + '" data-bi="' + bi + '">x</button>' : ''}</li>`).join('');
     return `<div class="phase"><div class="phase-h"><h3 data-edit="text" data-path="phaseDetails.${i}.title">${p.title}</h3></div><ul>${bulletItems}</ul>${EDIT_MODE ? '<button class="edit-add-btn" data-action="add-bullet" data-i="' + i + '">+ add bullet</button>' : ''}</div>`;
   }).join('');
@@ -444,11 +515,11 @@ function render(){
   document.querySelector('#task-table tbody').innerHTML = taskRows;
 
   /* LAUNCH TIMELINE */
-  const launchItems = (VIEW === 'internal' ? CONFIG.launchTimeline_internal : CONFIG.launchTimeline_client);
+  const launchItems = (VIEW === 'internal' && CONFIG.launchTimeline_internal) ? CONFIG.launchTimeline_internal : CONFIG.launchTimeline_client;
   document.getElementById('launch-timeline').innerHTML = launchItems.map((t, i) => `<li data-edit="html" data-path="launchTimeline_${VIEW}.${i}">${t}${EDIT_MODE ? ' <button class="edit-remove-btn" data-action="rm-launch" data-i="' + i + '">x</button>' : ''}</li>`).join('');
 
   /* CRITICAL PATH */
-  const critItems = (VIEW === 'internal' ? CONFIG.criticalPath_internal : CONFIG.criticalPath_client);
+  const critItems = (VIEW === 'internal' && CONFIG.criticalPath_internal) ? CONFIG.criticalPath_internal : CONFIG.criticalPath_client;
   document.getElementById('crit-path').innerHTML = critItems.map((t, i) => `<li data-edit="html" data-path="criticalPath_${VIEW}.${i}">${t}${EDIT_MODE ? ' <button class="edit-remove-btn" data-action="rm-crit" data-i="' + i + '">x</button>' : ''}</li>`).join('');
 
   /* RISKS */
@@ -464,16 +535,12 @@ function render(){
   }).join('');
 
   /* GO/NO-GO */
-  const gngItems = (VIEW === 'internal' ? CONFIG.gng_internal : CONFIG.gng_client);
+  const gngItems = (VIEW === 'internal' && CONFIG.gng_internal) ? CONFIG.gng_internal : CONFIG.gng_client;
   document.getElementById('gng-list').innerHTML = gngItems.map((t, i) => `<li data-edit="html" data-path="gng_${VIEW}.${i}">${t}${EDIT_MODE ? ' <button class="edit-remove-btn" data-action="rm-gng" data-i="' + i + '">x</button>' : ''}</li>`).join('');
 
   /* FOOTER */
-  const footerText = (VIEW === 'internal' ? CONFIG.footer_internal : CONFIG.footer_client);
+  const footerText = (VIEW === 'internal' && CONFIG.footer_internal) ? CONFIG.footer_internal : CONFIG.footer_client;
   document.getElementById('footer').innerHTML = footerText;
-  const lastEditEl = document.getElementById('last-edit');
-  if (lastEditEl && CONFIG.lastEditedAt) {
-    lastEditEl.textContent = CONFIG.lastEditedAt + (CONFIG.lastEditedBy ? (' by ' + CONFIG.lastEditedBy) : '');
-  }
 
   /* Wire edit affordances if in edit mode */
   if (EDIT_MODE) wireEditAffordances();
@@ -481,13 +548,11 @@ function render(){
 
 /* ============== EDIT AFFORDANCES ============== */
 function wireEditAffordances(){
-  /* Make text fields contenteditable */
   document.querySelectorAll('[data-edit="text"], [data-edit="html"]').forEach(el => {
     el.setAttribute('contenteditable', 'true');
     el.addEventListener('input', () => { el.dataset.dirty = '1'; updatePath(el); markDirty(); });
   });
 
-  /* Meta fields */
   ['pilotStart','asOf','owner'].forEach(k => {
     const el = document.querySelector(`[data-jsonpath="${k}"]`);
     if (el) {
@@ -496,7 +561,6 @@ function wireEditAffordances(){
     }
   });
 
-  /* Status pills cycle */
   document.querySelectorAll('[data-jsonpath][data-status]').forEach(el => {
     el.addEventListener('click', () => {
       const cur = el.dataset.status;
@@ -508,11 +572,10 @@ function wireEditAffordances(){
       setByPath(CONFIG, path, next);
       el.dataset.dirty = '1';
       markDirty();
-      render(); /* re-render to update colors/labels */
+      render();
     });
   });
 
-  /* Add buttons */
   document.getElementById('add-task-btn').addEventListener('click', () => {
     CONFIG.tasks.push({task: 'New task', owner: 'SiQ', due: 'TBD', status: 'pending', note: '', audience: 'both'});
     markDirty(); render();
@@ -522,7 +585,6 @@ function wireEditAffordances(){
     markDirty(); render();
   });
 
-  /* Remove buttons */
   document.querySelectorAll('[data-action]').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -573,7 +635,6 @@ document.getElementById('save-btn').addEventListener('click', async () => {
   const btn = document.getElementById('save-btn');
   btn.disabled = true;
   btn.textContent = 'Saving...';
-  /* Final pass: refresh editable text fields from DOM */
   document.querySelectorAll('[data-edit="text"]').forEach(el => { if (el.dataset.dirty) updatePath(el); });
   document.querySelectorAll('[data-edit="html"]').forEach(el => { if (el.dataset.dirty) updatePath(el); });
   CONFIG.lastEditedBy = EDITOR_NAME;
@@ -610,6 +671,14 @@ document.getElementById('discard-btn').addEventListener('click', () => {
   document.getElementById('savebar').classList.remove('visible');
   render();
 });
+
+/* ============== TOGGLE WIRING ============== */
+document.getElementById('v-client').addEventListener('click', () => setView('client'));
+document.getElementById('v-internal').addEventListener('click', () => setView('internal'));
+document.getElementById('v-edit').addEventListener('click', enterEditMode);
+document.getElementById('edit-go').addEventListener('click', confirmEditMode);
+document.getElementById('edit-cancel').addEventListener('click', () => document.getElementById('edit-modal').classList.remove('visible'));
+document.getElementById('edit-name-input').addEventListener('keydown', e => { if (e.key === 'Enter') confirmEditMode(); });
 
 /* THEME */
 const setTheme = (t) => {
