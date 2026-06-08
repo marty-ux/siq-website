@@ -15,5 +15,11 @@
       "destination": "/client-intake.html",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/clients/:slug/config.json",
+      "destination": "/api/blocked"
+    }
   ]
 }
