@@ -16,14 +16,14 @@ We are a GTM Orchestration System, not a CRM, not an AI SDR, and not a sales eng
 ## Product
 
 ### SiQ Cortex
-The GTM Orchestration System. SiQ Cortex unifies signals from 80+ tool connectors across 15 categories (CRM, intent platforms, conversation intelligence, sales engagement, marketing automation, AI SDR, partner ecosystems, product analytics, and more) and uses the GTM Signal Matrix™ to score and prioritize accounts and contacts.
+The GTM Orchestration System. SiQ Cortex unifies signals from 200+ tool connectors across 30+ categories (CRM, intent platforms, conversation intelligence, sales engagement, marketing automation, AI SDR, partner ecosystems, product analytics, and more) and uses the GTM Signal Matrix™ to score and prioritize accounts and contacts.
 
 ### GTM Signal Matrix™
 The proprietary scoring framework that combines three input dimensions — intent signals, engagement behavior, and ICP fit — into a composite score. The score is what tells the customer's revenue team who to focus on, why now, and what play to run. The exact weighting and methodology are proprietary; the inputs are transparent.
 
 ## Six Core Differentiators
 
-1. **GTM Marketplace** — 80+ tool connectors across 15 categories. Plug an entire GTM stack in under an hour through standard read-only OAuth.
+1. **GTM Marketplace** — 200+ tool connectors across 30+ categories, curated from a 15,000+ tool martech universe (chiefmartec 2025). Plug an entire GTM stack in under an hour through standard read-only OAuth.
 2. **Stakeholder Intelligence Engine** — Detects buying committee roles from conversation intelligence, tracks objections per stakeholder, renders a Stakeholder Politics Map for every deal, generates pre-meeting briefs.
 3. **Buying Committee Health Score** — Composite Green/Yellow/Red score on every deal card.
 4. **CRM Fidelity Automation** — Auto-detects deal stage drift, missing follow-ups, stale close dates, blocker signals. The only GTM OS that keeps the customer's CRM honest.
