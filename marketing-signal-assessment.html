@@ -112,14 +112,21 @@ footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertia
   <div class="section">
     <div class="section-head"><div class="section-number">1</div><div class="section-title">Demand Health Report</div></div>
     <div class="section-lead">Composite across six dimensions of the Marketing Signal Matrix. Two of six are healthy; the drag is data fidelity and brand visibility in AI search.</div>
-    <div class="shr">
+    <div class="shr show-bad">
       <div>
         <div class="score-big a">55</div>
         <div class="score-tag a" style="background:var(--caution-soft)">Amber — six dimensions</div>
       </div>
       <div class="section-lead" style="margin:0">A mid-band demand engine: the funnel converts well, but a third of the database has gone dark, a quarter of pipeline is unattributed, and Acme is nearly invisible in AI search — the fastest-growing place buyers start.</div>
     </div>
-    <div class="dim-grid">
+    <div class="shr show-good">
+      <div>
+        <div class="score-big g">80</div>
+        <div class="score-tag g" style="background:var(--success-soft)">Green — projected, 90 days</div>
+      </div>
+      <div class="section-lead" style="margin:0">Modeled after 90 days of Cortex: the dark database reactivated, source enforced so pipeline is traceable, MQL quality gated, and AI-search visibility monitored and climbing. Every lift is bottom-up from the plays below, not a top-down multiple.</div>
+    </div>
+    <div class="dim-grid show-bad">
       <div class="dim"><div class="dim-top"><div class="dim-name">Demand health</div><div class="dim-score a">54</div></div><div class="bar"><i class="a" style="width:54%;background:var(--caution)"></i></div><div class="dim-note">MQL&rarr;SQL acceptance 44% on 2,700 MQLs. Volume is there; quality is mid.</div><div class="dim-wt">Weight 20%</div></div>
       <div class="dim"><div class="dim-top"><div class="dim-name">Funnel conversion</div><div class="dim-score g">76</div></div><div class="bar"><i style="width:76%;background:var(--success)"></i></div><div class="dim-note">SQL&rarr;customer 28%; MQL&rarr;SQL median 24 days. The engine moves well once qualified.</div><div class="dim-wt">Weight 20%</div></div>
       <div class="dim"><div class="dim-top"><div class="dim-name">Attribution fidelity</div><div class="dim-score a">64</div></div><div class="bar"><i style="width:64%;background:var(--caution)"></i></div><div class="dim-note">74% of pipeline traceable to a source. The other 26% is spend flying blind.</div><div class="dim-wt">Weight 20%</div></div>
@@ -127,9 +134,21 @@ footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertia
       <div class="dim"><div class="dim-top"><div class="dim-name">Brand visibility (AEO/GEO)</div><div class="dim-score r">34</div></div><div class="bar"><i style="width:34%;background:var(--danger)"></i></div><div class="dim-note">Surfaces in AI-search answers for only 2 of 12 category prompts. Near-invisible in ChatGPT and Perplexity.</div><div class="dim-wt">Weight 15%</div></div>
       <div class="dim"><div class="dim-top"><div class="dim-name">ABM / committee coverage</div><div class="dim-score a">55</div></div><div class="bar"><i style="width:55%;background:var(--caution)"></i></div><div class="dim-note">41% of target accounts have multi-contact coverage; the rest run single-threaded.</div><div class="dim-wt">Weight 10%</div></div>
     </div>
-    <div class="hero">
+    <div class="dim-grid show-good">
+      <div class="dim"><div class="dim-top"><div class="dim-name">Demand health</div><div class="dim-score g">74</div></div><div class="bar"><i style="width:74%;background:var(--success)"></i></div><div class="dim-note">MQL quality gate lifts acceptance; sales sees only the leads that convert.</div><div class="dim-wt">Weight 20%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">Funnel conversion</div><div class="dim-score g">84</div></div><div class="bar"><i style="width:84%;background:var(--success)"></i></div><div class="dim-note">Velocity held, qualified flow up as top-of-funnel noise drops.</div><div class="dim-wt">Weight 20%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">Attribution fidelity</div><div class="dim-score g">88</div></div><div class="bar"><i style="width:88%;background:var(--success)"></i></div><div class="dim-note">Source enforced on every record — pipeline steerable, spend defensible.</div><div class="dim-wt">Weight 20%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">Marketing data fidelity</div><div class="dim-score g">82</div></div><div class="bar"><i style="width:82%;background:var(--success)"></i></div><div class="dim-note">Dark database reactivated on a cadence; decay held under 10%.</div><div class="dim-wt">Weight 15%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">Brand visibility (AEO/GEO)</div><div class="dim-score a">68</div></div><div class="bar"><i style="width:68%;background:var(--caution)"></i></div><div class="dim-note">Monitored across all AI engines; share of voice climbing on the priority prompts.</div><div class="dim-wt">Weight 15%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">ABM / committee coverage</div><div class="dim-score g">80</div></div><div class="bar"><i style="width:80%;background:var(--success)"></i></div><div class="dim-note">Committee-fill plays running on the single-threaded accounts.</div><div class="dim-wt">Weight 10%</div></div>
+    </div>
+    <div class="hero show-bad">
       <div class="l">The hero finding — brand visibility in AI search</div>
       <div style="margin-top:8px;font-size:14px;color:var(--text-secondary)">Buyers increasingly start in ChatGPT, Perplexity, Gemini, and Claude. Acme shows up in <strong style="color:var(--text-primary)">2 of 12</strong> category prompts — a demand channel that barely exists in the stack, and a gap no competitor is measuring. This is where the assessment opens eyes.</div>
+    </div>
+    <div class="hero show-good">
+      <div class="l">The hero, now a managed channel</div>
+      <div style="margin-top:8px;font-size:14px;color:var(--text-secondary)">Acme's share of voice across ChatGPT, Perplexity, Gemini, and Claude is tracked weekly and climbing as the content plays land. The gap nobody else measures is now instrumented and moving.</div>
     </div>
   </div>
 
