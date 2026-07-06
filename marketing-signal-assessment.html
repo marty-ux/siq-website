@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demand Health Report — Acme Corp (Sample) | Scalient IQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#0073E6;--orange:#FF6600;--dark:#0A1628;--danger:#EF4444;--danger-soft:#2a1416;--caution:#FBBF24;--caution-soft:#2a2410;--success:#22C55E;--success-soft:#0f2417;}
+body[data-theme="dark"]{--bg:#0A1628;--surface:#0F1E35;--surface2:#132540;--border:#1F3352;--text-primary:#F5F7FA;--text-secondary:#B8C5D6;--text-tertiary:#8FA3BF;}
+body[data-theme="light"]{--bg:#F8FAFC;--surface:#FFFFFF;--surface2:#F1F5F9;--border:#E2E8F0;--text-primary:#0A1628;--text-secondary:#475569;--text-tertiary:#94A3B8;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text-primary);line-height:1.55;padding:0 20px 60px;transition:background .2s}
+.wrap{max-width:960px;margin:0 auto}
+.head{padding:28px 0 6px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px}
+.brand{font-size:22px;font-weight:700;color:var(--blue)}.brand span{color:var(--orange)}
+.prepared{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-tertiary);margin:14px 0 4px}
+.title{font-size:34px;font-weight:700;letter-spacing:-.6px;margin:2px 0 8px}
+.subtitle{color:var(--text-secondary);font-size:15px;max-width:620px}
+.metarow{display:flex;gap:34px;flex-wrap:wrap;margin:22px 0 6px;padding-top:16px;border-top:1px solid var(--border)}
+.meta-item .label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-tertiary)}
+.meta-item .value{font-size:15px;font-weight:500;margin-top:3px}
+.toggles{display:flex;gap:10px;flex-wrap:wrap}
+.toggle{display:inline-flex;border:1px solid var(--border);border-radius:0;overflow:hidden}
+.toggle button{background:var(--surface);color:var(--text-secondary);border:none;padding:8px 13px;font-family:inherit;font-size:12px;font-weight:500;cursor:pointer}
+.toggle button.active{background:var(--blue);color:#fff}
+body[data-assessment="bad"] .show-good{display:none!important}
+body[data-assessment="good"] .show-bad{display:none!important}
+body[data-assessment="bad"] .good-only{display:none!important}
+body[data-assessment="good"] .bad-only{display:none!important}
+.sample{margin:16px 0 4px;padding:8px 12px;font-size:12px;color:var(--caution);background:var(--caution-soft);border:1px solid var(--caution)}
+.banner{margin:16px 0 6px;padding:11px 14px;font-size:13px;border:1px solid}
+.banner.show-bad{color:var(--danger);background:var(--danger-soft);border-color:var(--danger)}
+.banner.show-good{color:var(--success);background:var(--success-soft);border-color:var(--success)}
+.section{padding:26px 0;border-top:1px solid var(--border)}
+.section-head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.section-number{width:26px;height:26px;background:var(--orange);color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
+.section-title{font-size:21px;font-weight:600}
+.section-lead{color:var(--text-secondary);font-size:14px;margin-bottom:16px;max-width:680px}
+.shr{display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.score-big{font-size:60px;font-weight:700;line-height:1}
+.score-tag{display:inline-block;font-size:12px;font-weight:600;padding:3px 10px;margin-top:8px}
+.dim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.dim{background:var(--surface);border:1px solid var(--border);padding:14px}
+.dim-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.dim-name{font-weight:600;font-size:15px}
+.dim-score{font-size:22px;font-weight:700}
+.dim-note{color:var(--text-secondary);font-size:13px;margin-top:7px;line-height:1.5}
+.dim-wt{font-size:11px;color:var(--text-tertiary)}
+.g{color:var(--success)}.a{color:var(--caution)}.r{color:var(--danger)}
+.bar{height:5px;background:var(--surface2);margin-top:10px;position:relative}
+.bar i{position:absolute;left:0;top:0;bottom:0;display:block}
+.hero{background:var(--surface);border:1px solid var(--orange);border-left:4px solid var(--orange);padding:18px;margin-top:16px}
+.hero .l{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--orange);font-weight:600}
+.bn{background:var(--surface);border:1px solid var(--border);padding:16px;margin-bottom:14px}
+.bn .l{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:6px}
+.big-danger{color:var(--danger);font-size:26px;font-weight:700}
+.uplift{background:var(--surface);border:1px solid var(--orange);border-left:4px solid var(--orange);padding:20px;margin-bottom:14px}
+.uplift .v{font-size:32px;font-weight:700;letter-spacing:-.5px}
+.leak{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);padding:13px;margin-bottom:8px}
+.leak-rank{color:var(--orange);font-weight:700;font-size:15px;min-width:20px}
+.leak-name{font-weight:600;font-size:14px}
+.leak-cause{color:var(--text-secondary);font-size:13px;margin-top:3px}
+.leak-$ {margin-left:auto;color:var(--danger);font-weight:600;font-size:13px;white-space:nowrap}
+.fid-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.fid{background:var(--surface);border:1px solid var(--border);padding:14px}
+.fid-label{font-size:12px;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:.5px}
+.fid-val{font-size:28px;font-weight:700;color:var(--danger);margin-top:4px}
+.fid-note{font-size:12px;color:var(--text-secondary);margin-top:6px}
+.note-strip{background:var(--surface2);border:1px solid var(--border);padding:12px 14px;font-size:13px;color:var(--text-secondary);margin-top:12px}
+ul.plays{list-style:none;margin-top:8px}
+ul.plays li{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--blue);padding:11px 13px;margin-bottom:8px;font-size:13px}
+.cta{background:var(--surface);border:1px solid var(--orange);padding:22px;margin-top:16px;text-align:center}
+.cta a{display:inline-block;margin-top:12px;background:var(--orange);color:#fff;text-decoration:none;padding:11px 22px;font-weight:600;text-transform:uppercase;font-size:13px;letter-spacing:.5px}
+footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertiary);font-size:12px;margin-top:8px}
+</style>
+</head>
+<body data-theme="dark" data-assessment="bad">
+<div class="wrap">
+  <div class="head">
+    <div>
+      <div class="brand">Scalient<span>IQ</span></div>
+      <div class="prepared">Marketing Signal Assessment · Prepared for Acme Corp</div>
+    </div>
+    <div class="toggles">
+      <div class="toggle" role="tablist" aria-label="Assessment state">
+        <button class="active" data-assess-btn="bad">Pre-assessment</button>
+        <button data-assess-btn="good">Post-assessment</button>
+      </div>
+      <div class="toggle" role="tablist" aria-label="Theme">
+        <button class="active" data-theme-btn="dark">Dark</button>
+        <button data-theme-btn="light">Light</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="title">Demand Health Report</div>
+  <div class="subtitle">A marketing-lens GTM Signal Assessment, read read-only against Acme's marketing automation and CRM. This is a sample built on synthetic data to show what your own report looks like.</div>
+
+  <div class="metarow">
+    <div class="meta-item"><div class="label">Records analyzed</div><div class="value">8,500 contacts · 620 deals</div></div>
+    <div class="meta-item"><div class="label">MQL → SQL</div><div class="value">44% acceptance</div></div>
+    <div class="meta-item"><div class="label">Stack</div><div class="value">HubSpot (read-only)</div></div>
+    <div class="meta-item"><div class="label">Report date</div><div class="value">July 6, 2026</div></div>
+  </div>
+
+  <div class="sample">Sample report · Acme Corp and all figures are synthetic, for demonstration only.</div>
+  <div class="banner show-bad">&#9888; Pre-assessment view — current state of Acme's demand engine. Toggle to "Post-assessment" to see what Cortex orchestration delivers.</div>
+  <div class="banner show-good">&#10003; Post-assessment projection — Cortex live for 90 days, modeled against Acme's own numbers. Toggle back to see today's gaps.</div>
+
+  <div class="section">
+    <div class="section-head"><div class="section-number">1</div><div class="section-title">Demand Health Report</div></div>
+    <div class="section-lead">Composite across six dimensions of the Marketing Signal Matrix. Two of six are healthy; the drag is data fidelity and brand visibility in AI search.</div>
+    <div class="shr">
+      <div>
+        <div class="score-big a">55</div>
+        <div class="score-tag a" style="background:var(--caution-soft)">Amber — six dimensions</div>
+      </div>
+      <div class="section-lead" style="margin:0">A mid-band demand engine: the funnel converts well, but a third of the database has gone dark, a quarter of pipeline is unattributed, and Acme is nearly invisible in AI search — the fastest-growing place buyers start.</div>
+    </div>
+    <div class="dim-grid">
+      <div class="dim"><div class="dim-top"><div class="dim-name">Demand health</div><div class="dim-score a">54</div></div><div class="bar"><i class="a" style="width:54%;background:var(--caution)"></i></div><div class="dim-note">MQL&rarr;SQL acceptance 44% on 2,700 MQLs. Volume is there; quality is mid.</div><div class="dim-wt">Weight 20%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">Funnel conversion</div><div class="dim-score g">76</div></div><div class="bar"><i style="width:76%;background:var(--success)"></i></div><div class="dim-note">SQL&rarr;customer 28%; MQL&rarr;SQL median 24 days. The engine moves well once qualified.</div><div class="dim-wt">Weight 20%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">Attribution fidelity</div><div class="dim-score a">64</div></div><div class="bar"><i style="width:64%;background:var(--caution)"></i></div><div class="dim-note">74% of pipeline traceable to a source. The other 26% is spend flying blind.</div><div class="dim-wt">Weight 20%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">Marketing data fidelity</div><div class="dim-score r">39</div></div><div class="bar"><i style="width:39%;background:var(--danger)"></i></div><div class="dim-note">34% database decay (no activity 180d+); 27% of records missing a source.</div><div class="dim-wt">Weight 15%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">Brand visibility (AEO/GEO)</div><div class="dim-score r">34</div></div><div class="bar"><i style="width:34%;background:var(--danger)"></i></div><div class="dim-note">Surfaces in AI-search answers for only 2 of 12 category prompts. Near-invisible in ChatGPT and Perplexity.</div><div class="dim-wt">Weight 15%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">ABM / committee coverage</div><div class="dim-score a">55</div></div><div class="bar"><i style="width:55%;background:var(--caution)"></i></div><div class="dim-note">41% of target accounts have multi-contact coverage; the rest run single-threaded.</div><div class="dim-wt">Weight 10%</div></div>
+    </div>
+    <div class="hero">
+      <div class="l">The hero finding — brand visibility in AI search</div>
+      <div style="margin-top:8px;font-size:14px;color:var(--text-secondary)">Buyers increasingly start in ChatGPT, Perplexity, Gemini, and Claude. Acme shows up in <strong style="color:var(--text-primary)">2 of 12</strong> category prompts — a demand channel that barely exists in the stack, and a gap no competitor is measuring. This is where the assessment opens eyes.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="section-number">2</div><div class="section-title">Wasted Spend &amp; Unattributed Pipeline</div></div>
+    <div class="section-lead show-bad">Current-state dollars flying blind, quantified from Acme's live pipeline.</div>
+    <div class="section-lead show-good">What tightening attribution and reactivating the database is worth, modeled at Acme's own conversion rates.</div>
+    <div class="bn show-bad"><div class="l">Quantified exposure — today</div><div><span class="big-danger">$3.1M unattributed · 2,890 contacts gone dark</span><br><span style="color:var(--text-secondary);font-size:14px">26% of the $11.98M open pipeline can't be traced to a source, so budget can't be steered. And 34% of the database (2,890 contacts) has had no activity in 180+ days — demand you already paid to create, now decaying.</span></div></div>
+    <div class="uplift show-good"><div class="l" style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--orange);font-weight:600">Attributable uplift — year 1 (modeled)</div><div class="v">$410K–$620K recovered</div><div style="color:var(--text-secondary);font-size:13px;margin-top:6px">Reactivating 20–30% of the dark database at Acme's 28% SQL&rarr;customer rate, plus reallocating the newly-attributed spend. Bottom-up from the plays below.</div></div>
+    <div class="note-strip"><strong>Benchmark.</strong> Gartner's 2025 survey puts martech utilization at 49% — Acme is leaving demand on the table it already owns. Cortex sits above the stack to work it.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="section-number">3</div><div class="section-title">Top 5 Signal Leaks</div></div>
+    <div class="section-lead">Ranked by dollars and risk. Each maps to a play in the Play Book.</div>
+    <div class="leak"><div class="leak-rank">1</div><div><div class="leak-name">Invisible in AI search</div><div class="leak-cause">2 of 12 category prompts return Acme. Buyers researching in ChatGPT/Perplexity never see you.</div></div><div class="leak-$">demand channel dark</div></div>
+    <div class="leak"><div class="leak-rank">2</div><div><div class="leak-name">Database decay</div><div class="leak-cause">2,890 contacts (34%) cold 180d+. Paid-for demand rotting in the CRM.</div></div><div class="leak-$">$ sunk</div></div>
+    <div class="leak"><div class="leak-rank">3</div><div><div class="leak-name">Unattributed pipeline</div><div class="leak-cause">$3.1M of open pipeline with no traceable source — spend steered on guesswork.</div></div><div class="leak-$">$3.1M blind</div></div>
+    <div class="leak"><div class="leak-rank">4</div><div><div class="leak-name">MQL quality gap</div><div class="leak-cause">Only 44% of MQLs are accepted as SQLs — over half are noise sales rejects.</div></div><div class="leak-$">56% rejected</div></div>
+    <div class="leak"><div class="leak-rank">5</div><div><div class="leak-name">Single-threaded accounts</div><div class="leak-cause">59% of target accounts run on one contact — no committee coverage.</div></div><div class="leak-$">59% exposed</div></div>
+  </div>
+
+  <div class="section bad-only">
+    <div class="section-head"><div class="section-number">4</div><div class="section-title">Play Book — Not Running</div></div>
+    <div class="section-lead">No Cortex plays orchestrating against Acme's stack today. The dark database isn't worked, AI-search visibility isn't tracked, and attribution gaps compound weekly.</div>
+  </div>
+  <div class="section good-only">
+    <div class="section-head"><div class="section-number">4</div><div class="section-title">Play Book</div></div>
+    <div class="section-lead">The plays Cortex runs continuously against Acme's stack. High-stakes actions require human approval (HITL); nurture runs on pre-approved guardrails.</div>
+    <ul class="plays">
+      <li><strong>AI-search visibility monitor.</strong> Track share of voice across ChatGPT/Perplexity/Gemini/Claude on 12 category prompts; alert on movement; feed the content team the gaps.</li>
+      <li><strong>Database reactivation.</strong> Work the 2,890 dark contacts on a cadence, prioritized by fit and past intent.</li>
+      <li><strong>Attribution repair.</strong> Backfill and enforce source on every new record so pipeline is steerable.</li>
+      <li><strong>MQL quality gate.</strong> Score before hand-off so sales only sees the 44% that convert.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="section-number">5</div><div class="section-title">ABM Buying-Committee Coverage</div></div>
+    <div class="section-lead">Which target accounts have air cover across the committee versus which run single-threaded.</div>
+    <div class="bn"><div class="l">Coverage today</div><div><span class="big-danger">41% multi-threaded</span><br><span style="color:var(--text-secondary);font-size:14px">Only 41% of target accounts have more than one engaged contact. The rest hinge on a single person — the deal dies if they leave. Cortex flags single-threaded accounts and queues committee-fill plays.</span></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="section-number">6</div><div class="section-title">Marketing Data Fidelity Diagnostic</div></div>
+    <div class="section-lead show-bad">Hygiene today — every number is demand leaking or spend flying blind.</div>
+    <div class="section-lead show-good">Hygiene after 90 days of Fidelity Automation.</div>
+    <div class="fid-grid">
+      <div class="fid"><div class="fid-label">Database decay</div><div class="fid-val">34%<span class="show-good" style="color:var(--success);font-size:15px"> &rarr; &lt;10%</span></div><div class="fid-note">2,890 contacts with no activity in 180+ days.</div></div>
+      <div class="fid"><div class="fid-label">Records missing source</div><div class="fid-val">27%<span class="show-good" style="color:var(--success);font-size:15px"> &rarr; &lt;5%</span></div><div class="fid-note">Source enforced on creation, backfilled on the rest.</div></div>
+      <div class="fid"><div class="fid-label">Unattributed pipeline</div><div class="fid-val">$3.1M<span class="show-good" style="color:var(--success);font-size:15px"> &rarr; traceable</span></div><div class="fid-note">26% of open pipeline with no source.</div></div>
+      <div class="fid"><div class="fid-label">MQL&rarr;SQL rejection</div><div class="fid-val">56%<span class="show-good" style="color:var(--success);font-size:15px"> &rarr; scored</span></div><div class="fid-note">Over half of MQLs bounce back from sales.</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="section-number">7</div><div class="section-title">Stack Efficiency Diagnostic</div></div>
+    <div class="section-lead">What Acme owns vs. uses. A CFO-ready number, separate from the demand score.</div>
+    <div class="bn"><div class="l">Own vs. use</div><div><span class="big-danger">$186K/yr in redundant + dormant tools</span><br><span style="color:var(--text-secondary);font-size:14px">Acme runs 38 martech tools across 11 categories. 15 show no active signal (dormant), and 3 categories carry overlapping tools doing the same job. Roughly $186K a year in licenses feeding nothing — before buying anything new. We orchestrate what's there; we don't tell you to rip-and-replace.</span></div></div>
+    <div class="note-strip">The two-sided gap map: 3 signal categories with <strong>no source</strong> (including AI-search visibility), and 3 with <strong>redundant</strong> tools. Both surface in the Path Forward.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="section-number">8</div><div class="section-title">Path Forward</div></div>
+    <div class="section-lead">The Cortex orchestration path that acts on everything above — read-only, nothing installed in your environment, every external action human-approved.</div>
+    <div class="cta">
+      <div class="show-bad"><div style="font-size:18px;font-weight:600">This is a sample. Yours runs on your own data.</div><div style="color:var(--text-secondary);font-size:14px;margin-top:6px">A 30-day read of your demand engine, marketing-lens: demand, funnel, attribution, data fidelity, AI-search visibility, and stack efficiency.</div></div>
+      <div class="show-good"><div style="font-size:18px;font-weight:600">Ready to put Cortex on your demand engine?</div><div style="color:var(--text-secondary);font-size:14px;margin-top:6px">Phase 1 acts on the dark database and the AI-search gap from day one, with your team approving every move.</div></div>
+      <a href="https://scalientiq.com/contact.html">Get your assessment</a>
+    </div>
+  </div>
+
+  <footer>Scalient IQ — GTM Orchestration. Marketing Signal Assessment, sample report on synthetic data (Acme Corp). All figures illustrative. Six-dimension Demand Health composite. scalientiq.com</footer>
+</div>
+<script>
+(function(){
+  var body=document.body;
+  document.querySelectorAll('[data-theme-btn]').forEach(function(b){b.addEventListener('click',function(){body.setAttribute('data-theme',b.getAttribute('data-theme-btn'));document.querySelectorAll('[data-theme-btn]').forEach(function(x){x.classList.remove('active')});b.classList.add('active');});});
+  document.querySelectorAll('[data-assess-btn]').forEach(function(b){b.addEventListener('click',function(){body.setAttribute('data-assessment',b.getAttribute('data-assess-btn'));document.querySelectorAll('[data-assess-btn]').forEach(function(x){x.classList.remove('active')});b.classList.add('active');});});
+})();
+</script>
+</body>
+</html>
