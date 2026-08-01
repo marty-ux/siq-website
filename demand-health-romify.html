@@ -7,67 +7,67 @@
 body[data-theme="dark"]{--bg:#0A1628;--surface:#0F1E35;--surface2:#132540;--border:#1F3352;--text-primary:#F5F7FA;--text-secondary:#B8C5D6;--text-tertiary:#8FA3BF;}
 body[data-theme="light"]{--bg:#F8FAFC;--surface:#FFFFFF;--surface2:#F1F5F9;--border:#E2E8F0;--text-primary:#0A1628;--text-secondary:#475569;--text-tertiary:#94A3B8;}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text-primary);line-height:1.55;padding:0 20px 60px}
-.wrap{max-width:960px;margin:0 auto}
+body{font-size:16px;font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text-primary);line-height:1.6;padding:0 20px 60px}
+.wrap{max-width:1040px;margin:0 auto}
 .head{padding:28px 0 6px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px}
 .brands{display:flex;align-items:center;gap:16px}
 .brands img{height:34px}
 .cobrand{color:var(--text-tertiary);font-size:20px;font-weight:300}
-.prepared{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-tertiary);margin:14px 0 4px}
-.title{font-size:34px;font-weight:700;letter-spacing:-.6px;margin:2px 0 8px}
-.subtitle{color:var(--text-secondary);font-size:15px;max-width:640px}
+.prepared{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-tertiary);margin:14px 0 4px}
+.title{font-size:38px;font-weight:700;letter-spacing:-.6px;margin:2px 0 8px}
+.subtitle{color:var(--text-secondary);font-size:17px;max-width:640px}
 .metarow{display:flex;gap:30px;flex-wrap:wrap;margin:22px 0 6px;padding-top:16px;border-top:1px solid var(--border)}
-.meta-item .label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-tertiary)}
-.meta-item .value{font-size:15px;font-weight:500;margin-top:3px}
+.meta-item .label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-tertiary)}
+.meta-item .value{font-size:17px;font-weight:500;margin-top:3px}
 .toggles{display:flex;gap:10px;flex-wrap:wrap}
 .toggle{display:inline-flex;border:1px solid var(--border);overflow:hidden}
-.toggle button{background:var(--surface);color:var(--text-secondary);border:none;padding:8px 13px;font-family:inherit;font-size:12px;font-weight:500;cursor:pointer}
+.toggle button{background:var(--surface);color:var(--text-secondary);border:none;padding:8px 13px;font-family:inherit;font-size:14px;font-weight:500;cursor:pointer}
 .toggle button.active{background:var(--blue);color:#fff}
 body[data-assessment="bad"] .show-good{display:none!important}
 body[data-assessment="good"] .show-bad{display:none!important}
-.banner{margin:16px 0 6px;padding:11px 14px;font-size:13px;border:1px solid}
+.banner{margin:16px 0 6px;padding:11px 14px;font-size:15px;border:1px solid}
 .banner.show-bad{color:var(--danger);background:var(--danger-soft);border-color:var(--danger)}
 .banner.show-good{color:var(--success);background:var(--success-soft);border-color:var(--success)}
 .section{padding:26px 0;border-top:1px solid var(--border)}
 .section-head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
-.section-number{width:26px;height:26px;background:var(--orange);color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
-.section-title{font-size:21px;font-weight:600}
-.section-lead{color:var(--text-secondary);font-size:14px;margin-bottom:16px;max-width:700px}
-.chip{display:inline-block;font-size:12px;font-weight:600;padding:4px 11px;background:var(--caution-soft);color:var(--caution);margin-bottom:16px}
+.section-number{width:26px;height:26px;background:var(--orange);color:#fff;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center}
+.section-title{font-size:23px;font-weight:600}
+.section-lead{color:var(--text-secondary);font-size:16px;margin-bottom:16px;max-width:700px}
+.chip{display:inline-block;font-size:14px;font-weight:600;padding:4px 11px;background:var(--caution-soft);color:var(--caution);margin-bottom:16px}
 .dim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
 .dim{background:var(--surface);border:1px solid var(--border);padding:14px}
 .dim.ns{border:1px dashed var(--border)}
 .dim-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.dim-name{font-weight:600;font-size:15px}
+.dim-name{font-weight:600;font-size:17px}
 .dim-score{font-size:22px;font-weight:700}
-.dim-ns{font-size:12px;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:.5px}
-.dim-note{color:var(--text-secondary);font-size:13px;margin-top:7px;line-height:1.5}
-.dim-wt{font-size:11px;color:var(--text-tertiary);margin-top:6px}
+.dim-ns{font-size:14px;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:.5px}
+.dim-note{color:var(--text-secondary);font-size:15px;margin-top:7px;line-height:1.5}
+.dim-wt{font-size:12.5px;color:var(--text-tertiary);margin-top:6px}
 .g{color:var(--success)}.a{color:var(--caution)}.r{color:var(--danger)}
 .bar{height:5px;background:var(--surface2);margin-top:10px}.bar i{display:block;height:100%}
 .bn{background:var(--surface);border:1px solid var(--border);padding:16px;margin-bottom:14px}
-.bn .l{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:6px}
-.big-danger{color:var(--danger);font-size:26px;font-weight:700}
+.bn .l{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:6px}
+.big-danger{color:var(--danger);font-size:28px;font-weight:700}
 .uplift{background:var(--surface);border:1px solid var(--orange);border-left:4px solid var(--orange);padding:20px;margin-bottom:14px}
 .uplift .v{font-size:30px;font-weight:700;letter-spacing:-.5px}
 .seam{background:var(--surface);border:1px solid var(--blue);border-left:4px solid var(--blue);padding:18px;margin-top:6px}
-.seam .l{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--blue);font-weight:600}
-.note-strip{background:var(--surface2);border:1px solid var(--border);padding:12px 14px;font-size:13px;color:var(--text-secondary);margin-top:12px}
+.seam .l{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--blue);font-weight:600}
+.note-strip{background:var(--surface2);border:1px solid var(--border);padding:12px 14px;font-size:15px;color:var(--text-secondary);margin-top:12px}
 ul.plays{list-style:none;margin-top:8px}
-ul.plays li{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--blue);padding:11px 13px;margin-bottom:8px;font-size:13px}
+ul.plays li{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--blue);padding:11px 13px;margin-bottom:8px;font-size:15px}
 .cta{background:var(--surface);border:1px solid var(--orange);padding:22px;margin-top:16px;text-align:center}
-footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertiary);font-size:12px;margin-top:8px}
+footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertiary);font-size:14px;margin-top:8px}
 
   #siq-gate{position:fixed;inset:0;background:#0A1628;display:flex;align-items:center;justify-content:center;z-index:99999;font-family:'DM Sans',Arial,sans-serif}
   .siq-gate-box{text-align:center;max-width:380px;width:90%;padding:32px}
   .siq-gate-logo{font-size:28px;font-weight:700;color:#0073E6;margin-bottom:20px}
   .siq-gate-logo span{color:#FF6600}
-  .siq-gate-title{color:#fff;font-size:19px;font-weight:600;margin-bottom:6px}
-  .siq-gate-sub{color:#8A9BB0;font-size:13px;margin-bottom:22px;line-height:1.5}
-  #siq-gate-input{width:100%;padding:13px 14px;font-size:15px;border:1px solid #24364d;background:#0f1f33;color:#fff;border-radius:0;margin-bottom:12px;box-sizing:border-box}
+  .siq-gate-title{color:#fff;font-size:21px;font-weight:600;margin-bottom:6px}
+  .siq-gate-sub{color:#8A9BB0;font-size:15px;margin-bottom:22px;line-height:1.5}
+  #siq-gate-input{width:100%;padding:13px 14px;font-size:17px;border:1px solid #24364d;background:#0f1f33;color:#fff;border-radius:0;margin-bottom:12px;box-sizing:border-box}
   #siq-gate-input:focus{outline:none;border-color:#0073E6}
-  #siq-gate-btn{width:100%;padding:13px;background:#FF6600;color:#fff;border:none;font-weight:600;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;border-radius:0;font-size:14px}
-  #siq-gate-err{color:#ff5a5a;font-size:13px;margin-top:12px;display:none}
+  #siq-gate-btn{width:100%;padding:13px;background:#FF6600;color:#fff;border:none;font-weight:600;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;border-radius:0;font-size:16px}
+  #siq-gate-err{color:#ff5a5a;font-size:15px;margin-top:12px;display:none}
   body.siq-locked{overflow:hidden;height:100vh}
 </style></head>
 <body data-theme="dark" data-assessment="bad" class="siq-locked">
@@ -109,46 +109,46 @@ footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertia
   <div class="section-head"><div class="section-number">2</div><div class="section-title">The Leak — Dark Demand</div></div>
   <div class="section-lead show-bad">The single biggest finding, quantified from Romify's live database.</div>
   <div class="section-lead show-good">What working the event database is worth.</div>
-  <div class="bn show-bad"><div class="l">Captured demand, decaying uncontacted</div><div><span class="big-danger">9,423 contacts cold · 4,704 never touched</span><br><span style="color:var(--text-secondary);font-size:14px">79% of the database has had no activity in 180+ days, and 40% has never had a single logged touch. Events sourced <strong style="color:var(--text-primary)">$9.5M</strong> of pipeline ($2.7M won) — but the demand is paid for at the booth and then lost in the CRM. This is the classic event-lead dump.</span></div></div>
-  <div class="uplift show-good"><div class="l" style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--orange);font-weight:600">Attributable uplift — year 1 (modeled)</div><div class="v">Warm first, then the 9,423</div><div style="color:var(--text-secondary);font-size:13px;margin-top:6px">Sequence is the whole game. The <b style="color:var(--text-primary)">764 hand-raisers and 789 web-engaged</b> contacts get worked first — they have already signalled intent, so they convert fastest and fund the rest of the effort. The remaining cold database then runs on a reactivation cadence prioritized by fit and event recency. Bottom-up from Romify's own event-sourced win rate, not a top-down multiple.</div></div>
+  <div class="bn show-bad"><div class="l">Captured demand, decaying uncontacted</div><div><span class="big-danger">9,423 contacts cold · 4,704 never touched</span><br><span style="color:var(--text-secondary);font-size:16px">79% of the database has had no activity in 180+ days, and 40% has never had a single logged touch. Events sourced <strong style="color:var(--text-primary)">$9.5M</strong> of pipeline ($2.7M won) — but the demand is paid for at the booth and then lost in the CRM. This is the classic event-lead dump.</span></div></div>
+  <div class="uplift show-good"><div class="l" style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--orange);font-weight:600">Attributable uplift — year 1 (modeled)</div><div class="v">Warm first, then the 9,423</div><div style="color:var(--text-secondary);font-size:15px;margin-top:6px">Sequence is the whole game. The <b style="color:var(--text-primary)">764 hand-raisers and 789 web-engaged</b> contacts get worked first — they have already signalled intent, so they convert fastest and fund the rest of the effort. The remaining cold database then runs on a reactivation cadence prioritized by fit and event recency. Bottom-up from Romify's own event-sourced win rate, not a top-down multiple.</div></div>
 </div>
 
 <div class="section">
   <div class="section-head"><div class="section-number">3</div><div class="section-title">Now Visible — Owners, Hand-Raisers &amp; Web Signal</div></div>
   <div class="section-lead">New in this run: the dark database is now attributable to a person, and the contacts already signalling intent are separated out.</div>
-  <div class="bn show-bad"><div class="l">Who holds the cold database</div><div><span class="big-danger" style="color:var(--caution)">1,450 cold contacts have no owner at all</span><br><span style="font-size:14px;color:var(--text-secondary)">Sean Eiseman <strong style="color:var(--text-primary)">3,534</strong> · Mikael Rinne <strong style="color:var(--text-primary)">3,114</strong> · unassigned <strong style="color:var(--text-primary)">1,450</strong> · Ian Hill <strong style="color:var(--text-primary)">594</strong> · Antti 207 · Jaan 199 · Ben 165. Enough volume on each side to run a clean split test: marketing nurture on one half, SDR outreach on the other.</span></div></div>
-  <div class="bn show-good"><div class="l">Owned, split, and measurable</div><div><span class="big-danger" style="color:var(--success)">Every contact has an owner</span><br><span style="font-size:14px;color:var(--text-secondary)">The 1,450 orphaned contacts are routed, and the cold database runs as a controlled split — marketing nurture against SDR outreach — so for the first time the answer to "which motion actually reactivates event leads" is measured, not argued. Results attribute cleanly by rep and by treatment.</span></div></div>
-  <div class="bn show-bad"><div class="l">Already raising a hand</div><div><span class="big-danger" style="color:var(--success)">764 hand-raisers · 789 web-engaged</span><br><span style="font-size:14px;color:var(--text-secondary)">764 contacts have submitted a form (demo request, content download) and 789 have identifiable website sessions. These are not cold — they are the warmest re-entry point in the database and should be worked before any bulk cadence. Every contact now carries a HubSpot record deep-link, so any bucket above opens straight to the underlying records.</span></div></div>
-  <div class="bn show-good"><div class="l">Warm segment worked first</div><div><span class="big-danger" style="color:var(--success)">Intent routed the day it happens</span><br><span style="font-size:14px;color:var(--text-secondary)">The 764 hand-raisers and 789 web-engaged contacts are worked on a priority cadence ahead of the bulk database, and every new form fill or return visit routes to an owner the day it happens rather than joining the backlog. The warmest demand stops aging.</span></div></div>
+  <div class="bn show-bad"><div class="l">Who holds the cold database</div><div><span class="big-danger" style="color:var(--caution)">1,450 cold contacts have no owner at all</span><br><span style="font-size:16px;color:var(--text-secondary)">Sean Eiseman <strong style="color:var(--text-primary)">3,534</strong> · Mikael Rinne <strong style="color:var(--text-primary)">3,114</strong> · unassigned <strong style="color:var(--text-primary)">1,450</strong> · Ian Hill <strong style="color:var(--text-primary)">594</strong> · Antti 207 · Jaan 199 · Ben 165. Enough volume on each side to run a clean split test: marketing nurture on one half, SDR outreach on the other.</span></div></div>
+  <div class="bn show-good"><div class="l">Owned, split, and measurable</div><div><span class="big-danger" style="color:var(--success)">Every contact has an owner</span><br><span style="font-size:16px;color:var(--text-secondary)">The 1,450 orphaned contacts are routed, and the cold database runs as a controlled split — marketing nurture against SDR outreach — so for the first time the answer to "which motion actually reactivates event leads" is measured, not argued. Results attribute cleanly by rep and by treatment.</span></div></div>
+  <div class="bn show-bad"><div class="l">Already raising a hand</div><div><span class="big-danger" style="color:var(--success)">764 hand-raisers · 789 web-engaged</span><br><span style="font-size:16px;color:var(--text-secondary)">764 contacts have submitted a form (demo request, content download) and 789 have identifiable website sessions. These are not cold — they are the warmest re-entry point in the database and should be worked before any bulk cadence. Every contact now carries a HubSpot record deep-link, so any bucket above opens straight to the underlying records.</span></div></div>
+  <div class="bn show-good"><div class="l">Warm segment worked first</div><div><span class="big-danger" style="color:var(--success)">Intent routed the day it happens</span><br><span style="font-size:16px;color:var(--text-secondary)">The 764 hand-raisers and 789 web-engaged contacts are worked on a priority cadence ahead of the bulk database, and every new form fill or return visit routes to an owner the day it happens rather than joining the backlog. The warmest demand stops aging.</span></div></div>
 </div>
 
 <div class="section">
   <div class="section-head"><div class="section-number">4</div><div class="section-title">The Seam — Where This Meets the Sales Report</div></div>
   <div class="section-lead">This marketing read connects directly to Romify's sales assessment — it's the upstream cause.</div>
-  <div class="seam"><div class="l">Full-funnel through-line</div><div style="margin-top:8px;font-size:14px;color:var(--text-secondary)">Marketing captures event demand &rarr; <strong style="color:var(--text-primary)">79% decays uncontacted</strong> &rarr; sales inherits a cold pipeline. The $2.83M cold pipeline and past-due deals in the sales assessment don't start in sales — they start here, at the event-to-CRM handoff. Working the captured event leads on a cadence is the single highest-leverage move across the whole funnel.</div></div>
+  <div class="seam"><div class="l">Full-funnel through-line</div><div style="margin-top:8px;font-size:16px;color:var(--text-secondary)">Marketing captures event demand &rarr; <strong style="color:var(--text-primary)">79% decays uncontacted</strong> &rarr; sales inherits a cold pipeline. The $2.83M cold pipeline and past-due deals in the sales assessment don't start in sales — they start here, at the event-to-CRM handoff. Working the captured event leads on a cadence is the single highest-leverage move across the whole funnel.</div></div>
 </div>
 
 <div class="section">
   <div class="section-head"><div class="section-number">5</div><div class="section-title">Attribution — Complete, But Concentrated</div></div>
   <div class="section-lead">Traceability isn't the problem; channel dependence is.</div>
-  <div class="bn"><div class="l">Source mix</div><div><span class="big-danger" style="color:var(--caution)">97% one channel (offline / events)</span><br><span style="color:var(--text-secondary);font-size:14px">Every contact is sourced — but nearly all of it is trade-show capture. Organic ($739K pipeline) and direct ($631K) are the only meaningful diversifiers. Heavy event dependence is a concentration risk: a soft event season and the top of the funnel dries up. Diversifying channels is the strategic play once the database is being worked.</span></div></div>
+  <div class="bn"><div class="l">Source mix</div><div><span class="big-danger" style="color:var(--caution)">97% one channel (offline / events)</span><br><span style="color:var(--text-secondary);font-size:16px">Every contact is sourced — but nearly all of it is trade-show capture. Organic ($739K pipeline) and direct ($631K) are the only meaningful diversifiers. Heavy event dependence is a concentration risk: a soft event season and the top of the funnel dries up. Diversifying channels is the strategic play once the database is being worked.</span></div></div>
 </div>
 
 <div class="section">
   <div class="section-head"><div class="section-number">6</div><div class="section-title">AI Search — The Silent Channel</div></div>
   <div class="section-lead">Buyers now ask ChatGPT, Claude, and Perplexity which vendor to shortlist. We measured what those engines say when they are asked, using Romify's own category questions — independently of any agency reporting.</div>
 
-  <div class="bn"><div class="l">Method</div><div><span style="color:var(--text-secondary);font-size:14px">14 buying questions spanning category discovery, use case, integration fit and competitive comparison, put to <b style="color:var(--text-primary)">ChatGPT and Perplexity</b>, repeated across <b style="color:var(--text-primary)">five independent runs</b> on July 20, 2026. Every vendor named in every answer was recorded and ranked. 140 total opportunities to be cited per engine. AI answers vary run to run, so single-run results are not reported — every figure below is the five-run result. On July 27 the same test was extended to <b style="color:var(--text-primary)">Anthropic's Claude and Google's Gemini</b> — the other leading AI models — as a cross-check.</span></div></div>
+  <div class="bn"><div class="l">Method</div><div><span style="color:var(--text-secondary);font-size:16px">14 buying questions spanning category discovery, use case, integration fit and competitive comparison, put to <b style="color:var(--text-primary)">ChatGPT and Perplexity</b>, repeated across <b style="color:var(--text-primary)">five independent runs</b> on July 20, 2026. Every vendor named in every answer was recorded and ranked. 140 total opportunities to be cited per engine. AI answers vary run to run, so single-run results are not reported — every figure below is the five-run result. On July 27 the same test was extended to <b style="color:var(--text-primary)">Anthropic's Claude and Google's Gemini</b> — the other leading AI models — as a cross-check.</span></div></div>
 
-  <div class="bn show-bad"><div class="l">The finding</div><div><span class="big-danger" style="color:var(--danger)">Zero ChatGPT citations in 70 attempts</span><br><span style="font-size:14px;color:var(--text-secondary)">Across all 14 questions and all five runs, ChatGPT never named Romify — not once. Perplexity named it five times out of 70. For contrast, iCapture was cited <b style="color:var(--text-primary)">93 times</b> across the same questions: 52 on ChatGPT, 41 on Perplexity. In the venue where a growing share of vendor shortlists now originate, Romify is effectively absent.</span></div></div>
+  <div class="bn show-bad"><div class="l">The finding</div><div><span class="big-danger" style="color:var(--danger)">Zero ChatGPT citations in 70 attempts</span><br><span style="font-size:16px;color:var(--text-secondary)">Across all 14 questions and all five runs, ChatGPT never named Romify — not once. Perplexity named it five times out of 70. For contrast, iCapture was cited <b style="color:var(--text-primary)">93 times</b> across the same questions: 52 on ChatGPT, 41 on Perplexity. In the venue where a growing share of vendor shortlists now originate, Romify is effectively absent.</span></div></div>
 
-  <div class="bn show-bad"><div class="l">Confirmed across every major AI model</div><div><span class="big-danger" style="color:var(--danger)">ChatGPT, Claude, and Gemini: zero citations</span><br><span style="font-size:14px;color:var(--text-secondary)">A natural question is whether a stronger or different model would find Romify. On July 27 we put the same 14 questions to <b style="color:var(--text-primary)">Anthropic's Claude</b> and <b style="color:var(--text-primary)">Google's Gemini</b> as well — three runs each. Both named Romify <b style="color:var(--text-primary)">zero times out of 42</b>, matching ChatGPT. That is three independent generative engines — every major AI a buyer might ask — all blind to Romify, while each named iCapture roughly 30 times. Only Perplexity, which searches the live web rather than answering from training, surfaces Romify at all, and only twice. The gap is not the model. It is Romify's presence in the content these engines draw on.</span></div></div>
+  <div class="bn show-bad"><div class="l">Confirmed across every major AI model</div><div><span class="big-danger" style="color:var(--danger)">ChatGPT, Claude, and Gemini: zero citations</span><br><span style="font-size:16px;color:var(--text-secondary)">A natural question is whether a stronger or different model would find Romify. On July 27 we put the same 14 questions to <b style="color:var(--text-primary)">Anthropic's Claude</b> and <b style="color:var(--text-primary)">Google's Gemini</b> as well — three runs each. Both named Romify <b style="color:var(--text-primary)">zero times out of 42</b>, matching ChatGPT. That is three independent generative engines — every major AI a buyer might ask — all blind to Romify, while each named iCapture roughly 30 times. Only Perplexity, which searches the live web rather than answering from training, surfaces Romify at all, and only twice. The gap is not the model. It is Romify's presence in the content these engines draw on.</span></div></div>
 
-  <div class="bn show-bad"><div class="l">Where Romify does appear</div><div><span class="big-danger" style="color:var(--caution)">One question, reproducibly</span><br><span style="font-size:14px;color:var(--text-secondary)">Romify surfaced consistently on a single query — <i>"universal lead capture app that works across all trade shows"</i> — on Perplexity, in second position, in three of the four runs where per-question detail was captured. That is a real foothold, and it is instructive: the engines associate Romify with the universal-capture idea specifically, and with almost nothing else in the category. The broad questions, the ones with the most buyers behind them, return competitors.</span></div></div>
+  <div class="bn show-bad"><div class="l">Where Romify does appear</div><div><span class="big-danger" style="color:var(--caution)">One question, reproducibly</span><br><span style="font-size:16px;color:var(--text-secondary)">Romify surfaced consistently on a single query — <i>"universal lead capture app that works across all trade shows"</i> — on Perplexity, in second position, in three of the four runs where per-question detail was captured. That is a real foothold, and it is instructive: the engines associate Romify with the universal-capture idea specifically, and with almost nothing else in the category. The broad questions, the ones with the most buyers behind them, return competitors.</span></div></div>
 
   <div class="bn"><div class="l">Category share of voice — five-run mean</div><div>
-    <table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:4px">
-      <tr style="color:var(--text-tertiary);text-align:left;font-size:11px;letter-spacing:.5px;text-transform:uppercase">
+    <table style="width:100%;border-collapse:collapse;font-size:15px;margin-top:4px">
+      <tr style="color:var(--text-tertiary);text-align:left;font-size:12.5px;letter-spacing:.5px;text-transform:uppercase">
         <th style="padding:6px 8px 6px 0;font-weight:600">Vendor</th><th style="padding:6px 8px;font-weight:600">Score</th>
         <th style="padding:6px 8px;font-weight:600">Range</th><th style="padding:6px 8px;font-weight:600">Questions cited</th>
         <th style="padding:6px 0 6px 8px;font-weight:600">Citations</th></tr>
@@ -160,12 +160,12 @@ footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertia
       <tr style="border-top:1px solid var(--border);background:var(--danger-soft)"><td style="padding:7px 8px 7px 0"><b>Romify</b></td><td style="padding:7px 8px;color:var(--danger);font-weight:600">13</td><td style="padding:7px 8px;color:var(--text-tertiary)">0&ndash;27</td><td style="padding:7px 8px">0&ndash;2 of 14</td><td style="padding:7px 0 7px 8px">5</td></tr>
       <tr style="border-top:1px solid var(--border)"><td style="padding:7px 8px 7px 0">vFairs</td><td style="padding:7px 8px;color:var(--danger);font-weight:600">9</td><td style="padding:7px 8px;color:var(--text-tertiary)">7&ndash;12</td><td style="padding:7px 8px">1&ndash;2 of 14</td><td style="padding:7px 0 7px 8px">&mdash;</td></tr>
     </table>
-    <span style="color:var(--text-tertiary);font-size:12px;display:block;margin-top:10px">Zuant, atEvent and Jifflenow were also monitored; none reached meaningful citation volume. Note the range column: vendors with real presence score consistently run to run, while vendors near zero swing widely. Romify's 0&ndash;27 spread is itself the finding — five citations is too few to produce a stable number, which is what being absent looks like in this measurement.</span>
+    <span style="color:var(--text-tertiary);font-size:14px;display:block;margin-top:10px">Zuant, atEvent and Jifflenow were also monitored; none reached meaningful citation volume. Note the range column: vendors with real presence score consistently run to run, while vendors near zero swing widely. Romify's 0&ndash;27 spread is itself the finding — five citations is too few to produce a stable number, which is what being absent looks like in this measurement.</span>
   </div></div>
 
-  <div class="bn show-good"><div class="l">What changes</div><div><span class="big-danger" style="color:var(--success)">From one question to the category</span><br><span style="font-size:14px;color:var(--text-secondary)">The universal-capture foothold is the wedge: it is the one association the engines already make, and it is a genuine differentiator rather than a generic claim. Extending from there means publishing directly against the questions buyers actually ask &mdash; comparison and alternative-to pages, integration-specific content, and third-party presence on the review and listicle sources these engines lean on. This is a content and citation problem, not a product problem. It is measurable monthly on the same 14 questions, so progress is visible rather than asserted.</span></div></div>
+  <div class="bn show-good"><div class="l">What changes</div><div><span class="big-danger" style="color:var(--success)">From one question to the category</span><br><span style="font-size:16px;color:var(--text-secondary)">The universal-capture foothold is the wedge: it is the one association the engines already make, and it is a genuine differentiator rather than a generic claim. Extending from there means publishing directly against the questions buyers actually ask &mdash; comparison and alternative-to pages, integration-specific content, and third-party presence on the review and listicle sources these engines lean on. This is a content and citation problem, not a product problem. It is measurable monthly on the same 14 questions, so progress is visible rather than asserted.</span></div></div>
 
-  <div class="bn"><div class="l">Why this matters commercially</div><div><span style="color:var(--text-secondary);font-size:14px">This is the one dimension where the gap is against named competitors rather than against Romify's own history &mdash; and unlike the database work in &sect;2, it compounds slowly. Content published now takes months to be absorbed by these engines, which argues for starting the clock early rather than waiting for the funnel work to finish.</span></div></div>
+  <div class="bn"><div class="l">Why this matters commercially</div><div><span style="color:var(--text-secondary);font-size:16px">This is the one dimension where the gap is against named competitors rather than against Romify's own history &mdash; and unlike the database work in &sect;2, it compounds slowly. Content published now takes months to be absorbed by these engines, which argues for starting the clock early rather than waiting for the funnel work to finish.</span></div></div>
 </div>
 
 <div class="section">
@@ -180,8 +180,8 @@ footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertia
     <li><strong>AI-search visibility program.</strong> Extend from the universal-capture foothold into the broad category questions, and re-measure monthly on the same 14 questions. Add an intent feed to light up the last unscored dimension.</li>
   </ul>
   <div class="cta">
-    <div class="show-bad"><div style="font-size:18px;font-weight:600">Complete the read: connect three things.</div><div style="color:var(--text-secondary);font-size:14px;margin-top:6px">An MQL/nurture layer and an intent feed turn this into a full six-dimension Demand Health score — and pair with the sales assessment for the full-funnel picture.</div></div>
-    <div class="show-good"><div style="font-size:18px;font-weight:600">Start with the 764 who already raised a hand.</div><div style="color:var(--text-secondary);font-size:14px;margin-top:6px">Phase 1 works the warm segment first, routes the 1,450 orphans, then puts the 9,423 on a split-tested reactivation cadence — with your team approving every external move.</div></div>
+    <div class="show-bad"><div style="font-size:18px;font-weight:600">Complete the read: connect three things.</div><div style="color:var(--text-secondary);font-size:16px;margin-top:6px">An MQL/nurture layer and an intent feed turn this into a full six-dimension Demand Health score — and pair with the sales assessment for the full-funnel picture.</div></div>
+    <div class="show-good"><div style="font-size:18px;font-weight:600">Start with the 764 who already raised a hand.</div><div style="color:var(--text-secondary);font-size:16px;margin-top:6px">Phase 1 works the warm segment first, routes the 1,450 orphans, then puts the 9,423 on a split-tested reactivation cadence — with your team approving every external move.</div></div>
   </div>
 </div>
 
