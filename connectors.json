@@ -1,0 +1,1330 @@
+{
+ "subcategories": [
+  "CRM",
+  "Sales Engagement",
+  "AI SDR / Sales Agents",
+  "Conversation Intelligence",
+  "Meeting Intelligence",
+  "Intent Data",
+  "Enrichment",
+  "Funding / Market Intelligence",
+  "Marketing Automation",
+  "Website Visitor ID",
+  "Reverse IP / Data",
+  "Scheduling",
+  "Customer Success",
+  "Analytics / RevOps",
+  "Outbound / Dialer",
+  "AEO / GEO Visibility",
+  "Social Selling",
+  "e-Signature / CPQ",
+  "Gifting / Direct Mail",
+  "Video / Async Selling",
+  "Sales Coaching / Role-play",
+  "Email Deliverability / Infra",
+  "Lead Routing / RevOps Plumbing",
+  "Data / CDP & Reverse ETL",
+  "Product Analytics / PLG Signals",
+  "Relationship / Signal Intelligence",
+  "Partner / Ecosystem",
+  "ABM / Personalization",
+  "Sales Enablement / Content",
+  "Digital Sales Rooms",
+  "Conversational / Chat",
+  "Reviews / Social Proof",
+  "Data Warehouse / Lakehouse",
+  "TAM / Whitespace"
+ ],
+ "connectors": [
+  {
+   "name": "HubSpot",
+   "subcategory": "CRM",
+   "description": "All-in-one CRM + marketing for mid-market",
+   "website": "https://www.hubspot.com"
+  },
+  {
+   "name": "Salesforce",
+   "subcategory": "CRM",
+   "description": "Enterprise CRM and system of record",
+   "website": "https://www.salesforce.com"
+  },
+  {
+   "name": "Pipedrive",
+   "subcategory": "CRM",
+   "description": "Pipeline-first CRM for small teams",
+   "website": "https://www.pipedrive.com"
+  },
+  {
+   "name": "Microsoft Dynamics 365",
+   "subcategory": "CRM",
+   "description": "Microsoft's CRM/ERP suite",
+   "website": "https://dynamics.microsoft.com"
+  },
+  {
+   "name": "Zoho CRM",
+   "subcategory": "CRM",
+   "description": "Value CRM in the Zoho suite",
+   "website": "https://www.zoho.com/crm"
+  },
+  {
+   "name": "Close",
+   "subcategory": "CRM",
+   "description": "CRM built for inside sales teams",
+   "website": "https://close.com"
+  },
+  {
+   "name": "Attio",
+   "subcategory": "CRM",
+   "description": "Flexible, data-modeled modern CRM",
+   "website": "https://attio.com"
+  },
+  {
+   "name": "Copper",
+   "subcategory": "CRM",
+   "description": "CRM native to Google Workspace",
+   "website": "https://www.copper.com"
+  },
+  {
+   "name": "Outreach",
+   "subcategory": "Sales Engagement",
+   "description": "Sequencing and execution platform",
+   "website": "https://www.outreach.io"
+  },
+  {
+   "name": "Salesloft",
+   "subcategory": "Sales Engagement",
+   "description": "Engagement cadences, dialer, analytics",
+   "website": "https://www.salesloft.com"
+  },
+  {
+   "name": "Apollo",
+   "subcategory": "Sales Engagement",
+   "description": "Prospecting database + sequences",
+   "website": "https://www.apollo.io"
+  },
+  {
+   "name": "Groove",
+   "subcategory": "Sales Engagement",
+   "description": "Salesforce-native engagement (Clari)",
+   "website": "https://clari.com"
+  },
+  {
+   "name": "Reply.io",
+   "subcategory": "Sales Engagement",
+   "description": "Multichannel outbound sequences",
+   "website": "https://reply.io"
+  },
+  {
+   "name": "Klenty",
+   "subcategory": "Sales Engagement",
+   "description": "Sales engagement and cadences",
+   "website": "https://www.klenty.com"
+  },
+  {
+   "name": "Mixmax",
+   "subcategory": "Sales Engagement",
+   "description": "Gmail-based engagement and sequences",
+   "website": "https://mixmax.com"
+  },
+  {
+   "name": "Amplemarket",
+   "subcategory": "Sales Engagement",
+   "description": "All-in-one AI-assisted outbound",
+   "website": "https://www.amplemarket.com"
+  },
+  {
+   "name": "11x",
+   "subcategory": "AI SDR / Sales Agents",
+   "description": "Autonomous AI SDRs (Alice, Julian)",
+   "website": "https://www.11x.ai"
+  },
+  {
+   "name": "Artisan",
+   "subcategory": "AI SDR / Sales Agents",
+   "description": "AI BDR (Ava) for outbound",
+   "website": "https://www.artisan.co"
+  },
+  {
+   "name": "AiSDR",
+   "subcategory": "AI SDR / Sales Agents",
+   "description": "AI SDR for email + SMS outreach",
+   "website": "https://aisdr.com"
+  },
+  {
+   "name": "Unify",
+   "subcategory": "AI SDR / Sales Agents",
+   "description": "Signal-triggered AI outreach",
+   "website": "https://www.unifygtm.com"
+  },
+  {
+   "name": "Alta",
+   "subcategory": "AI SDR / Sales Agents",
+   "description": "AI revenue agents",
+   "website": "https://www.altahq.com"
+  },
+  {
+   "name": "Topo",
+   "subcategory": "AI SDR / Sales Agents",
+   "description": "AI SDR agents for outbound",
+   "website": "https://www.topo.io"
+  },
+  {
+   "name": "Valley",
+   "subcategory": "AI SDR / Sales Agents",
+   "description": "AI-assisted outbound rep",
+   "website": "https://joinvalley.co/"
+  },
+  {
+   "name": "Regie.ai",
+   "subcategory": "AI SDR / Sales Agents",
+   "description": "Agentic prospecting + content",
+   "website": "https://www.regie.ai"
+  },
+  {
+   "name": "Relevance AI",
+   "subcategory": "AI SDR / Sales Agents",
+   "description": "No-code AI agent builder",
+   "website": "https://relevanceai.com"
+  },
+  {
+   "name": "Lyzr",
+   "subcategory": "AI SDR / Sales Agents",
+   "description": "Self-hosted AI sales agents",
+   "website": "https://www.lyzr.ai"
+  },
+  {
+   "name": "Landbase",
+   "subcategory": "AI SDR / Sales Agents",
+   "description": "GTM AI agent (GTM-1)",
+   "website": "https://www.landbase.com"
+  },
+  {
+   "name": "Floworks",
+   "subcategory": "AI SDR / Sales Agents",
+   "description": "AI SDR (Jason)",
+   "website": "https://www.floworks.ai"
+  },
+  {
+   "name": "Salesforge",
+   "subcategory": "AI SDR / Sales Agents",
+   "description": "AI-assisted outbound at scale",
+   "website": "https://www.salesforge.ai"
+  },
+  {
+   "name": "Persana AI",
+   "subcategory": "AI SDR / Sales Agents",
+   "description": "AI prospecting + enrichment agent",
+   "website": "https://www.persana.ai"
+  },
+  {
+   "name": "Octave",
+   "subcategory": "AI SDR / Sales Agents",
+   "description": "GTM positioning + agent engine",
+   "website": "https://www.octavehq.com"
+  },
+  {
+   "name": "Aomni",
+   "subcategory": "AI SDR / Sales Agents",
+   "description": "AI account research agent",
+   "website": "https://www.aomni.com"
+  },
+  {
+   "name": "Qualified Piper",
+   "subcategory": "AI SDR / Sales Agents",
+   "description": "AI SDR on the website (Piper)",
+   "website": "https://www.qualified.com"
+  },
+  {
+   "name": "Salesforce Agentforce",
+   "subcategory": "AI SDR / Sales Agents",
+   "description": "Salesforce's agent platform",
+   "website": "https://www.salesforce.com/agentforce"
+  },
+  {
+   "name": "Gong",
+   "subcategory": "Conversation Intelligence",
+   "description": "Revenue call analysis + coaching",
+   "website": "https://www.gong.io"
+  },
+  {
+   "name": "Chorus",
+   "subcategory": "Conversation Intelligence",
+   "description": "CI inside ZoomInfo",
+   "website": "https://www.zoominfo.com/products/chorus"
+  },
+  {
+   "name": "Read.ai",
+   "subcategory": "Conversation Intelligence",
+   "description": "Meeting analytics + summaries",
+   "website": "https://www.read.ai"
+  },
+  {
+   "name": "Fathom",
+   "subcategory": "Conversation Intelligence",
+   "description": "Free call recorder + AI notes",
+   "website": "https://fathom.video"
+  },
+  {
+   "name": "Clari Copilot",
+   "subcategory": "Conversation Intelligence",
+   "description": "CI by Clari (Wingman)",
+   "website": "https://www.clari.com/products/copilot"
+  },
+  {
+   "name": "Jiminny",
+   "subcategory": "Conversation Intelligence",
+   "description": "CI and coaching platform",
+   "website": "https://jiminny.com"
+  },
+  {
+   "name": "Salesken",
+   "subcategory": "Conversation Intelligence",
+   "description": "Real-time conversation guidance",
+   "website": "https://salesken.ai"
+  },
+  {
+   "name": "Momentum",
+   "subcategory": "Conversation Intelligence",
+   "description": "CI + signal automation to CRM",
+   "website": "https://www.momentum.io"
+  },
+  {
+   "name": "Attention",
+   "subcategory": "Conversation Intelligence",
+   "description": "Real-time AI call assistant",
+   "website": "https://www.attention.com"
+  },
+  {
+   "name": "Rilla",
+   "subcategory": "Conversation Intelligence",
+   "description": "Virtual ride-along for field reps",
+   "website": "https://www.rilla.com"
+  },
+  {
+   "name": "Convin",
+   "subcategory": "Conversation Intelligence",
+   "description": "Contact-center CI",
+   "website": "https://convin.ai"
+  },
+  {
+   "name": "Granola",
+   "subcategory": "Meeting Intelligence",
+   "description": "Bot-free AI meeting notes",
+   "website": "https://www.granola.ai"
+  },
+  {
+   "name": "Otter.ai",
+   "subcategory": "Meeting Intelligence",
+   "description": "Live transcription + notes",
+   "website": "https://otter.ai"
+  },
+  {
+   "name": "Fireflies.ai",
+   "subcategory": "Meeting Intelligence",
+   "description": "Notetaker with broad CRM sync",
+   "website": "https://fireflies.ai"
+  },
+  {
+   "name": "tl;dv",
+   "subcategory": "Meeting Intelligence",
+   "description": "Meeting recorder + AI summaries",
+   "website": "https://tldv.io"
+  },
+  {
+   "name": "Avoma",
+   "subcategory": "Meeting Intelligence",
+   "description": "AI meeting assistant + CI",
+   "website": "https://www.avoma.com"
+  },
+  {
+   "name": "Grain",
+   "subcategory": "Meeting Intelligence",
+   "description": "Meeting notes + clips to CRM",
+   "website": "https://grain.com"
+  },
+  {
+   "name": "Circleback",
+   "subcategory": "Meeting Intelligence",
+   "description": "AI notes + action items",
+   "website": "https://circleback.ai"
+  },
+  {
+   "name": "Sembly",
+   "subcategory": "Meeting Intelligence",
+   "description": "AI notes for formal meetings",
+   "website": "https://www.sembly.ai"
+  },
+  {
+   "name": "Fellow",
+   "subcategory": "Meeting Intelligence",
+   "description": "Meeting agendas + AI notes",
+   "website": "https://fellow.app"
+  },
+  {
+   "name": "Spinach",
+   "subcategory": "Meeting Intelligence",
+   "description": "AI scrum/meeting assistant",
+   "website": "https://www.spinach.io"
+  },
+  {
+   "name": "Supernormal",
+   "subcategory": "Meeting Intelligence",
+   "description": "AI meeting notes",
+   "website": "https://supernormal.com"
+  },
+  {
+   "name": "Krisp",
+   "subcategory": "Meeting Intelligence",
+   "description": "Noise cancel + AI notes",
+   "website": "https://krisp.ai"
+  },
+  {
+   "name": "Laxis",
+   "subcategory": "Meeting Intelligence",
+   "description": "AI meeting + revenue assistant",
+   "website": "https://www.laxis.com"
+  },
+  {
+   "name": "Bluedot",
+   "subcategory": "Meeting Intelligence",
+   "description": "Bot-free meeting recorder",
+   "website": "https://www.bluedothq.com"
+  },
+  {
+   "name": "Notta",
+   "subcategory": "Meeting Intelligence",
+   "description": "Transcription + meeting notes",
+   "website": "https://www.notta.ai"
+  },
+  {
+   "name": "Romify",
+   "subcategory": "Meeting Intelligence",
+   "description": "Meeting intelligence (Scalient IQ client)",
+   "website": "https://www.romify.io"
+  },
+  {
+   "name": "Bombora",
+   "subcategory": "Intent Data",
+   "description": "Third-party intent co-op",
+   "website": "https://bombora.com"
+  },
+  {
+   "name": "6sense",
+   "subcategory": "Intent Data",
+   "description": "Predictive intent + ABM",
+   "website": "https://6sense.com"
+  },
+  {
+   "name": "G2",
+   "subcategory": "Intent Data",
+   "description": "Buyer intent from review activity",
+   "website": "https://www.g2.com"
+  },
+  {
+   "name": "Demandbase",
+   "subcategory": "Intent Data",
+   "description": "ABM + account intelligence",
+   "website": "https://www.demandbase.com"
+  },
+  {
+   "name": "TechTarget Priority Engine",
+   "subcategory": "Intent Data",
+   "description": "Purchase-intent insights",
+   "website": "https://www.techtarget.com"
+  },
+  {
+   "name": "Intentsify",
+   "subcategory": "Intent Data",
+   "description": "Intent activation platform",
+   "website": "https://intentsify.io"
+  },
+  {
+   "name": "Foundry Intent",
+   "subcategory": "Intent Data",
+   "description": "B2B intent data (IDG)",
+   "website": "https://foundryco.com"
+  },
+  {
+   "name": "Clay",
+   "subcategory": "Enrichment",
+   "description": "Waterfall enrichment + orchestration",
+   "website": "https://www.clay.com"
+  },
+  {
+   "name": "ZoomInfo",
+   "subcategory": "Enrichment",
+   "description": "B2B contact + company database",
+   "website": "https://www.zoominfo.com"
+  },
+  {
+   "name": "Clearbit",
+   "subcategory": "Enrichment",
+   "description": "Real-time enrichment (HubSpot)",
+   "website": "https://clearbit.com"
+  },
+  {
+   "name": "Cognism",
+   "subcategory": "Enrichment",
+   "description": "Compliant contact data, EU strong",
+   "website": "https://www.cognism.com"
+  },
+  {
+   "name": "Lusha",
+   "subcategory": "Enrichment",
+   "description": "Contact + company enrichment",
+   "website": "https://www.lusha.com"
+  },
+  {
+   "name": "Seamless.AI",
+   "subcategory": "Enrichment",
+   "description": "Real-time contact search",
+   "website": "https://seamless.ai"
+  },
+  {
+   "name": "LeadMagic",
+   "subcategory": "Enrichment",
+   "description": "B2B enrichment + waterfall",
+   "website": "https://www.leadmagic.io"
+  },
+  {
+   "name": "FullEnrich",
+   "subcategory": "Enrichment",
+   "description": "Waterfall email/phone enrichment",
+   "website": "https://www.fullenrich.com"
+  },
+  {
+   "name": "Ocean.io",
+   "subcategory": "Enrichment",
+   "description": "Lookalike company data",
+   "website": "https://www.ocean.io"
+  },
+  {
+   "name": "Fundable.ai",
+   "subcategory": "Funding / Market Intelligence",
+   "description": "Real-time funding signals",
+   "website": "https://www.tryfundable.ai"
+  },
+  {
+   "name": "Crunchbase",
+   "subcategory": "Funding / Market Intelligence",
+   "description": "Private company + funding data",
+   "website": "https://www.crunchbase.com"
+  },
+  {
+   "name": "PitchBook",
+   "subcategory": "Funding / Market Intelligence",
+   "description": "Private capital market data",
+   "website": "https://pitchbook.com"
+  },
+  {
+   "name": "Tracxn",
+   "subcategory": "Funding / Market Intelligence",
+   "description": "Startup + funding tracker",
+   "website": "https://tracxn.com"
+  },
+  {
+   "name": "Specter",
+   "subcategory": "Funding / Market Intelligence",
+   "description": "Company growth + funding signals",
+   "website": "https://www.tryspecter.com"
+  },
+  {
+   "name": "Harmonic",
+   "subcategory": "Funding / Market Intelligence",
+   "description": "Startup discovery + signals",
+   "website": "https://www.harmonic.ai"
+  },
+  {
+   "name": "Grata",
+   "subcategory": "Funding / Market Intelligence",
+   "description": "Private company search engine",
+   "website": "https://grata.com"
+  },
+  {
+   "name": "SourceScrub",
+   "subcategory": "Funding / Market Intelligence",
+   "description": "Private market deal sourcing",
+   "website": "https://www.sourcescrub.com"
+  },
+  {
+   "name": "Affinity",
+   "subcategory": "Funding / Market Intelligence",
+   "description": "Relationship intelligence CRM",
+   "website": "https://www.affinity.co"
+  },
+  {
+   "name": "Marketo",
+   "subcategory": "Marketing Automation",
+   "description": "Enterprise marketing automation",
+   "website": "https://business.adobe.com/products/marketo.html"
+  },
+  {
+   "name": "Pardot",
+   "subcategory": "Marketing Automation",
+   "description": "B2B automation native to SFDC",
+   "website": "https://www.salesforce.com/products/marketing-cloud/marketing-automation"
+  },
+  {
+   "name": "Customer.io",
+   "subcategory": "Marketing Automation",
+   "description": "Behavioral lifecycle messaging",
+   "website": "https://customer.io"
+  },
+  {
+   "name": "ActiveCampaign",
+   "subcategory": "Marketing Automation",
+   "description": "SMB marketing automation + CRM",
+   "website": "https://www.activecampaign.com"
+  },
+  {
+   "name": "Klaviyo",
+   "subcategory": "Marketing Automation",
+   "description": "Email/SMS automation",
+   "website": "https://www.klaviyo.com"
+  },
+  {
+   "name": "Braze",
+   "subcategory": "Marketing Automation",
+   "description": "Cross-channel engagement",
+   "website": "https://www.braze.com"
+  },
+  {
+   "name": "Iterable",
+   "subcategory": "Marketing Automation",
+   "description": "Cross-channel marketing platform",
+   "website": "https://iterable.com"
+  },
+  {
+   "name": "Leadpipe",
+   "subcategory": "Website Visitor ID",
+   "description": "Person-level visitor de-anon",
+   "website": "https://www.leadpipe.com"
+  },
+  {
+   "name": "RB2B",
+   "subcategory": "Website Visitor ID",
+   "description": "Person-level US visitor ID",
+   "website": "https://www.rb2b.com"
+  },
+  {
+   "name": "Warmly",
+   "subcategory": "Website Visitor ID",
+   "description": "Visitor de-anon + orchestration",
+   "website": "https://www.warmly.ai"
+  },
+  {
+   "name": "Vector",
+   "subcategory": "Website Visitor ID",
+   "description": "Person-level web intent",
+   "website": "https://www.vector.co"
+  },
+  {
+   "name": "Koala",
+   "subcategory": "Website Visitor ID",
+   "description": "PLG intent + visitor signals",
+   "website": "https://getkoala.com"
+  },
+  {
+   "name": "Factors.ai",
+   "subcategory": "Website Visitor ID",
+   "description": "Account ID + analytics",
+   "website": "https://www.factors.ai"
+  },
+  {
+   "name": "Leadfeeder",
+   "subcategory": "Reverse IP / Data",
+   "description": "Reverse-IP company ID",
+   "website": "https://www.leadfeeder.com"
+  },
+  {
+   "name": "Clearbit Reveal",
+   "subcategory": "Reverse IP / Data",
+   "description": "Anonymous traffic to firmographics",
+   "website": "https://clearbit.com/reveal"
+  },
+  {
+   "name": "Albacross",
+   "subcategory": "Reverse IP / Data",
+   "description": "Account-level visitor ID",
+   "website": "https://albacross.com"
+  },
+  {
+   "name": "Snitcher",
+   "subcategory": "Reverse IP / Data",
+   "description": "Reverse-IP visitor tracking",
+   "website": "https://www.snitcher.com"
+  },
+  {
+   "name": "Calendly",
+   "subcategory": "Scheduling",
+   "description": "Self-serve scheduling links",
+   "website": "https://calendly.com"
+  },
+  {
+   "name": "Chili Piper",
+   "subcategory": "Scheduling",
+   "description": "Inbound routing + instant booking",
+   "website": "https://www.chilipiper.com"
+  },
+  {
+   "name": "RevenueHero",
+   "subcategory": "Scheduling",
+   "description": "Inbound scheduling + routing",
+   "website": "https://www.revenuehero.io"
+  },
+  {
+   "name": "Kronologic",
+   "subcategory": "Scheduling",
+   "description": "Automated meeting scheduling",
+   "website": "https://kronologic.ai"
+  },
+  {
+   "name": "Gainsight",
+   "subcategory": "Customer Success",
+   "description": "Customer health + success",
+   "website": "https://www.gainsight.com"
+  },
+  {
+   "name": "ChurnZero",
+   "subcategory": "Customer Success",
+   "description": "Churn-risk + CS automation",
+   "website": "https://churnzero.com"
+  },
+  {
+   "name": "Catalyst",
+   "subcategory": "Customer Success",
+   "description": "Customer success platform",
+   "website": "https://catalyst.io"
+  },
+  {
+   "name": "Vitally",
+   "subcategory": "Customer Success",
+   "description": "CS platform with automations",
+   "website": "https://www.vitally.io"
+  },
+  {
+   "name": "Totango",
+   "subcategory": "Customer Success",
+   "description": "Customer success + retention",
+   "website": "https://www.totango.com"
+  },
+  {
+   "name": "Planhat",
+   "subcategory": "Customer Success",
+   "description": "Customer platform / CS",
+   "website": "https://www.planhat.com"
+  },
+  {
+   "name": "Clari",
+   "subcategory": "Analytics / RevOps",
+   "description": "Forecasting + pipeline inspection",
+   "website": "https://www.clari.com"
+  },
+  {
+   "name": "Terret",
+   "subcategory": "Analytics / RevOps",
+   "description": "Forecasting + deal health (was BoostUp)",
+   "website": "https://terret.ai"
+  },
+  {
+   "name": "Aviso",
+   "subcategory": "Analytics / RevOps",
+   "description": "AI forecasting + RevOps",
+   "website": "https://www.aviso.com"
+  },
+  {
+   "name": "Weflow",
+   "subcategory": "Analytics / RevOps",
+   "description": "Pipeline hygiene + forecasting",
+   "website": "https://www.getweflow.com"
+  },
+  {
+   "name": "InsightSquared",
+   "subcategory": "Analytics / RevOps",
+   "description": "Revenue analytics (Mediafly)",
+   "website": "https://www.mediafly.com"
+  },
+  {
+   "name": "Tableau",
+   "subcategory": "Analytics / RevOps",
+   "description": "BI / data visualization",
+   "website": "https://www.tableau.com"
+  },
+  {
+   "name": "Looker",
+   "subcategory": "Analytics / RevOps",
+   "description": "BI on Google Cloud",
+   "website": "https://cloud.google.com/looker"
+  },
+  {
+   "name": "Orum",
+   "subcategory": "Outbound / Dialer",
+   "description": "AI parallel dialer",
+   "website": "https://www.orum.com"
+  },
+  {
+   "name": "Nooks",
+   "subcategory": "Outbound / Dialer",
+   "description": "AI dialer + virtual sales floor",
+   "website": "https://www.nooks.in"
+  },
+  {
+   "name": "Aircall",
+   "subcategory": "Outbound / Dialer",
+   "description": "Cloud phone for sales/support",
+   "website": "https://aircall.io"
+  },
+  {
+   "name": "Kixie",
+   "subcategory": "Outbound / Dialer",
+   "description": "Sales dialer + SMS",
+   "website": "https://www.kixie.com"
+  },
+  {
+   "name": "JustCall",
+   "subcategory": "Outbound / Dialer",
+   "description": "Cloud phone + dialer",
+   "website": "https://justcall.io"
+  },
+  {
+   "name": "Dialpad",
+   "subcategory": "Outbound / Dialer",
+   "description": "AI-powered calling platform",
+   "website": "https://www.dialpad.com"
+  },
+  {
+   "name": "PhoneBurner",
+   "subcategory": "Outbound / Dialer",
+   "description": "Power dialer",
+   "website": "https://www.phoneburner.com"
+  },
+  {
+   "name": "Profound",
+   "subcategory": "AEO / GEO Visibility",
+   "description": "Brand visibility in AI answers",
+   "website": "https://www.tryprofound.com"
+  },
+  {
+   "name": "Goodie AI",
+   "subcategory": "AEO / GEO Visibility",
+   "description": "AEO/GEO monitoring",
+   "website": "https://www.higoodie.com"
+  },
+  {
+   "name": "Otterly.ai",
+   "subcategory": "AEO / GEO Visibility",
+   "description": "AI search visibility tracking",
+   "website": "https://otterly.ai"
+  },
+  {
+   "name": "Peec AI",
+   "subcategory": "AEO / GEO Visibility",
+   "description": "AI search analytics",
+   "website": "https://peec.ai"
+  },
+  {
+   "name": "Scrunch AI",
+   "subcategory": "AEO / GEO Visibility",
+   "description": "AI search presence monitoring",
+   "website": "https://www.scrunchai.com"
+  },
+  {
+   "name": "Next Net",
+   "subcategory": "AEO / GEO Visibility",
+   "description": "AI-driven brand visibility across AI search, voice, and recommendation engines",
+   "website": "https://nextnet.ai"
+  },
+  {
+   "name": "Snowflake",
+   "subcategory": "Data Warehouse / Lakehouse",
+   "description": "Cloud data warehouse",
+   "website": "https://www.snowflake.com"
+  },
+  {
+   "name": "Databricks",
+   "subcategory": "Data Warehouse / Lakehouse",
+   "description": "Data + AI lakehouse",
+   "website": "https://www.databricks.com"
+  },
+  {
+   "name": "Google BigQuery",
+   "subcategory": "Data Warehouse / Lakehouse",
+   "description": "Serverless cloud data warehouse",
+   "website": "https://cloud.google.com/bigquery"
+  },
+  {
+   "name": "Amazon Redshift",
+   "subcategory": "Data Warehouse / Lakehouse",
+   "description": "AWS cloud data warehouse",
+   "website": "https://aws.amazon.com/redshift"
+  },
+  {
+   "name": "Keyplay",
+   "subcategory": "TAM / Whitespace",
+   "description": "Account scoring + ICP whitespace",
+   "website": "https://keyplay.io"
+  },
+  {
+   "name": "MadKudu",
+   "subcategory": "TAM / Whitespace",
+   "description": "Predictive account + lead scoring",
+   "website": "https://www.madkudu.com"
+  },
+  {
+   "name": "LinkedIn Sales Navigator",
+   "subcategory": "Social Selling",
+   "description": "LinkedIn targeting for sellers",
+   "website": "https://business.linkedin.com/sales-solutions/sales-navigator"
+  },
+  {
+   "name": "Trigify",
+   "subcategory": "Social Selling",
+   "description": "Social signal tracking",
+   "website": "https://www.trigify.io"
+  },
+  {
+   "name": "Aware",
+   "subcategory": "Social Selling",
+   "description": "LinkedIn social listening (shut down)",
+   "website": "https://www.useaware.co"
+  },
+  {
+   "name": "Taplio",
+   "subcategory": "Social Selling",
+   "description": "LinkedIn content + growth",
+   "website": "https://taplio.com"
+  },
+  {
+   "name": "PhantomBuster",
+   "subcategory": "Social Selling",
+   "description": "Social automation + scraping",
+   "website": "https://phantombuster.com"
+  },
+  {
+   "name": "DocuSign",
+   "subcategory": "e-Signature / CPQ",
+   "description": "E-signature + contracts",
+   "website": "https://www.docusign.com"
+  },
+  {
+   "name": "PandaDoc",
+   "subcategory": "e-Signature / CPQ",
+   "description": "Proposals, quotes, e-sign",
+   "website": "https://www.pandadoc.com"
+  },
+  {
+   "name": "DealHub",
+   "subcategory": "e-Signature / CPQ",
+   "description": "CPQ + revenue platform",
+   "website": "https://dealhub.io"
+  },
+  {
+   "name": "Salesforce CPQ",
+   "subcategory": "e-Signature / CPQ",
+   "description": "CPQ native to Salesforce",
+   "website": "https://www.salesforce.com/products/cpq"
+  },
+  {
+   "name": "Dropbox Sign",
+   "subcategory": "e-Signature / CPQ",
+   "description": "E-signature (HelloSign)",
+   "website": "https://www.dropbox.com/sign"
+  },
+  {
+   "name": "Proposify",
+   "subcategory": "e-Signature / CPQ",
+   "description": "Proposal software",
+   "website": "https://www.proposify.com"
+  },
+  {
+   "name": "Qwilr",
+   "subcategory": "e-Signature / CPQ",
+   "description": "Interactive proposals/quotes",
+   "website": "https://qwilr.com"
+  },
+  {
+   "name": "Sendoso",
+   "subcategory": "Gifting / Direct Mail",
+   "description": "Sending + gifting platform",
+   "website": "https://sendoso.com"
+  },
+  {
+   "name": "Reachdesk",
+   "subcategory": "Gifting / Direct Mail",
+   "description": "Gifting + direct mail",
+   "website": "https://www.reachdesk.com"
+  },
+  {
+   "name": "Alyce",
+   "subcategory": "Gifting / Direct Mail",
+   "description": "Personalized gifting (acquired by Sendoso)",
+   "website": "https://www.sendoso.com"
+  },
+  {
+   "name": "Postal",
+   "subcategory": "Gifting / Direct Mail",
+   "description": "Offline engagement + gifting",
+   "website": "https://www.postal.com"
+  },
+  {
+   "name": "Loom",
+   "subcategory": "Video / Async Selling",
+   "description": "Async video messaging",
+   "website": "https://www.loom.com"
+  },
+  {
+   "name": "Vidyard",
+   "subcategory": "Video / Async Selling",
+   "description": "Video for sales",
+   "website": "https://www.vidyard.com"
+  },
+  {
+   "name": "Sendspark",
+   "subcategory": "Video / Async Selling",
+   "description": "Personalized sales video",
+   "website": "https://www.sendspark.com"
+  },
+  {
+   "name": "Bonjoro",
+   "subcategory": "Video / Async Selling",
+   "description": "Personal video outreach",
+   "website": "https://www.bonjoro.com"
+  },
+  {
+   "name": "Tavus",
+   "subcategory": "Video / Async Selling",
+   "description": "AI personalized video",
+   "website": "https://www.tavus.io"
+  },
+  {
+   "name": "HeyGen",
+   "subcategory": "Video / Async Selling",
+   "description": "AI avatar video",
+   "website": "https://www.heygen.com"
+  },
+  {
+   "name": "Hyperbound",
+   "subcategory": "Sales Coaching / Role-play",
+   "description": "AI buyer role-play",
+   "website": "https://www.hyperbound.ai"
+  },
+  {
+   "name": "Second Nature",
+   "subcategory": "Sales Coaching / Role-play",
+   "description": "AI sales role-play",
+   "website": "https://www.secondnature.ai"
+  },
+  {
+   "name": "Quantified",
+   "subcategory": "Sales Coaching / Role-play",
+   "description": "AI sales simulation",
+   "website": "https://www.quantified.ai"
+  },
+  {
+   "name": "Yoodli",
+   "subcategory": "Sales Coaching / Role-play",
+   "description": "AI communication coaching",
+   "website": "https://yoodli.ai"
+  },
+  {
+   "name": "Instantly",
+   "subcategory": "Email Deliverability / Infra",
+   "description": "Cold email infra + warmup",
+   "website": "https://instantly.ai"
+  },
+  {
+   "name": "Smartlead",
+   "subcategory": "Email Deliverability / Infra",
+   "description": "Cold email at scale",
+   "website": "https://www.smartlead.ai"
+  },
+  {
+   "name": "Lemlist",
+   "subcategory": "Email Deliverability / Infra",
+   "description": "Outreach + warmup",
+   "website": "https://www.lemlist.com"
+  },
+  {
+   "name": "MailReach",
+   "subcategory": "Email Deliverability / Infra",
+   "description": "Email warmup + deliverability",
+   "website": "https://www.mailreach.co"
+  },
+  {
+   "name": "LeanData",
+   "subcategory": "Lead Routing / RevOps Plumbing",
+   "description": "Lead-to-account routing",
+   "website": "https://www.leandata.com"
+  },
+  {
+   "name": "Default",
+   "subcategory": "Lead Routing / RevOps Plumbing",
+   "description": "Inbound routing + forms",
+   "website": "https://www.default.com"
+  },
+  {
+   "name": "Distribute",
+   "subcategory": "Lead Routing / RevOps Plumbing",
+   "description": "Lead capture + pages",
+   "website": "https://www.distribute.so"
+  },
+  {
+   "name": "RingLead",
+   "subcategory": "Lead Routing / RevOps Plumbing",
+   "description": "Data orchestration (ZoomInfo)",
+   "website": "https://www.zoominfo.com/products/operations"
+  },
+  {
+   "name": "Openprise",
+   "subcategory": "Lead Routing / RevOps Plumbing",
+   "description": "RevOps data automation",
+   "website": "https://www.openprisetech.com"
+  },
+  {
+   "name": "Syncari",
+   "subcategory": "Lead Routing / RevOps Plumbing",
+   "description": "Data unification + sync",
+   "website": "https://syncari.com"
+  },
+  {
+   "name": "Segment",
+   "subcategory": "Data / CDP & Reverse ETL",
+   "description": "Customer data platform",
+   "website": "https://segment.com"
+  },
+  {
+   "name": "Hightouch",
+   "subcategory": "Data / CDP & Reverse ETL",
+   "description": "Reverse ETL / data activation",
+   "website": "https://hightouch.com"
+  },
+  {
+   "name": "Census",
+   "subcategory": "Data / CDP & Reverse ETL",
+   "description": "Reverse ETL (acquired by Fivetran)",
+   "website": "https://www.fivetran.com"
+  },
+  {
+   "name": "RudderStack",
+   "subcategory": "Data / CDP & Reverse ETL",
+   "description": "Warehouse-native CDP",
+   "website": "https://www.rudderstack.com"
+  },
+  {
+   "name": "Amplitude",
+   "subcategory": "Product Analytics / PLG Signals",
+   "description": "Product analytics",
+   "website": "https://amplitude.com"
+  },
+  {
+   "name": "Mixpanel",
+   "subcategory": "Product Analytics / PLG Signals",
+   "description": "Product analytics",
+   "website": "https://mixpanel.com"
+  },
+  {
+   "name": "Pendo",
+   "subcategory": "Product Analytics / PLG Signals",
+   "description": "Product analytics + guides",
+   "website": "https://www.pendo.io"
+  },
+  {
+   "name": "Heap",
+   "subcategory": "Product Analytics / PLG Signals",
+   "description": "Autocapture product analytics",
+   "website": "https://www.heap.io"
+  },
+  {
+   "name": "June",
+   "subcategory": "Product Analytics / PLG Signals",
+   "description": "Product analytics for B2B",
+   "website": "https://www.june.so"
+  },
+  {
+   "name": "Pocus",
+   "subcategory": "Product Analytics / PLG Signals",
+   "description": "Product-led sales signals",
+   "website": "https://www.pocus.com"
+  },
+  {
+   "name": "Endgame",
+   "subcategory": "Product Analytics / PLG Signals",
+   "description": "Account + PLG signals",
+   "website": "https://www.endgame.io"
+  },
+  {
+   "name": "Correlated",
+   "subcategory": "Product Analytics / PLG Signals",
+   "description": "Product-led revenue signals",
+   "website": "https://www.getcorrelated.com"
+  },
+  {
+   "name": "UserGems",
+   "subcategory": "Relationship / Signal Intelligence",
+   "description": "Job-change + champion signals",
+   "website": "https://www.usergems.com"
+  },
+  {
+   "name": "Common Room",
+   "subcategory": "Relationship / Signal Intelligence",
+   "description": "Signal capture + activation",
+   "website": "https://www.commonroom.io"
+  },
+  {
+   "name": "Cabal",
+   "subcategory": "Relationship / Signal Intelligence",
+   "description": "Investor/network warm intros",
+   "website": "https://getcabal.com"
+  },
+  {
+   "name": "Crossbeam",
+   "subcategory": "Partner / Ecosystem",
+   "description": "Partner ecosystem mapping",
+   "website": "https://www.crossbeam.com"
+  },
+  {
+   "name": "PartnerStack",
+   "subcategory": "Partner / Ecosystem",
+   "description": "Partner/affiliate management",
+   "website": "https://partnerstack.com"
+  },
+  {
+   "name": "RollWorks",
+   "subcategory": "ABM / Personalization",
+   "description": "ABM advertising + orchestration",
+   "website": "https://www.rollworks.com"
+  },
+  {
+   "name": "DemandScience",
+   "subcategory": "ABM / Personalization",
+   "description": "ABM platform (was Terminus)",
+   "website": "https://demandscience.com/"
+  },
+  {
+   "name": "Mutiny",
+   "subcategory": "ABM / Personalization",
+   "description": "Website personalization",
+   "website": "https://www.mutinyhq.com"
+  },
+  {
+   "name": "Folloze",
+   "subcategory": "ABM / Personalization",
+   "description": "B2B buyer experience / ABM",
+   "website": "https://www.folloze.com"
+  },
+  {
+   "name": "PathFactory",
+   "subcategory": "ABM / Personalization",
+   "description": "Content engagement / ABM",
+   "website": "https://www.pathfactory.com"
+  },
+  {
+   "name": "Highspot",
+   "subcategory": "Sales Enablement / Content",
+   "description": "Enablement + content management",
+   "website": "https://www.highspot.com"
+  },
+  {
+   "name": "Seismic",
+   "subcategory": "Sales Enablement / Content",
+   "description": "Enablement platform",
+   "website": "https://seismic.com"
+  },
+  {
+   "name": "Showpad",
+   "subcategory": "Sales Enablement / Content",
+   "description": "Enablement + content",
+   "website": "https://www.showpad.com"
+  },
+  {
+   "name": "Mindtickle",
+   "subcategory": "Sales Enablement / Content",
+   "description": "Readiness + enablement",
+   "website": "https://www.mindtickle.com"
+  },
+  {
+   "name": "Spekit",
+   "subcategory": "Sales Enablement / Content",
+   "description": "Just-in-time enablement",
+   "website": "https://www.spekit.com"
+  },
+  {
+   "name": "Guru",
+   "subcategory": "Sales Enablement / Content",
+   "description": "Knowledge + enablement",
+   "website": "https://www.getguru.com"
+  },
+  {
+   "name": "Aligned",
+   "subcategory": "Digital Sales Rooms",
+   "description": "Buyer collaboration rooms",
+   "website": "https://www.alignedup.com"
+  },
+  {
+   "name": "Dock",
+   "subcategory": "Digital Sales Rooms",
+   "description": "Deal rooms + onboarding",
+   "website": "https://www.dock.us"
+  },
+  {
+   "name": "GetAccept",
+   "subcategory": "Digital Sales Rooms",
+   "description": "Digital sales room + e-sign",
+   "website": "https://www.getaccept.com"
+  },
+  {
+   "name": "Recapped",
+   "subcategory": "Digital Sales Rooms",
+   "description": "Mutual action plans",
+   "website": "https://www.recapped.io"
+  },
+  {
+   "name": "Trumpet",
+   "subcategory": "Digital Sales Rooms",
+   "description": "Digital sales rooms (pods)",
+   "website": "https://www.sendtrumpet.com"
+  },
+  {
+   "name": "Flowla",
+   "subcategory": "Digital Sales Rooms",
+   "description": "Buyer journey rooms",
+   "website": "https://www.flowla.com"
+  },
+  {
+   "name": "Drift",
+   "subcategory": "Conversational / Chat",
+   "description": "Conversational marketing (Salesloft)",
+   "website": "https://www.salesloft.com/platform/drift"
+  },
+  {
+   "name": "Intercom",
+   "subcategory": "Conversational / Chat",
+   "description": "Support + chat + AI agent",
+   "website": "https://www.intercom.com"
+  },
+  {
+   "name": "Chatbase",
+   "subcategory": "Conversational / Chat",
+   "description": "AI chatbot builder",
+   "website": "https://www.chatbase.co"
+  },
+  {
+   "name": "TrustRadius",
+   "subcategory": "Reviews / Social Proof",
+   "description": "B2B reviews + intent",
+   "website": "https://www.trustradius.com"
+  },
+  {
+   "name": "Capterra",
+   "subcategory": "Reviews / Social Proof",
+   "description": "Software reviews directory",
+   "website": "https://www.capterra.com"
+  },
+  {
+   "name": "Gartner Peer Insights",
+   "subcategory": "Reviews / Social Proof",
+   "description": "Enterprise software reviews",
+   "website": "https://www.gartner.com/reviews"
+  }
+ ]
+}
