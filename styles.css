@@ -308,7 +308,7 @@ p { color: var(--siq-text-secondary); }
   font-size: var(--fs-lg);
 }
 .card h3 { margin-bottom: var(--sp-3); }
-.card p { font-size: var(--fs-sm); }
+.card p { font-size: var(--fs-base); line-height: 1.6; }
 
 /* ============ NUMBERED COMPONENT BLOCK ============ */
 .component {

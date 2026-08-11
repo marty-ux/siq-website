@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="480" viewBox="0 0 480 480" role="img" aria-label="GTM Tool Time scorecard mark">
+  <!-- Ink tile -->
+  <rect width="480" height="480" fill="#14110F"/>
+  <!-- Three stacked scorecard bars: crimson / paper / green -->
+  <g>
+    <rect x="96" y="150" width="220" height="60" fill="#C8102E"/>
+    <rect x="96" y="234" width="288" height="60" fill="#F6F1E7"/>
+    <rect x="96" y="318" width="168" height="60" fill="#1F7A4D"/>
+  </g>
+</svg>

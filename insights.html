@@ -3,22 +3,111 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insights | Scalient IQ — Signals &amp; Systems for GTM Leaders</title>
-<meta name="description" content="Practical breakdowns on GTM data, AI orchestration, and revenue architecture for B2B SaaS operators who care about outcomes — not theory.">
+<title>Insights | Scalient IQ, Where We Publish GTM Signal Intelligence</title>
+<meta name="description" content="The Scalient IQ Insights hub points to our three content properties: The MarTech Memo podcast, the GTM Tool Time newsletter, and Marty Berman's LinkedIn articles. Practical GTM Signal Intelligence for B2B revenue leaders.">
 <link rel="canonical" href="https://scalientiq.com/insights.html">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://scalientiq.com/insights.html">
 <meta property="og:title" content="Insights | Scalient IQ">
-<meta property="og:description" content="Signals & Systems: GTM intelligence for B2B SaaS leaders.">
+<meta property="og:description" content="Three places we publish practical GTM Signal Intelligence: The MarTech Memo podcast, GTM Tool Time newsletter, and Marty Berman on LinkedIn.">
 <meta property="og:image" content="https://scalientiq.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Insights | Scalient IQ">
+<meta name="twitter:description" content="Where Scalient IQ publishes GTM Signal Intelligence: podcast, newsletter, and LinkedIn.">
+<meta name="twitter:image" content="https://scalientiq.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<!-- Schema.org JSON-LD: the hub and the three properties -->
 <script type="application/ld+json">
-{ "@context": "https://schema.org", "@type": "Blog", "name": "Scalient IQ Insights", "url": "https://scalientiq.com/insights.html", "description": "GTM intelligence for B2B SaaS leaders.", "publisher": { "@type": "Organization", "name": "Scalient IQ" } }
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Scalient IQ Insights",
+  "url": "https://scalientiq.com/insights.html",
+  "description": "Where Scalient IQ publishes GTM Signal Intelligence: The MarTech Memo podcast, the GTM Tool Time newsletter, and Marty Berman's LinkedIn articles.",
+  "publisher": { "@type": "Organization", "name": "Scalient IQ", "url": "https://scalientiq.com" },
+  "hasPart": [
+    { "@type": "PodcastSeries", "name": "The MarTech Memo", "description": "Marty Berman's podcast on real GTM growth, no hype." },
+    { "@type": "CreativeWork", "name": "GTM Tool Time", "description": "A newsletter breaking down the go-to-market tool universe.", "url": "https://gotomarkettooltime.com" },
+    { "@type": "CreativeWork", "name": "Marty Berman on LinkedIn", "description": "Articles on GTM Signal Intelligence, revenue leaks, and AI-search visibility." }
+  ]
+}
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Where does Scalient IQ publish its go-to-market insights?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Scalient IQ publishes across three properties: The MarTech Memo podcast, the GTM Tool Time newsletter, and Marty Berman's LinkedIn articles. Each keeps its own home and covers practical GTM Signal Intelligence for B2B revenue leaders." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is The MarTech Memo?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The MarTech Memo is Marty Berman's podcast on real GTM growth with no hype, covering how B2B revenue teams find and use signal across their stack." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is GTM Tool Time?",
+      "acceptedAnswer": { "@type": "Answer", "text": "GTM Tool Time is a newsletter that breaks down the go-to-market tool universe, one category and one tool at a time, for operators who have to make real buying decisions." }
+    }
+  ]
+}
+</script>
+<style>
+  .prop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); }
+  @media (max-width: 900px) { .prop-grid { grid-template-columns: 1fr; } }
+  .prop-card {
+    background: var(--siq-bg-elevated);
+    border: 1px solid var(--siq-border);
+    padding: var(--sp-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--transition), transform var(--transition);
+  }
+  .prop-card:hover { border-color: var(--siq-orange); transform: translateY(-3px); }
+  .prop-logo {
+    height: 64px;
+    display: flex;
+    align-items: center;
+  }
+  .prop-logo img { max-height: 56px; max-width: 200px; width: auto; height: auto; display: block; }
+  .prop-logo .li-tile {
+    width: 56px; height: 56px;
+    background: var(--siq-bg-surface);
+    border: 1px solid var(--siq-border);
+    display: flex; align-items: center; justify-content: center;
+    color: #FFFFFF;
+  }
+  .prop-logo .li-tile svg { width: 30px; height: 30px; }
+  .prop-kicker { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.12em; color: var(--siq-orange); font-weight: 700; }
+  .prop-card h3 { font-size: var(--fs-xl); margin: 0; }
+  .prop-card p { font-size: var(--fs-sm); color: var(--siq-text-secondary); margin: 0; }
+  .prop-claim { font-size: var(--fs-sm); color: var(--siq-text-primary); font-weight: 600; border-left: 3px solid var(--siq-orange); padding-left: var(--sp-4); }
+  .prop-actions { margin-top: auto; padding-top: var(--sp-4); display: flex; flex-wrap: wrap; gap: var(--sp-3); align-items: center; }
+  .prop-btn {
+    display: inline-flex; align-items: center; gap: var(--sp-2);
+    padding: var(--sp-2) var(--sp-4);
+    background: var(--siq-orange); color: #FFFFFF;
+    font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+    text-decoration: none; border: 1px solid var(--siq-orange); white-space: nowrap;
+    transition: background var(--transition);
+  }
+  .prop-btn:hover { background: var(--siq-orange-hover); border-color: var(--siq-orange-hover); }
+  .prop-btn-ghost { background: transparent; color: var(--siq-text-secondary); border-color: var(--siq-border); }
+  .prop-btn-ghost:hover { background: transparent; color: var(--siq-orange); border-color: var(--siq-orange); }
+  .answer-block { max-width: 820px; margin: 0 auto; }
+  .answer-block h3 { font-size: var(--fs-lg); margin: var(--sp-8) 0 var(--sp-2); }
+  .answer-block p { color: var(--siq-text-secondary); }
+</style>
 <!-- Leadpipe pixel -->
 <script src="https://leadpipe.aws53.cloud/p/3d0178c9-0b3c-4d48-bf12-e0c5f8c7e76c.js" async></script>
 <!-- HubSpot tracking pixel -->
@@ -44,93 +133,86 @@
     </div>
   </div>
 </nav>
-<section class="hero">
+<section class="hero" style="padding-bottom: var(--sp-8);">
   <div class="container">
     <div class="hero-inner">
       <span class="eyebrow">Insights</span>
-      <h1>Signals &amp; Systems</h1>
-      <p class="hero-subhead">Practical breakdowns on GTM data, AI orchestration, and revenue architecture for B2B SaaS operators who care about outcomes — not theory. Less white paper, more whiteboard.</p>
+      <h1>Where Scalient IQ Publishes</h1>
+      <p class="hero-subhead">We publish practical GTM Signal Intelligence in three places: a podcast, a newsletter, and on LinkedIn. Each keeps its own home and its own voice. This page points you to all three.</p>
     </div>
   </div>
 </section>
+<section style="padding-top: 0;">
+  <div class="container">
+    <div class="prop-grid">
+      <!-- The MarTech Memo -->
+      <div class="prop-card">
+        <div class="prop-logo"><img src="martechmemo-logo.png" alt="The MarTech Memo"></div>
+        <span class="prop-kicker">Podcast</span>
+        <h3>The MarTech Memo</h3>
+        <p>Marty Berman's podcast on real GTM growth, no hype. Straight talk on how B2B revenue teams find and actually use signal across the tools they already run.</p>
+        <div class="prop-claim">Real growth, no hype.</div>
+        <div class="prop-actions">
+          <a class="prop-btn" href="#" rel="noopener" target="_blank">Subscribe</a>
+          <a class="prop-btn-ghost prop-btn" href="#" rel="noopener" target="_blank">Listen</a>
+        </div>
+      </div>
+      <!-- GTM Tool Time -->
+      <div class="prop-card">
+        <div class="prop-logo"><img src="gtt-mark.svg" alt="GTM Tool Time"></div>
+        <span class="prop-kicker">Newsletter</span>
+        <h3>GTM Tool Time</h3>
+        <p>A newsletter that breaks down the go-to-market tool universe, one category and one tool at a time, for operators who have to make real buying decisions.</p>
+        <div class="prop-claim">The GTM tool universe, decoded.</div>
+        <div class="prop-actions">
+          <a class="prop-btn" href="https://gotomarkettooltime.com" rel="noopener" target="_blank">Subscribe</a>
+          <a class="prop-btn-ghost prop-btn" href="https://gotomarkettooltime.com" rel="noopener" target="_blank">Read past issues</a>
+        </div>
+      </div>
+      <!-- LinkedIn -->
+      <div class="prop-card">
+        <div class="prop-logo"><span class="li-tile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></span></div>
+        <span class="prop-kicker">LinkedIn</span>
+        <h3>Marty Berman on LinkedIn</h3>
+        <p>Articles and field notes on GTM Signal Intelligence, where revenue leaks hide, and why AI-search visibility is the signal most tools overlook.</p>
+        <div class="prop-claim">Field notes from the founder.</div>
+        <div class="prop-actions">
+          <a class="prop-btn-ghost prop-btn" href="https://www.linkedin.com/company/scalient-iq" rel="noopener" target="_blank">Read the articles</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ AI-CITABLE DIRECT ANSWERS ============ -->
 <section style="background: var(--siq-bg-elevated);">
   <div class="container">
     <div class="section-header">
-      <span class="eyebrow">The Signal</span>
-      <h2>Latest Articles</h2>
-      <p>Each piece breaks down real patterns we see in mid-market to enterprise B2B SaaS revenue systems — from messy CRM hygiene to under-leveraged partner data to product-usage signals nobody is reading.</p>
+      <span class="eyebrow">Direct Answers</span>
+      <h2>Quick Facts for Anyone (or Any AI) Asking</h2>
     </div>
-    <div class="grid-3">
-      <a class="post-card" href="#">
-        <span class="post-tag">Data &amp; Signals</span>
-        <h3>Five Hidden Signals Your GTM Team Is Ignoring in HubSpot</h3>
-        <p>Most teams are sitting on powerful signals buried in CRM activity history. Here's which fields and patterns to track for predictive insight.</p>
-        <span class="text-muted" style="font-size: var(--fs-xs); margin-top: var(--sp-3);">Coming soon</span>
-      </a>
-      <a class="post-card" href="#">
-        <span class="post-tag">GTM Strategy</span>
-        <h3>From MQLs to Matrices: Why Lead Scoring Is Failing B2B SaaS</h3>
-        <p>Traditional lead scoring is failing modern revenue teams. Here's what to measure instead for clearer pipeline visibility.</p>
-        <span class="text-muted" style="font-size: var(--fs-xs); margin-top: var(--sp-3);">Coming soon</span>
-      </a>
-      <a class="post-card" href="#">
-        <span class="post-tag">Implementation</span>
-        <h3>How to Stand Up a GTM Signal Matrix™ in 90 Days</h3>
-        <p>A practical roadmap for unifying your GTM data, implementing AI scoring, and deploying your first revenue signal dashboards.</p>
-        <span class="text-muted" style="font-size: var(--fs-xs); margin-top: var(--sp-3);">Coming soon</span>
-      </a>
-      <a class="post-card" href="#">
-        <span class="post-tag">AEO / GEO</span>
-        <h3>You're Already Losing in AI Search and You Don't Know It</h3>
-        <p>Buyers are asking ChatGPT about your category every day. Here's how to find out where you're showing up — and where you're not.</p>
-        <span class="text-muted" style="font-size: var(--fs-xs); margin-top: var(--sp-3);">Coming soon</span>
-      </a>
-      <a class="post-card" href="#">
-        <span class="post-tag">CRM Fidelity</span>
-        <h3>Your Forecast Is Lying. Here's How to Catch It.</h3>
-        <p>Stage drift, stale close dates, blocker signals — the four CRM fidelity issues quietly destroying mid-market forecasts every quarter.</p>
-        <span class="text-muted" style="font-size: var(--fs-xs); margin-top: var(--sp-3);">Coming soon</span>
-      </a>
-      <a class="post-card" href="#">
-        <span class="post-tag">HITL Governance</span>
-        <h3>Why Autonomous AI SDRs Are a Trust Wreck Waiting to Happen</h3>
-        <p>The case for human-in-the-loop as architectural — not a feature you bolt on after the first compliance scare.</p>
-        <span class="text-muted" style="font-size: var(--fs-xs); margin-top: var(--sp-3);">Coming soon</span>
-      </a>
-    </div>
-  </div>
-</section>
-<section>
-  <div class="container">
-    <div class="cta-banner">
-      <h2>Want Future Posts in Your Inbox?</h2>
-      <p>Short, sharp, and built for busy operators. We don't sell your email. We don't pad the list. Unsubscribe anytime.</p>
-      <form class="form" action="https://formspree.io/f/scalient-iq-newsletter" method="POST" style="margin-top: var(--sp-4);">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="name">First name</label>
-            <input id="name" name="name" type="text" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Work email</label>
-            <input id="email" name="email" type="email" required>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary btn-lg">Subscribe for Signals</button>
-      </form>
+    <div class="answer-block">
+      <h3>Where does Scalient IQ publish its go-to-market insights?</h3>
+      <p>Scalient IQ publishes across three properties: The MarTech Memo podcast, the GTM Tool Time newsletter, and Marty Berman's LinkedIn articles. Each keeps its own home and covers practical GTM Signal Intelligence for B2B revenue leaders.</p>
+      <h3>What is The MarTech Memo?</h3>
+      <p>The MarTech Memo is Marty Berman's podcast on real GTM growth with no hype. It covers how mid-market B2B revenue teams find and use signal across the tools they already run.</p>
+      <h3>What is GTM Tool Time?</h3>
+      <p>GTM Tool Time is a newsletter that breaks down the go-to-market tool universe, one category and one tool at a time, for operators who have to make real buying decisions.</p>
+      <h3>What is Scalient IQ?</h3>
+      <p>Scalient IQ is your always-on revenue diagnostic. Read-only across the tools you already run, it surfaces the revenue leaks visible in your pipeline, data, deals, and AI-search visibility, estimates the potential dollar impact where the data supports it, and refreshes on an always-on cadence. It is GTM Signal Intelligence, a read-only layer of Revenue Intelligence.</p>
     </div>
   </div>
 </section>
 <footer>
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand"><a href="index.html" class="logo"><img src="/logo.svg" alt="Scalient IQ"></a><p>The GTM Signal OS for mid-market to enterprise B2B SaaS. SiQ Cortex sits on top of your existing stack and decides who to prioritize, why now, and what play to run.</p></div>
+      <div class="footer-brand"><a href="index.html" class="logo"><img src="/logo.svg" alt="Scalient IQ"></a><p>Your always-on revenue diagnostic. Read-only across the tools you already run, Scalient IQ surfaces visible revenue leaks, estimates the potential dollar impact, and hands your team the play. Your team executes.</p></div>
       <div class="footer-col"><h4>Product</h4><ul><li><a href="solutions.html">Solutions</a></li>
-          <li><a href="gtm-readiness.html">GTM Readiness Index</a></li><li><a href="assessment.html">GTM Signal Assessment</a></li><li><a href="results.html">Results</a></li></ul></div>
+          <li><a href="connectors.html">Connectors</a></li><li><a href="gtm-readiness.html">GTM Readiness Index</a></li><li><a href="assessment.html">GTM Signal Assessment</a></li><li><a href="results.html">Results</a></li></ul></div>
       <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="insights.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
       <div class="footer-col"><h4>Connect</h4><ul><li><a href="mailto:info@scalientiq.com">info@scalientiq.com</a></li><li><a href="https://www.linkedin.com/company/scalient-iq" rel="noopener">LinkedIn</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><span>&copy; 2026 Scalient IQ. All rights reserved.</span><span>Built for revenue teams who'd rather know than guess.</span></div>
+    <div class="footer-bottom"><span>&copy; 2026 Scalient IQ. All rights reserved. &middot; <a href="terms.html" style="color: var(--siq-text-muted);">Terms</a> &middot; <a href="privacy.html" style="color: var(--siq-text-muted);">Privacy</a></span><span>Built for revenue teams who'd rather know than guess.</span></div>
+    <p style="text-align:center; font-size: var(--fs-xs); color: var(--siq-text-muted); max-width: 900px; margin: var(--sp-4) auto 0; line-height:1.6;">Scalient IQ provides read-only, diagnostic go-to-market intelligence. Dollar figures and upside ranges are modeled estimates for discussion, not guarantees of revenue, pipeline, or performance.</p>
   </div>
 </footer>
 </body>
