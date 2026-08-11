@@ -221,7 +221,7 @@
 
   async function loadDir() {
     try {
-      const res = await fetch('./connectors.json');
+      const res = await fetch('./connectors.json?v=logos1');
       const data = await res.json();
       DIR.connectors = data.connectors || [];
       DIR.subcategories = data.subcategories || [];
