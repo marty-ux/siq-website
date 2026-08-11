@@ -98,6 +98,18 @@
     transition: border-color var(--transition), transform var(--transition);
   }
   .conn-card:hover { border-color: var(--siq-orange); transform: translateY(-2px); }
+  .conn-logo {
+    width: 48px;
+    height: 48px;
+    background: #FFFFFF;
+    border: 1px solid var(--siq-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    margin-bottom: var(--sp-2);
+  }
+  .conn-logo img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
   .conn-cat {
     font-size: var(--fs-xs);
     text-transform: uppercase;
@@ -200,10 +212,8 @@
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 Scalient IQ. All rights reserved.</span>
-      <span>Built for revenue teams who'd rather know than guess.</span>
-    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Scalient IQ. All rights reserved. &middot; <a href="terms.html" style="color: var(--siq-text-muted);">Terms</a> &middot; <a href="privacy.html" style="color: var(--siq-text-muted);">Privacy</a></span><span>Built for revenue teams who'd rather know than guess.</span></div>
+    <p style="text-align:center; font-size: var(--fs-xs); color: var(--siq-text-muted); max-width: 900px; margin: var(--sp-4) auto 0; line-height:1.6;">Scalient IQ provides read-only, diagnostic go-to-market intelligence. Dollar figures and upside ranges are modeled estimates for discussion, not guarantees of revenue, pipeline, or performance.</p>
   </div>
 </footer>
 <script>
@@ -267,7 +277,9 @@
     const href = c.website ? esc(c.website) : '';
     const tag = href ? 'a href="' + href + '" target="_blank" rel="noopener"' : 'div';
     const close = href ? 'a' : 'div';
+    const logo = c.logo ? esc(c.logo) : 'logos/default-logo.svg';
     return '<' + tag + ' class="conn-card">' +
+      '<span class="conn-logo"><img src="' + logo + '" alt="' + esc(c.name) + ' logo" loading="lazy" onerror="this.onerror=null;this.src=\'logos/default-logo.svg\'"></span>' +
       '<span class="conn-cat">' + esc(c.subcategory) + '</span>' +
       '<h3>' + esc(c.name) + '</h3>' +
       '<p>' + esc(c.description) + '</p>' +
