@@ -1,20 +1,20 @@
 /**
- * Vercel serverless function â /api/save-runbook
+ * Vercel serverless function - /api/save-runbook
  * Receives admin-authenticated edits to a client runbook config and commits the
  * updated JSON back to siq-website via the GitHub Contents API.
  *
  * POST body: { adminPass, clientSlug, editor, config }
  *
  * Env vars required:
- *   GITHUB_PAT â fine-grained PAT with Contents:Read+Write on marty-ux/siq-website
+ *   GITHUB_PAT - fine-grained PAT with Contents:Read+Write on marty-ux/siq-website
+ *   ADMIN_PASS_HASH - sha256 hex digest of the admin passphrase
  *
- * Admin passphrase is hash-verified against ADMIN_PASS_HASH (hardcoded below for v1;
- * move to env var on rotation).
+ * Admin passphrase is hash-verified against the ADMIN_PASS_HASH env var.
  */
 
 const crypto = require('crypto');
 
-const ADMIN_PASS_HASH = 'c396ec00848e1c04ff30bb9fd924edeb1aae36915f68db30da44b2b2c2f9f6a8';
+const ADMIN_PASS_HASH = process.env.ADMIN_PASS_HASH;
 const REPO_OWNER = 'marty-ux';
 const REPO_NAME = 'siq-website';
 const BRANCH = 'main';
@@ -45,6 +45,7 @@ module.exports = async (req, res) => {
   const { adminPass, clientSlug, editor, config } = body;
 
   /* Auth */
+  if (!ADMIN_PASS_HASH) return bad(res, 500, 'ADMIN_PASS_HASH env var not set on Vercel');
   if (!adminPass) return bad(res, 401, 'missing adminPass');
   if (sha256(adminPass) !== ADMIN_PASS_HASH) return bad(res, 401, 'invalid adminPass');
 
@@ -53,7 +54,7 @@ module.exports = async (req, res) => {
   if (!config || typeof config !== 'object') return bad(res, 400, 'missing config');
   if (config.slug && config.slug !== clientSlug) return bad(res, 400, 'config.slug mismatch');
 
-  /* Light schema check â required top-level keys */
+  /* Light schema check - required top-level keys */
   const required = ['name', 'passHash', 'phases', 'tasks', 'risks'];
   for (const k of required) {
     if (!(k in config)) return bad(res, 400, `config missing required key: ${k}`);
@@ -83,7 +84,7 @@ module.exports = async (req, res) => {
       const cur = await getRes.json();
       currentSha = cur.sha;
     } else if (getRes.status === 404) {
-      /* File doesn't exist yet â first save creates it */
+      /* File doesn't exist yet - first save creates it */
       currentSha = null;
     } else {
       const errText = await getRes.text();
