@@ -4,10 +4,15 @@
  * POST body: { slug, passphrase }
  *
  * Validates passphrase against:
- *   1. Admin hash (siq-admin-runbook-2026 sha256) - returns full config + admin: true
+ *   1. Admin hash (sha256 of the passphrase, from the ADMIN_PASS_HASH env var)
+ *      - returns full config + admin: true
  *   2. Client passHash from clients/{slug}/config.json - returns audience-filtered config
  *
  * Reads source JSON from GitHub via PAT to avoid exposing the static file path.
+ *
+ * Env vars required:
+ *   GITHUB_PAT       - fine-grained PAT with Contents:Read+Write on marty-ux/siq-website
+ *   ADMIN_PASS_HASH  - sha256 hex digest of the admin passphrase
  *
  * Response:
  *   200 { ok: true, admin: true|false, config: {...} }
@@ -19,7 +24,7 @@
 
 const crypto = require('crypto');
 
-const ADMIN_PASS_HASH = 'c396ec00848e1c04ff30bb9fd924edeb1aae36915f68db30da44b2b2c2f9f6a8';
+const ADMIN_PASS_HASH = process.env.ADMIN_PASS_HASH;
 const REPO_OWNER = 'marty-ux';
 const REPO_NAME = 'siq-website';
 const BRANCH = 'main';
@@ -79,6 +84,10 @@ module.exports = async (req, res) => {
   const pat = process.env.GITHUB_PAT;
   if (!pat) {
     res.status(500).json({ ok: false, error: 'server not configured (no PAT)' });
+    return;
+  }
+  if (!ADMIN_PASS_HASH) {
+    res.status(500).json({ ok: false, error: 'server not configured (no ADMIN_PASS_HASH)' });
     return;
   }
   const filePath = `clients/${slug}/config.json`;
