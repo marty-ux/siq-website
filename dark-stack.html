@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dark Stack Calculator | Scalient IQ — Estimate Your Redundant Stack Spend</title>
+<meta name="description" content="Estimate how much of your GTM stack you pay for but get no signal from. Eight questions, no data connection required.">
+<link rel="canonical" href="https://scalientiq.com/dark-stack.html">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://scalientiq.com/dark-stack.html">
+<meta property="og:title" content="Dark Stack Calculator | Scalient IQ">
+<meta property="og:description" content="Estimate how much of your GTM stack you pay for but get no signal from. Eight questions, no data connection required.">
+<meta property="og:image" content="https://scalientiq.com/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Dark Stack Calculator",
+  "applicationCategory": "BusinessApplication",
+  "about": "Estimates the dollar range of a GTM stack's dormant and redundant spend from eight self-reported inputs.",
+  "provider": { "@type": "Organization", "name": "Scalient IQ", "url": "https://scalientiq.com" }
+}
+</script>
+<!-- Leadpipe pixel -->
+<script src="https://leadpipe.aws53.cloud/p/3d0178c9-0b3c-4d48-bf12-e0c5f8c7e76c.js" async></script>
+<!-- HubSpot tracking pixel -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/51005472.js"></script>
+<style>
+:root{--blue:#0073E6;--orange:#FF6600;--ink:#0A1628;--ink2:#0E1D33;--line:#1E3050;--txt:#E8EDF5;--dim:#8FA3BF;--grn:#1F7A4D;--amb:#B8860B;--red:#C8102E}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0!important}
+body{background:var(--ink);color:var(--txt);font-family:'DM Sans',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:40px 22px 80px}
+.eyebrow{color:var(--blue);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+h1{font-size:clamp(30px,5.4vw,46px);font-weight:700;line-height:1.1;margin-bottom:14px}
+h1 .o{color:var(--orange)}
+.sub{color:var(--dim);font-size:17px;max-width:620px;margin-bottom:10px}
+.rule{height:3px;background:var(--orange);width:78px;margin:22px 0 34px}
+.q{border-top:1px solid var(--line);padding:22px 0}
+.q:last-of-type{border-bottom:1px solid var(--line)}
+.qn{color:var(--blue);font-size:12px;font-weight:700;letter-spacing:.12em;margin-bottom:7px}
+.qt{font-size:18px;font-weight:500;margin-bottom:6px}
+.qh{color:var(--dim);font-size:14px;margin-bottom:14px}
+.opts{display:flex;flex-wrap:wrap;gap:9px}
+.opt{background:var(--ink2);border:1px solid var(--line);color:var(--txt);padding:10px 15px;font:500 14px 'DM Sans',sans-serif;cursor:pointer;transition:.12s}
+.opt:hover{border-color:var(--blue)}
+.opt[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.bar{position:sticky;bottom:0;background:linear-gradient(180deg,rgba(10,22,40,0) 0%,var(--ink) 34%);padding:26px 0 6px;margin-top:8px}
+.prog{height:4px;background:var(--ink2);margin-bottom:16px}
+.prog i{display:block;height:100%;background:var(--orange);width:0;transition:width .25s}
+.cta{background:var(--orange);color:#fff;border:0;padding:16px 30px;font:700 15px 'DM Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;width:100%}
+.cta:disabled{background:#33415A;color:#7D8DA5;cursor:not-allowed}
+.gate,.res{display:none}
+label{display:block;font-size:13px;color:var(--dim);margin:14px 0 6px}
+input{width:100%;background:var(--ink2);border:1px solid var(--line);color:var(--txt);padding:12px 14px;font:400 15px 'DM Sans',sans-serif}
+input:focus{outline:0;border-color:var(--blue)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.hero{background:var(--ink2);border-left:4px solid var(--orange);padding:28px 26px;margin:6px 0 26px}
+.big{font-size:clamp(34px,7vw,54px);font-weight:700;color:var(--orange);line-height:1.05;margin:6px 0}
+.cap{color:var(--dim);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+table{width:100%;border-collapse:collapse;margin:10px 0 24px;font-size:15px}
+th{text-align:left;background:var(--ink2);color:var(--dim);font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:11px 12px;font-weight:700}
+td{padding:11px 12px;border-top:1px solid var(--line)}
+.pill{font-size:12px;font-weight:700;padding:3px 9px;color:#fff;display:inline-block}
+h2{font-size:22px;margin:30px 0 12px}
+.fine{color:var(--dim);font-size:13px;margin-top:26px;border-top:1px solid var(--line);padding-top:18px}
+a{color:var(--blue)}
+@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+</style></head><body><div class="wrap">
+
+<div class="eyebrow">Scalient IQ</div>
+<h1>The Dark <span class="o">Stack</span> Calculator</h1>
+<p class="sub">Shadow IT is what you never approved. <strong>Dark Stack is what you did approve, pay for every month, and get no signal from.</strong></p>
+<p class="sub">Eight questions. No data connection, no login, nothing installed.</p>
+<div class="rule"></div>
+
+<form id="quiz"></form>
+
+<div class="bar">
+  <div class="prog"><i id="pi"></i></div>
+  <button class="cta" id="go" disabled>Answer all 8 to continue</button>
+</div>
+
+<div class="gate" id="gate">
+  <div class="rule"></div>
+  <h2>Where should we send it?</h2>
+  <p class="sub">Your estimate is ready. We will send a copy plus the category breakdown.</p>
+  <div class="grid2">
+    <div><label>First name</label><input id="fn" autocomplete="given-name"></div>
+    <div><label>Last name</label><input id="ln" autocomplete="family-name"></div>
+  </div>
+  <label>Work email</label><input id="em" type="email" autocomplete="email">
+  <div class="grid2">
+    <div><label>Company</label><input id="co" autocomplete="organization"></div>
+    <div><label>Role</label><input id="ro" autocomplete="organization-title"></div>
+  </div>
+  <br><button class="cta" id="show">Show my Dark Stack estimate</button>
+</div>
+
+<div class="res" id="res"></div>
+
+<p class="fine">This is a directional estimate built from your own answers, not a measurement of your systems. Industry baseline for unused licenses is drawn from the Zylo 2026 SaaS Management Index (40 million licenses, $75 billion in spend). A Stack Health Report measures your actual stack read-only across 200+ connectors and prices what is dark, tool by tool, with renewal dates attached.<br><br>Scalient IQ &middot; scalientiq.com</p>
+</div>
+
+<script>
+const Q=[
+ {t:"Roughly how many tools are in your GTM stack?",h:"Sales, marketing, RevOps and data tools combined.",
+  o:[["Under 15",0],["15 to 30",1],["30 to 60",2],["60 to 100",3],["Over 100",4]],k:"count"},
+ {t:"What do you spend on those tools annually?",h:"Your best estimate of total GTM and martech licence spend.",
+  o:[["Under $250K",150000],["$250K to $750K",500000],["$750K to $2M",1350000],["$2M to $5M",3400000],["Over $5M",7000000]],k:"spend"},
+ {t:"How many were added in the last 18 months?",h:"New tools rarely displace old ones.",
+  o:[["Almost none",0],["A few",1],["Quite a few",2],["A lot, we buy constantly",3]],k:"new"},
+ {t:"Any merger, acquisition or re-platform in the last three years?",h:"Growth by acquisition guarantees duplicate tooling.",
+  o:[["No",0],["One",2],["More than one",3]],k:"ma"},
+ {t:"Could you name today which tools write data into your CRM?",h:"Not which you own. Which ones actually deliver data.",
+  o:[["Yes, all of them",0],["Most of them",1],["Some of them",2],["Honestly, no",3]],k:"vis"},
+ {t:"When did you last review the whole stack for overlap?",h:"Category by category, not line by line on an invoice.",
+  o:[["Last 6 months",0],["6 to 18 months ago",1],["Over 18 months ago",2],["Never",3]],k:"rev"},
+ {t:"How many tools do you suspect fewer than a quarter of the intended team uses?",h:"Bought with good intentions, quietly abandoned.",
+  o:[["None that I know of",0],["One or two",1],["A handful",2],["More than I want to admit",3]],k:"unused"},
+ {t:"Who owns the decision to cancel a GTM tool?",h:"Ownership is the difference between a finding and a saving.",
+  o:[["One clear owner",0],["Finance, with input",1],["Whoever bought it",2],["Nobody, really",3]],k:"own"}
+];
+const A={};const f=document.getElementById('quiz');
+Q.forEach((q,i)=>{const d=document.createElement('div');d.className='q';
+ d.innerHTML='<div class="qn">QUESTION '+(i+1)+' OF 8</div><div class="qt">'+q.t+'</div><div class="qh">'+q.h+'</div>';
+ const w=document.createElement('div');w.className='opts';
+ q.o.forEach(([lab,val])=>{const b=document.createElement('button');b.type='button';b.className='opt';b.textContent=lab;b.setAttribute('aria-pressed','false');
+  b.onclick=()=>{[...w.children].forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');A[q.k]=val;upd();};
+  w.appendChild(b);});
+ d.appendChild(w);f.appendChild(d);});
+function upd(){const n=Object.keys(A).length;document.getElementById('pi').style.width=(n/8*100)+'%';
+ const g=document.getElementById('go');g.disabled=n<8;g.textContent=n<8?('Answer all 8 to continue ('+n+'/8)'):'Calculate my Dark Stack';}
+document.getElementById('go').onclick=()=>{document.querySelector('.bar').style.display='none';f.style.display='none';
+ document.getElementById('gate').style.display='block';document.getElementById('gate').scrollIntoView({behavior:'smooth'});};
+const money=n=>'$'+Math.round(n/1000)*1000>=1000000?'$'+(n/1000000).toFixed(n<10000000?1:0)+'M':'$'+Math.round(n/1000)+'K';
+document.getElementById('show').onclick=()=>{
+ const em=document.getElementById('em').value.trim();
+ if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){alert('Please enter a valid work email.');return;}
+ const risk=A.new+A.ma+A.vis+A.rev+A.unused+A.own;           // 0 to 18
+ const lo=Math.min(0.16+risk*0.011,0.34), hi=Math.min(0.24+risk*0.014,0.46);
+ const S=A.spend, dLo=S*lo, dHi=S*hi;
+ const grade = risk<=4?['STRONG','var(--grn)']:risk<=9?['LEAKING','var(--amb)']:['DARK','var(--red)'];
+ const L=v=>v>=3?"High":v===2?"Moderate":v===1?"Low":"Unlikely";
+ const cats=[
+  ["Overlapping point tools",L(A.count>=4?3:A.count>=3?2:A.count>=2?1:0),"Two tools doing the same job, usually a legacy of buying fast."],
+  ["Tools with no CRM write-back",L(A.vis),"Paid for, producing data that never reaches a revenue decision."],
+  ["Abandoned seats and licences",L(A.unused),"Bought for a team that never adopted it."],
+  ["Duplicate data and enrichment",L(A.ma),"Merged entities almost always carry two of these."],
+  ["Auto-renewing with no owner",L(A.own),"Nobody is accountable for the cancel decision."]];
+ const band = S<250000?["$4,500","Under $250K"]:S<750000?["$7,500","$250K to $750K"]:S<2000000?["$12,500","$750K to $2M"]:["$20,000+","$2M+"];
+ document.getElementById('gate').style.display='none';
+ const r=document.getElementById('res');r.style.display='block';
+ r.innerHTML=
+ '<div class="cap">Your estimated Dark Stack</div>'+
+ '<div class="hero"><div class="cap">Paying for, getting no signal from</div>'+
+ '<div class="big">'+money(dLo)+' to '+money(dHi)+'</div>'+
+ '<div class="cap">per year &middot; <span class="pill" style="background:'+grade[1]+'">SIGNAL-TO-SPEND: '+grade[0]+'</span></div></div>'+
+ '<h2>Where it is most likely hiding</h2><table><tr><th>Category</th><th>Likelihood</th><th>What it looks like</th></tr>'+
+ cats.map(c=>'<tr><td><strong>'+c[0]+'</strong></td><td>'+c[1]+'</td><td style="color:var(--dim)">'+c[2]+'</td></tr>').join('')+'</table>'+
+ '<h2>What this estimate is not</h2><p class="sub">It is arithmetic on eight answers. It cannot tell you <em>which</em> tools are dark, what each one costs, or when they renew. That takes a read of the actual stack.</p>'+
+ '<h2>The Stack Health Report</h2><p class="sub">Read-only across 200+ connectors. Every tool scored on whether its output reaches a revenue decision, priced in dollars, with the renewal date attached to each finding so you know what you can still cancel. Ten business days. Nothing installed.</p>'+
+ '<table><tr><th>Your GTM stack spend</th><th>Stack Health Report</th></tr><tr><td>'+band[1]+'</td><td><strong style="color:var(--orange)">'+band[0]+'</strong></td></tr></table>'+
+ '<p class="sub">The fee credits 100 percent toward any Scalient IQ engagement within 30 days.</p>'+
+ '<br><a class="cta" style="display:block;text-align:center;text-decoration:none" href="https://calendly.com/marty-scalientiq/gtm-signal-review">Book a Signal Review</a>';
+ r.scrollIntoView({behavior:'smooth'});
+ const gradeLabel = grade[0];
+ fetch("https://scalientiq.app.n8n.cloud/webhook/website-leads",{method:"POST",headers:{"Content-Type":"application/json"},keepalive:true,
+  body:JSON.stringify({
+   email: em,
+   firstName: document.getElementById("fn").value.trim(),
+   lastName: document.getElementById("ln").value.trim(),
+   company: document.getElementById("co").value.trim(),
+   role: document.getElementById("ro").value.trim(),
+   source: "Dark Stack Calculator",
+   detail: "Estimated Dark Stack " + money(dLo) + " to " + money(dHi) + " per year. Signal-to-Spend: " + gradeLabel + ". Stack spend band: " + band[1] + ". Recommended report: " + band[0] + ".",
+   darkStackLow: Math.round(dLo),
+   darkStackHigh: Math.round(dHi),
+   signalToSpendGrade: gradeLabel,
+   stackSpendBand: band[1],
+   answers: A
+  })}).catch(function(){});
+};
+</script></body></html>
