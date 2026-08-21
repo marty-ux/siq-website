@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Scalient IQ · Paradigm: The Read Before You Scale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --canvas: #0A1628;
+    --surface: #101D33;
+    --surface-2: #14243D;
+    --text-primary: #F4F7FB;
+    --text-secondary: #94A3B8;
+    --border: rgba(255,255,255,0.10);
+    --blue: #0073E6;
+    --orange: #FF6600;
+  }
+  [data-theme="light"] {
+    --canvas: #FFFFFF;
+    --surface: #F6F8FA;
+    --surface-2: #EEF1F5;
+    --text-primary: #0A1628;
+    --text-secondary: #5B6472;
+    --border: #E1E5EB;
+    --blue: #0073E6;
+    --orange: #FF6600;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--canvas);
+    color: var(--text-primary);
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 56px 24px 80px;
+  }
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+  .brand {
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+  }
+  .brand .iq { color: var(--orange); }
+  .brand .s { color: var(--blue); }
+  .brand .tag {
+    color: var(--text-secondary);
+    font-weight: 700;
+    margin-left: 10px;
+  }
+  .theme-toggle {
+    display: flex;
+    border: 1px solid var(--border);
+  }
+  .theme-toggle button {
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    background: transparent;
+    color: var(--text-secondary);
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+  }
+  .theme-toggle button.active {
+    background: var(--blue);
+    color: #FFFFFF;
+  }
+  h1 {
+    font-size: 40px;
+    line-height: 1.15;
+    font-weight: 800;
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    font-size: 19px;
+    color: var(--text-secondary);
+    font-style: italic;
+    margin: 0 0 36px;
+    max-width: 620px;
+  }
+  p.body {
+    font-size: 17px;
+    color: var(--text-primary);
+    margin: 0 0 18px;
+    max-width: 660px;
+  }
+  .label {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin: 40px 0 18px;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--blue);
+    padding: 20px 22px;
+  }
+  .card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--blue);
+  }
+  .card-lens {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+  .card p {
+    margin: 0;
+    font-size: 15.5px;
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+  .cta-row {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 18px;
+  }
+  .btn {
+    display: inline-block;
+    background: var(--orange);
+    color: #0A1628;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    padding: 14px 24px;
+    border: none;
+  }
+  .link {
+    color: var(--blue);
+    font-weight: 700;
+    text-decoration: underline;
+  }
+  footer {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-secondary);
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  footer a { color: var(--text-secondary); }
+  @media (max-width: 520px) {
+    h1 { font-size: 30px; }
+    .subtitle { font-size: 17px; }
+    .wrap { padding: 36px 18px 60px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand">
+      <span class="s">SCALIENT</span><span class="iq">IQ</span><span class="tag">· PARADIGM</span>
+    </div>
+    <div class="theme-toggle" role="group" aria-label="Theme">
+      <button type="button" id="btn-dark" class="active">DARK</button>
+      <button type="button" id="btn-light">LIGHT</button>
+    </div>
+  </div>
+
+  <h1>The Read Before You Scale</h1>
+  <p class="subtitle">What a Signal Health Report and a Demand Health Report would surface right now, before the new platform goes to market at volume.</p>
+
+  <p class="body">Paradigm is standing up a full go-to-market motion for the new platform at the same time the sales and marketing team is still forming. Josh is twelve days in and already finding the gaps by hand: a demo request that sat untouched for two days, a form nobody was watching, no shared line yet between an MQL and an SQL.</p>
+  <p class="body">A read does the same kind of work Josh is already doing, just across the whole stack at once. It surfaces the visible gaps, estimates the potential dollar impact where the data supports it, and repeats on a recurring cadence instead of catching it once.</p>
+
+  <div class="label">Two Lenses, One Read</div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">Signal Health Report</div>
+        <div class="card-lens">Sales</div>
+      </div>
+      <p>Deal-stage fidelity, buying-committee coverage, and CRM data quality in HubSpot. Most relevant once the SDR and AE team turns the new platform on for SMB and mid-market in January, while you run enterprise and large accounts directly in the meantime.</p>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">Demand Health Report</div>
+        <div class="card-lens">Demand</div>
+      </div>
+      <p>Whether a demo request or content download gets followed up and how fast, where the two websites and form flows leak against each other, and a point-in-time test of whether Paradigm shows up when an enterprise home-care buyer asks ChatGPT, Perplexity, Gemini, or Claude for a vendor like it.</p>
+    </div>
+  </div>
+
+  <div class="label">Why Before, Not After</div>
+  <p class="body">The bogus-email test, the two days of silence, the call to go fix the form: that is the right instinct, run manually, on one channel. A read covers every channel and every stage at once, without anyone having to sit and test it themselves, while the new motion is still small enough to fix cheaply.</p>
+  <p class="body">Once outbound, paid spend, and a full SDR and AE team turn on in January, every gap here gets more expensive to find and more expensive to fix. A read now sets the baseline everything after it gets measured against.</p>
+
+  <div class="label">Nobody Has to Log In</div>
+  <p class="body">Read-only access to HubSpot is all it takes. Nothing new for a team that is already stretched thin standing up a launch to learn, adopt, or maintain. Nothing installed, nothing written back, and access can be revoked at any time.</p>
+
+  <div class="label">Next Step</div>
+  <p class="body">Happy to walk Josh through this whenever works, ahead of or alongside your Monday morning call with him. Looking forward to Thursday, September 3rd at 9:30 AM ET.</p>
+
+  <div class="cta-row">
+    <a class="btn" href="mailto:marty@scalientiq.com">Talk to Marty</a>
+    <a class="link" href="https://scalientiq.com" target="_blank" rel="noopener">More on how this works: scalientiq.com</a>
+  </div>
+
+  <footer>
+    <span>Scalient IQ</span>
+    <span>·</span>
+    <a href="https://scalientiq.com" target="_blank" rel="noopener">scalientiq.com</a>
+    <span>·</span>
+    <a href="mailto:marty@scalientiq.com">marty@scalientiq.com</a>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btnDark = document.getElementById('btn-dark');
+    var btnLight = document.getElementById('btn-light');
+    function setTheme(theme) {
+      root.setAttribute('data-theme', theme);
+      btnDark.classList.toggle('active', theme === 'dark');
+      btnLight.classList.toggle('active', theme === 'light');
+    }
+    btnDark.addEventListener('click', function () { setTheme('dark'); });
+    btnLight.addEventListener('click', function () { setTheme('light'); });
+  })();
+</script>
+</body>
+</html>
