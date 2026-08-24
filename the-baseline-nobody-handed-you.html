@@ -120,6 +120,18 @@ strong{font-weight:700;color:var(--text);}
   max-width:40em;
 }
 
+/* Secondary, deliberately quieter than the primary card */
+.secondary{
+  border-left:3px solid var(--orange);
+  padding:2px 0 2px 16px;
+  margin:20px 0 0;
+  max-width:44em;
+}
+.sec-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:5px;}
+.sec-name{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--orange);}
+.sec-when{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);}
+.secondary p{margin:0;font-size:14.5px;color:var(--muted);max-width:none;}
+
 /* Footer */
 .foot{
   margin-top:52px;padding-top:20px;border-top:1px solid var(--rule);
@@ -160,31 +172,24 @@ strong{font-weight:700;color:var(--text);}
 
   <p>Scalient IQ reads what is already in your CRM and the rest of your revenue stack, scores it, and prices what it finds. Read-only. Nothing installed, nothing written back, nothing new for your team to maintain.</p>
 
-  <div class="label">Two ways in</div>
-
-  <div class="door alt">
-    <div class="door-head">
-      <span class="door-name">Stack Health Report</span>
-      <span class="door-when">10 business days</span>
-    </div>
-    <div class="door-sub">The fast door &middot; finance and RevOps</div>
-    <p>What you spend on go-to-market software against what actually reaches a revenue decision. Zylo's 2026 SaaS Management Index found 36 percent of SaaS licenses sit unused. The sharper question is how many of your tools produce output that nobody acts on. We call that the Dark Stack, and it is usually bigger than the unused-license number.</p>
-    <p>Lowest access ask on this page: a spend export and read-only connector activity. No call recordings, no deal history.</p>
-    <span class="metric">One number: Signal-to-Spend</span>
-  </div>
+  <div class="label">The read</div>
 
   <div class="door">
     <div class="door-head">
       <span class="door-name">GTM Signal Assessment</span>
       <span class="door-when">About 30 days</span>
     </div>
-    <div class="door-sub">The deep door &middot; CEO and CRO</div>
-    <p><strong>Sales lens.</strong> Where pipeline leaks, whether deal stages mean what they say, buying-committee coverage on your real deals, and how much of the forecast rests on CRM data that will not hold up.</p>
-    <p><strong>Demand lens.</strong> Whether inbound gets followed up and how fast, where the funnel loses people between channels, and whether you show up at all when a buyer asks ChatGPT, Perplexity, Gemini, or Claude for a vendor like you.</p>
-    <span class="metric blue">Seven scored dimensions, priced in dollars</span>
+    <div class="door-sub">Two lenses, one read &middot; CEO and CRO</div>
+    <p><strong>Sales.</strong> Where pipeline leaks, whether deal stages mean what they say, buying-committee coverage on your real deals, and how much of the forecast rests on CRM data that will not hold up.</p>
+    <p><strong>Demand.</strong> Whether inbound gets followed up and how fast, where the funnel loses people between channels, and whether you show up at all when a buyer asks ChatGPT, Perplexity, Gemini, or Claude for a vendor like you.</p>
+    <p>Seven scored dimensions, each finding priced against the pipeline it puts at risk, plus a board-grade view of GTM efficiency sitting above the score.</p>
+    <span class="metric blue">The full baseline</span>
   </div>
 
-  <p class="note">Either credits 100 percent toward the other within 30 days, so starting small costs nothing but time.</p>
+  <div class="secondary">
+    <div class="sec-head"><span class="sec-name">Also available: Stack Health Report</span><span class="sec-when">10 business days</span></div>
+    <p>A narrower first step if you want one. What you spend on go-to-market software against what actually reaches a revenue decision, returned as a single Signal-to-Spend number. Smallest access ask of the two, and it credits 100 percent toward the full assessment within 30 days.</p>
+  </div>
 
   <div class="label">What comes back</div>
 
@@ -202,7 +207,7 @@ strong{font-weight:700;color:var(--text);}
 
   <div class="label">Next step</div>
 
-  <p>Thirty minutes. Bring whoever owns revenue operations. We walk both options and you decide whether either is worth running. If the answer is neither, that is a fine outcome. No deck.</p>
+  <p>Thirty minutes. Bring whoever owns revenue operations. We walk the assessment, you decide whether it is worth running, and if the answer is no, that is a fine outcome. No deck.</p>
 
   <div class="foot">
     <span class="name">Marty Berman</span> &middot; Founder &amp; CEO, Scalient IQ<br>
