@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Scalient IQ &middot; The Baseline Nobody Handed You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#0073E6;
+  --orange:#FF6600;
+  --ink:#0A1628;
+  --bg:#0A1628;
+  --surface:rgba(255,255,255,0.03);
+  --rule:rgba(255,255,255,0.10);
+  --text:#E8EDF5;
+  --muted:#95A3B8;
+  --dim:#6F7F96;
+  --chip-off:rgba(255,255,255,0.06);
+}
+html[data-theme="light"]{
+  --bg:#FFFFFF;
+  --surface:rgba(10,22,40,0.025);
+  --rule:rgba(10,22,40,0.12);
+  --text:#0A1628;
+  --muted:#4A5A70;
+  --dim:#6F7F96;
+  --chip-off:rgba(10,22,40,0.06);
+}
+*{box-sizing:border-box;border-radius:0;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  font-size:16px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:760px;margin:0 auto;padding:44px 28px 72px;}
+
+/* Masthead */
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:38px;}
+.mark{font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;}
+.mark .s{color:var(--blue);}
+.mark .iq{color:var(--orange);}
+.mark .div{color:var(--dim);font-weight:500;margin:0 6px;}
+.mark .aud{color:var(--muted);font-weight:700;}
+.toggle{display:flex;border:1px solid var(--rule);}
+.toggle button{
+  font-family:inherit;font-size:11px;font-weight:800;letter-spacing:.1em;
+  padding:7px 14px;border:0;cursor:pointer;background:var(--chip-off);color:var(--muted);
+}
+.toggle button.on{background:var(--blue);color:#fff;}
+
+/* Type */
+h1{
+  font-size:clamp(30px,5.2vw,46px);
+  line-height:1.08;
+  font-weight:800;
+  letter-spacing:-.022em;
+  margin:0 0 18px;
+}
+.deck{
+  font-style:italic;
+  color:var(--muted);
+  font-size:clamp(16px,2.2vw,19px);
+  line-height:1.5;
+  margin:0 0 34px;
+  max-width:36em;
+}
+p{margin:0 0 18px;max-width:40em;}
+.lede{font-size:17px;}
+strong{font-weight:700;color:var(--text);}
+
+/* Section labels */
+.label{
+  color:var(--orange);
+  font-size:11.5px;
+  font-weight:800;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  margin:44px 0 0;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--rule);
+}
+.label + *{margin-top:22px;}
+
+/* Door cards */
+.door{
+  background:var(--surface);
+  border-left:4px solid var(--blue);
+  padding:22px 24px;
+  margin-bottom:14px;
+}
+.door.alt{border-left-color:var(--orange);}
+.door-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:4px;}
+.door-name{font-size:19px;font-weight:800;color:var(--blue);letter-spacing:-.01em;}
+.door.alt .door-name{color:var(--orange);}
+.door-when{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);white-space:nowrap;}
+.door-sub{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.door p{margin:0 0 12px;font-size:15.5px;max-width:none;}
+.door p:last-child{margin-bottom:0;}
+.metric{
+  display:inline-block;background:var(--orange);color:#0A1628;
+  font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  padding:4px 9px;margin-top:2px;
+}
+.metric.blue{background:var(--blue);color:#fff;}
+
+.note{
+  border-left:3px solid var(--orange);
+  padding:2px 0 2px 16px;
+  color:var(--muted);
+  font-size:15px;
+  margin:22px 0 0;
+  max-width:40em;
+}
+
+/* Footer */
+.foot{
+  margin-top:52px;padding-top:20px;border-top:1px solid var(--rule);
+  font-size:13.5px;color:var(--muted);
+}
+.foot .name{color:var(--text);font-weight:700;}
+.foot a{color:var(--blue);text-decoration:none;font-weight:500;}
+.foot a:hover{text-decoration:underline;}
+
+@media print{
+  .toggle{display:none;}
+  body{background:#fff;color:#0A1628;}
+  .wrap{padding:0;max-width:none;}
+}
+@media (max-width:520px){
+  .wrap{padding:30px 20px 56px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div class="mark">
+      <span class="s">Scalient</span><span class="iq">IQ</span><span class="div">&middot;</span><span class="aud">For PE-Backed Operators</span>
+    </div>
+    <div class="toggle" role="group" aria-label="Theme">
+      <button id="btn-dark" class="on" type="button">DARK</button>
+      <button id="btn-light" type="button">LIGHT</button>
+    </div>
+  </div>
+
+  <h1>The Baseline Nobody Handed You</h1>
+
+  <p class="deck">What a read-only look at your go-to-market surfaces in 30 days, priced in dollars.</p>
+
+  <p class="lede">When you took the seat, someone handed you a number. Nobody handed you a go-to-market baseline: where pipeline leaks, which tools feed a revenue decision and which quietly do not, and what any of it is worth. Most operators spend two or three quarters finding that out by hand, one surprise at a time.</p>
+
+  <p>Scalient IQ reads what is already in your CRM and the rest of your revenue stack, scores it, and prices what it finds. Read-only. Nothing installed, nothing written back, nothing new for your team to maintain.</p>
+
+  <div class="label">Two ways in</div>
+
+  <div class="door alt">
+    <div class="door-head">
+      <span class="door-name">Stack Health Report</span>
+      <span class="door-when">10 business days</span>
+    </div>
+    <div class="door-sub">The fast door &middot; finance and RevOps</div>
+    <p>What you spend on go-to-market software against what actually reaches a revenue decision. Zylo's 2026 SaaS Management Index found 36 percent of SaaS licenses sit unused. The sharper question is how many of your tools produce output that nobody acts on. We call that the Dark Stack, and it is usually bigger than the unused-license number.</p>
+    <p>Lowest access ask on this page: a spend export and read-only connector activity. No call recordings, no deal history.</p>
+    <span class="metric">One number: Signal-to-Spend</span>
+  </div>
+
+  <div class="door">
+    <div class="door-head">
+      <span class="door-name">GTM Signal Assessment</span>
+      <span class="door-when">About 30 days</span>
+    </div>
+    <div class="door-sub">The deep door &middot; CEO and CRO</div>
+    <p><strong>Sales lens.</strong> Where pipeline leaks, whether deal stages mean what they say, buying-committee coverage on your real deals, and how much of the forecast rests on CRM data that will not hold up.</p>
+    <p><strong>Demand lens.</strong> Whether inbound gets followed up and how fast, where the funnel loses people between channels, and whether you show up at all when a buyer asks ChatGPT, Perplexity, Gemini, or Claude for a vendor like you.</p>
+    <span class="metric blue">Seven scored dimensions, priced in dollars</span>
+  </div>
+
+  <p class="note">Either credits 100 percent toward the other within 30 days, so starting small costs nothing but time.</p>
+
+  <div class="label">What comes back</div>
+
+  <p>A readout, not a login. Findings ranked by dollar impact, each traced to the data behind it, and a short list of what to fix first. Written for your operating team and forwardable to your board without translation.</p>
+
+  <p>If you want it to keep running, it repeats on a cadence and reports the delta. You find the leak once; the recurring version catches the next one at day 30 instead of day 90, while it is still recoverable.</p>
+
+  <div class="label">Nobody has to log in</div>
+
+  <p>Read-only access to HubSpot or Salesforce and whatever else sits in the stack. Nothing installed, nothing written back, access revocable at any time. We read the stack you already have rather than asking you to change it, and a diagnostic engagement clears procurement in weeks, not quarters.</p>
+
+  <div class="label">Why this travels</div>
+
+  <p>Same instrument, same scoring, every company, so the read is comparable across a portfolio without forcing a CRM change on anyone. It is the sequence McKinsey's June 2026 study of 471 private-equity-backed companies argued for: establish where a company actually is before deciding where to invest. Most turn out to be earlier than their owners assume.</p>
+
+  <div class="label">Next step</div>
+
+  <p>Thirty minutes. Bring whoever owns revenue operations. We walk both options and you decide whether either is worth running. If the answer is neither, that is a fine outcome. No deck.</p>
+
+  <div class="foot">
+    <span class="name">Marty Berman</span> &middot; Founder &amp; CEO, Scalient IQ<br>
+    <a href="mailto:marty@scalientiq.com">marty@scalientiq.com</a> &middot; <a href="https://scalientiq.com">scalientiq.com</a>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var d = document.getElementById('btn-dark');
+  var l = document.getElementById('btn-light');
+  function set(theme){
+    root.setAttribute('data-theme', theme);
+    if (theme === 'dark'){ d.classList.add('on'); l.classList.remove('on'); }
+    else { l.classList.add('on'); d.classList.remove('on'); }
+  }
+  d.addEventListener('click', function(){ set('dark'); });
+  l.addEventListener('click', function(){ set('light'); });
+})();
+</script>
+</body>
+</html>
