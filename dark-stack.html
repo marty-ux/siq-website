@@ -147,7 +147,8 @@ document.getElementById('show').onclick=()=>{
   ["Abandoned seats and licences",L(A.unused),"Bought for a team that never adopted it."],
   ["Duplicate data and enrichment",L(A.ma),"Merged entities almost always carry two of these."],
   ["Auto-renewing with no owner",L(A.own),"Nobody is accountable for the cancel decision."]];
- const band = S<250000?["$4,500","Under $250K"]:S<750000?["$7,500","$250K to $750K"]:S<2000000?["$12,500","$750K to $2M"]:["$20,000+","$2M+"];
+ const band = S<250000?"Under $250K":S<750000?"$250K to $750K":S<2000000?"$750K to $2M":"$2M+";
+ const internalRecPrice = S<250000?"$4,500":S<750000?"$7,500":S<2000000?"$12,500":"$20,000+";
  document.getElementById('gate').style.display='none';
  const r=document.getElementById('res');r.style.display='block';
  r.innerHTML=
@@ -159,7 +160,7 @@ document.getElementById('show').onclick=()=>{
  cats.map(c=>'<tr><td><strong>'+c[0]+'</strong></td><td>'+c[1]+'</td><td style="color:var(--dim)">'+c[2]+'</td></tr>').join('')+'</table>'+
  '<h2>What this estimate is not</h2><p class="sub">It is arithmetic on eight answers. It cannot tell you <em>which</em> tools are dark, what each one costs, or when they renew. That takes a read of the actual stack.</p>'+
  '<h2>The Stack Health Report</h2><p class="sub">Read-only across 200+ connectors. Every tool scored on whether its output reaches a revenue decision, priced in dollars, with the renewal date attached to each finding so you know what you can still cancel. Ten business days. Nothing installed.</p>'+
- '<table><tr><th>Your GTM stack spend</th><th>Stack Health Report</th></tr><tr><td>'+band[1]+'</td><td><strong style="color:var(--orange)">'+band[0]+'</strong></td></tr></table>'+
+ '<table><tr><th>Your GTM stack spend</th><th>Stack Health Report</th></tr><tr><td>'+band+'</td><td><strong style="color:var(--orange)">Scoped to your spend, priced on a call</strong></td></tr></table>'+
  '<p class="sub">The fee credits 100 percent toward any Scalient IQ engagement within 30 days.</p>'+
  '<br><a class="cta" style="display:block;text-align:center;text-decoration:none" href="https://calendly.com/marty-scalientiq/gtm-signal-review">Book a Signal Review</a>';
  r.scrollIntoView({behavior:'smooth'});
@@ -172,11 +173,12 @@ document.getElementById('show').onclick=()=>{
    company: document.getElementById("co").value.trim(),
    role: document.getElementById("ro").value.trim(),
    source: "Dark Stack Calculator",
-   detail: "Estimated Dark Stack " + money(dLo) + " to " + money(dHi) + " per year. Signal-to-Spend: " + gradeLabel + ". Stack spend band: " + band[1] + ". Recommended report: " + band[0] + ".",
+   detail: "Estimated Dark Stack " + money(dLo) + " to " + money(dHi) + " per year. Signal-to-Spend: " + gradeLabel + ". Stack spend band: " + band + ". Internal rec. report price (not shown to lead): " + internalRecPrice + ".",
    darkStackLow: Math.round(dLo),
    darkStackHigh: Math.round(dHi),
    signalToSpendGrade: gradeLabel,
-   stackSpendBand: band[1],
+   stackSpendBand: band,
+   internalRecommendedReportPrice: internalRecPrice,
    answers: A
   })}).catch(function(){});
 };
