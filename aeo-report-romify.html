@@ -21,10 +21,13 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 .metarow{display:flex;gap:30px;flex-wrap:wrap;margin:22px 0 6px;padding-top:16px;border-top:1px solid var(--border)}
 .meta-item .label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-tertiary)}
 .meta-item .value{font-size:15px;font-weight:500;margin-top:3px}
-.hero{background:var(--danger-soft);border:1px solid var(--danger);padding:22px;margin:24px 0 6px}
+/* NOTE 2026-08-26: --danger-soft / --caution-soft / --success-soft are OPAQUE dark hexes
+   declared once on :root and are NOT redefined per theme. Any text placed on them must use a
+   fixed light colour. Using var(--text-*) there renders at ~1:1 contrast in light mode. */
+.hero{background:var(--danger-soft);border:1px solid var(--danger);padding:22px;margin:24px 0 6px;color:#F5F7FA}
 .hero .k{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--danger);font-weight:600}
-.hero .big{font-size:30px;font-weight:700;letter-spacing:-.5px;margin:8px 0 6px;color:var(--text-primary)}
-.hero .sub{font-size:14px;color:var(--text-secondary);max-width:680px}
+.hero .big{font-size:30px;font-weight:700;letter-spacing:-.5px;margin:8px 0 6px;color:#F5F7FA}
+.hero .sub{font-size:14px;color:#B8C5D6;max-width:680px}
 .section{padding:26px 0;border-top:1px solid var(--border)}
 .section-head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
 .section-number{width:26px;height:26px;background:var(--orange);color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
@@ -41,7 +44,11 @@ td{padding:8px 8px 8px 0;border-top:1px solid var(--border)}
 .bn .l{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:6px}
 .bn .big-danger{color:var(--danger);font-size:22px;font-weight:700}
 .bn .big-good{color:var(--success);font-size:22px;font-weight:700}
-.rowhi{background:var(--danger-soft)}
+.rowhi{background:var(--danger-soft);color:#F5F7FA}
+/* NOTE: colour is set on the ROW, not on td. Setting it on td (specificity 0,1,1) would
+   outrank .zero / .some / .win (0,1,0) and strip the semantic red from the counts. */
+/* defensive: inline color:var(--text-*) inside a fixed-dark box would render ~1:1 in light mode */
+.hero b,.hero strong,.hero i,.hero span:not([class]){color:#F5F7FA!important}
 ul.rec{list-style:none;margin-top:8px}
 ul.rec li{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--blue);padding:11px 13px;margin-bottom:8px;font-size:13.5px;color:var(--text-secondary)}
 ul.rec li b{color:var(--text-primary)}
@@ -82,7 +89,7 @@ footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertia
 <div class="hero">
   <div class="k">The finding</div>
   <div class="big">Across 28 questions and four AI models, Romify is named zero times.</div>
-  <div class="sub">Each of the four leading engines &mdash; ChatGPT, Claude, Gemini and Perplexity &mdash; was asked 28 real buyer questions, three times each: <b style="color:var(--text-primary)">336 opportunities</b> to name Romify. It was named <b style="color:var(--text-primary)">zero</b>. Fifteen competitors were named, several of them dozens of times. In the place where a growing share of vendor shortlists now begin, Romify is absent.</div>
+  <div class="sub">Each of the four leading engines &mdash; ChatGPT, Claude, Gemini and Perplexity &mdash; was asked 28 real buyer questions, three times each: <b style="color:#F5F7FA">336 opportunities</b> to name Romify. It was named <b style="color:#F5F7FA">zero</b>. Fifteen competitors were named, several of them dozens of times. In the place where a growing share of vendor shortlists now begin, Romify is absent.</div>
 </div>
 
 <div class="section">
