@@ -68,7 +68,7 @@ a{color:var(--blue)}
 </style>  <!-- siq first-party signal beacon --><script>(function(){try{var K="siq_vid",v=localStorage.getItem(K);if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem(K,v);}var q=new URLSearchParams(location.search),d={vid:v,path:location.pathname,title:document.title,ref:document.referrer,utm_source:q.get("utm_source")||"",utm_medium:q.get("utm_medium")||"",utm_campaign:q.get("utm_campaign")||"",utm_term:q.get("utm_term")||"",utm_content:q.get("utm_content")||"",screen:innerWidth+"x"+innerHeight,type:"pageview"},s=JSON.stringify(d);if(navigator.sendBeacon){navigator.sendBeacon("/api/e",new Blob([s],{type:"application/json"}));}else{fetch("/api/e",{method:"POST",headers:{"Content-Type":"application/json"},body:s,keepalive:true});}}catch(e){}})();</script>
 </head><body><div class="wrap">
 
-<div class="eyebrow">Scalient IQ</div>
+<div class="eyebrow"><a href="index.html" style="color:inherit;text-decoration:none;">Scalient IQ</a></div>
 <h1>The Dark <span class="o">Stack</span> Calculator</h1>
 <p class="sub">Shadow IT is what you never approved. <strong>Dark Stack is what you did approve, pay for every month, and get no signal from.</strong></p>
 <p class="sub">Eight questions. No data connection, no login, nothing installed.</p>
@@ -183,4 +183,4 @@ document.getElementById('show').onclick=()=>{
    answers: A
   })}).catch(function(){});
 };
-</script></body></html>
+</script><footer style="max-width:680px;margin:48px auto 0;padding:20px 22px 40px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;"><a href="index.html" style="color:var(--orange);text-decoration:none;font-weight:600;">&larr; Back to Scalient IQ</a><span style="display:flex;flex-wrap:wrap;gap:16px;font-size:14px;"><a href="solutions.html" style="color:var(--dim);text-decoration:none;">Solutions</a><a href="connectors.html" style="color:var(--dim);text-decoration:none;">Connectors</a><a href="assessment.html" style="color:var(--dim);text-decoration:none;">Assessment</a><a href="contact.html" style="color:var(--dim);text-decoration:none;">Contact</a></span></footer></body></html>
