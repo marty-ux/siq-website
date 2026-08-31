@@ -334,7 +334,7 @@ footer { background:#080910; border-top:1px solid var(--siq-border); padding: va
   font-size: var(--fs-xs); font-weight:500; letter-spacing:0.04em; color: var(--siq-text-secondary);
   text-decoration:none; text-transform:uppercase; transition: border-color var(--transition), color var(--transition); white-space:nowrap; }
 .badge:hover { border-color: var(--siq-orange); color: var(--siq-orange); }
-.badge-status { font-size:0.625rem; color: var(--siq-caution); text-transform:uppercase; letter-spacing:0.06em;
+.badge-status { font-size:0.625rem; color: var(--siq-orange); text-transform:uppercase; letter-spacing:0.06em;
   padding-left: var(--sp-2); margin-left: var(--sp-1); border-left:1px solid var(--siq-border); }
 
 /* ============ TRUST PAGE TABLES ============ */
