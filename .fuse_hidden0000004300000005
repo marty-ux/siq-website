@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GTM Readiness Index | Scalient IQ: Get GTM Ready in 5 Minutes</title>
-<meta name="description" content="How ready is your revenue engine? Free 5-minute GTM Readiness Index. 12 questions across Signal Coverage, Stakeholder Intelligence, CRM Fidelity, and Signal-to-Action. Get your stage and your top fixes.">
+<title>GTM Readiness Index | Scalient IQ, Get GTM Ready in 5 Minutes</title>
+<meta name="description" content="How ready is your revenue engine? Free 5-minute GTM Readiness Index. 12 questions across Signal Coverage, Stakeholder Intelligence, CRM Fidelity, and Orchestration. Get your stage and your top fixes.">
 <link rel="canonical" href="https://scalientiq.com/gtm-readiness.html">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://scalientiq.com/gtm-readiness.html">
-<meta property="og:title" content="GTM Readiness Index | Scalient IQ: Get GTM Ready">
+<meta property="og:title" content="GTM Readiness Index | Scalient IQ, Get GTM Ready">
 <meta property="og:description" content="Free 5-minute self-assessment. 12 questions. Find out which of 4 readiness stages your revenue engine sits at, and the top fixes to move up.">
 <meta property="og:image" content="https://scalientiq.com/og-image.png">
 
@@ -24,7 +24,7 @@
   "@context": "https://schema.org",
   "@type": "Quiz",
   "name": "GTM Readiness Index",
-  "about": "A self-assessment of mid-market B2B GTM readiness across Signal Coverage, Stakeholder Intelligence, CRM Fidelity, and Signal-to-Action.",
+  "about": "A self-assessment of mid-market B2B GTM readiness across Signal Coverage, Stakeholder Intelligence, CRM Fidelity, and Orchestration & Action.",
   "provider": { "@type": "Organization", "name": "Scalient IQ", "url": "https://scalientiq.com" },
   "audience": { "@type": "BusinessAudience", "audienceType": "Mid-market B2B SaaS CROs and VPs of Sales" }
 }
@@ -277,9 +277,8 @@
     vertical-align: middle;
   }
   @keyframes mi-spin { to { transform: rotate(360deg); } }
-.mi-card{--siq-bg:#FFFFFF;--siq-bg-elevated:var(--siq-ivory);--siq-bg-surface:var(--siq-ivory-ground);--siq-border:var(--siq-ink-line);--siq-text-primary:var(--siq-ink);--siq-text-secondary:var(--siq-ink-body);--siq-text-muted:var(--siq-ink-body);background:var(--siq-ivory) !important;box-shadow:0 40px 90px -50px rgba(0,0,0,0.55);} .mi-card input,.mi-card .mi-cta-box{background:#FFFFFF;}</style>
+</style>
 
-<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,o.onload=function(){window.trackingFunctions.onLoad({appId:"678988ffe54cd602d0b96756"})},document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
 
@@ -329,7 +328,7 @@
       <div class="mi-card">
         <span class="mi-eyebrow">Start Here</span>
         <h2 style="font-size: var(--fs-2xl); font-weight: 600; margin-bottom: var(--sp-3);">A 5-minute pulse on your GTM readiness.</h2>
-        <p style="color: var(--siq-text-secondary);">No deck. No pitch. 12 short questions across the four dimensions that decide where your revenue engine sits on the readiness curve. Your results stay private. We use them to send you a personalized diagnostic and benchmark you against mid-market peers.</p>
+        <p style="color: var(--siq-text-secondary);">No deck. No pitch. 12 short questions across the four dimensions that decide where your revenue engine sits on the readiness curve, reactive, connected, orchestrated, or predictive. Your results stay private, we use them to send you a personalized diagnostic and benchmark you against mid-market peers.</p>
 
         <div class="mi-intro-meta">
           <div class="mi-intro-meta-item"><strong>5 min</strong>Avg. completion time</div>
@@ -394,7 +393,7 @@
           </div>
           <div class="mi-gate-error" id="mi-gate-error" role="alert"></div>
           <button type="submit" class="btn btn-primary btn-lg" id="mi-gate-submit">Show My Results</button>
-          <p style="font-size: var(--fs-xs); color: var(--siq-text-muted); margin-top: var(--sp-2);">We'll never share your email. Powered by SiQ Cortex, the Scalient IQ read.</p>
+          <p style="font-size: var(--fs-xs); color: var(--siq-text-muted); margin-top: var(--sp-2);">We'll never share your email. Powered by Scalient IQ.</p>
         </form>
       </div>
     </div>
@@ -433,13 +432,12 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="logo"><img src="/logo.svg" alt="Scalient IQ"></a>
-        <p>Your always-on revenue diagnostic. Read-only across the tools you already run, Scalient IQ surfaces visible revenue leaks, estimates the potential dollar impact, and hands your team the play. Your team executes.</p>
+        <p>The GTM Signal OS for mid-market to enterprise B2B SaaS. Scalient IQ sits on top of your existing stack and decides who to prioritize, why now, and what play to run.</p>
       </div>
       <div class="footer-col">
         <h4>Product</h4>
         <ul>
           <li><a href="solutions.html">Solutions</a></li>
-          <li><a href="connectors.html">Connectors</a></li>
           <li><a href="gtm-readiness.html">GTM Readiness Index</a></li>
           <li><a href="assessment.html">GTM Signal Assessment</a></li>
           <li><a href="results.html">Results</a></li>
@@ -461,17 +459,19 @@
         </ul>
       </div>
     </div>
-    <div class="footer-bottom"><span>&copy; 2026 Scalient IQ. All rights reserved. &middot; <a href="terms.html" style="color: var(--siq-text-muted);">Terms</a> &middot; <a href="privacy.html" style="color: var(--siq-text-muted);">Privacy</a></span><span>Built for revenue teams who'd rather know than guess.</span></div>
-    <p style="text-align:center; font-size: var(--fs-xs); color: var(--siq-text-muted); max-width: 900px; margin: var(--sp-4) auto 0; line-height:1.6;">Scalient IQ provides read-only, diagnostic go-to-market intelligence. Dollar figures and upside ranges are modeled estimates for discussion, not guarantees of revenue, pipeline, or performance.</p>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Scalient IQ. All rights reserved.</span>
+      <span>Built for revenue teams who'd rather know than guess.</span>
+    </div>
   </div>
 </footer>
 
 <script>
-/* ============ GTM READINESS INDEX quiz logic ============ */
+/* ============ GTM READINESS INDEX, quiz logic ============ */
 
 const MI_CONFIG = {
   // n8n webhook for HubSpot create_contact + Slack #siq-website-leads notify.
-  // Wire this up in next session; frontend captures via HubSpot _hsq fallback regardless.
+  // Wire this up in next session, frontend captures via HubSpot _hsq fallback regardless.
   N8N_WEBHOOK_URL: 'https://scalientiq.app.n8n.cloud/webhook/website-leads',
   CALENDLY_URL: 'https://calendly.com/marty-scalientiq/gtm-signal-review',
   HUBSPOT_PORTAL_ID: '51005472',
@@ -483,10 +483,10 @@ const MI_QUESTIONS = [
   { dim: 'Signal Coverage', dimKey: 'signal_coverage',
     text: 'How are you capturing buyer intent today?',
     options: [
-      { label: 'Mostly form fills and outbound. We don\'t have intent data', score: 1 },
+      { label: 'Mostly form fills and outbound, we don\'t have intent data', score: 1 },
       { label: 'We have intent data (Bombora, 6sense, G2) but reps don\'t use it consistently', score: 2 },
       { label: 'Intent flows into the CRM and we run plays for tier-1 accounts', score: 3 },
-      { label: 'Every signal source (intent, web, AEO/GEO, conversation) feeds a single account score', score: 4 }
+      { label: 'Every signal source, intent, web, AEO/GEO, conversation, feeds a single account score', score: 4 }
     ]
   },
   { dim: 'Signal Coverage', dimKey: 'signal_coverage',
@@ -501,7 +501,7 @@ const MI_QUESTIONS = [
   { dim: 'Signal Coverage', dimKey: 'signal_coverage',
     text: 'Are you tracking your visibility on AI search engines (ChatGPT, Perplexity, Gemini, Claude)?',
     options: [
-      { label: 'Not at all. No idea if we\'re being mentioned', score: 1 },
+      { label: 'Not at all, no idea if we\'re being mentioned', score: 1 },
       { label: 'Manual checks every few weeks', score: 2 },
       { label: 'We monitor visibility but it\'s not in our scoring', score: 3 },
       { label: 'AEO/GEO signals feed our account scoring continuously', score: 4 }
@@ -512,8 +512,8 @@ const MI_QUESTIONS = [
   { dim: 'Stakeholder Intelligence', dimKey: 'stakeholder_intel',
     text: 'On a typical late-stage deal, how many stakeholders are actively engaged on the buying side?',
     options: [
-      { label: 'One, our champion, mostly', score: 1 },
-      { label: '2 to 3, champion plus their boss', score: 2 },
+      { label: '1, our champion, mostly', score: 1 },
+      { label: '2-3, champion plus their boss', score: 2 },
       { label: '4+ across functions, but not always the economic buyer', score: 3 },
       { label: 'Full committee mapped: economic buyer, champion, technical, user, ratifier', score: 4 }
     ]
@@ -521,7 +521,7 @@ const MI_QUESTIONS = [
   { dim: 'Stakeholder Intelligence', dimKey: 'stakeholder_intel',
     text: 'How do you identify the buying committee on an account?',
     options: [
-      { label: 'We don\'t formally. Reps figure it out as they go', score: 1 },
+      { label: 'We don\'t formally, reps figure it out as they go', score: 1 },
       { label: 'Manual research per deal in LinkedIn', score: 2 },
       { label: 'We map roles in the CRM but it\'s reactive', score: 3 },
       { label: 'Conversation intelligence auto-detects roles and surfaces gaps', score: 4 }
@@ -553,7 +553,7 @@ const MI_QUESTIONS = [
       { label: 'Reps type it in, when they remember', score: 1 },
       { label: 'Reps log calls but skip the detail', score: 2 },
       { label: 'Conversation intelligence auto-summarizes and reps approve into CRM', score: 3 },
-      { label: 'CI to CRM is fully automated with HITL review for accuracy', score: 4 }
+      { label: 'CI → CRM is fully automated with HITL review for accuracy', score: 4 }
     ]
   },
   { dim: 'CRM Fidelity', dimKey: 'crm_fidelity',
@@ -562,53 +562,53 @@ const MI_QUESTIONS = [
       { label: 'When the forecast call exposes them', score: 1 },
       { label: 'Weekly during a manager review', score: 2 },
       { label: 'Daily via a dashboard', score: 3 },
-      { label: 'Real-time. The system flags drift and recommends a fix', score: 4 }
+      { label: 'Real-time, system flags drift and recommends a fix', score: 4 }
     ]
   },
 
-  // ---------- Dimension 4: Signal-to-Action ----------
-  { dim: 'Signal-to-Action', dimKey: 'orchestration',
+  // ---------- Dimension 4: Orchestration & Action ----------
+  { dim: 'Orchestration & Action', dimKey: 'orchestration',
     text: 'How well integrated is your GTM stack?',
     options: [
-      { label: 'Tools are mostly siloed. Data doesn\'t flow between them', score: 1 },
+      { label: 'Tools are mostly siloed, data doesn\'t flow between them', score: 1 },
       { label: 'Point-to-point integrations exist but break often', score: 2 },
-      { label: 'Consolidated stack with data flowing across the big tools', score: 3 },
-      { label: 'Full stack unified under a single always-on read across the whole stack', score: 4 }
+      { label: 'Consolidated stack with an orchestration layer covering the big tools', score: 3 },
+      { label: 'Full stack unified through a single GTM brain above the execution layer', score: 4 }
     ]
   },
-  { dim: 'Signal-to-Action', dimKey: 'orchestration',
+  { dim: 'Orchestration & Action', dimKey: 'orchestration',
     text: 'When a high-intent signal hits, who decides which play to run?',
     options: [
       { label: 'The rep, based on their gut', score: 1 },
       { label: 'A playbook the rep has to remember', score: 2 },
       { label: 'A workflow auto-assigns the play', score: 3 },
-      { label: 'The signal surfaces the play, the rep decides and runs it', score: 4 }
+      { label: 'AI recommends the play, the human approves, system executes', score: 4 }
     ]
   },
-  { dim: 'Signal-to-Action', dimKey: 'orchestration',
+  { dim: 'Orchestration & Action', dimKey: 'orchestration',
     text: 'How much of your GTM execution involves automated outbound that nobody approves before sending?',
     options: [
-      { label: 'A lot. Autonomous AI SDRs run unchecked', score: 1 },
-      { label: 'Some. We caught issues so we added manual review', score: 2 },
+      { label: 'A lot, autonomous AI SDRs run unchecked', score: 1 },
+      { label: 'Some, we caught issues so we added manual review', score: 2 },
       { label: 'High-stakes actions get approved, the rest is autonomous', score: 3 },
-      { label: 'Every external action gets a human review before it sends', score: 4 }
+      { label: 'Every external action goes through a Human-in-the-Loop Approval Queue', score: 4 }
     ]
   }
 ];
 
 const MI_STAGES = [
-  { min: 12, max: 21, num: 1, headline: 'Signals are everywhere. Your team just can\'t see them.',
+  { min: 12, max: 21, num: 1, headline: 'Signals are everywhere, your team just can\'t see them.',
     copy: 'You\'re capturing some signals, but most plays still happen on instinct. Your reps are doing heroic work without the system to back them up. The fastest unlock is unifying your existing data into a single signal feed before adding more tools.',
     ctaHeadline: 'Book a 30-min Signal Review',
-    ctaSub: 'We\'ll walk through what a unified signal read would look like on your stack.'
+    ctaSub: 'We\'ll walk through what a unified signal layer would look like on your stack.'
   },
   { min: 22, max: 30, num: 2, headline: 'You\'ve made the investment. Now make it talk.',
-    copy: 'You have the tools. What you don\'t have is a single read across all your signals that shows you where the pipeline is leaking and what each leak is costing. The data is there, it\'s just not connected. The next move is a single always-on read across the stack.',
+    copy: 'You have the tools. What you don\'t have is a single system that reads all your signals and tells you which accounts to focus on this week. The data is there, it\'s just not connected. The next move is an orchestration layer above the stack.',
     ctaHeadline: 'Book a 30-min Signal Review',
     ctaSub: 'We\'ll show you what a GTM Signal Assessment would surface in your data.'
   },
   { min: 31, max: 40, num: 3, headline: 'Your stack is humming. Time to scale the motion.',
-    copy: 'Signals reach the right rep at the right time for your tier-1 accounts. The opportunity is scaling that motion across the full pipeline and tightening CRM fidelity so the read gets sharper every week.',
+    copy: 'Signals reach the right rep at the right time for your tier-1 accounts. The opportunity is scaling that motion across the full pipeline and tightening CRM fidelity so the system gets smarter every week.',
     ctaHeadline: 'Book a 30-min Signal Review',
     ctaSub: 'Let\'s pressure-test the gaps and see what a benchmarked Signal Health Report would tell you.'
   },
@@ -801,7 +801,7 @@ const MI = {
       { key: 'signal_coverage', label: 'Signal Coverage' },
       { key: 'stakeholder_intel', label: 'Stakeholder Intelligence' },
       { key: 'crm_fidelity', label: 'CRM Fidelity' },
-      { key: 'orchestration', label: 'Signal-to-Action' }
+      { key: 'orchestration', label: 'Orchestration & Action' }
     ];
     dims.forEach(d => {
       const score = scores.dimScores[d.key];
@@ -821,7 +821,7 @@ const MI = {
 
 // Initial render
 document.addEventListener('DOMContentLoaded', () => {
-  // No-op: intro is already visible by default
+  // No-op, intro is already visible by default
 });
 </script>
 

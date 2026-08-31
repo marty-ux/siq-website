@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trust &amp; Security | Scalient IQ, Built to SOC 2 Type II Controls</title>
+<meta name="description" content="Scalient IQ security posture: SOC 2 Type II controls aligned (audit in progress), CCPA-compliant, AES-256 encryption, AWS US, read-only OAuth, HITL governance, sub-processor transparency.">
+<link rel="canonical" href="https://scalientiq.com/trust.html">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://scalientiq.com/trust.html">
+<meta property="og:title" content="Trust &amp; Security | Scalient IQ">
+<meta property="og:description" content="Built to SOC 2 Type II controls. Read-only OAuth. HITL governance. Customer controls every permission scope.">
+<meta property="og:image" content="https://scalientiq.com/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Trust & Security | Scalient IQ",
+  "url": "https://scalientiq.com/trust.html",
+  "description": "Scalient IQ security and data handling overview, SOC 2 Type II controls aligned, CCPA-compliant, encryption standards, sub-processor transparency, and HITL governance.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Scalient IQ"
+  }
+}
+</script>
+<!-- Leadpipe pixel -->
+<script src="https://leadpipe.aws53.cloud/p/3d0178c9-0b3c-4d48-bf12-e0c5f8c7e76c.js" async></script>
+<!-- HubSpot tracking pixel -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/51005472.js"></script>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><img src="/logo.svg" alt="Scalient IQ"></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="solutions.html">Solutions</a></li>
+      <li><a href="connectors.html">Connectors</a></li>
+      <li><a href="assessment.html">Assessment</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="insights.html">Insights</a></li>
+      <li><a href="trust.html" class="active">Trust</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="contact.html" class="btn btn-ghost">Contact</a>
+      <a href="assessment.html" class="btn btn-primary">Book Signal Review</a>
+    </div>
+  </div>
+</nav>
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <span class="eyebrow">Trust &amp; Security</span>
+      <h1>Built for InfoSec.<br>Engineered for Trust.</h1>
+      <p class="hero-subhead">Scalient IQ runs against your real revenue data, but never inside your environment. Read-only OAuth, AES-256 encryption, AWS US infrastructure, and SOC 2 Type II controls aligned with formal audit in progress. Every external action requires human approval through the HITL Approval Queue.</p>
+      <div class="hero-cta">
+        <a href="#download" class="btn btn-primary btn-lg">Get the Security Overview</a>
+        <a href="contact.html" class="btn btn-secondary btn-lg">Talk to InfoSec</a>
+      </div>
+    </div>
+    <div class="badge-strip" style="margin-top: var(--sp-16);">
+      <a href="#compliance" class="badge">SOC 2 Type II <span class="badge-status">Audit in Progress</span></a>
+      <a href="#compliance" class="badge">CCPA Compliant</a>
+      <a href="#compliance" class="badge">GDPR-Ready</a>
+      <a href="#data-handling" class="badge">AES-256 at Rest</a>
+      <a href="#data-handling" class="badge">TLS 1.2+ in Transit</a>
+      <a href="#infrastructure" class="badge">AWS US</a>
+    </div>
+  </div>
+</section>
+<section style="background: var(--siq-bg-elevated);">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Engagement Modes</span>
+      <h2>Two Modes. Two Distinct Data-Access Profiles.</h2>
+      <p>SiQ engagements operate in two modes with very different access scopes. Both start read-only.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-icon">01</div>
+        <h3>Assessment Mode</h3>
+        <p><strong>Strictly read-only.</strong> All OAuth scopes are read-only. SiQ cannot write, modify, or delete data in client systems. Output is delivered as a Signal Health Report, no actions are ever taken in your CRM or stack.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">02</div>
+        <h3>Platform Mode</h3>
+        <p><strong>Read access plus optional, customer-authorized write-back.</strong> Any write action (CRM field updates, outbound communications, play triggers) requires a separate OAuth grant and passes through the HITL Approval Queue before execution. No write action fires without explicit human approval.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <span class="trust-section-label">Connection Architecture</span>
+    <h2>How We Connect</h2>
+    <table class="trust-table">
+      <tbody>
+        <tr>
+          <th>Authentication</th>
+          <td>OAuth 2.0 with PKCE (where supported). Standard vendor OAuth flows identical to HubSpot, Salesforce, Gong, and Outreach integrations.</td>
+        </tr>
+        <tr>
+          <th>Access Level</th>
+          <td><strong>Assessment engagement:</strong> strictly read-only. All OAuth scopes are read-only; SiQ cannot write, modify, or delete data in client systems.<br><br><strong>Platform engagement:</strong> read access plus optional write-back capabilities. Any write scope requires separate customer authorization, and every write action passes through the HITL Approval Queue before execution.</td>
+        </tr>
+        <tr>
+          <th>Connection Method</th>
+          <td>REST API over TLS 1.2+ encrypted connections. No direct database access. No VPN tunnels. No agents or code installed in client environments.</td>
+        </tr>
+        <tr>
+          <th>Scope Transparency</th>
+          <td>Full list of OAuth scopes provided before authorization. Client reviews and approves each scope explicitly.</td>
+        </tr>
+        <tr>
+          <th>Revocation</th>
+          <td>Client can revoke API access at any time from their CRM admin panel. Revocation is immediate and requires no SiQ involvement.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section style="background: var(--siq-bg-elevated);" id="data-handling">
+  <div class="container">
+    <span class="trust-section-label">Data Handling &amp; Processing</span>
+    <h2>How We Handle Your Data</h2>
+    <table class="trust-table">
+      <tbody>
+        <tr>
+          <th>Data in Transit</th>
+          <td>All data transmitted over TLS 1.2+ encrypted connections. No unencrypted data transfer at any point.</td>
+        </tr>
+        <tr>
+          <th>Data at Rest</th>
+          <td>Encrypted using <strong>AES-256</strong>. All client data stored in isolated, logically separated environments.</td>
+        </tr>
+        <tr>
+          <th>Data Residency</th>
+          <td>Client data processed and stored within US-based cloud infrastructure (AWS). No cross-border data transfer without explicit client consent.</td>
+        </tr>
+        <tr>
+          <th>Data Retention</th>
+          <td>Assessment data retained for 90 days post-delivery for support purposes, then permanently deleted. Platform clients: data retained for duration of contract + 30-day grace period.</td>
+        </tr>
+        <tr>
+          <th>Data Deletion</th>
+          <td>Client can request full data deletion at any time. Deletion completed within 14 business days with written confirmation.</td>
+        </tr>
+        <tr>
+          <th>PII Handling</th>
+          <td>SiQ Cortex processes business contact records (name, email, title, company) as provided by the client's CRM. <strong>No consumer PII. No financial data. No health data.</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section id="infrastructure">
+  <div class="container">
+    <span class="trust-section-label">Infrastructure &amp; Security Controls</span>
+    <h2>How We Defend It</h2>
+    <table class="trust-table">
+      <tbody>
+        <tr>
+          <th>Cloud Provider</th>
+          <td>Amazon Web Services (AWS), US regions.</td>
+        </tr>
+        <tr>
+          <th>SOC 2 Alignment</th>
+          <td>Security controls aligned to <strong>SOC 2 Type II framework</strong>. Formal audit in progress.<span class="status-pill">Audit in Progress</span></td>
+        </tr>
+        <tr>
+          <th>Access Control</th>
+          <td>Role-based access (RBAC). All internal access requires MFA. Principle of least privilege enforced.</td>
+        </tr>
+        <tr>
+          <th>Logging &amp; Monitoring</th>
+          <td>All API access logged with timestamps, user identity, and action type. Anomaly detection active on all client data endpoints.</td>
+        </tr>
+        <tr>
+          <th>Incident Response</th>
+          <td>Documented incident response plan. Client notification within <strong>72 hours</strong> of confirmed breach involving their data.</td>
+        </tr>
+        <tr>
+          <th>Vulnerability Management</th>
+          <td>Regular dependency scanning and patching. No software installed in client environments. No VPN tunnels. No direct database access. All integrations are customer-authorized, outbound API connections from SiQ infrastructure.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section style="background: var(--siq-bg-elevated);">
+  <div class="container">
+    <span class="trust-section-label">HITL Governance</span>
+    <h2>AI Recommends. Human Approves.</h2>
+    <div style="max-width: 800px; margin: 0 auto;">
+      <p style="margin-bottom: var(--sp-4); font-size: var(--fs-md);">SiQ Cortex uses AI agents to analyze signals, score pipeline, and generate recommendations. In <strong>Assessment Mode</strong>, all output is delivered as a read-only report, no actions are taken in client systems.</p>
+      <p style="margin-bottom: var(--sp-4); font-size: var(--fs-md);">In <strong>Platform Mode</strong>, any external-facing action (outbound communications, CRM write operations, stakeholder alerts) requires explicit human approval through the HITL Approval Queue before execution.</p>
+      <p style="font-size: var(--fs-md);">HITL governance is a <strong>core architectural pattern, not an optional feature.</strong> It applies to every AI-generated recommendation that would result in a write action or external communication, including our AI SDR agent, Gage. No automated action fires without a human reviewing and approving it.</p>
+    </div>
+  </div>
+</section>
+<section id="compliance">
+  <div class="container">
+    <span class="trust-section-label">Compliance &amp; Privacy</span>
+    <h2>Frameworks We Operate Against</h2>
+    <table class="trust-table">
+      <tbody>
+        <tr>
+          <th>SOC 2 Type II</th>
+          <td>Controls aligned; formal audit in progress.<span class="status-pill">Audit in Progress</span></td>
+        </tr>
+        <tr>
+          <th>CCPA</th>
+          <td>Compliant. No sale of personal information. Deletion requests honored within 14 business days.<span class="status-pill status-pill-ok">Compliant</span></td>
+        </tr>
+        <tr>
+          <th>GDPR</th>
+          <td>Not currently processing EU personal data. Framework in place for future EU expansion.<span class="status-pill">Ready</span></td>
+        </tr>
+        <tr>
+          <th>Data Processing Agreement</th>
+          <td>Available on request. Standard DPA covering processing scope, sub-processors, and deletion obligations.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section id="download">
+  <div class="container">
+    <div class="cta-banner">
+      <span class="eyebrow">Resources</span>
+      <h2>Want the Full Security Overview?</h2>
+      <p>The Scalient IQ Security &amp; Data Handling Overview (v1.1, April 2026) is available on request. PDF, formatted for InfoSec / IT review. We're also happy to jump on a call with your security team to walk through any of the above in detail.</p>
+      <div class="hero-cta">
+        <button type="button" class="btn btn-primary btn-lg" onclick="SecurityPdfGate.open()">Request the PDF</button>
+        <a href="contact.html" class="btn btn-secondary btn-lg">Schedule InfoSec Call</a>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><img src="/logo.svg" alt="Scalient IQ"></a>
+        <p>The GTM Signal OS for mid-market to enterprise B2B SaaS. SiQ Cortex sits on top of your existing stack and decides who to prioritize, why now, and what play to run.</p>
+      </div>
+      <div class="footer-col"><h4>Product</h4><ul><li><a href="solutions.html">Solutions</a></li>
+          <li><a href="gtm-readiness.html">GTM Readiness Index</a></li><li><a href="assessment.html">GTM Signal Assessment</a></li><li><a href="results.html">Results</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="insights.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Connect</h4><ul><li><a href="mailto:info@scalientiq.com">info@scalientiq.com</a></li><li><a href="https://www.linkedin.com/company/scalient-iq" rel="noopener">LinkedIn</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Scalient IQ. All rights reserved.</span>
+      <span>Built for revenue teams who'd rather know than guess.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ Security PDF gated download modal ============ -->
+<div id="security-pdf-modal" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(10,22,40,0.85); align-items:center; justify-content:center; padding:var(--sp-6);">
+  <div style="max-width:540px; width:100%; background:var(--siq-bg-elevated); border:1px solid var(--siq-border); padding:var(--sp-12); position:relative;">
+    <button type="button" onclick="SecurityPdfGate.close()" aria-label="Close" style="position:absolute; top:var(--sp-4); right:var(--sp-4); background:transparent; border:none; color:var(--siq-text-muted); font-size:var(--fs-xl); cursor:pointer; padding:var(--sp-2);">&times;</button>
+
+    <div id="security-pdf-form-stage">
+      <span style="display:inline-block; font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:0.16em; color:var(--siq-orange); background:rgba(255,102,0,0.1); padding:var(--sp-2) var(--sp-3); margin-bottom:var(--sp-4);">Resource Request</span>
+      <h3 style="font-size:var(--fs-xl); font-weight:600; margin-bottom:var(--sp-3);">Request the Security &amp; Data Handling Overview</h3>
+      <p style="color:var(--siq-text-secondary); margin-bottom:var(--sp-6); font-size:var(--fs-sm);">PDF, formatted for InfoSec / IT review. We'll keep your info on file in case your security team has follow-up questions.</p>
+
+      <form class="form" id="security-pdf-form" onsubmit="SecurityPdfGate.submit(event)" novalidate>
+        <div class="form-group">
+          <label for="sp-firstname">Name</label>
+          <input id="sp-firstname" name="firstname" type="text" required autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="sp-email">Work email</label>
+          <input id="sp-email" name="email" type="email" required autocomplete="email" placeholder="you@company.com">
+        </div>
+        <div class="form-group">
+          <label for="sp-company">Company</label>
+          <input id="sp-company" name="company" type="text" required autocomplete="organization">
+        </div>
+        <div id="sp-error" style="color:var(--siq-danger); font-size:var(--fs-sm); min-height:1.4em;"></div>
+        <button type="submit" class="btn btn-primary btn-lg" id="sp-submit">Get the PDF</button>
+        <p style="font-size:var(--fs-xs); color:var(--siq-text-muted); margin-top:var(--sp-2);">We'll never share your email. Powered by SiQ Cortex.</p>
+      </form>
+    </div>
+
+    <div id="security-pdf-success-stage" style="display:none; text-align:center;">
+      <span style="display:inline-block; font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:0.16em; color:var(--siq-success); background:rgba(22,163,74,0.1); padding:var(--sp-2) var(--sp-3); margin-bottom:var(--sp-4);">Ready</span>
+      <h3 style="font-size:var(--fs-xl); font-weight:600; margin-bottom:var(--sp-4);">Your PDF is ready.</h3>
+      <p style="color:var(--siq-text-secondary); margin-bottom:var(--sp-6); font-size:var(--fs-sm);">Click below to download the Security &amp; Data Handling Overview (v1.1, April 2026). We've also logged your request, feel free to forward this directly to your InfoSec team.</p>
+      <a href="/SiQ-Security-Data-Handling-Overview.pdf" download class="btn btn-primary btn-lg" onclick="SecurityPdfGate.close();">Download the PDF</a>
+      <p style="font-size:var(--fs-xs); color:var(--siq-text-muted); margin-top:var(--sp-6);">Need to walk through it together? <a href="contact.html" style="color:var(--siq-orange);">Schedule an InfoSec call</a>.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const SecurityPdfGate = {
+  N8N_WEBHOOK_URL: 'https://scalientiq.app.n8n.cloud/webhook/website-leads',
+  LEAD_SOURCE: 'Security PDF Request',
+
+  open() {
+    document.getElementById('security-pdf-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('sp-firstname').focus(), 100);
+  },
+
+  close() {
+    document.getElementById('security-pdf-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  },
+
+  async submit(e) {
+    e.preventDefault();
+    const errEl = document.getElementById('sp-error');
+    errEl.textContent = '';
+
+    const firstname = document.getElementById('sp-firstname').value.trim();
+    const email     = document.getElementById('sp-email').value.trim();
+    const company   = document.getElementById('sp-company').value.trim();
+
+    if (!firstname || !email || !company) {
+      errEl.textContent = 'Please fill in all fields.';
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errEl.textContent = 'Please enter a valid work email.';
+      return;
+    }
+
+    const submitBtn = document.getElementById('sp-submit');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting…';
+
+    const payload = {
+      firstname, email, company,
+      lead_source_detail: this.LEAD_SOURCE,
+      asset_requested: 'SiQ Security & Data Handling Overview v1.1',
+      submitted_at: new Date().toISOString(),
+      page_url: window.location.href
+    };
+
+    // HubSpot identify via sitewide tracking pixel
+    try {
+      window._hsq = window._hsq || [];
+      _hsq.push(['identify', {
+        email, firstname, company,
+        siq_lead_source_detail: payload.lead_source_detail
+      }]);
+      _hsq.push(['trackCustomBehavioralEvent', {
+        name: 'security_pdf_requested',
+        properties: { asset: payload.asset_requested }
+      }]);
+      _hsq.push(['trackPageView']);
+    } catch (e) { console.warn('HubSpot identify failed (non-fatal):', e); }
+
+    // n8n webhook
+    try {
+      await fetch(this.N8N_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        mode: 'no-cors'
+      });
+    } catch (e) { console.warn('n8n webhook failed (non-fatal):', e); }
+
+    document.getElementById('security-pdf-form-stage').style.display = 'none';
+    document.getElementById('security-pdf-success-stage').style.display = 'block';
+  }
+};
+
+// Close modal on backdrop click or ESC
+document.getElementById('security-pdf-modal').addEventListener('click', (e) => {
+  if (e.target.id === 'security-pdf-modal') SecurityPdfGate.close();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && document.getElementById('security-pdf-modal').style.display === 'flex') SecurityPdfGate.close();
+});
+</script>
+
+</body>
+</html>

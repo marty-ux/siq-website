@@ -4,20 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GTM Connector Directory | Scalient IQ</title>
-<meta name="description" content="The Scalient IQ GTM Connector Directory: 215+ go-to-market tool connectors across 30+ categories, curated from a 15,000+ tool martech universe. Search CRM, intent, conversation intelligence, enrichment, AEO/GEO, and more.">
+<meta name="description" content="The Scalient IQ GTM Connector Directory: 200+ go-to-market tool connectors across 30+ categories, curated from a 15,000+ tool martech universe. Search CRM, intent, conversation intelligence, enrichment, AEO/GEO, and more.">
 <link rel="canonical" href="https://scalientiq.com/connectors.html">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://scalientiq.com/connectors.html">
 <meta property="og:title" content="GTM Connector Directory | Scalient IQ">
-<meta property="og:description" content="215+ go-to-market tool connectors across 30+ categories, curated from a 15,000+ tool martech universe.">
+<meta property="og:description" content="200+ go-to-market tool connectors across 30+ categories, curated from a 15,000+ tool martech universe.">
 <meta property="og:image" content="https://scalientiq.com/og-image.png">
 <meta property="og:site_name" content="Scalient IQ">
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="GTM Connector Directory | Scalient IQ">
-<meta name="twitter:description" content="215+ go-to-market tool connectors across 30+ categories, curated from a 15,000+ tool martech universe.">
+<meta name="twitter:description" content="200+ go-to-market tool connectors across 30+ categories, curated from a 15,000+ tool martech universe.">
 <meta name="twitter:image" content="https://scalientiq.com/og-image.png">
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,7 +36,7 @@
     "name": "Scalient IQ",
     "url": "https://scalientiq.com"
   },
-  "about": "A directory of 215+ go-to-market tool connectors across 30+ categories that Scalient IQ connects with, curated from a 15,000+ tool martech universe.",
+  "about": "A directory of 200+ go-to-market tool connectors across 30+ categories that Scalient IQ connects with, curated from a 15,000+ tool martech universe.",
   "publisher": {
     "@type": "Organization",
     "name": "Scalient IQ",
@@ -47,41 +47,40 @@
 <style>
   /* ===== Connector Directory (page-scoped) ===== */
   .dir-controls { max-width: var(--container-max); margin: 0 auto; }
-  .dir-row { display: flex; flex-wrap: wrap; gap: var(--sp-3); align-items: stretch; margin-bottom: var(--sp-4); }
   .dir-search {
-    flex: 2 1 260px;
+    width: 100%;
     background: var(--siq-bg-elevated);
     color: var(--siq-text-primary);
     border: 1px solid var(--siq-border);
     font-family: var(--font-sans);
     font-size: var(--fs-base);
     padding: var(--sp-4);
+    margin-bottom: var(--sp-4);
   }
   .dir-search:focus { outline: none; border-color: var(--siq-orange); }
-  .dir-select-wrap { position: relative; flex: 1 1 190px; max-width: 100%; }
-  .dir-select {
-    -webkit-appearance: none; -moz-appearance: none; appearance: none;
-    width: 100%; height: 100%;
-    background: var(--siq-bg-elevated);
-    color: var(--siq-text-primary);
-    border: 1px solid var(--siq-border);
-    font-family: var(--font-sans);
-    font-size: var(--fs-base);
-    padding: var(--sp-4);
-    padding-right: 44px;
-    cursor: pointer;
-  }
-  .dir-select:focus { outline: none; border-color: var(--siq-orange); }
-  .dir-select-wrap::after {
-    content: ""; position: absolute; right: var(--sp-4); top: 50%;
-    width: 9px; height: 9px; margin-top: -7px;
-    border-right: 2px solid var(--siq-text-muted); border-bottom: 2px solid var(--siq-text-muted);
-    transform: rotate(45deg); pointer-events: none;
-  }
-  .dir-select:disabled { opacity: 0.5; cursor: not-allowed; }
-  .dir-select option { background: var(--siq-bg-elevated); color: var(--siq-text-primary); }
-  .dir-count { font-size: var(--fs-sm); color: var(--siq-text-muted); margin-bottom: var(--sp-6); }
+  .dir-count { font-size: var(--fs-sm); color: var(--siq-text-muted); margin-bottom: var(--sp-4); }
   .dir-count strong { color: var(--siq-text-primary); font-weight: 700; }
+  .dir-filters { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-bottom: var(--sp-8); }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: var(--sp-2) var(--sp-4);
+    background: var(--siq-bg-elevated);
+    border: 1px solid var(--siq-border);
+    color: var(--siq-text-secondary);
+    font-family: var(--font-sans);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: border-color var(--transition), color var(--transition), background var(--transition);
+    white-space: nowrap;
+  }
+  .chip:hover { border-color: var(--siq-orange); color: var(--siq-orange); }
+  .chip.active { background: var(--siq-blue); border-color: var(--siq-blue); color: #FFFFFF; }
+  .chip .chip-count { font-weight: 700; opacity: 0.85; }
   .dir-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -99,18 +98,6 @@
     transition: border-color var(--transition), transform var(--transition);
   }
   .conn-card:hover { border-color: var(--siq-orange); transform: translateY(-2px); }
-  .conn-logo {
-    width: 48px;
-    height: 48px;
-    background: #FFFFFF;
-    border: 1px solid var(--siq-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
-    margin-bottom: var(--sp-2);
-  }
-  .conn-logo img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
   .conn-cat {
     font-size: var(--fs-xs);
     text-transform: uppercase;
@@ -136,7 +123,6 @@
 <script src="https://leadpipe.aws53.cloud/p/3d0178c9-0b3c-4d48-bf12-e0c5f8c7e76c.js" async></script>
 <!-- HubSpot tracking pixel -->
 <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/51005472.js"></script>
-<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,o.onload=function(){window.trackingFunctions.onLoad({appId:"678988ffe54cd602d0b96756"})},document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
 <!-- ============ NAV ============ -->
@@ -165,7 +151,7 @@
     <div class="hero-inner">
       <span class="eyebrow">GTM Connector Directory</span>
       <h1>The GTM tools Scalient IQ connects with.</h1>
-      <p class="hero-subhead">215+ connectors across 30+ categories, curated from a 15,000+ tool martech universe. Search by tool name or browse by category.</p>
+      <p class="hero-subhead">200+ connectors across 30+ categories, curated from a 15,000+ tool martech universe. Search by tool name or browse by category.</p>
     </div>
   </div>
 </section>
@@ -173,13 +159,9 @@
 <section style="padding-top: 0;">
   <div class="container">
     <div class="dir-controls">
-      <div class="dir-row">
-        <input id="dir-search" class="dir-search" type="search" placeholder="Search connectors by name..." aria-label="Search connectors">
-        <div class="dir-select-wrap"><select id="dir-cat" class="dir-select" aria-label="Category"></select></div>
-        <div class="dir-select-wrap"><select id="dir-sub" class="dir-select" aria-label="Subcategory" disabled></select></div>
-        <div class="dir-select-wrap"><select id="dir-sort" class="dir-select" aria-label="Sort"></select></div>
-      </div>
+      <input id="dir-search" class="dir-search" type="search" placeholder="Search connectors by name or category..." aria-label="Search connectors">
       <div id="dir-count" class="dir-count"></div>
+      <div id="dir-filters" class="dir-filters" role="group" aria-label="Filter by category"></div>
       <main id="dir-grid" class="dir-grid" aria-live="polite"></main>
       <div id="dir-empty" class="dir-empty" hidden>No connectors match your search.</div>
     </div>
@@ -218,31 +200,22 @@
         </ul>
       </div>
     </div>
-    <div class="footer-bottom"><span>&copy; 2026 Scalient IQ. All rights reserved. &middot; <a href="terms.html" style="color: var(--siq-text-muted);">Terms</a> &middot; <a href="privacy.html" style="color: var(--siq-text-muted);">Privacy</a></span><span>Built for revenue teams who'd rather know than guess.</span></div>
-    <p style="text-align:center; font-size: var(--fs-xs); color: var(--siq-text-muted); max-width: 900px; margin: var(--sp-4) auto 0; line-height:1.6;">Scalient IQ provides read-only, diagnostic go-to-market intelligence. Dollar figures and upside ranges are modeled estimates for discussion, not guarantees of revenue, pipeline, or performance.</p>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Scalient IQ. All rights reserved.</span>
+      <span>Built for revenue teams who'd rather know than guess.</span>
+    </div>
   </div>
 </footer>
 <script>
-  // Top-level category taxonomy (from Rex / siq-labs)
-  const CATEGORIES = [
-    { name: 'Core Revenue Systems', subs: ['CRM','Customer Success','Analytics / RevOps','Lead Routing / RevOps Plumbing','Scheduling'] },
-    { name: 'Sales Execution', subs: ['Sales Engagement','AI SDR / Sales Agents','Outbound / Dialer','Conversation Intelligence','Meeting Intelligence','Sales Coaching / Role-play','Social Selling','Video / Async Selling','Digital Sales Rooms','e-Signature / CPQ'] },
-    { name: 'Data & Intelligence', subs: ['Intent Data','Enrichment','Funding / Market Intelligence','Website Visitor ID','Reverse IP / Data','Relationship / Signal Intelligence','Data / CDP & Reverse ETL','Product Analytics / PLG Signals','AEO / GEO Visibility','Data Warehouse / Lakehouse','TAM / Whitespace'] },
-    { name: 'Marketing & Demand Gen', subs: ['Marketing Automation','ABM / Personalization','Email Deliverability / Infra','Conversational / Chat','Reviews / Social Proof'] },
-    { name: 'Enablement & Ecosystem', subs: ['Sales Enablement / Content','Partner / Ecosystem','Gifting / Direct Mail'] }
-  ];
-  const SUB_TO_CAT = {};
-  CATEGORIES.forEach(c => c.subs.forEach(s => { SUB_TO_CAT[s] = c.name; }));
-
-  const DIR = { connectors: [], subcategories: [], cat: 'All', sub: 'All', sort: 'featured', query: '' };
+  const DIR = { connectors: [], subcategories: [], active: 'All', query: '' };
 
   async function loadDir() {
     try {
-      const res = await fetch('./connectors.json?v=logos1');
+      const res = await fetch('./connectors.json');
       const data = await res.json();
       DIR.connectors = data.connectors || [];
       DIR.subcategories = data.subcategories || [];
-      renderControls();
+      renderFilters();
       renderGrid();
     } catch (err) {
       console.error('Could not load connectors.json', err);
@@ -250,64 +223,34 @@
     }
   }
 
-  function subCount(sub) { return DIR.connectors.filter(c => c.subcategory === sub).length; }
-  function catCount(name) { return DIR.connectors.filter(c => SUB_TO_CAT[c.subcategory] === name).length; }
-
   function visible() {
     const q = DIR.query.toLowerCase();
-    let list = DIR.connectors.filter(c => {
-      if (DIR.cat !== 'All' && SUB_TO_CAT[c.subcategory] !== DIR.cat) return false;
-      if (DIR.sub !== 'All' && c.subcategory !== DIR.sub) return false;
+    return DIR.connectors.filter(c => {
+      const catOk = DIR.active === 'All' || c.subcategory === DIR.active;
+      if (!catOk) return false;
       if (!q) return true;
       return (c.name + ' ' + c.description + ' ' + c.subcategory).toLowerCase().includes(q);
     });
-    if (DIR.sort === 'az') list = list.slice().sort((a, b) => a.name.localeCompare(b.name));
-    else if (DIR.sort === 'za') list = list.slice().sort((a, b) => b.name.localeCompare(a.name));
-    else if (DIR.sort === 'cat') list = list.slice().sort((a, b) => a.subcategory.localeCompare(b.subcategory) || a.name.localeCompare(b.name));
-    return list;
   }
 
-  function opt(value, label, selected) {
-    return '<option value="' + escAttr(value) + '"' + (selected ? ' selected' : '') + '>' + esc(label) + '</option>';
-  }
-
-  function renderControls() {
-    const catSel = document.getElementById('dir-cat');
-    let cats = [opt('All', 'All categories (' + DIR.connectors.length + ')', DIR.cat === 'All')];
-    CATEGORIES.forEach(c => { const n = catCount(c.name); if (n) cats.push(opt(c.name, c.name + ' (' + n + ')', DIR.cat === c.name)); });
-    catSel.innerHTML = cats.join('');
-    catSel.value = DIR.cat;
-    catSel.onchange = () => { DIR.cat = catSel.value; DIR.sub = 'All'; renderSub(); renderGrid(); };
-    renderSub();
-
-    const sortSel = document.getElementById('dir-sort');
-    sortSel.innerHTML = [
-      opt('featured', 'Sort: Featured', DIR.sort === 'featured'),
-      opt('az', 'Sort: A to Z', DIR.sort === 'az'),
-      opt('za', 'Sort: Z to A', DIR.sort === 'za'),
-      opt('cat', 'Sort: By category', DIR.sort === 'cat')
-    ].join('');
-    sortSel.value = DIR.sort;
-    sortSel.onchange = () => { DIR.sort = sortSel.value; renderGrid(); };
-  }
-
-  function renderSub() {
-    const subSel = document.getElementById('dir-sub');
-    if (DIR.cat === 'All') {
-      subSel.innerHTML = opt('All', 'All subcategories', true);
-      subSel.value = 'All';
-      subSel.disabled = true;
-      subSel.onchange = null;
-      return;
-    }
-    const cat = CATEGORIES.find(c => c.name === DIR.cat);
-    const subs = cat ? cat.subs.filter(s => subCount(s)) : [];
-    let opts = [opt('All', 'All in ' + DIR.cat + ' (' + catCount(DIR.cat) + ')', DIR.sub === 'All')];
-    subs.forEach(s => opts.push(opt(s, s + ' (' + subCount(s) + ')', DIR.sub === s)));
-    subSel.innerHTML = opts.join('');
-    subSel.value = DIR.sub;
-    subSel.disabled = false;
-    subSel.onchange = () => { DIR.sub = subSel.value; renderGrid(); };
+  function renderFilters() {
+    const wrap = document.getElementById('dir-filters');
+    const counts = {};
+    DIR.connectors.forEach(c => { counts[c.subcategory] = (counts[c.subcategory] || 0) + 1; });
+    const cats = ['All', ...DIR.subcategories.filter(s => counts[s])];
+    wrap.innerHTML = cats.map(cat => {
+      const n = cat === 'All' ? DIR.connectors.length : counts[cat];
+      const active = cat === DIR.active ? ' active' : '';
+      return '<button class="chip' + active + '" data-cat="' + escAttr(cat) + '">' +
+        esc(cat) + ' <span class="chip-count">' + n + '</span></button>';
+    }).join('');
+    wrap.querySelectorAll('.chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        DIR.active = btn.getAttribute('data-cat');
+        renderFilters();
+        renderGrid();
+      });
+    });
   }
 
   function renderGrid() {
@@ -324,9 +267,7 @@
     const href = c.website ? esc(c.website) : '';
     const tag = href ? 'a href="' + href + '" target="_blank" rel="noopener"' : 'div';
     const close = href ? 'a' : 'div';
-    const logo = c.logo ? esc(c.logo) : 'logos/default-logo.svg';
     return '<' + tag + ' class="conn-card">' +
-      '<span class="conn-logo"><img src="' + logo + '" alt="' + esc(c.name) + ' logo" loading="lazy" onerror="this.onerror=null;this.src=\'logos/default-logo.svg\'"></span>' +
       '<span class="conn-cat">' + esc(c.subcategory) + '</span>' +
       '<h3>' + esc(c.name) + '</h3>' +
       '<p>' + esc(c.description) + '</p>' +
