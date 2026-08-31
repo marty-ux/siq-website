@@ -368,3 +368,21 @@ footer { background:#080910; border-top:1px solid var(--siq-border); padding: va
 .ivory-panel .form-group label{color:var(--siq-ink-body);}
 .ivory-panel .form-group input,.ivory-panel .form-group textarea,.ivory-panel .form-group select{background:#FFFFFF;border-color:var(--siq-ink-line);color:var(--siq-ink);}
 .ivory-panel .form-group input:focus,.ivory-panel .form-group textarea:focus,.ivory-panel .form-group select:focus{border-color:var(--siq-orange);}
+
+/* ============ IVORY HEROES (inner pages) ============ */
+.hero{ background: var(--siq-ivory); }
+.hero::before{ background:
+  radial-gradient(680px 340px at 78% -10%, rgba(255,102,0,0.10), transparent 70%),
+  radial-gradient(560px 320px at 10% 0%, rgba(46,125,255,0.06), transparent 70%); }
+.hero h1, .hero h2, .hero h3, .hero h4{ color: var(--siq-ink); }
+.hero .hero-subhead, .hero > .container p, .hero p{ color: var(--siq-ink-body); }
+.hero .eyebrow{ color: var(--siq-orange); border-color: var(--siq-ink-line); background: rgba(18,32,58,0.03); }
+.hero .btn-secondary{ color: var(--siq-ink); border-color: var(--siq-ink-line); }
+.hero .btn-secondary:hover{ border-color: var(--siq-orange); color: var(--siq-orange); }
+.hero .hero-quote{ background: rgba(18,32,58,0.05); }
+.hero .hero-quote p{ color: var(--siq-ink); }
+.hero .hero-quote cite{ color: var(--siq-ink-body); }
+.hero .badge-strip{ border-top-color: var(--siq-ink-line); }
+.hero .badge-strip-label, .hero .badge{ color: var(--siq-ink-body); }
+.hero .badge{ background: rgba(18,32,58,0.03); border-color: var(--siq-ink-line); }
+.hero .stat{ background: linear-gradient(180deg,#111C30,#0C1424); }
