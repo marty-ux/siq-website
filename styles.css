@@ -140,6 +140,12 @@ p { color: var(--siq-text-secondary); }
 .nav-links a:hover, .nav-links a.active { color: var(--siq-text-primary); }
 .nav-cta { display:flex; gap: var(--sp-3); align-items:center; }
 @media (max-width:900px){ .nav-links { display:none; } }
+@media (max-width:600px){
+  .nav-inner { padding: var(--sp-3) var(--sp-4); }
+  .logo img { height:26px; }
+  .nav-cta .btn-ghost { display:none; }
+  .nav-cta .btn-primary { padding: var(--sp-2) var(--sp-4); font-size: var(--fs-xs); box-shadow:none; }
+}
 
 /* ============ BUTTONS ============ */
 .btn {
