@@ -181,6 +181,7 @@
   }
 </style>
   <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/51005472.js"></script>
+  <!-- siq first-party signal beacon --><script>(function(){try{var K="siq_vid",v=localStorage.getItem(K);if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem(K,v);}var q=new URLSearchParams(location.search),d={vid:v,path:location.pathname,title:document.title,ref:document.referrer,utm_source:q.get("utm_source")||"",utm_medium:q.get("utm_medium")||"",utm_campaign:q.get("utm_campaign")||"",utm_term:q.get("utm_term")||"",utm_content:q.get("utm_content")||"",screen:innerWidth+"x"+innerHeight,type:"pageview"},s=JSON.stringify(d);if(navigator.sendBeacon){navigator.sendBeacon("/api/e",new Blob([s],{type:"application/json"}));}else{fetch("/api/e",{method:"POST",headers:{"Content-Type":"application/json"},body:s,keepalive:true});}}catch(e){}})();</script>
 </head>
 <body data-theme="dark">
 
@@ -1019,7 +1020,7 @@
       : '<div style="max-width:560px;text-align:center;font-family:\'DM Sans\',Arial,sans-serif;">' +
           '<div style="font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#FF6600;margin-bottom:14px;">Almost there</div>' +
           '<h1 style="font-size:30px;margin:0 0 16px;line-height:1.2;font-weight:700;">We couldn\'t auto-submit your responses.</h1>' +
-          '<p style="font-size:17px;line-height:1.6;color:#c7d0db;margin:0 0 28px;">Please download a copy below and email it to <b style="color:#fff;">marty@scalientiq.com</b> — we\'ll take it from there.</p>' +
+          '<p style="font-size:17px;line-height:1.6;color:#c7d0db;margin:0 0 28px;">Please download a copy below and email it to <b style="color:#fff;">info@scalientiq.com</b> — we\'ll take it from there.</p>' +
           btn +
         '</div>';
     ov.innerHTML = inner;
