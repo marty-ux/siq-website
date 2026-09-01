@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stack Health Report: Sample Readout &middot; Acme Corp | Scalient IQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#0073E6;--orange:#FF6600;--dark:#0A0B10;--danger:#EF4444;--danger-soft:#2a1416;--caution:#FBBF24;--caution-soft:#2a2410;--success:#22C55E;--success-soft:#0f2417;}
+body[data-theme="dark"]{--bg:#0A0B10;--surface:#0F1E35;--surface2:#132540;--border:#1F3352;--text-primary:#F5F7FA;--text-secondary:#B8C5D6;--text-tertiary:#8FA3BF;}
+body[data-theme="light"]{--bg:#F8FAFC;--surface:#FFFFFF;--surface2:#F1F5F9;--border:#E2E8F0;--text-primary:#0A0B10;--text-secondary:#475569;--text-tertiary:#94A3B8;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text-primary);line-height:1.55;padding:0 20px 60px;transition:background .2s}
+.wrap{max-width:960px;margin:0 auto}
+.head{padding:28px 0 6px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px}
+.brand{font-size:22px;font-weight:700;color:var(--blue)}.brand span{color:var(--orange)}
+.prepared{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-tertiary);margin:14px 0 4px}
+.title{font-size:34px;font-weight:700;letter-spacing:-.6px;margin:2px 0 8px}
+.subtitle{color:var(--text-secondary);font-size:15px;max-width:660px}
+.metarow{display:flex;gap:30px;flex-wrap:wrap;margin:22px 0 6px;padding-top:16px;border-top:1px solid var(--border)}
+.meta-item .label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-tertiary)}
+.meta-item .value{font-size:15px;font-weight:500;margin-top:3px}
+.toggles{display:flex;gap:10px;flex-wrap:wrap}
+.toggle{display:inline-flex;border:1px solid var(--border);border-radius:0;overflow:hidden}
+.toggle button{background:var(--surface);color:var(--text-secondary);border:none;padding:8px 13px;font-family:inherit;font-size:12px;font-weight:500;cursor:pointer}
+.toggle button.active{background:var(--blue);color:#fff}
+body[data-assessment="bad"] .show-good{display:none!important}
+body[data-assessment="good"] .show-bad{display:none!important}
+body[data-assessment="bad"] .good-only{display:none!important}
+body[data-assessment="good"] .bad-only{display:none!important}
+.sample{margin:16px 0 4px;padding:8px 12px;font-size:12px;color:var(--caution);background:var(--caution-soft);border:1px solid var(--caution)}
+.banner{margin:16px 0 6px;padding:11px 14px;font-size:13px;border:1px solid}
+.banner.show-bad{color:var(--danger);background:var(--danger-soft);border-color:var(--danger)}
+.banner.show-good{color:var(--success);background:var(--success-soft);border-color:var(--success)}
+.section{padding:26px 0;border-top:1px solid var(--border)}
+.section-head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.section-number{width:26px;height:26px;background:var(--orange);color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
+.section-title{font-size:21px;font-weight:600}
+.section-lead{color:var(--text-secondary);font-size:14px;margin-bottom:16px;max-width:700px}
+.shr{display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.score-big{font-size:60px;font-weight:700;line-height:1}
+.score-tag{display:inline-block;font-size:12px;font-weight:600;padding:3px 10px;margin-top:8px}
+.dim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.dim{background:var(--surface);border:1px solid var(--border);padding:14px}
+.dim-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.dim-name{font-weight:600;font-size:15px}
+.dim-score{font-size:22px;font-weight:700}
+.dim-note{color:var(--text-secondary);font-size:13px;margin-top:7px;line-height:1.5}
+.dim-wt{font-size:11px;color:var(--text-tertiary)}
+.g{color:var(--success)}.a{color:var(--caution)}.r{color:var(--danger)}
+.bar{height:5px;background:var(--surface2);margin-top:10px;position:relative}
+.bar i{position:absolute;left:0;top:0;bottom:0;display:block}
+.lens-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-tertiary);font-weight:600;margin:18px 0 8px;display:flex;align-items:center;gap:10px}
+.lens-label::after{content:"";flex:1;height:1px;background:var(--border)}
+.hero{background:var(--surface);border:1px solid var(--orange);border-left:4px solid var(--orange);padding:18px;margin-top:16px}
+.hero .l{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--orange);font-weight:600}
+.bn{background:var(--surface);border:1px solid var(--border);padding:16px;margin-bottom:14px}
+.bn .l{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:6px}
+.big-danger{color:var(--danger);font-size:26px;font-weight:700}
+.uplift{background:var(--surface);border:1px solid var(--orange);border-left:4px solid var(--orange);padding:20px;margin-bottom:14px}
+.uplift .l{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--orange);font-weight:600}
+.uplift .v{font-size:32px;font-weight:700;letter-spacing:-.5px;margin-top:4px}
+.leak{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);padding:13px;margin-bottom:8px}
+.leak-rank{color:var(--orange);font-weight:700;font-size:15px;min-width:20px}
+.leak-name{font-weight:600;font-size:14px}
+.leak-cause{color:var(--text-secondary);font-size:13px;margin-top:3px}
+.leak-v{margin-left:auto;color:var(--danger);font-weight:600;font-size:13px;white-space:nowrap}
+.leak-v-norm{font-weight:400;font-size:11px;color:var(--text-tertiary);margin-top:4px;text-align:right}
+.fid-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.fid{background:var(--surface);border:1px solid var(--border);padding:14px}
+.fid-label{font-size:12px;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:.5px}
+.fid-val{font-size:26px;font-weight:700;color:var(--danger);margin-top:4px}
+.fid-note{font-size:12px;color:var(--text-secondary);margin-top:6px;line-height:1.45}
+.note-strip{background:var(--surface2);border:1px solid var(--border);padding:12px 14px;font-size:13px;color:var(--text-secondary);margin-top:12px}
+ul.plays{list-style:none;margin-top:8px}
+ul.plays li{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--blue);padding:11px 13px;margin-bottom:8px;font-size:13px}
+.cta{background:var(--surface);border:1px solid var(--orange);padding:22px;margin-top:16px;text-align:center}
+.cta a{display:inline-block;margin-top:12px;background:var(--orange);color:#fff;text-decoration:none;padding:11px 22px;font-weight:600;text-transform:uppercase;font-size:13px;letter-spacing:.5px}
+.bu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(224px,1fr));gap:12px}
+.bu{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--blue);padding:14px}
+.bu-name{font-weight:600;font-size:15px}
+.bu-meta{font-size:12px;color:var(--text-tertiary);margin-top:3px}
+.bu-score{display:flex;align-items:baseline;gap:8px;margin:11px 0 8px}
+.pill{display:inline-block;font-size:13px;font-weight:700;padding:2px 9px}
+.arrow{color:var(--text-tertiary);font-weight:700}
+.bu-flag{font-size:12px;color:var(--text-secondary);line-height:1.45}
+.roll{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+.roll th,.roll td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+.roll th{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-tertiary);font-weight:600}
+.roll td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.bench-row{display:grid;grid-template-columns:210px 1fr 46px;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px}
+.bench-name{color:var(--text-secondary)}
+.bench-track{height:9px;background:var(--surface2);position:relative}
+.bench-track i{position:absolute;top:0;bottom:0;left:0}
+.bench-track .med{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--text-tertiary);left:50%}
+.bench-pct{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.gov-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.gov{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--success);padding:14px}
+.gov-t{font-weight:600;font-size:14px}
+.gov-n{font-size:12px;color:var(--text-secondary);margin-top:6px;line-height:1.5}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 12px}
+.chip{background:var(--surface2);border:1px solid var(--border);padding:7px 12px;font-size:12px;font-weight:500}
+.chip b{color:var(--blue)}
+.ladder{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:12px;margin-top:8px}
+.rung{background:var(--surface);border:1px solid var(--border);padding:16px}
+.rung .n{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--orange);font-weight:600}
+.rung .h{font-weight:600;font-size:15px;margin:5px 0 6px}
+.rung .d{font-size:12px;color:var(--text-secondary);line-height:1.5}
+footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertiary);font-size:12px;margin-top:8px}
+
+  #siq-gate{position:fixed;inset:0;background:#0A1628;display:flex;align-items:center;justify-content:center;z-index:99999;font-family:'DM Sans',Arial,sans-serif}
+  .siq-gate-box{text-align:center;max-width:380px;width:90%;padding:32px}
+  .siq-gate-logo{font-size:28px;font-weight:700;color:#0073E6;margin-bottom:20px}
+  .siq-gate-logo span{color:#FF6600}
+  .siq-gate-title{color:#fff;font-size:21px;font-weight:600;margin-bottom:6px}
+  .siq-gate-sub{color:#8A9BB0;font-size:15px;margin-bottom:22px;line-height:1.5}
+  #siq-gate-input{width:100%;padding:13px 14px;font-size:17px;border:1px solid #24364d;background:#0f1f33;color:#fff;border-radius:0;margin-bottom:12px;box-sizing:border-box}
+  #siq-gate-input:focus{outline:none;border-color:#0073E6}
+  #siq-gate-btn{width:100%;padding:13px;background:#FF6600;color:#fff;border:none;font-weight:600;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;border-radius:0;font-size:16px}
+  #siq-gate-err{color:#ff5a5a;font-size:15px;margin-top:12px;display:none}
+  body.siq-locked{overflow:hidden;height:100vh}
+</style>
+  <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/51005472.js"></script>
+  <!-- siq first-party signal beacon --><script>(function(){try{var K="siq_vid",v=localStorage.getItem(K);if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem(K,v);}var q=new URLSearchParams(location.search),d={vid:v,path:location.pathname,title:document.title,ref:document.referrer,utm_source:q.get("utm_source")||"",utm_medium:q.get("utm_medium")||"",utm_campaign:q.get("utm_campaign")||"",utm_term:q.get("utm_term")||"",utm_content:q.get("utm_content")||"",screen:innerWidth+"x"+innerHeight,type:"pageview"},s=JSON.stringify(d);if(navigator.sendBeacon){navigator.sendBeacon("/api/e",new Blob([s],{type:"application/json"}));}else{fetch("/api/e",{method:"POST",headers:{"Content-Type":"application/json"},body:s,keepalive:true});}}catch(e){}})();</script>
+
+</head>
+<body data-theme="dark" data-assessment="bad" class="siq-locked">
+<div id="siq-gate"><div class="siq-gate-box"><div class="siq-gate-logo">Scalient<span>IQ</span></div><div class="siq-gate-title">Stack Health Report: Sample Readout</div><div class="siq-gate-sub">Sample deliverable built on synthetic data. Enter the access passphrase to view.</div><input id="siq-gate-input" type="password" placeholder="Access passphrase" autocomplete="off" /><button id="siq-gate-btn">View Report</button><div id="siq-gate-err">Incorrect passphrase. Please try again.</div></div></div>
+
+<div class="wrap">
+  <div class="head">
+    <div>
+      <div class="brand"><svg viewBox="0 0 1275.29 266.54" role="img" aria-label="Scalient IQ" style="height:30px;width:auto;display:block;"><g> <g> <path style="fill:#0073E6;" d="M342.44,155.82h73.72c3.99,0,6.07-1.56,6.07-4.86v-18.91c0-3.3-2.08-4.86-6.07-4.86h-44.23 c-19.6,0-29.49-7.81-29.49-23.59V85.74c0-15.79,9.89-23.59,29.49-23.59h76.32v20.82H383.2c-3.99,0-6.07,1.56-6.07,4.86v13.7 c0,3.3,2.08,4.86,6.07,4.86h44.23c19.6,0,29.49,7.81,29.49,23.59v23.07c0,15.79-9.89,23.59-29.49,23.59h-85V155.82z"/> <g> <path style="fill:#0073E6;" d="M474.27,112.45c0-13.88,8.67-20.82,26.02-20.82h62.45v18.21h-52.91c-2.95,0-4.34,1.21-4.34,3.47 v41.63c0,2.26,1.39,3.47,4.34,3.47h52.91v18.21h-62.45c-17.35,0-26.02-6.94-26.02-20.82V112.45z"/> <path style="fill:#0073E6;" d="M574.88,144.54c0-13.88,8.67-20.82,26.02-20.82h36.43v-10.41c0-2.26-1.39-3.47-4.34-3.47h-51.17 V91.64h60.71c17.35,0,26.02,6.94,26.02,20.82v64.18H600.9c-17.35,0-26.02-6.94-26.02-20.82V144.54z M610.44,158.42h26.89v-16.48 h-26.89c-2.95,0-4.34,1.21-4.34,3.47v9.54C606.1,157.21,607.49,158.42,610.44,158.42z"/> <path style="fill:#0073E6;" d="M685.9,62.15h31.22v114.49H685.9V62.15z"/> <path style="fill:#0073E6;" d="M734.47,62.15h31.22V79.5h-31.22V62.15z M734.47,91.64h31.22v85h-31.22V91.64z"/> <path style="fill:#0073E6;" d="M783.04,112.45c0-13.88,8.67-20.82,26.02-20.82h41.63c17.35,0,26.02,6.94,26.02,20.82v29.49 h-62.45v13.01c0,2.26,1.39,3.47,4.34,3.47h54.64v18.21h-64.18c-17.35,0-26.02-6.94-26.02-20.82V112.45z M845.48,123.73v-10.41 c0-2.26-1.39-3.47-4.34-3.47H818.6c-2.95,0-4.34,1.21-4.34,3.47v10.41H845.48z"/> <path style="fill:#0073E6;" d="M894.05,91.64h71.12c17.35,0,26.02,6.94,26.02,20.82v64.18h-31.22v-63.31 c0-2.26-1.39-3.47-4.34-3.47h-30.36v66.78h-31.22V91.64z"/> <path style="fill:#0073E6;" d="M1008.54,62.15h31.22v29.49h29.49v18.21h-29.49v45.1c0,2.26,1.39,3.47,4.34,3.47h25.15v18.21 h-34.69c-17.35,0-26.02-6.94-26.02-20.82V62.15z"/> <path style="fill:#FF6600;" d="M1100.09,62.15h34.69v114.49h-34.69V62.15z"/> <path style="fill:#FF6600;" d="M1155.6,85.74c0-15.79,9.89-23.59,29.49-23.59h60.71c19.6,0,29.49,7.81,29.49,23.59v67.3 c0,15.79-9.89,23.59-29.49,23.59h-4.68l12.14,27.75h-35.21l-12.14-27.75h-20.82c-19.6,0-29.49-7.81-29.49-23.59V85.74z M1196.36,155.82h38.16c3.99,0,6.07-1.56,6.07-4.86V87.82c0-3.3-2.08-4.86-6.07-4.86h-38.16c-3.99,0-6.07,1.56-6.07,4.86v63.14 C1190.29,154.26,1192.37,155.82,1196.36,155.82z"/> </g> </g> <g> <polygon style="fill:#0073E6;" points="91.51,266.54 78.46,266.54 0,130.65 4.33,123.14 44.05,131.74 91.32,214 "/> <g> <polygon style="fill:#0073E6;" points="138.96,197.18 125.71,266.54 104.3,266.54 104.07,202.41 56.8,120.15 11.7,110.39 11.63,110.38 19.7,96.36 19.79,96.37 83.21,107.18 "/> <polygon style="fill:#0073E6;" points="192.93,179.18 151.8,266.54 134.83,266.54 143.23,239.54 144.38,235.16 156.36,190.24 139.23,160.54 128.49,141.94 100.6,93.61 28.36,81.54 37.29,66.07 137.09,82.44 159.62,121.47 165.01,130.8 "/> <polygon style="fill:#0073E6;" points="244.75,160.35 190.43,266.54 165.65,266.54 206.9,177.19 185.78,140.59 172.54,117.66 138.19,58.12 45.38,52.06 56.31,33.12 175.98,41.22 203.73,89.28 210.37,100.78 "/> <polygon style="fill:#0073E6;" points="296.56,141.52 252.07,218.59 250.45,221.45 224.74,266.54 199.01,266.54 215.98,236.4 219.63,229.95 226.02,218.59 230.41,210.97 234.98,203.07 257.44,164.13 216.61,93.37 175.77,22.61 62.39,22.61 75.43,0 214.88,0 255.71,70.76 "/> </g> </g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g></svg></div>
+      <div class="prepared">Stack Health Report &middot; Standalone Sample Readout &middot; Prepared for Acme Corp</div>
+    </div>
+    <div class="toggles">
+      <div class="toggle" role="tablist" aria-label="Report state">
+        <button class="active" data-assess-btn="bad">Pre-Report</button>
+        <button data-assess-btn="good">Post-Renewal Watch</button>
+      </div>
+      <div class="toggle" role="tablist" aria-label="Theme">
+        <button class="active" data-theme-btn="dark">Dark</button>
+        <button data-theme-btn="light">Light</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="title">Stack Health Report</div>
+  <div class="subtitle">Read-only across the tools you already run, Scalient IQ scores what Acme owns against what it actually uses, prices the dormant and redundant spend, and flags every renewal 60 to 90 days before it locks you in again. Sample built on synthetic data to show what your own read looks like.</div>
+
+  <div class="metarow">
+    <div class="meta-item"><div class="label">Tools inventoried</div><div class="value">94 across 4 business units</div></div>
+    <div class="meta-item"><div class="label">Annual GTM stack spend</div><div class="value">$9.6M</div></div>
+    <div class="meta-item"><div class="label">Sources (read-only)</div><div class="value">Billing export &middot; SSO activity &middot; CRM write-activity</div></div>
+    <div class="meta-item"><div class="label">Report date</div><div class="value">August 21, 2026</div></div>
+  </div>
+
+  <div class="sample">Sample report &middot; &ldquo;Acme Corp&rdquo; is a synthetic multi-BU B2B SaaS enterprise. All figures are illustrative, for demonstration only.</div>
+  <div class="banner show-bad">&#9888; Pre-Report view: current state of Acme's GTM stack across all four business units. Toggle to &ldquo;Post-Renewal Watch&rdquo; to see what ~2 quarters of monitoring catches.</div>
+  <div class="banner show-good">&#10003; Post-Renewal Watch projection: modeled after ~2 quarters of monitoring against Acme's own renewal calendar. Toggle back to see today's leak.</div>
+
+  <div class="section">
+    <div class="section-head"><div class="section-number">1</div><div class="section-title">Executive Summary: Own vs. Use</div></div>
+    <div class="section-lead show-bad">One number the CFO can act on this quarter: what Acme owns across the GTM stack, what it actually uses, and what's feeding nothing. This is the layer no seat-utilization tool measures, because it scores whether a tool's output reaches a revenue decision, not whether someone logged in.</div>
+    <div class="section-lead show-good">The same stack after ~2 quarters of Renewal Watch, modeled on Acme's own renewal calendar and cancellation decisions.</div>
+    <div class="fid-grid show-bad">
+      <div class="fid"><div class="fid-label">Annual GTM stack spend</div><div class="fid-val" style="color:var(--text-primary)">$9.6M</div><div class="fid-note">94 tools across four business units, before buying anything new.</div></div>
+      <div class="fid"><div class="fid-label">Redundant + dormant</div><div class="fid-val" style="color:var(--caution)">$2.4M/yr</div><div class="fid-note">25% of spend feeding nothing or duplicating another tool in the stack.</div></div>
+      <div class="fid"><div class="fid-label">Dormant tools</div><div class="fid-val" style="color:var(--caution)">31 of 94</div><div class="fid-note">Zero active signal in the last 90 days. Licensed, paid for, untouched.</div></div>
+      <div class="fid"><div class="fid-label">Cross-BU duplicate categories</div><div class="fid-val" style="color:var(--caution)">6 of 34</div><div class="fid-note">Two or more BUs pay for tools doing the same job, a natural result of growth-by-acquisition.</div></div>
+      <div class="fid"><div class="fid-label">Renewals reviewed pre-lock</div><div class="fid-val" style="color:var(--danger)">22%</div><div class="fid-note">Most contracts auto-renew before anyone checks whether the tool is still earning its spend.</div></div>
+      <div class="fid"><div class="fid-label">Signal-to-Spend score</div><div class="fid-val" style="color:var(--caution)">58</div><div class="fid-note">Amber. Full breakdown in the next section.</div></div>
+    </div>
+    <div class="bn show-bad"><div class="l">The number to bring to the budget meeting</div><div><span class="big-danger">$2.4M/yr feeding nothing</span><br><span style="color:var(--text-secondary);font-size:14px">That's before Acme buys a single new tool next year. It doesn't require a new process, a new hire, or a behavior change from a single seller. It requires someone with signature authority to see the list and decline three renewals.</span></div></div>
+    <div class="fid-grid show-good">
+      <div class="fid"><div class="fid-label">Net stack spend</div><div class="fid-val" style="color:var(--success)">$8.0M</div><div class="fid-note">Down from $9.6M with the same functional coverage across all four BUs.</div></div>
+      <div class="fid"><div class="fid-label">Reclaimed so far</div><div class="fid-val" style="color:var(--success)">$1.6M/yr</div><div class="fid-note">Cancelled or right-sized at natural renewal points, no early-termination penalties.</div></div>
+      <div class="fid"><div class="fid-label">Dormant tools remaining</div><div class="fid-val" style="color:var(--success)">8 of 94</div><div class="fid-note">Down from 31. The rest are either cancelled or back to active use.</div></div>
+      <div class="fid"><div class="fid-label">Cross-BU duplicate categories</div><div class="fid-val" style="color:var(--success)">2 of 34</div><div class="fid-note">Consolidated to a single instance per category at renewal.</div></div>
+      <div class="fid"><div class="fid-label">Renewals reviewed pre-lock</div><div class="fid-val" style="color:var(--success)">96%</div><div class="fid-note">Every renewal flagged 60 to 90 days out, before the contract locks in another year.</div></div>
+      <div class="fid"><div class="fid-label">Signal-to-Spend score</div><div class="fid-val" style="color:var(--success)">81</div><div class="fid-note">Green. Still $0.8M in review, not yet at a natural renewal point.</div></div>
+    </div>
+    <div class="note-strip">Zylo's 2026 SaaS Management Index puts the median unused-license rate at 36% across 218 IT organizations. Acme's dormant rate of 33% is in line with the category, but on $9.6M of spend, being in line with the category is still real money left on the table.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="section-number">2</div><div class="section-title">Signal-to-Spend Composite</div></div>
+    <div class="section-lead">Every tool scored on whether its output reaches a revenue decision, not on who logged in. Seat-utilization tools tell you nobody logs in. This tells you nobody acts on what the tool produces, a different and often much bigger gap.</div>
+    <div class="shr show-bad">
+      <div>
+        <div class="score-big a">58</div>
+        <div class="score-tag a" style="background:var(--caution-soft)">Amber: Signal-to-Spend, whole stack</div>
+      </div>
+      <div class="section-lead" style="margin:0">A stack that runs but leaks: a third of tools produce no active signal, renewals sail through unreviewed, and six categories carry duplicate tools across business units, a direct byproduct of growth-by-acquisition.</div>
+    </div>
+    <div class="shr show-good">
+      <div>
+        <div class="score-big g">81</div>
+        <div class="score-tag g" style="background:var(--success-soft)">Green: projected, ~2 quarters</div>
+      </div>
+      <div class="section-lead" style="margin:0">Modeled after two quarters of Renewal Watch: dormant tools cancelled at their natural renewal date, duplicate categories consolidated to one instance, and every upcoming renewal reviewed before it locks in.</div>
+    </div>
+
+    <div class="dim-grid show-bad">
+      <div class="dim"><div class="dim-top"><div class="dim-name">Tool Utilization</div><div class="dim-score a">61</div></div><div class="bar"><i style="width:61%;background:var(--caution)"></i></div><div class="dim-note">Share of licensed seats with any activity in the last 90 days. The metric every seat-based tool stops at.</div><div class="dim-wt">Weight 15%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">Signal Reach</div><div class="dim-score r">47</div></div><div class="bar"><i style="width:47%;background:var(--danger)"></i></div><div class="dim-note">Share of tools whose output actually lands in Salesforce or HubSpot. This is the gap seat-utilization tools can't see.</div><div class="dim-wt">Weight 25%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">Active Signal Rate</div><div class="dim-score a">67</div></div><div class="bar"><i style="width:67%;background:var(--caution)"></i></div><div class="dim-note">33% of the 94 tools show zero active signal in 90 days. Licensed, paid for, untouched.</div><div class="dim-wt">Weight 20%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">Category Redundancy</div><div class="dim-score a">82</div></div><div class="bar"><i style="width:82%;background:var(--caution)"></i></div><div class="dim-note">6 of 34 tool categories carry overlapping tools doing the same job across business units.</div><div class="dim-wt">Weight 15%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">Renewal Coverage</div><div class="dim-score r">22</div></div><div class="bar"><i style="width:22%;background:var(--danger)"></i></div><div class="dim-note">Only 22% of upcoming renewals get reviewed before the contract auto-renews.</div><div class="dim-wt">Weight 15%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">Cost per Active Signal</div><div class="dim-score a">$218K</div></div><div class="bar"><i style="width:55%;background:var(--caution)"></i></div><div class="dim-note">Total spend divided by tools with confirmed signal reach. High when reach is low.</div><div class="dim-wt">Weight 10%</div></div>
+    </div>
+    <div class="dim-grid show-good">
+      <div class="dim"><div class="dim-top"><div class="dim-name">Tool Utilization</div><div class="dim-score g">84</div></div><div class="bar"><i style="width:84%;background:var(--success)"></i></div><div class="dim-note">Dormant tools removed from the count; what's left is what's actually running.</div><div class="dim-wt">Weight 15%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">Signal Reach</div><div class="dim-score g">79</div></div><div class="bar"><i style="width:79%;background:var(--success)"></i></div><div class="dim-note">Consolidated and right-sized tools now write to the CRM at a rate that matches their spend.</div><div class="dim-wt">Weight 25%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">Active Signal Rate</div><div class="dim-score g">91</div></div><div class="bar"><i style="width:91%;background:var(--success)"></i></div><div class="dim-note">Dormant rate down to 9%, in line with cancelling and right-sizing at each renewal point.</div><div class="dim-wt">Weight 20%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">Category Redundancy</div><div class="dim-score g">94</div></div><div class="bar"><i style="width:94%;background:var(--success)"></i></div><div class="dim-note">Down to 2 of 34 categories still carrying a duplicate, both mid-consolidation.</div><div class="dim-wt">Weight 15%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">Renewal Coverage</div><div class="dim-score g">96</div></div><div class="bar"><i style="width:96%;background:var(--success)"></i></div><div class="dim-note">Nearly every renewal now gets a flag and a read 60 to 90 days before it locks in.</div><div class="dim-wt">Weight 15%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">Cost per Active Signal</div><div class="dim-score g">$97K</div></div><div class="bar"><i style="width:88%;background:var(--success)"></i></div><div class="dim-note">Roughly half the pre-report figure. Less spend, spread across fewer, more active tools.</div><div class="dim-wt">Weight 10%</div></div>
+    </div>
+
+    <div class="hero show-bad">
+      <div class="l">The hero finding: Signal Reach, not seat count</div>
+      <div style="margin-top:8px;font-size:14px;color:var(--text-secondary)">Tool Utilization looks almost fine at 61. Most seats get touched. Signal Reach, at 47, tells the real story: fewer than half of Acme's 94 tools actually write output a rep, a manager, or the board ever sees. <strong style="color:var(--text-primary)">A tool with a 90% login rate and a 0% Signal Reach is still dark.</strong> That's the gap every seat-utilization tool misses, and it's where most of the $2.4M is hiding.</div>
+    </div>
+    <div class="hero show-good">
+      <div class="l">The hero, now a monitored calendar</div>
+      <div style="margin-top:8px;font-size:14px;color:var(--text-secondary)">Signal Reach is up 32 points, Renewal Coverage is up from 22% to 96%, and the gap between "someone logs in" and "the output reaches a revenue decision" has mostly closed. New dark spend still arrives, faster than 90 days, but it no longer sits unreviewed for a year.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="section-number">3</div><div class="section-title">Business-Unit Rollup</div></div>
+    <div class="section-lead">One enterprise score hides four very different stacks. The acquired business unit carries the most duplicate tooling, which is normal after an acquisition and exactly where the fastest dollars are.</div>
+    <div class="bu-grid">
+      <div class="bu"><div class="bu-name">Core Platform</div><div class="bu-meta">$3.1M stack spend &middot; Salesforce</div><div class="bu-score"><span class="pill" style="background:var(--caution-soft);color:var(--caution)">64 <span class="bad-only">Amber</span></span><span class="arrow">&rarr;</span><span class="pill show-good" style="background:var(--success-soft);color:var(--success)">85 Green</span><span class="pill show-bad" style="background:var(--surface2);color:var(--text-tertiary)">85 proj.</span></div><div class="bu-flag">Largest stack in dollar terms, dormant enrichment seats are the single biggest line item.</div></div>
+      <div class="bu"><div class="bu-name">Data Cloud</div><div class="bu-meta">$2.4M stack spend &middot; Salesforce + Pardot</div><div class="bu-score"><span class="pill" style="background:var(--caution-soft);color:var(--caution)">55 <span class="bad-only">Amber</span></span><span class="arrow">&rarr;</span><span class="pill show-good" style="background:var(--success-soft);color:var(--success)">78 Green</span><span class="pill show-bad" style="background:var(--surface2);color:var(--text-tertiary)">78 proj.</span></div><div class="bu-flag">Shares two categories with Velocity, both licensed independently since launch.</div></div>
+      <div class="bu"><div class="bu-name">Trust &amp; Security Suite <span style="color:var(--text-tertiary);font-weight:400">(acquired)</span></div><div class="bu-meta">$2.6M stack spend &middot; HubSpot + Marketo</div><div class="bu-score"><span class="pill" style="background:var(--danger-soft);color:var(--danger)">39 <span class="bad-only">Amber</span></span><span class="arrow">&rarr;</span><span class="pill show-good" style="background:var(--success-soft);color:var(--success)">76 Green</span><span class="pill show-bad" style="background:var(--surface2);color:var(--text-tertiary)">76 proj.</span></div><div class="bu-flag">Inherited its own sales-engagement and reporting stack at acquisition, never consolidated. Biggest single lift available.</div></div>
+      <div class="bu"><div class="bu-name">Velocity <span style="color:var(--text-tertiary);font-weight:400">(SMB / self-serve)</span></div><div class="bu-meta">$1.5M stack spend &middot; HubSpot + Snowflake</div><div class="bu-score"><span class="pill" style="background:var(--caution-soft);color:var(--caution)">62 <span class="bad-only">Amber</span></span><span class="arrow">&rarr;</span><span class="pill show-good" style="background:var(--success-soft);color:var(--success)">80 Green</span><span class="pill show-bad" style="background:var(--surface2);color:var(--text-tertiary)">80 proj.</span></div><div class="bu-flag">Leanest stack of the four, but carries an orphaned tool from a since-replaced conversion flow.</div></div>
+    </div>
+    <div class="note-strip">The blended Signal-to-Spend score is <strong>58 (Amber)</strong>, spend-weighted across the four units above. Trust &amp; Security at 39 is dragging a healthier Core Platform at 64, the same acquired-stack pattern that shows up on the pipeline lenses, just measured in dollars instead of deals.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="section-number">4</div><div class="section-title">Top Dark Stack Findings</div></div>
+    <div class="section-lead">Ranked by dollars, and shown as a share of the $9.6M annual stack spend so the findings are comparable to each other and to the total. Every one is a cancel-or-right-size decision a finance or RevOps leader can make without touching a seller's workflow.</div>
+    <div class="leak"><div class="leak-rank">1</div><div><div class="leak-name">Legacy sales-engagement seat block (Trust &amp; Security)</div><div class="leak-cause">Zero send activity in 120+ days, fully redundant with the sales-engagement tool Core Platform already runs company-wide.</div></div><div class="leak-v">$410K dark<div class="leak-v-norm">4.3% of annual stack spend</div></div></div>
+    <div class="leak"><div class="leak-rank">2</div><div><div class="leak-name">Duplicate BI &amp; reporting license</div><div class="leak-cause">Core Platform and Data Cloud both pay full list price for the same reporting category, no multi-BU discount negotiated.</div></div><div class="leak-v">$340K redundant<div class="leak-v-norm">3.5% of annual stack spend</div></div></div>
+    <div class="leak"><div class="leak-rank">3</div><div><div class="leak-name">Duplicate intent-data feed</div><div class="leak-cause">Data Cloud and Velocity both license the same intent category independently, with over 70% source overlap.</div></div><div class="leak-v">$290K redundant<div class="leak-v-norm">3.0% of annual stack spend</div></div></div>
+    <div class="leak"><div class="leak-rank">4</div><div><div class="leak-name">Dormant ABM enrichment seats</div><div class="leak-cause">61 of 90 licensed seats show no login in 90 days. Right-sizing to active usage still covers every current user.</div></div><div class="leak-v">$185K dormant<div class="leak-v-norm">1.9% of annual stack spend</div></div></div>
+    <div class="leak"><div class="leak-rank">5</div><div><div class="leak-name">Orphaned trial-to-paid conversion tool</div><div class="leak-cause">Replaced eight months ago in Velocity's onboarding flow. Contract was never cancelled and is still auto-billing.</div></div><div class="leak-v">$96K orphaned<div class="leak-v-norm">1.0% of annual stack spend</div></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="section-number">5</div><div class="section-title">Renewal Calendar: Next 90 Days</div></div>
+    <div class="section-lead">Every renewal in the window, what it costs, and the read. This is the exact artifact Renewal Watch produces on a rolling 90-day horizon, refreshed continuously for as long as the subscription runs.</div>
+    <table class="roll">
+      <thead><tr><th>Tool category</th><th>Business unit</th><th class="num">Renews</th><th class="num">Annual value</th><th>Our read</th></tr></thead>
+      <tbody>
+        <tr><td>BI &amp; reporting (duplicate)</td><td>Core Platform + Data Cloud</td><td class="num"><span class="r">34 days</span></td><td class="num">$340K</td><td>Consolidate to one instance before renewal; save roughly half.</td></tr>
+        <tr><td>Sales engagement (dormant)</td><td>Trust &amp; Security</td><td class="num"><span class="r">52 days</span></td><td class="num">$410K</td><td>Cancel. Zero signal in 120 days, fully covered elsewhere.</td></tr>
+        <tr><td>Intent-data feed (duplicate)</td><td>Data Cloud</td><td class="num"><span class="a">70 days</span></td><td class="num">$145K</td><td>Cancel this instance, keep Velocity's.</td></tr>
+        <tr><td>Trial-to-paid tool (orphaned)</td><td>Velocity</td><td class="num"><span class="a">77 days</span></td><td class="num">$96K</td><td>Cancel. Replaced eight months ago.</td></tr>
+        <tr><td>ABM enrichment (right-size)</td><td>Core Platform</td><td class="num"><span class="a">85 days</span></td><td class="num">$185K</td><td>Right-size from 90 to 30 seats; save roughly two-thirds.</td></tr>
+      </tbody>
+    </table>
+    <div class="note-strip">These five renewals alone total <strong>$1.18M</strong> in the next 90 days. Miss the window on any one and it's locked in for another year. That's the exact regeneration problem a one-time report can't solve, and the reason the recurring product is a calendar, not another audit.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="section-number">6</div><div class="section-title">Access &amp; Governance</div></div>
+    <div class="section-lead">The lowest access ask of any Scalient IQ lens. No call recordings, no deal history, nothing installed. That's why this is the one a CFO or RevOps leader can authorize without a security review.</div>
+    <div class="gov-grid">
+      <div class="gov"><div class="gov-t">&#10003; Read-only ingestion</div><div class="gov-n">A spend export and read-only connector activity. No writes to any system, ever.</div></div>
+      <div class="gov"><div class="gov-t">&#10003; Lowest access ask of any lens</div><div class="gov-n">No call recordings, no deal history, no CRM write scope. A line executive can authorize this.</div></div>
+      <div class="gov"><div class="gov-t">&#10003; Zero behavior change required</div><div class="gov-n">The finding is &ldquo;cancel this contract&rdquo; or &ldquo;right-size these seats.&rdquo; You decide, you act. Nothing on our side touches your billing or renewal terms.</div></div>
+      <div class="gov"><div class="gov-t">&#10003; SOC 2 Type II (in progress)</div><div class="gov-n">Audit underway with a top-20 accounting firm. Policy pack available under NDA.</div></div>
+      <div class="gov"><div class="gov-t">&#10003; No rip-and-replace</div><div class="gov-n">Stack-neutral. We read across HubSpot, Salesforce, Marketo, and Snowflake; we don't ask you to displace any of them.</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="section-number">7</div><div class="section-title">Path Forward</div></div>
+    <div class="section-lead">The report is one-time by design. The condition it measures is not. New tools arrive continuously, so the recurring product is a calendar, not a second audit.</div>
+    <div class="ladder">
+      <div class="rung"><div class="n">Rung 1 &middot; You are here</div><div class="h">Stack Health Report</div><div class="d">A 10-business-day read-only diagnostic across your GTM stack. Own vs. use, scored and dollar-ranked, with a renewal calendar for the next 90 days. Priced against your annual stack spend, scoped on a call.</div></div>
+      <div class="rung"><div class="n">Rung 2 &middot; The recurring line</div><div class="h">Renewal Watch</div><div class="d">Every renewal flagged 60 to 90 days out: what it produced, what it costs, our read. Priced below the report itself, since it's monitoring, not analysis.</div></div>
+      <div class="rung"><div class="n">Rung 3 &middot; Credit forward</div><div class="h">Signal Health or Demand Health</div><div class="d">100% of the Stack Health Report fee credits toward either pipeline lens within 30 days: the same fragmented-signal read, on your pipeline instead of your spend.</div></div>
+    </div>
+    <div class="cta">
+      <div class="show-bad"><div style="font-size:18px;font-weight:600">This is a sample. Yours runs on your own stack.</div><div style="color:var(--text-secondary);font-size:14px;margin-top:6px">A 10-business-day read-only diagnostic across your GTM stack: own vs. use, scored and dollar-ranked, with a renewal calendar for the next 90 days.</div></div>
+      <div class="show-good"><div style="font-size:18px;font-weight:600">Ready to stop paying for signals that are switched off?</div><div style="color:var(--text-secondary);font-size:14px;margin-top:6px">Renewal Watch keeps this current: every renewal flagged 60 to 90 days out, before you're locked in another year.</div></div>
+      <a href="https://scalientiq.com/contact.html">Book Signal Review</a>
+    </div>
+  </div>
+
+  <footer>Scalient IQ &middot; GTM Signal Intelligence. Stack Health Report, standalone sample readout on synthetic data (&ldquo;Acme Corp,&rdquo; a multi-BU B2B SaaS enterprise). All figures illustrative. The report is a 10-business-day read-only diagnostic against your annual GTM stack spend. scalientiq.com</footer>
+</div>
+<script>
+(function(){
+  var body=document.body;
+  document.querySelectorAll('[data-theme-btn]').forEach(function(b){b.addEventListener('click',function(){body.setAttribute('data-theme',b.getAttribute('data-theme-btn'));document.querySelectorAll('[data-theme-btn]').forEach(function(x){x.classList.remove('active')});b.classList.add('active');});});
+  document.querySelectorAll('[data-assess-btn]').forEach(function(b){b.addEventListener('click',function(){body.setAttribute('data-assessment',b.getAttribute('data-assess-btn'));document.querySelectorAll('[data-assess-btn]').forEach(function(x){x.classList.remove('active')});b.classList.add('active');});});
+})();
+</script>
+<script>
+  (function(){
+    var PASS='stack-2026';
+    var gate=document.getElementById('siq-gate');
+    function unlock(){gate.style.display='none';document.body.classList.remove('siq-locked');try{sessionStorage.setItem('siq_stack_acme','1');}catch(e){}}
+    function tryUnlock(){var v=(document.getElementById('siq-gate-input').value||'').trim().toLowerCase();if(v===PASS){unlock();}else{document.getElementById('siq-gate-err').style.display='block';}}
+    document.getElementById('siq-gate-btn').addEventListener('click',tryUnlock);
+    document.getElementById('siq-gate-input').addEventListener('keydown',function(e){if(e.key==='Enter')tryUnlock();});
+    try{if(sessionStorage.getItem('siq_stack_acme')==='1'){unlock();}}catch(e){}
+  })();
+</script>
+</body>
+</html>
