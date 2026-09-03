@@ -53,6 +53,345 @@ footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertia
 @media(max-width:640px){ol.q{columns:1}}
 .cf-logo-chip{display:inline-flex;align-items:center;background:var(--dark);padding:6px 12px}
 .cf-logo-chip img{display:block;height:26px;width:auto}
+</style>
+<style data-siq-skin="03_ivory-navy-v3">
+/* ============================================================
+   SiQ Readout Skin - 02 - Ivory / Navy v2
+   Supersedes 01_ivory-navy-solid.css. Same look, three defects fixed.
+   01 is left in place untouched for comparison.
+
+   CHANGED FROM 01, and why:
+
+   1. The three *-soft tokens are NO LONGER declared here.
+      01 set --danger-soft:#E5484D, --caution-soft:#FF7A00,
+      --success-soft:#12B76A. Those tokens are not brand hues, they are
+      background SURFACES, and the readouts hardcode light text on top
+      of them:
+          .hero {background:var(--danger-soft); color:#F5F7FA}
+          .rowhi{background:var(--danger-soft); color:#F5F7FA}
+      Re-pointing them at saturated brand colour dropped that text from
+      16.17:1 to 3.65:1, and .hero .sub (#B8C5D6) to 2.24:1. Both fail
+      WCAG AA. This is the same defect fixed in the AEO template on
+      2026-08-26; skin 01 would have reintroduced it.
+      Leaving them undeclared means each readout keeps its own value:
+          AEO family      opaque dark hex   -> stays a dark anchor, 16:1
+          Coinflow readout rgba(...,0.10)   -> tints the ivory ground
+      Both are correct. DO NOT add these three tokens to a skin.
+
+   2. .bridge and .attribution added to the navy re-scope. They use
+      var(--surface) / var(--surface-2) and sit directly beneath
+      navy-filled .leak cards, so under 01 they rendered as light boxes
+      in the middle of a navy stack.
+
+   3. The palette block now names [data-theme="light"] explicitly.
+      Under 01 the theme toggle was silently inert: the skin's :root
+      matched the file's [data-theme="light"] on specificity and won on
+      source order. Ivory in both states is the intended look, so this
+      is now deliberate rather than accidental. To restore the dark
+      editorial look on the dark side, delete [data-theme="dark"] from
+      the selector below.
+   ============================================================ */
+
+/* --- palette: ivory ground, solid brand, solid health tiers --- */
+/* NOTE: no --danger-soft / --caution-soft / --success-soft here. See 1. */
+/* SPECIFICITY NOTE, 2026-08-31. The AEO / Demand / Campaign / Full-Funnel /
+   Marketing templates declare their palette on `body[data-theme="dark"]`,
+   which is specificity (0,1,1). A bare `:root` is (0,1,0) and LOSES to it no
+   matter how late it is injected. That is why those reports flipped to an
+   ivory background while their text tokens stayed at dark-theme white, and
+   why the Signal Assessment (which declares on `:root`) was the only file
+   that skinned cleanly. Matching every shape below fixes all of them.
+   Do not simplify this selector list. */
+:root,
+[data-theme="dark"],
+[data-theme="light"],
+html[data-theme="dark"],
+html[data-theme="light"],
+body[data-theme="dark"],
+body[data-theme="light"] {
+  --canvas: #EFE8D8; --surface: #FBF8F1; --surface-2: #E7DECB;
+  --border: rgba(20,25,34,0.14); --border-strong: rgba(20,25,34,0.32);
+  --text-primary: #14181F; --text-secondary: #46505F; --text-tertiary: #5A636F;
+  --brand-blue: #2E7DFF; --brand-orange: #FF6600; --ink: #101722; --navy: #12203A;
+  --success: #12B76A; --caution: #FF7A00; --danger: #E5484D; --track: #E1D7C4;
+}
+
+/* --- ivory paper + navy editorial grid --- */
+html { background-color: var(--canvas); }
+body {
+  background-color: var(--canvas);
+  background-image:
+    linear-gradient(rgba(18,32,58,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18,32,58,0.06) 1px, transparent 1px);
+  background-size: 34px 34px; background-position: -1px -1px;
+}
+.wrap { background: transparent; }
+
+/* --- filled navy data boxes on ivory (token re-scope flips inner text) --- */
+.card, .play-card, .deal-card, .fidelity-card, .phase-card, .leak, .milestone,
+.note-strip, .bad-narrative, .bridge, .attribution {
+  --surface: var(--navy); --surface-2: #16273F;
+  --border: rgba(255,255,255,0.10); --border-strong: rgba(255,255,255,0.20);
+  --text-primary: #F4F0E7; --text-secondary: #C6D0DE; --text-tertiary: #8FA0B6;
+  --track: #2A3B57;
+  color: var(--text-primary);
+  background: var(--navy) !important; border-color: rgba(255,255,255,0.10) !important;
+  box-shadow: 0 18px 42px -28px rgba(16,23,34,0.75);
+}
+/* label colours are handled in the CONTRAST REPAIRS block below */
+/* .attribution is a dashed memo box, keep the dashed rail readable on navy */
+.attribution { border-style: dashed !important; border-color: rgba(255,255,255,0.28) !important; }
+
+/* --- black anchors: overall score + featured phase --- */
+.card.shr-hero { background: var(--ink) !important; }
+.card.shr-hero .score { color: var(--brand-orange); }
+.card.shr-hero .score-unit { color: rgba(244,240,231,0.5); }
+.phase-card.featured { background: var(--ink) !important; border: 2px solid var(--ink) !important; }
+.phase-card.featured .phase-badge { background: var(--brand-orange); }
+
+/* --- orange / blue rails --- */
+.dim-card { border-top: 3px solid var(--brand-orange) !important; }
+.dim-score { color: #F4F0E7; }
+.dim-score-unit { color: rgba(244,240,231,0.5); }
+.leak { border-left: 3px solid var(--brand-orange) !important; }
+.milestone { border-left: 3px solid var(--brand-blue) !important; }
+.section-number { box-shadow: 0 6px 18px -8px rgba(255,102,0,0.55); }
+
+/* --- SOLID status chips + bars (no translucency) --- */
+.state-pill.green { background: var(--success) !important; color: #08130C !important; }
+.state-pill.amber { background: var(--caution) !important; color: #1A1205 !important; }
+.state-pill.red   { background: var(--danger)  !important; color: #FFFFFF !important; }
+.hitl-badge { background: var(--success) !important; color: #08130C !important; }
+.assess-banner { border: 0 !important; color: #FFFFFF; }
+body[data-assessment="bad"] .assess-banner { background: var(--danger) !important; color: #FFFFFF !important; }
+body[data-assessment="good"] .assess-banner { background: var(--success) !important; color: #08130C !important; }
+.dim-bar-fill.green { background: var(--success); } .dim-bar-fill.amber { background: var(--caution); } .dim-bar-fill.red { background: var(--danger); }
+.fid-after { color: var(--success); }
+
+/* ==================================================================
+   CONTRAST REPAIRS  (added v3, 2026-08-31)
+   Every value below was chosen by measuring the rendered page in
+   headless Chromium, not by eye. Each line names the ratio it fixes.
+   Re-run Design Library/_verify/sweep.js after touching any of them.
+   ================================================================== */
+
+/* Labels. v2 forced #93A3B8 everywhere; on the ivory ground that is
+   2.11:1. Mid-grey now applies only inside the navy boxes.           */
+.card-label, .fid-label, .spec-label, .milestone-day, .deal-meta,
+.meta-item .label { color: #5F6875 !important; }            /* 4.62 on ivory */
+.card .card-label, .card .fid-label, .card .spec-label, .card .milestone-day,
+.card .deal-meta, .card .meta-item .label, .leak .card-label,
+.play-card .card-label, .deal-card .deal-meta, .fidelity-card .fid-label,
+.phase-card .spec-label, .milestone .milestone-day, .bridge .card-label,
+.attribution .card-label { color: #93A3B8 !important; }     /* on navy */
+
+/* Toggle buttons. Two separate problems:
+   (a) white on --brand-blue #2E7DFF as a BACKGROUND is 3.82, and white
+       on --brand-orange is 2.94;
+   (b) an earlier version of this rule painted EVERY button, which
+       destroyed the active-state affordance. Inactive buttons must
+       stay transparent, exactly as the baseline has them.            */
+.toggle button { background: transparent !important; color: #46505F !important; }        /* on near-white */
+.toggle button.active { background: var(--brand-orange) !important; color: #1A1205 !important; }        /* 6.31 */
+.toggle.assess button.active { background: #1F63D6 !important; color: #FFFFFF !important; }             /* 5.51 */
+
+/* Solid red bar + red pill. White on #E5484D is 3.91. Still a solid
+   red bar, just one that passes.                                     */
+body[data-assessment="bad"] .assess-banner,
+.assess-banner.show-bad, .banner.show-bad { background: #C22B32 !important; color: #FFFFFF !important; }  /* 5.70 */
+.state-pill.red { background: #C22B32 !important; color: #FFFFFF !important; }                            /* 5.70 */
+
+/* Red TEXT sitting on the navy boxes. #E5484D is 4.15 there.         */
+.bad-narrative .bn-label, .leak .leak-play span, .leak-play .show-bad,
+.card .state-pill.red-text, .bridge .bridge-val { color: #FF6169 !important; }                            /* 5.54 */
+
+/* Phase badge. White on brand orange is 2.94. Dark ink on orange
+   matches the amber pill treatment already in the skin.              */
+.phase-badge, .phase-card.featured .phase-badge { color: #1A1205 !important; }                            /* 6.31 */
+
+/* Semantic red on the dark .rowhi ground (AEO family). --danger-soft
+   stays a dark hex, so #E5484D there is 4.43, just under AA.         */
+.rowhi .zero, tr.rowhi .zero { color: #F0565B !important; }                                               /* 5.11 */
+
+/* Drill-down summary. Pre-existing 3.65 at baseline on the ink hero;
+   the ivory skin's brand-blue lifts it to 4.70. Pinned so a future
+   token change cannot quietly drop it back.                          */
+.dd summary { color: #2E7DFF !important; }                                                                /* 4.70 */
+
+/* Footer sits on the ivory ground, not in a navy box. --text-tertiary
+   (#717B8A) is 3.51 there.                                           */
+footer, footer div, footer a { color: #46505F !important; }                                               /* 6.69 */
+
+/* Closing CTA banner. Pre-existing at baseline too: white on brand
+   orange is 2.94, and the white button's orange label is also 2.94.
+   Fixed here for the skin; the baseline template still needs the same
+   two lines applied at source.                                       */
+.cta-banner, .cta-banner .cta-title, .cta-banner .cta-sub { color: #1A1205 !important; }                  /* 6.31 */
+.cta-btn { color: #993D00 !important; }                                                                   /* 6.95 */
+
+/* --- second pass, measured across all nine readouts ---------------- */
+
+/* Wordmark. --brand-orange on the ivory ground is 2.41 (needs 3.0 at
+   this size). Darkened for the mark only; the token is untouched, so
+   orange rails and badges keep the brand value.                       */
+.brand .iq { color: #C74B00 !important; }                                                                 /* 3.55 */
+
+/* "Prepared for" and friends: same tertiary-grey-on-ivory case as the
+   footer.                                                             */
+.cobrand .cb-label, .cb-label { color: #5F6875 !important; }                                              /* 4.62 */
+
+/* White on brand orange is 2.94 wherever it appears. Same dark-ink
+   treatment already used for the phase badge and the amber pill.      */
+.section-number, .siq-gate-box button, .gate-btn { color: #1A1205 !important; }                           /* 6.31 */
+
+/* Red text on the navy boxes, remaining selectors.                    */
+.deal-card.red .deal-score, .fid-note strong, .fidelity-card .fid-note strong { color: #FF6169 !important; } /* 5.54 */
+
+/* ==================================================================
+   IVORY GROUND REPAIRS, third pass 2026-08-31
+   The templates below use saturated brand colour as TEXT on the light
+   ground. Those values are correct as BACKGROUNDS (chips, bars, pills)
+   and unreadable as type: orange 2.41, green 2.15, red 3.21. The tokens
+   are therefore left alone and only the text uses are darkened.
+   ================================================================== */
+
+/* Score numbers, table figures and callouts rendered in brand colour.
+   This selector list is taken from the templates themselves: every rule
+   that sets color:var(--success|--caution|--danger|--brand-orange) and
+   does NOT also set its own background. The tokens keep their saturated
+   values because chips, bars and rails need them. Only the type moves. */
+.a, .some, .correction .l, .caution-text,
+.score-big.a, .num.a, td.num.a, .big.a, .qcat { color: #A83F00 !important; }           /* 5.10 / 5.86 */
+.g, .win, td.win, .bn .big-good, .big-good, .big.g, .success-text { color: #0A6E40 !important; }  /* 5.19 / 5.97 */
+.r, .num.r, td.num.r, .zero, .leak-\$, .fid-val,
+.big-danger, .bn .big-danger, .danger-text { color: #C22B32 !important; }              /* 4.67 / 5.37 */
+
+/* .hero means two opposite things depending on the template:
+       AEO family      background:var(--danger-soft)  -> a DARK box
+       Demand/Marketing background:var(--surface)     -> a LIGHT box
+   Same class name, inverted treatment. The discriminator is .rowhi,
+   which appears in the DOM only in the two dark-hero templates
+   (verified across all nine readouts). Scoping with :has() keeps the
+   light-on-dark rules off the light heroes, where an earlier version
+   of this block turned readable text white on near-white.            */
+body:has(.rowhi) .hero,
+body:has(.rowhi) .hero td, body:has(.rowhi) .hero th,
+body:has(.rowhi) .hero span, body:has(.rowhi) .hero div,
+body:has(.rowhi) .hero b, body:has(.rowhi) .hero strong,
+body:has(.rowhi) .hero i, body:has(.rowhi) .hero em { color: #F5F7FA !important; }
+body:has(.rowhi) .hero .sub { color: #B8C5D6 !important; }
+body:has(.rowhi) .hero .k { color: #F0565B !important; }
+
+.rowhi, .rowhi td, .rowhi th, .rowhi span, .rowhi b, .rowhi strong,
+.rowhi i, .rowhi em, .rowhi .a, .rowhi .g, .rowhi .win,
+.rowhi .some { color: #F5F7FA !important; }
+.rowhi .zero, tr.rowhi .zero, .rowhi .r { color: #F0565B !important; }
+
+/* .dim-score is light because it normally sits in a navy card. In the
+   AEO / Demand family it sits on the light surface instead, where the
+   skin's own card colour made it 1.07:1, effectively invisible.       */
+.dim-score { color: var(--text-primary); }
+.card .dim-score, .dim-card .dim-score, .leak .dim-score { color: #F4F0E7 !important; }
+
+/* ==================================================================
+   DARK-GROUND OVERRIDES, fourth pass
+   Some blocks keep an OPAQUE DARK background under this skin, because
+   their --*-soft token is a dark hex the skin deliberately does not
+   redeclare. Extracted from the templates, those blocks are exactly:
+   .hero (AEO family only), .rowhi, .banner.show-bad, .banner.show-good,
+   .chip, .sample. Plus the navy card family. Text inside any of them
+   needs the LIGHT semantic variants, not the ivory-ground dark ones,
+   or the dark-on-dark lands near 1:1.
+   ================================================================== */
+.banner.show-bad, .banner.show-good, .chip, .sample,
+.banner.show-bad *, .banner.show-good *, .chip *, .sample * { color: #F5F7FA !important; }
+
+/* semantic colour inside any dark block */
+.card .a, .card .some, .leak .a, .leak .some, .play-card .a, .bridge .a,
+.deal-card .a, .fidelity-card .a, .phase-card .a, .milestone .a,
+.bad-narrative .a, .attribution .a, .note-strip .a,
+.score.a, .score-tag.a, .banner .a, .chip .a, .sample .a,
+body:has(.rowhi) .hero .a, .rowhi .a { color: #FF9B57 !important; }   /* >=7.4 on every dark ground */
+
+.card .g, .card .win, .leak .g, .play-card .g, .deal-card .g,
+.fidelity-card .g, .phase-card .g, .milestone .g, .bad-narrative .g,
+.attribution .g, .note-strip .g, .bridge .g,
+.score.g, .score-tag.g, .banner .g, .chip .g, .sample .g,
+body:has(.rowhi) .hero .g, .rowhi .g, .rowhi .win { color: #3DDC97 !important; }   /* >=8.7 */
+
+.card .r, .leak .r, .leak-\$, .leak .leak-\$, .play-card .r, .deal-card .r,
+.fidelity-card .r, .phase-card .r, .milestone .r, .bad-narrative .r,
+.attribution .r, .note-strip .r, .bridge .r,
+.score.r, .score-tag.r, .banner .r, .chip .r, .sample .r,
+body:has(.rowhi) .hero .r, .rowhi .r { color: #FF6169 !important; }   /* >=5.2 */
+
+/* Fifth pass. Lead-in lines (.l) inside .hero / .seam blocks, and the
+   bare-span wordmark in the marketing template, both carry brand orange
+   as type on the light ground. The dark-block overrides below repeat
+   afterwards so they still win inside .rowhi / .card / a dark .hero.   */
+.l, .hero .l, .seam .l, .correction .l { color: #A83F00 !important; }   /* 5.10 / 5.86 */
+.brand span, .brand .iq { color: #C74B00 !important; }                  /* 3.55, large type */
+
+/* re-assert the dark grounds last so they outrank everything above */
+.rowhi, .rowhi td, .rowhi th, .rowhi span, .rowhi b, .rowhi strong,
+.rowhi i, .rowhi em, .rowhi .l { color: #F5F7FA !important; }
+.rowhi .zero, tr.rowhi .zero, .rowhi .r { color: #F0565B !important; }
+.rowhi .a, .rowhi .some { color: #FF9B57 !important; }
+.rowhi .g, .rowhi .win { color: #3DDC97 !important; }
+body:has(.rowhi) .hero .l, .banner .l, .chip .l, .sample .l,
+.card .l, .leak .l { color: #FF9B57 !important; }
+
+/* ==================================================================
+   TYPE SCALE, added 2026-08-31
+   reference_font_size_standard: body 11pt, headers 14pt, industry
+   standard, set by Marty. At 96dpi that is 14.67px body / 18.67px
+   header. The Coinflow readout was shipping body copy at 10-13px,
+   roughly 8-10pt, and set no font-size on body at all. Romify sets
+   body 16px, which is why the two looked nothing alike side by side.
+
+   Rule applied below:
+     body copy        -> 15px  (11pt, rounded up)
+     small body       -> 14px  (dense grids only)
+     UPPERCASE labels -> 11px floor (micro-labels stay small on purpose,
+                         but nothing ships at 9 or 10px)
+   Headers are already at or above 18px and are left alone.
+   ================================================================== */
+body { font-size: 15px; }
+
+/* body copy, lifted to the 11pt standard */
+.section-lead, .bn-text, .bad-narrative .bn-text, .attr-text,
+.attribution .attr-text, .cta-sub, .net-detail, .uplift-net .net-detail,
+.leak-cause, .leak-body .leak-cause, .dim-note, .baseline-note,
+.milestone-desc, .phase-features, .phase-features li, .phase-term,
+.phase-cadence, .play-trigger, .play-specs, .uplift-note,
+.uplift-card .uplift-note, .bridge-sub, .bridge-foot, .deal-flag,
+.fid-note, .dd-math, .dd-name, footer, footer div { font-size: 15px; }
+
+/* dense grid values, one step down but still above the old 11-12px */
+.bridge-label, .bridge-val, .dd-val, .dim-delta, .role { font-size: 14px; }
+.bridge-val.total { font-size: 16px; }
+
+/* uppercase micro-labels: 11px floor, never 9 or 10 */
+.card-label, .fid-label, .spec-label, .play-spec .spec-label, .bn-label,
+.bad-narrative .bn-label, .attr-label, .attribution .attr-label,
+.bridge-head, .deal-meta, .meta-item .label, .kicker, .uplift-card .kicker,
+.net-label, .uplift-net .net-label, .milestone-day, .phase-badge,
+.hitl-badge, .leak-play, .state-pill, .toggle button, .dd summary,
+.assess-banner, .cta-btn { font-size: 11px; }
+
+/* a note strip immediately after a card grid was sitting flush against the
+   last card and its shadow */
+.deal-grid + .note-strip, .fidelity-grid + .note-strip { margin-top: 18px; }
+
+/* Role chips in the deal grid sit on #16273F, a lighter navy than the card.
+   Measured there: .role.missing 3.75, .role.champion 3.93, both under AA. */
+.role.missing { color: #FF8A8F !important; }   /* 7.18 on navy */
+.role.champion { color: #5B9AFF !important; }  /* 5.81 on navy */
+
+/* Demand Health CTA button: white on brand orange is 2.94, the same pattern
+   already fixed on .phase-badge and .section-number. */
+.cta a, .cta > a { color: #1A1205 !important; }   /* 6.31 on #FF6600 */
+
 
   #siq-gate{position:fixed;inset:0;background:#0A1628;display:flex;align-items:center;justify-content:center;z-index:99999;font-family:'DM Sans',Arial,sans-serif}
   .siq-gate-box{text-align:center;max-width:380px;width:90%;padding:32px}
@@ -65,7 +404,8 @@ footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertia
   #siq-gate-btn{width:100%;padding:13px;background:#FF6600;color:#fff;border:none;font-weight:600;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;border-radius:0;font-size:14px}
   #siq-gate-err{color:#ff5a5a;font-size:13px;margin-top:12px;display:none}
   body.siq-locked{overflow:hidden;height:100vh}
-</style></head>
+</style>
+</head>
 <body data-theme="dark" class="siq-locked">
 <div id="siq-gate"><div class="siq-gate-box"><div class="siq-gate-logo">Scalient<span>IQ</span></div><div class="siq-gate-title">Coinflow AEO/GEO Visibility Report</div><div class="siq-gate-sub">Confidential client report. Enter the access passphrase to view.</div><input id="siq-gate-input" type="password" placeholder="Access passphrase" autocomplete="off" /><button id="siq-gate-btn">View Report</button><div id="siq-gate-err">Incorrect passphrase. Please try again.</div></div></div><div class="wrap">
 <div class="head">
