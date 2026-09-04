@@ -400,6 +400,29 @@ body { font-size: 15px; }
    orange badges read muddy/brown. Filled blocks use brand blue instead. */
 .section-number { background: var(--brand-blue) !important; box-shadow: 0 6px 18px -8px rgba(46,125,255,0.55) !important; color: #FFFFFF !important; }
 .toggle button.active { background: var(--brand-blue) !important; color: #FFFFFF !important; }
+</style>
+
+<style data-siq-patch="navy-blocks-blue-accents-not-ivory-or-brown">
+/* Marty rule, confirmed 9/4: content blocks (hero, callout boxes) are
+   filled solid NAVY, matching the ivory skin's own "filled navy data
+   box on ivory ground" pattern already used elsewhere in this design
+   system. No content block stays pale/ivory-colored, and no accent
+   reads red/orange/brown. Blue only, solid only. */
+.hero {
+  background: var(--navy) !important;
+  border: 1px solid var(--brand-blue) !important;
+}
+.hero .k { color: var(--brand-blue) !important; }
+.l { color: var(--brand-blue) !important; }
+.bn {
+  --surface: var(--navy); --surface-2: #16273F;
+  --border: rgba(255,255,255,0.10); --border-strong: rgba(255,255,255,0.20);
+  --text-primary: #F4F0E7; --text-secondary: #C6D0DE; --text-tertiary: #8FA0B6;
+  color: var(--text-primary) !important;
+  background: var(--navy) !important;
+  border-color: rgba(255,255,255,0.10) !important;
+  box-shadow: 0 18px 42px -28px rgba(16,23,34,0.75);
+}
 
   #siq-gate{position:fixed;inset:0;background:#0A1628;display:flex;align-items:center;justify-content:center;z-index:99999;font-family:'DM Sans',Arial,sans-serif}
   .siq-gate-box{text-align:center;max-width:380px;width:90%;padding:32px}
