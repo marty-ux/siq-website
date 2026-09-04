@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<title>You Can't Automate a Leak You Haven't Found &middot; Scalient IQ</title>
+<meta name="description" content="Read-only data lookup returns a field. Read-only diagnosis returns a judgment: a scored leak, a dollar figure, and a ranked play with a named owner. Two different products, and the market keeps confusing them.">
+<link rel="canonical" href="https://scalientiq.com/you-cant-automate-a-leak-you-havent-found.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="You can&#39;t automate a leak you haven&#39;t found.">
+<meta property="og:description" content="Faster is not the problem. Aiming a very fast machine at a funnel nobody has read is the problem.">
+<meta property="og:url" content="https://scalientiq.com/you-cant-automate-a-leak-you-havent-found.html">
+<meta property="og:site_name" content="Scalient IQ">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://scalientiq.com/img/faster-is-not-the-problem-og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#0073E6;
+  --orange:#FF6600;
+  --ink:#0A0B10;
+  --bg:#0A0B10;
+  --surface:rgba(255,255,255,0.03);
+  --rule:rgba(255,255,255,0.10);
+  --text:#E8EDF5;
+  --muted:#95A3B8;
+  --dim:#6F7F96;
+  --chip-off:rgba(255,255,255,0.06);
+}
+html[data-theme="light"]{
+  --bg:#FFFFFF;
+  --surface:rgba(10,22,40,0.025);
+  --rule:rgba(10,22,40,0.12);
+  --text:#0A0B10;
+  --muted:#4A5A70;
+  --dim:#6F7F96;
+  --chip-off:rgba(10,22,40,0.06);
+}
+*{box-sizing:border-box;border-radius:0;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  font-size:16px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:760px;margin:0 auto;padding:44px 28px 72px;}
+
+/* Masthead */
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:38px;}
+.mark{font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;}
+.mark .s{color:var(--blue);}
+.mark .iq{color:var(--orange);}
+.mark .div{color:var(--dim);font-weight:500;margin:0 6px;}
+.mark .aud{color:var(--muted);font-weight:700;}
+.toggle{display:flex;border:1px solid var(--rule);}
+.toggle button{
+  font-family:inherit;font-size:11px;font-weight:800;letter-spacing:.1em;
+  padding:7px 14px;border:0;cursor:pointer;background:var(--chip-off);color:var(--muted);
+}
+.toggle button.on{background:var(--blue);color:#fff;}
+
+/* Type */
+h1{
+  font-size:clamp(30px,5.2vw,46px);
+  line-height:1.08;
+  font-weight:800;
+  letter-spacing:-.022em;
+  margin:0 0 18px;
+}
+h2{
+  font-size:clamp(19px,2.6vw,23px);
+  line-height:1.2;
+  font-weight:800;
+  letter-spacing:-.014em;
+  margin:0 0 14px;
+}
+.deck{
+  font-style:italic;
+  color:var(--muted);
+  font-size:clamp(16px,2.2vw,19px);
+  line-height:1.5;
+  margin:0 0 34px;
+  max-width:36em;
+}
+p{margin:0 0 18px;max-width:40em;}
+.lede{font-size:17px;}
+strong{font-weight:700;color:var(--text);}
+
+/* Section labels */
+.label{
+  color:var(--orange);
+  font-size:11.5px;
+  font-weight:800;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  margin:44px 0 0;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--rule);
+}
+.label + *{margin-top:22px;}
+
+/* Pull line */
+.pull{
+  border-left:4px solid var(--orange);
+  padding:6px 0 6px 18px;
+  margin:26px 0;
+  font-size:19px;
+  font-weight:700;
+  line-height:1.35;
+  letter-spacing:-.012em;
+  max-width:34em;
+}
+
+/* Comparison table */
+.tablewrap{overflow-x:auto;margin:22px 0 8px;border:1px solid var(--rule);}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:14.5px;}
+th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--rule);vertical-align:top;}
+thead th{
+  font-size:11px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--muted);background:var(--surface);
+}
+thead th:nth-child(3){color:var(--orange);}
+tbody th{
+  font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--dim);width:26%;
+}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:0;}
+td:nth-child(3){color:var(--text);font-weight:500;}
+
+/* Cards */
+.door{
+  background:var(--surface);
+  border-left:4px solid var(--blue);
+  padding:22px 24px;
+  margin-bottom:14px;
+}
+.door.alt{border-left-color:var(--orange);}
+.door-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:4px;}
+.door-name{font-size:19px;font-weight:800;color:var(--blue);letter-spacing:-.01em;}
+.door.alt .door-name{color:var(--orange);}
+.door-when{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);white-space:nowrap;}
+.door p{margin:0 0 12px;font-size:15.5px;max-width:none;}
+.door p:last-child{margin-bottom:0;}
+.metric{
+  display:inline-block;background:var(--orange);color:#0A0B10;
+  font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  padding:4px 9px;margin-top:2px;
+}
+.metric.blue{background:var(--blue);color:#fff;}
+
+.note{
+  border-left:3px solid var(--orange);
+  padding:2px 0 2px 16px;
+  color:var(--muted);
+  font-size:15px;
+  margin:22px 0 0;
+  max-width:40em;
+}
+
+/* Question block */
+.qa{background:var(--surface);border-left:4px solid var(--orange);padding:24px;margin:22px 0 0;}
+.qa .q{font-size:18px;font-weight:800;line-height:1.3;letter-spacing:-.012em;margin:0 0 14px;max-width:34em;}
+.qa p{font-size:15.5px;max-width:none;}
+.qa p:last-child{margin-bottom:0;}
+
+/* Footer */
+.foot{
+  margin-top:52px;padding-top:20px;border-top:1px solid var(--rule);
+  font-size:13.5px;color:var(--muted);
+}
+.foot .name{color:var(--text);font-weight:700;}
+.foot a{color:var(--blue);text-decoration:none;font-weight:500;}
+.foot a:hover{text-decoration:underline;}
+.foot .when{display:block;margin-top:10px;font-size:12px;color:var(--dim);}
+
+@media print{
+  .toggle{display:none;}
+  body{background:#fff;color:#0A0B10;}
+  .wrap{padding:0;max-width:none;}
+}
+@media (max-width:520px){
+  .wrap{padding:30px 20px 56px;}
+}
+</style>
+<!-- siq first-party signal beacon --><script>(function(){try{if(localStorage.getItem("siq_no")==="1")return;var K="siq_vid",v=localStorage.getItem(K);if(v==="mthrc8423q99gzql"||v==="mtgop71aab363pkm"){localStorage.setItem("siq_no","1");return;}if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem(K,v);}var q=new URLSearchParams(location.search),d={vid:v,path:location.pathname,title:document.title,ref:document.referrer,utm_source:q.get("utm_source")||"",utm_medium:q.get("utm_medium")||"",utm_campaign:q.get("utm_campaign")||"",utm_term:q.get("utm_term")||"",utm_content:q.get("utm_content")||"",screen:innerWidth+"x"+innerHeight,type:"pageview"},s=JSON.stringify(d);if(navigator.sendBeacon){navigator.sendBeacon("/api/e",new Blob([s],{type:"application/json"}));}else{fetch("/api/e",{method:"POST",headers:{"Content-Type":"application/json"},body:s,keepalive:true});}}catch(e){}})();</script>
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/51005472.js"></script>
+<script>(function(){try{if(localStorage.getItem("siq_no")==="1")return;}catch(e){}function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,o.onload=function(){window.trackingFunctions.onLoad({appId:"678988ffe54cd602d0b96756"})},document.head.appendChild(o)}initApollo();})();</script>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div class="mark">
+      <span class="s">Scalient</span><span class="iq">IQ</span><span class="div">&middot;</span><span class="aud">GTM Signal Intelligence</span>
+    </div>
+    <div class="toggle" role="group" aria-label="Theme">
+      <button id="btn-dark" class="on" type="button">DARK</button>
+      <button id="btn-light" type="button">LIGHT</button>
+    </div>
+  </div>
+
+  <h1>You can't automate a leak you haven't found.</h1>
+
+  <p class="deck">Faster is not the problem.</p>
+
+  <p class="lede">Almost every go to market pitch this year is a speed pitch. Connect it once, prompt it, and the campaign builds itself, the audience assembles itself, the sequence enrolls itself. That is a real capability. It works. It is also not what is wrong with your quarter.</p>
+
+  <p>The problem is pointing a very fast machine at a funnel nobody has read.</p>
+
+  <div class="label">The expensive quarter</div>
+
+  <p>The expensive quarter is not the slow one. It is the one where everything shipped on time, into the wrong place.</p>
+
+  <p>Confident execution on an unexamined stack is the costliest failure in go to market, and it is costly for one specific reason. It does not feel like failure while it is happening. It produces activity. Meetings get booked. Dashboards move. From the inside, a campaign that is working and a campaign that is merely busy look identical, and they keep looking identical until the number comes in.</p>
+
+  <p>None of that is a knock on the people running it. The teams are good and the tools are good. The gap is structural: the stack was assembled over four years by three different owners, and not one instrument in it can see across the others. Every tool grades its own homework. Nobody owns the read.</p>
+
+  <div class="label">Two different things are being called read-only</div>
+
+  <p>There is a critique of read-only going around, and the sentence at the center of it is this: with read-only, you still have to figure out what to do with the data yourself.</p>
+
+  <p>Against the thing it is aimed at, that sentence is correct.</p>
+
+  <p>Look at the examples that always travel with it. A phone number. An email address. A location. Those are fields. That is enrichment, and the critique of enrichment is fair. A field is not a decision, and a stack full of fields really does leave the figuring out to you.</p>
+
+  <p>But two different products are being called read-only, and the market has never separated them.</p>
+
+  <div class="tablewrap">
+  <table>
+    <thead>
+      <tr><th scope="col"></th><th scope="col">Read-only data lookup</th><th scope="col">Read-only diagnosis</th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row">What it returns</th><td>A field</td><td>A judgment</td></tr>
+      <tr><th scope="row">What lands on your desk</th><td>A phone number</td><td>A scored leak, a dollar figure, and a ranked play with a named owner</td></tr>
+      <tr><th scope="row">Answers the question</th><td>What is this record</td><td>Where is the money going, and what is it worth to stop it</td></tr>
+      <tr><th scope="row">Does the critique apply</th><td>Yes, fairly</td><td>No</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>These are not two grades of the same product. They answer different questions, and only one of them is what the critique is actually about.</p>
+
+  <div class="label">Knowing is not enough. Neither is guessing.</div>
+
+  <p>The argument being made against diagnosis is that knowing is not enough. Agreed. Take it as read.</p>
+
+  <p>Then notice that the conclusion does not follow. The opposite of a diagnosis nobody acts on is not action. It is action taken blind, and blind is the more expensive of the two errors.</p>
+
+  <p>A diagnosis you ignore costs you the diagnosis. An action you never diagnosed costs you the spend, the quarter, and your credibility on the next budget request, and it feels like momentum the entire way down.</p>
+
+  <div class="pull">Nobody buys execution before they trust the read. The order is not a matter of taste.</div>
+
+  <div class="label">The fair version of the objection</div>
+
+  <p>Here is the part of the argument that is strong, and we are not going to duck it.</p>
+
+  <p>A diagnosis nobody acts on is worthless. That is true. We have watched it happen inside our own work: findings that were correct, ranked and priced, sitting in an account with every reason to act, and then not touched. Insight that dies on a slide is a cost, not an asset. Anyone selling diagnosis who tells you otherwise is selling you the slide.</p>
+
+  <p>So the read has to arrive in a form somebody can pick up. That is a design requirement, not a disclaimer. In practice it means four things. Every finding ships with a play attached. Plays are ranked by expected lift, not by how interesting they are. Each one carries a dollar figure. Each one names who runs it, either your own team or a tool you already own. If a finding cannot be handed to a person by name, it is not finished.</p>
+
+  <p>And the honest state of the evidence, because you will ask and you should. We can show you the quality of the read. We do not yet have a client on the record saying they ran play three and the number moved. When we have that, it goes out with their name on it and their permission, not as an anonymous composite. Until then this is a position we can defend rather than a result we can claim. Better you hear that here than find it in month two.</p>
+
+  <div class="label">Read-only is a choice, not a ceiling</div>
+
+  <p>Read-only is not a limitation we are making the best of. It is a governance decision, and it pays commercially.</p>
+
+  <p><strong>No write scopes exist.</strong> There is no path by which anything we do reaches your system of record, which means there is no failure mode where a bad inference writes itself into your CRM and your team spends a quarter unwinding it.</p>
+
+  <p><strong>Nothing is installed and no code runs in your environment.</strong> That turns the security review into a scope review, and scope reviews clear in days rather than quarters. The read is running on your live data while a heavier procurement path would still be scheduling its kickoff.</p>
+
+  <p><strong>We never grade our own work.</strong> Because we do not act inside your funnel, we have no play of our own in the results. The read stays neutral for the same reason an auditor does not also keep the books.</p>
+
+  <p>We find the leak, price it, and hand you the play. Your team, or the tools you already own, run it. Instrument panel, not driver.</p>
+
+    <div class="label">Before you buy the platform, find the leak</div>
+
+  <p>All of this matters most at one specific moment: the week before a contract gets signed.</p>
+
+  <p>Every AI go to market platform on a shortlist assumes the funnel underneath it is worth automating. That is the one assumption nobody checks before the money moves. If pipeline is leaking, the automation pours faster into the same hole. If the CRM is dirty, the automation acts on the wrong records, confidently and at volume, and now the mess has a budget line attached to it.</p>
+
+  <p>Four things worth answering before signing anything.</p>
+
+  <p><strong>01. Where is pipeline leaking today, in dollars?</strong> Not a percentage. A number you could defend in a budget meeting.</p>
+
+  <p><strong>02. Which of the tools you already pay for produce a signal anyone uses?</strong> Most stacks carry paid capabilities that were switched on once, never adopted, and never switched off.</p>
+
+  <p><strong>03. Is the CRM clean enough that an automation would act on the right records?</strong> An agent working from stale data does not fail quietly. It fails at volume, in your name, to your buyers.</p>
+
+  <p><strong>04. Who runs the play once the tool surfaces it?</strong> If the answer is nobody in particular, the tool will surface things into a void, and you will conclude the tool was the problem.</p>
+
+  <p>If the first three are unanswered, the fourth does not matter yet. None of the four require buying anything to answer, which is rather the point.</p>
+
+  <div class="label">The question underneath all of this</div>
+
+  <div class="qa">
+    <p class="q">How do I know what is actually broken in my funnel before I spend more on fixing it?</p>
+    <p>You read the stack you already have, before you add anything to it. Concretely, that is three steps. Connect read-only across the tools that already hold the answer, since the evidence is almost never missing, it is scattered. Resolve it into one view, so that a deal, the calls behind it, and the demand in front of it become one object instead of three, because the cross-tool join is the read no single tool in your stack can produce on its own. Then score it deterministically, so every figure is a query against your own records with a row count behind it and it reproduces next quarter instead of drifting.</p>
+    <p>What comes back is a ranked list of leaks with a dollar figure on each, and the plays that close them, in order, with owners named. That is the baseline. Spend after you have it, against a specific thing you now know is broken.</p>
+  </div>
+
+  <div class="label">Where to start</div>
+
+  <div class="door alt">
+    <div class="door-head">
+      <span class="door-name"><a href="https://scalientiq.com/gtm-readiness.html?utm_source=article&utm_medium=owned&utm_campaign=faster-is-not-the-problem&utm_content=readiness-cta" style="color:inherit;text-decoration:none;">GTM Readiness Index</a></span>
+      <span class="door-when">Five minutes</span>
+    </div>
+    <p>Free, and it connects to nothing. A directional read on where your engine is most likely leaking and what to look at first.</p>
+    <span class="metric">Start here</span>
+  </div>
+
+  <div class="door">
+    <div class="door-head">
+      <span class="door-name"><a href="https://scalientiq.com/assessment.html?utm_source=article&utm_medium=owned&utm_campaign=faster-is-not-the-problem&utm_content=assessment-cta" style="color:inherit;text-decoration:none;">GTM Signal Assessment</a></span>
+      <span class="door-when">About 30 days</span>
+    </div>
+    <p>Read-only across the stack you actually run. Two lenses, demand and pipeline, every finding priced, every play owned. Nothing installed, every scope yours, revocable at any time.</p>
+    <span class="metric blue">The full baseline</span>
+  </div>
+
+  <p class="note">Or <a href="https://calendly.com/marty-scalientiq/gtm-signal-review" style="color:#0073E6;text-decoration:none;font-weight:500;">take thirty minutes</a> and talk it through first. Bring whoever owns revenue operations. If the read is that this is not worth running for you, that is a fine outcome and we will say so.</p>
+
+  <div class="foot">
+    <span class="name">Marty Berman</span> &middot; Founder &amp; CEO, Scalient IQ<br>
+    <a href="mailto:marty@scalientiq.com">marty@scalientiq.com</a> &middot; <a href="https://scalientiq.com">scalientiq.com</a>
+    <span class="when">Published September 3, 2026</span>
+  </div>
+
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "You can't automate a leak you haven't found.",
+      "description": "Read-only data lookup returns a field. Read-only diagnosis returns a judgment. Two different products, and the market keeps confusing them.",
+      "datePublished": "2026-09-03",
+      "author": {"@type": "Person", "name": "Marty Berman", "jobTitle": "Founder and CEO"},
+      "publisher": {"@type": "Organization", "name": "Scalient IQ", "url": "https://scalientiq.com"},
+      "mainEntityOfPage": "https://scalientiq.com/you-cant-automate-a-leak-you-havent-found.html"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I know what is actually broken in my funnel before I spend more on fixing it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You read the stack you already have before you add anything to it. Connect read-only across the tools that already hold the answer, since the evidence is rarely missing, it is scattered. Resolve it into one view so a deal, the calls behind it, and the demand in front of it become one object instead of three, because that cross-tool join is the read no single tool in the stack can produce on its own. Then score it deterministically, so every figure is a query against your own records with a row count behind it and it reproduces next quarter. What comes back is a ranked list of leaks with a dollar figure on each and the plays that close them, in order, with owners named. Spend after you have that baseline, against a specific thing you now know is broken."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between a read-only data lookup and a read-only diagnosis?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A read-only data lookup returns a field, such as a phone number, an email address, or a location. That is enrichment. A read-only diagnosis returns a judgment: a scored leak, a dollar figure on it, and a ranked play with a named owner. Lookup answers what is this record. Diagnosis answers where the money is going and what it is worth to stop it. The common criticism that read-only leaves you to figure out what to do with the data yourself is aimed at lookup, and it does not apply to diagnosis."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What should a RevOps leader diagnose before buying more go-to-market automation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Before adding automation, a RevOps leader should establish a baseline across the existing stack: where pipeline is leaking and how much is sitting untouched, where deals stall by stage and what dollars are stuck there, CRM and data fidelity including stale records and stage-logic mismatches, buying-committee coverage on live deals, the objections that recur and how they track against win rate, whether the company appears when buyers ask AI engines for a vendor like it, and how much of the go-to-market stack is paid for but unused. Each of those should carry a dollar figure and a named owner before any new spend is approved."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var d = document.getElementById('btn-dark');
+  var l = document.getElementById('btn-light');
+  function set(theme){
+    root.setAttribute('data-theme', theme);
+    if (theme === 'dark'){ d.classList.add('on'); l.classList.remove('on'); }
+    else { l.classList.add('on'); d.classList.remove('on'); }
+  }
+  d.addEventListener('click', function(){ set('dark'); });
+  l.addEventListener('click', function(){ set('light'); });
+})();
+</script>
+</body>
+</html>
