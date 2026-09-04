@@ -412,7 +412,8 @@ body { font-size: 15px; }
   background: var(--navy) !important;
   border: 1px solid var(--brand-blue) !important;
 }
-.hero .k { color: var(--brand-blue) !important; }
+.hero .k, body:has(.rowhi) .hero .k, .rowhi .k { color: var(--brand-blue) !important; }
+.l, body:has(.rowhi) .hero .l, .rowhi .l, .banner .l, .chip .l, .sample .l, .card .l, .leak .l { color: var(--brand-blue) !important; }
 .l { color: var(--brand-blue) !important; }
 .bn {
   --surface: var(--navy); --surface-2: #16273F;
