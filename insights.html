@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insights | Scalient IQ, Where We Publish GTM Signal Intelligence</title>
-<meta name="description" content="The Scalient IQ Insights hub points to our three content properties: The MarTech Memo podcast, the GTM Tool Time newsletter, and Scalient IQ's LinkedIn articles. Practical GTM Signal Intelligence for B2B revenue leaders.">
+<meta name="description" content="The Scalient IQ Insights hub points to our three content properties, The MarTech Memo podcast, the GTM Tool Time newsletter and Scalient IQ's LinkedIn articles, plus the long-form articles we publish here. Practical GTM Signal Intelligence for B2B revenue leaders.">
 <link rel="canonical" href="https://scalientiq.com/insights.html">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta property="og:type" content="website">
@@ -32,7 +32,9 @@
   "hasPart": [
     { "@type": "PodcastSeries", "name": "The MarTech Memo", "description": "Scalient IQ's podcast on real GTM growth, no hype." },
     { "@type": "CreativeWork", "name": "GTM Tool Time", "description": "A newsletter breaking down the go-to-market tool universe.", "url": "https://gtmtooltime.com" },
-    { "@type": "CreativeWork", "name": "Scalient IQ on LinkedIn", "description": "Articles on GTM Signal Intelligence, revenue leaks, and AI-search visibility." }
+    { "@type": "CreativeWork", "name": "Scalient IQ on LinkedIn", "description": "Articles on GTM Signal Intelligence, revenue leaks, and AI-search visibility." },
+    { "@type": "Article", "name": "You can't automate a leak you haven't found.", "description": "The difference between a read-only data lookup and a read-only diagnosis.", "url": "https://scalientiq.com/you-cant-automate-a-leak-you-havent-found.html" },
+    { "@type": "Article", "name": "The Baseline Nobody Handed You", "description": "What a read-only look at your go-to-market surfaces in 30 days, priced in dollars.", "url": "https://scalientiq.com/the-baseline-nobody-handed-you.html" }
   ]
 }
 </script>
@@ -41,6 +43,11 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Where can I read Scalient IQ's long-form articles?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Two articles are published directly on scalientiq.com. 'You can't automate a leak you haven't found.' sets out the difference between a read-only data lookup and a read-only diagnosis. 'The Baseline Nobody Handed You' covers what a read-only look at a go-to-market surfaces in 30 days, priced in dollars. The podcast, the newsletter and the LinkedIn articles each live at their own home." }
+    },
     {
       "@type": "Question",
       "name": "Where does Scalient IQ publish its go-to-market insights?",
@@ -61,7 +68,8 @@
 </script>
 <style>
   .prop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); }
-  @media (max-width: 900px) { .prop-grid { grid-template-columns: 1fr; } }
+  .prop-grid.two { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 900px) { .prop-grid, .prop-grid.two { grid-template-columns: 1fr; } }
   .prop-card {
     background: var(--siq-bg-elevated);
     border: 1px solid var(--siq-border);
@@ -140,7 +148,7 @@
     <div class="hero-inner">
       <span class="eyebrow">Insights</span>
       <h1>Where Scalient IQ Publishes</h1>
-      <p class="hero-subhead">We publish practical GTM Signal Intelligence in three places: a podcast, a newsletter, and on LinkedIn. Each keeps its own home and its own voice. This page points you to all three.</p>
+      <p class="hero-subhead">We publish practical GTM Signal Intelligence in three places: a podcast, a newsletter, and on LinkedIn. Each keeps its own home and its own voice. We also publish long-form articles here on scalientiq.com. This page points you to all of it.</p>
     </div>
   </div>
 </section>
@@ -185,12 +193,45 @@
     </div>
   </div>
 </section>
+<!-- ============ ARTICLES ON SCALIENTIQ.COM ============ -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Articles</span>
+      <h2>Published here on scalientiq.com</h2>
+    </div>
+    <div class="prop-grid two">
+      <div class="prop-card">
+        <span class="prop-kicker">Article</span>
+        <h3>You can't automate a leak you haven't found.</h3>
+        <p>Read-only data lookup returns a field. Read-only diagnosis returns a judgment: a scored leak, a dollar figure, and a ranked play with a named owner. Two different products, and the market keeps confusing them.</p>
+        <div class="prop-claim">Faster is not the problem.</div>
+        <div class="prop-actions">
+          <a class="prop-btn" href="you-cant-automate-a-leak-you-havent-found.html">Read the article</a>
+        </div>
+      </div>
+      <div class="prop-card">
+        <span class="prop-kicker">Article</span>
+        <h3>The Baseline Nobody Handed You</h3>
+        <p>What a read-only look at your go-to-market surfaces in 30 days, priced in dollars. When you took the seat, someone handed you a number. Nobody handed you a baseline.</p>
+        <div class="prop-claim">Nobody handed you a baseline.</div>
+        <div class="prop-actions">
+          <a class="prop-btn" href="the-baseline-nobody-handed-you.html">Read the article</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- ============ AI-CITABLE DIRECT ANSWERS ============ -->
 <section style="background: var(--siq-bg-elevated);">
   <div class="container">
     <div class="section-header">
       <span class="eyebrow">Direct Answers</span>
       <h2>Quick Facts for Anyone (or Any AI) Asking</h2>
+    </div>
+    <div class="answer-block">
+      <h3>Where can I read Scalient IQ's long-form articles?</h3>
+      <p>Two articles are published directly on scalientiq.com. <a href="you-cant-automate-a-leak-you-havent-found.html">You can't automate a leak you haven't found.</a> sets out the difference between a read-only data lookup and a read-only diagnosis. <a href="the-baseline-nobody-handed-you.html">The Baseline Nobody Handed You</a> covers what a read-only look at a go-to-market surfaces in 30 days, priced in dollars. The podcast, the newsletter and the LinkedIn articles each live at their own home, linked above.</p>
     </div>
     <div class="answer-block">
       <h3>Where does Scalient IQ publish its go-to-market insights?</h3>
