@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Demand Health Report — Acme Corp (Sample) | Scalient IQ</title>
+<title>Demand Health Report: Acme Corp (Sample) | Scalient IQ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -78,6 +78,760 @@ footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertia
 <script>(function(){try{if(localStorage.getItem("siq_no")==="1")return;}catch(e){}function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,o.onload=function(){window.trackingFunctions.onLoad({appId:"678988ffe54cd602d0b96756"})},document.head.appendChild(o)}initApollo();})();</script>
   <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/51005472.js"></script>
   <!-- siq first-party signal beacon --><script>(function(){try{if(localStorage.getItem("siq_no")==="1")return;var K="siq_vid",v=localStorage.getItem(K);if(v==="mthrc8423q99gzql"||v==="mtgop71aab363pkm"){localStorage.setItem("siq_no","1");return;}if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem(K,v);}var q=new URLSearchParams(location.search),d={vid:v,path:location.pathname,title:document.title,ref:document.referrer,utm_source:q.get("utm_source")||"",utm_medium:q.get("utm_medium")||"",utm_campaign:q.get("utm_campaign")||"",utm_term:q.get("utm_term")||"",utm_content:q.get("utm_content")||"",screen:innerWidth+"x"+innerHeight,type:"pageview"},s=JSON.stringify(d);if(navigator.sendBeacon){navigator.sendBeacon("/api/e",new Blob([s],{type:"application/json"}));}else{fetch("/api/e",{method:"POST",headers:{"Content-Type":"application/json"},body:s,keepalive:true});}}catch(e){}})();</script>
+
+<style data-siq-skin="03_ivory-navy-v3">
+/* ============================================================
+   SiQ Readout Skin - 02 - Ivory / Navy v2
+   Supersedes 01_ivory-navy-solid.css. Same look, three defects fixed.
+   01 is left in place untouched for comparison.
+
+   CHANGED FROM 01, and why:
+
+   1. The three *-soft tokens are NO LONGER declared here.
+      01 set --danger-soft:#E5484D, --caution-soft:#FF7A00,
+      --success-soft:#12B76A. Those tokens are not brand hues, they are
+      background SURFACES, and the readouts hardcode light text on top
+      of them:
+          .hero {background:var(--danger-soft); color:#F5F7FA}
+          .rowhi{background:var(--danger-soft); color:#F5F7FA}
+      Re-pointing them at saturated brand colour dropped that text from
+      16.17:1 to 3.65:1, and .hero .sub (#B8C5D6) to 2.24:1. Both fail
+      WCAG AA. This is the same defect fixed in the AEO template on
+      2026-08-26; skin 01 would have reintroduced it.
+      Leaving them undeclared means each readout keeps its own value:
+          AEO family      opaque dark hex   -> stays a dark anchor, 16:1
+          Coinflow readout rgba(...,0.10)   -> tints the ivory ground
+      Both are correct. DO NOT add these three tokens to a skin.
+
+   2. .bridge and .attribution added to the navy re-scope. They use
+      var(--surface) / var(--surface-2) and sit directly beneath
+      navy-filled .leak cards, so under 01 they rendered as light boxes
+      in the middle of a navy stack.
+
+   3. The palette block now names [data-theme="light"] explicitly.
+      Under 01 the theme toggle was silently inert: the skin's :root
+      matched the file's [data-theme="light"] on specificity and won on
+      source order. Ivory in both states is the intended look, so this
+      is now deliberate rather than accidental. To restore the dark
+      editorial look on the dark side, delete [data-theme="dark"] from
+      the selector below.
+   ============================================================ */
+
+/* --- palette: ivory ground, solid brand, solid health tiers --- */
+/* NOTE: no --danger-soft / --caution-soft / --success-soft here. See 1. */
+/* SPECIFICITY NOTE, 2026-08-31. The AEO / Demand / Campaign / Full-Funnel /
+   Marketing templates declare their palette on `body[data-theme="dark"]`,
+   which is specificity (0,1,1). A bare `:root` is (0,1,0) and LOSES to it no
+   matter how late it is injected. That is why those reports flipped to an
+   ivory background while their text tokens stayed at dark-theme white, and
+   why the Signal Assessment (which declares on `:root`) was the only file
+   that skinned cleanly. Matching every shape below fixes all of them.
+   Do not simplify this selector list. */
+:root,
+[data-theme="dark"],
+[data-theme="light"],
+html[data-theme="dark"],
+html[data-theme="light"],
+body[data-theme="dark"],
+body[data-theme="light"] {
+  --canvas: #EFE8D8; --surface: #FBF8F1; --surface-2: #E7DECB;
+  --border: rgba(20,25,34,0.14); --border-strong: rgba(20,25,34,0.32);
+  --text-primary: #14181F; --text-secondary: #46505F; --text-tertiary: #5A636F;
+  --brand-blue: #2E7DFF; --brand-orange: #FF6600; --ink: #101722; --navy: #12203A;
+  --success: #12B76A; --caution: #FF7A00; --danger: #E5484D; --track: #E1D7C4;
+}
+
+/* --- ivory paper + navy editorial grid --- */
+html { background-color: var(--canvas); }
+body {
+  background-color: var(--canvas);
+  background-image:
+    linear-gradient(rgba(18,32,58,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18,32,58,0.06) 1px, transparent 1px);
+  background-size: 34px 34px; background-position: -1px -1px;
+}
+.wrap { background: transparent; }
+
+/* --- filled navy data boxes on ivory (token re-scope flips inner text) --- */
+.card, .play-card, .deal-card, .fidelity-card, .phase-card, .leak, .milestone,
+.note-strip, .bad-narrative, .bridge, .attribution {
+  --surface: var(--navy); --surface-2: #16273F;
+  --border: rgba(255,255,255,0.10); --border-strong: rgba(255,255,255,0.20);
+  --text-primary: #F4F0E7; --text-secondary: #C6D0DE; --text-tertiary: #8FA0B6;
+  --track: #2A3B57;
+  color: var(--text-primary);
+  background: var(--navy) !important; border-color: rgba(255,255,255,0.10) !important;
+  box-shadow: 0 18px 42px -28px rgba(16,23,34,0.75);
+}
+/* label colours are handled in the CONTRAST REPAIRS block below */
+/* .attribution is a dashed memo box, keep the dashed rail readable on navy */
+.attribution { border-style: dashed !important; border-color: rgba(255,255,255,0.28) !important; }
+
+/* --- black anchors: overall score + featured phase --- */
+.card.shr-hero { background: var(--ink) !important; }
+.card.shr-hero .score { color: var(--brand-orange); }
+.card.shr-hero .score-unit { color: rgba(244,240,231,0.5); }
+.phase-card.featured { background: var(--ink) !important; border: 2px solid var(--ink) !important; }
+.phase-card.featured .phase-badge { background: var(--brand-orange); }
+
+/* --- orange / blue rails --- */
+.dim-card { border-top: 3px solid var(--brand-orange) !important; }
+.dim-score { color: #F4F0E7; }
+.dim-score-unit { color: rgba(244,240,231,0.5); }
+.leak { border-left: 3px solid var(--brand-orange) !important; }
+.milestone { border-left: 3px solid var(--brand-blue) !important; }
+.section-number { box-shadow: 0 6px 18px -8px rgba(255,102,0,0.55); }
+
+/* --- SOLID status chips + bars (no translucency) --- */
+.state-pill.green { background: var(--success) !important; color: #08130C !important; }
+.state-pill.amber { background: var(--caution) !important; color: #1A1205 !important; }
+.state-pill.red   { background: var(--danger)  !important; color: #FFFFFF !important; }
+.hitl-badge { background: var(--success) !important; color: #08130C !important; }
+.assess-banner { border: 0 !important; color: #FFFFFF; }
+body[data-assessment="bad"] .assess-banner { background: var(--danger) !important; color: #FFFFFF !important; }
+body[data-assessment="good"] .assess-banner { background: var(--success) !important; color: #08130C !important; }
+.dim-bar-fill.green { background: var(--success); } .dim-bar-fill.amber { background: var(--caution); } .dim-bar-fill.red { background: var(--danger); }
+.fid-after { color: var(--success); }
+
+/* ==================================================================
+   CONTRAST REPAIRS  (added v3, 2026-08-31)
+   Every value below was chosen by measuring the rendered page in
+   headless Chromium, not by eye. Each line names the ratio it fixes.
+   Re-run Design Library/_verify/sweep.js after touching any of them.
+   ================================================================== */
+
+/* Labels. v2 forced #93A3B8 everywhere; on the ivory ground that is
+   2.11:1. Mid-grey now applies only inside the navy boxes.           */
+.card-label, .fid-label, .spec-label, .milestone-day, .deal-meta,
+.meta-item .label { color: #5F6875 !important; }            /* 4.62 on ivory */
+.card .card-label, .card .fid-label, .card .spec-label, .card .milestone-day,
+.card .deal-meta, .card .meta-item .label, .leak .card-label,
+.play-card .card-label, .deal-card .deal-meta, .fidelity-card .fid-label,
+.phase-card .spec-label, .milestone .milestone-day, .bridge .card-label,
+.attribution .card-label { color: #93A3B8 !important; }     /* on navy */
+
+/* Toggle buttons. Two separate problems:
+   (a) white on --brand-blue #2E7DFF as a BACKGROUND is 3.82, and white
+       on --brand-orange is 2.94;
+   (b) an earlier version of this rule painted EVERY button, which
+       destroyed the active-state affordance. Inactive buttons must
+       stay transparent, exactly as the baseline has them.            */
+.toggle button { background: transparent !important; color: #46505F !important; }        /* on near-white */
+.toggle button.active { background: var(--brand-orange) !important; color: #1A1205 !important; }        /* 6.31 */
+.toggle.assess button.active { background: #1F63D6 !important; color: #FFFFFF !important; }             /* 5.51 */
+
+/* Solid red bar + red pill. White on #E5484D is 3.91. Still a solid
+   red bar, just one that passes.                                     */
+body[data-assessment="bad"] .assess-banner,
+.assess-banner.show-bad, .banner.show-bad { background: #C22B32 !important; color: #FFFFFF !important; }  /* 5.70 */
+.state-pill.red { background: #C22B32 !important; color: #FFFFFF !important; }                            /* 5.70 */
+
+/* Red TEXT sitting on the navy boxes. #E5484D is 4.15 there.         */
+.bad-narrative .bn-label, .leak .leak-play span, .leak-play .show-bad,
+.card .state-pill.red-text, .bridge .bridge-val { color: #FF6169 !important; }                            /* 5.54 */
+
+/* Phase badge. White on brand orange is 2.94. Dark ink on orange
+   matches the amber pill treatment already in the skin.              */
+.phase-badge, .phase-card.featured .phase-badge { color: #1A1205 !important; }                            /* 6.31 */
+
+/* Semantic red on the dark .rowhi ground (AEO family). --danger-soft
+   stays a dark hex, so #E5484D there is 4.43, just under AA.         */
+.rowhi .zero, tr.rowhi .zero { color: #F0565B !important; }                                               /* 5.11 */
+
+/* Drill-down summary. Pre-existing 3.65 at baseline on the ink hero;
+   the ivory skin's brand-blue lifts it to 4.70. Pinned so a future
+   token change cannot quietly drop it back.                          */
+.dd summary { color: #2E7DFF !important; }                                                                /* 4.70 */
+
+/* Footer sits on the ivory ground, not in a navy box. --text-tertiary
+   (#717B8A) is 3.51 there.                                           */
+footer, footer div, footer a { color: #46505F !important; }                                               /* 6.69 */
+
+/* Closing CTA banner. Pre-existing at baseline too: white on brand
+   orange is 2.94, and the white button's orange label is also 2.94.
+   Fixed here for the skin; the baseline template still needs the same
+   two lines applied at source.                                       */
+.cta-banner, .cta-banner .cta-title, .cta-banner .cta-sub { color: #1A1205 !important; }                  /* 6.31 */
+.cta-btn { color: #993D00 !important; }                                                                   /* 6.95 */
+
+/* --- second pass, measured across all nine readouts ---------------- */
+
+/* Wordmark. --brand-orange on the ivory ground is 2.41 (needs 3.0 at
+   this size). Darkened for the mark only; the token is untouched, so
+   orange rails and badges keep the brand value.                       */
+.brand .iq { color: #C74B00 !important; }                                                                 /* 3.55 */
+
+/* "Prepared for" and friends: same tertiary-grey-on-ivory case as the
+   footer.                                                             */
+.cobrand .cb-label, .cb-label { color: #5F6875 !important; }                                              /* 4.62 */
+
+/* White on brand orange is 2.94 wherever it appears. Same dark-ink
+   treatment already used for the phase badge and the amber pill.      */
+.section-number, .siq-gate-box button, .gate-btn { color: #1A1205 !important; }                           /* 6.31 */
+
+/* Red text on the navy boxes, remaining selectors.                    */
+.deal-card.red .deal-score, .fid-note strong, .fidelity-card .fid-note strong { color: #FF6169 !important; } /* 5.54 */
+
+/* ==================================================================
+   IVORY GROUND REPAIRS, third pass 2026-08-31
+   The templates below use saturated brand colour as TEXT on the light
+   ground. Those values are correct as BACKGROUNDS (chips, bars, pills)
+   and unreadable as type: orange 2.41, green 2.15, red 3.21. The tokens
+   are therefore left alone and only the text uses are darkened.
+   ================================================================== */
+
+/* Score numbers, table figures and callouts rendered in brand colour.
+   This selector list is taken from the templates themselves: every rule
+   that sets color:var(--success|--caution|--danger|--brand-orange) and
+   does NOT also set its own background. The tokens keep their saturated
+   values because chips, bars and rails need them. Only the type moves. */
+.a, .some, .correction .l, .caution-text,
+.score-big.a, .num.a, td.num.a, .big.a, .qcat { color: #A83F00 !important; }           /* 5.10 / 5.86 */
+.g, .win, td.win, .bn .big-good, .big-good, .big.g, .success-text { color: #0A6E40 !important; }  /* 5.19 / 5.97 */
+.r, .num.r, td.num.r, .zero, .leak-\$, .fid-val,
+.big-danger, .bn .big-danger, .danger-text { color: #C22B32 !important; }              /* 4.67 / 5.37 */
+
+/* .hero means two opposite things depending on the template:
+       AEO family      background:var(--danger-soft)  -> a DARK box
+       Demand/Marketing background:var(--surface)     -> a LIGHT box
+   Same class name, inverted treatment. The discriminator is .rowhi,
+   which appears in the DOM only in the two dark-hero templates
+   (verified across all nine readouts). Scoping with :has() keeps the
+   light-on-dark rules off the light heroes, where an earlier version
+   of this block turned readable text white on near-white.            */
+body:has(.rowhi) .hero,
+body:has(.rowhi) .hero td, body:has(.rowhi) .hero th,
+body:has(.rowhi) .hero span, body:has(.rowhi) .hero div,
+body:has(.rowhi) .hero b, body:has(.rowhi) .hero strong,
+body:has(.rowhi) .hero i, body:has(.rowhi) .hero em { color: #F5F7FA !important; }
+body:has(.rowhi) .hero .sub { color: #B8C5D6 !important; }
+body:has(.rowhi) .hero .k { color: #F0565B !important; }
+
+.rowhi, .rowhi td, .rowhi th, .rowhi span, .rowhi b, .rowhi strong,
+.rowhi i, .rowhi em, .rowhi .a, .rowhi .g, .rowhi .win,
+.rowhi .some { color: #F5F7FA !important; }
+.rowhi .zero, tr.rowhi .zero, .rowhi .r { color: #F0565B !important; }
+
+/* .dim-score is light because it normally sits in a navy card. In the
+   AEO / Demand family it sits on the light surface instead, where the
+   skin's own card colour made it 1.07:1, effectively invisible.       */
+.dim-score { color: var(--text-primary); }
+.card .dim-score, .dim-card .dim-score, .leak .dim-score { color: #F4F0E7 !important; }
+
+/* ==================================================================
+   DARK-GROUND OVERRIDES, fourth pass
+   Some blocks keep an OPAQUE DARK background under this skin, because
+   their --*-soft token is a dark hex the skin deliberately does not
+   redeclare. Extracted from the templates, those blocks are exactly:
+   .hero (AEO family only), .rowhi, .banner.show-bad, .banner.show-good,
+   .chip, .sample. Plus the navy card family. Text inside any of them
+   needs the LIGHT semantic variants, not the ivory-ground dark ones,
+   or the dark-on-dark lands near 1:1.
+   ================================================================== */
+.banner.show-bad, .banner.show-good, .chip, .sample,
+.banner.show-bad *, .banner.show-good *, .chip *, .sample * { color: #F5F7FA !important; }
+
+/* semantic colour inside any dark block */
+.card .a, .card .some, .leak .a, .leak .some, .play-card .a, .bridge .a,
+.deal-card .a, .fidelity-card .a, .phase-card .a, .milestone .a,
+.bad-narrative .a, .attribution .a, .note-strip .a,
+.score.a, .score-tag.a, .banner .a, .chip .a, .sample .a,
+body:has(.rowhi) .hero .a, .rowhi .a { color: #FF9B57 !important; }   /* >=7.4 on every dark ground */
+
+.card .g, .card .win, .leak .g, .play-card .g, .deal-card .g,
+.fidelity-card .g, .phase-card .g, .milestone .g, .bad-narrative .g,
+.attribution .g, .note-strip .g, .bridge .g,
+.score.g, .score-tag.g, .banner .g, .chip .g, .sample .g,
+body:has(.rowhi) .hero .g, .rowhi .g, .rowhi .win { color: #3DDC97 !important; }   /* >=8.7 */
+
+.card .r, .leak .r, .leak-\$, .leak .leak-\$, .play-card .r, .deal-card .r,
+.fidelity-card .r, .phase-card .r, .milestone .r, .bad-narrative .r,
+.attribution .r, .note-strip .r, .bridge .r,
+.score.r, .score-tag.r, .banner .r, .chip .r, .sample .r,
+body:has(.rowhi) .hero .r, .rowhi .r { color: #FF6169 !important; }   /* >=5.2 */
+
+/* Fifth pass. Lead-in lines (.l) inside .hero / .seam blocks, and the
+   bare-span wordmark in the marketing template, both carry brand orange
+   as type on the light ground. The dark-block overrides below repeat
+   afterwards so they still win inside .rowhi / .card / a dark .hero.   */
+.l, .hero .l, .seam .l, .correction .l { color: #A83F00 !important; }   /* 5.10 / 5.86 */
+.brand span, .brand .iq { color: #C74B00 !important; }                  /* 3.55, large type */
+
+/* re-assert the dark grounds last so they outrank everything above */
+.rowhi, .rowhi td, .rowhi th, .rowhi span, .rowhi b, .rowhi strong,
+.rowhi i, .rowhi em, .rowhi .l { color: #F5F7FA !important; }
+.rowhi .zero, tr.rowhi .zero, .rowhi .r { color: #F0565B !important; }
+.rowhi .a, .rowhi .some { color: #FF9B57 !important; }
+.rowhi .g, .rowhi .win { color: #3DDC97 !important; }
+body:has(.rowhi) .hero .l, .banner .l, .chip .l, .sample .l,
+.card .l, .leak .l { color: #FF9B57 !important; }
+
+/* ==================================================================
+   SIXTH PASS, 2026-09-04. Tokens used as text via INLINE style.
+   The fifth pass fixed every CLASSED use of the saturated tokens as
+   type. It could not see the uses that carry the token inline, which
+   is how the Romify AEO and Demand templates colour their table cells:
+       <td style="color:var(--success)">76</td>
+   An author !important rule outranks a non-important inline style, and
+   an attribute substring selector can see which token was used. The
+   selectors match "color:var(" specifically, so an inline BORDER or
+   BACKGROUND written with the same token is never recoloured.
+   Measured on the ivory ground:
+     var(--orange)  #FF6600  2.41  ->  #A83F00  5.10
+     var(--caution) #FF7A00  2.46  ->  #A83F00  5.10
+     var(--success) #12B76A  2.47  ->  #0A6E40  5.19
+     var(--danger)  #E5484D  3.69  ->  #C22B32  4.67
+   ================================================================== */
+[style*="color:var(--orange)"],       [style*="color: var(--orange)"],
+[style*="color:var(--brand-orange)"], [style*="color: var(--brand-orange)"],
+[style*="color:var(--caution)"],      [style*="color: var(--caution)"]  { color: #A83F00 !important; }
+[style*="color:var(--success)"],      [style*="color: var(--success)"]  { color: #0A6E40 !important; }
+[style*="color:var(--danger)"],       [style*="color: var(--danger)"]   { color: #C22B32 !important; }
+
+/* ------------------------------------------------------------------
+   The inverse case. A table row painted inline with one of the dark
+   *-soft SURFACES, which this skin deliberately never redeclares:
+       <tr style="background:var(--danger-soft)">
+   It is the .rowhi pattern without the .rowhi class, so every
+   fifth-pass rule missed it and its cells kept --text-primary #14181F
+   on #2a1416, which measures 1.03:1. Effectively invisible.
+   Measured on #2a1416:
+     #F5F7FA 15.9   #B8C5D6 9.9   #3DDC97 8.7   #FF9B57 7.4   #FF6169 5.2
+   These sit AFTER the ivory rules above and outrank them on
+   specificity, (0,2,1) against (0,2,0), so a token-coloured cell
+   inside a dark row lands on the light variant, not the ivory one.
+   ------------------------------------------------------------------ */
+tr[style*="var(--danger-soft)"],  tr[style*="var(--caution-soft)"],  tr[style*="var(--success-soft)"],
+tr[style*="var(--danger-soft)"] td,     tr[style*="var(--danger-soft)"] th,
+tr[style*="var(--danger-soft)"] b,      tr[style*="var(--danger-soft)"] strong,
+tr[style*="var(--danger-soft)"] span,   tr[style*="var(--danger-soft)"] i,
+tr[style*="var(--caution-soft)"] td,    tr[style*="var(--caution-soft)"] th,
+tr[style*="var(--caution-soft)"] b,     tr[style*="var(--caution-soft)"] span,
+tr[style*="var(--success-soft)"] td,    tr[style*="var(--success-soft)"] th,
+tr[style*="var(--success-soft)"] b,     tr[style*="var(--success-soft)"] span { color: #F5F7FA !important; }
+
+tr[style*="-soft)"] [style*="color:var(--danger)"],  tr[style*="-soft)"] [style*="color: var(--danger)"]  { color: #FF6169 !important; }
+tr[style*="-soft)"] [style*="color:var(--caution)"], tr[style*="-soft)"] [style*="color: var(--caution)"] { color: #FF9B57 !important; }
+tr[style*="-soft)"] [style*="color:var(--orange)"],  tr[style*="-soft)"] [style*="color: var(--orange)"]  { color: #FF9B57 !important; }
+tr[style*="-soft)"] [style*="color:var(--success)"], tr[style*="-soft)"] [style*="color: var(--success)"] { color: #3DDC97 !important; }
+tr[style*="-soft)"] [style*="--text-tertiary"],      tr[style*="-soft)"] [style*="--text-secondary"]      { color: #B8C5D6 !important; }
+
+/* ==================================================================
+   SEVENTH PASS, 2026-09-04. The sixth pass, corrected.
+   The sixth pass recoloured every inline-styled token use for the IVORY
+   ground. That is right on ivory and wrong inside the navy boxes, where
+   the same inline styles are how the Signal Assessment sets its big
+   fidelity numbers:
+       <span class="fid-before" style="color:var(--danger);font-size:32px">
+   Measured: applying the sixth pass alone took coinflow-signal from 0
+   to 8 failures and romify-signal from 0 to 16, because #C22B32 on navy
+   is 2.85 while the untouched #E5484D was 4.15 and passing at 32px.
+   These rules restore the light variants inside every container this
+   skin fills dark. Same container list as the fourth-pass block above.
+   They sit after the sixth pass and win on source order.
+   On #12203A / #16273F / #2a1416:
+     #FF6169  5.2+     #FF9B57  7.4+     #3DDC97  8.7+
+   ================================================================== */
+.card [style*="color:var(--danger)"], .card [style*="color: var(--danger)"],
+.play-card [style*="color:var(--danger)"], .play-card [style*="color: var(--danger)"],
+.deal-card [style*="color:var(--danger)"], .deal-card [style*="color: var(--danger)"],
+.fidelity-card [style*="color:var(--danger)"], .fidelity-card [style*="color: var(--danger)"],
+.phase-card [style*="color:var(--danger)"], .phase-card [style*="color: var(--danger)"],
+.leak [style*="color:var(--danger)"], .leak [style*="color: var(--danger)"],
+.milestone [style*="color:var(--danger)"], .milestone [style*="color: var(--danger)"],
+.note-strip [style*="color:var(--danger)"], .note-strip [style*="color: var(--danger)"],
+.bad-narrative [style*="color:var(--danger)"], .bad-narrative [style*="color: var(--danger)"],
+.bridge [style*="color:var(--danger)"], .bridge [style*="color: var(--danger)"],
+.attribution [style*="color:var(--danger)"], .attribution [style*="color: var(--danger)"],
+.rowhi [style*="color:var(--danger)"], .rowhi [style*="color: var(--danger)"],
+.banner.show-bad [style*="color:var(--danger)"], .banner.show-bad [style*="color: var(--danger)"],
+.banner.show-good [style*="color:var(--danger)"], .banner.show-good [style*="color: var(--danger)"],
+.chip [style*="color:var(--danger)"], .chip [style*="color: var(--danger)"],
+.sample [style*="color:var(--danger)"], .sample [style*="color: var(--danger)"],
+body:has(.rowhi) .hero [style*="color:var(--danger)"], body:has(.rowhi) .hero [style*="color: var(--danger)"] { color: #FF6169 !important; }   /* 5.2+ on every dark ground */
+
+.card [style*="color:var(--caution)"], .card [style*="color: var(--caution)"],
+.card [style*="color:var(--orange)"], .card [style*="color: var(--orange)"],
+.card [style*="color:var(--brand-orange)"], .card [style*="color: var(--brand-orange)"],
+.play-card [style*="color:var(--caution)"], .play-card [style*="color: var(--caution)"],
+.play-card [style*="color:var(--orange)"], .play-card [style*="color: var(--orange)"],
+.play-card [style*="color:var(--brand-orange)"], .play-card [style*="color: var(--brand-orange)"],
+.deal-card [style*="color:var(--caution)"], .deal-card [style*="color: var(--caution)"],
+.deal-card [style*="color:var(--orange)"], .deal-card [style*="color: var(--orange)"],
+.deal-card [style*="color:var(--brand-orange)"], .deal-card [style*="color: var(--brand-orange)"],
+.fidelity-card [style*="color:var(--caution)"], .fidelity-card [style*="color: var(--caution)"],
+.fidelity-card [style*="color:var(--orange)"], .fidelity-card [style*="color: var(--orange)"],
+.fidelity-card [style*="color:var(--brand-orange)"], .fidelity-card [style*="color: var(--brand-orange)"],
+.phase-card [style*="color:var(--caution)"], .phase-card [style*="color: var(--caution)"],
+.phase-card [style*="color:var(--orange)"], .phase-card [style*="color: var(--orange)"],
+.phase-card [style*="color:var(--brand-orange)"], .phase-card [style*="color: var(--brand-orange)"],
+.leak [style*="color:var(--caution)"], .leak [style*="color: var(--caution)"],
+.leak [style*="color:var(--orange)"], .leak [style*="color: var(--orange)"],
+.leak [style*="color:var(--brand-orange)"], .leak [style*="color: var(--brand-orange)"],
+.milestone [style*="color:var(--caution)"], .milestone [style*="color: var(--caution)"],
+.milestone [style*="color:var(--orange)"], .milestone [style*="color: var(--orange)"],
+.milestone [style*="color:var(--brand-orange)"], .milestone [style*="color: var(--brand-orange)"],
+.note-strip [style*="color:var(--caution)"], .note-strip [style*="color: var(--caution)"],
+.note-strip [style*="color:var(--orange)"], .note-strip [style*="color: var(--orange)"],
+.note-strip [style*="color:var(--brand-orange)"], .note-strip [style*="color: var(--brand-orange)"],
+.bad-narrative [style*="color:var(--caution)"], .bad-narrative [style*="color: var(--caution)"],
+.bad-narrative [style*="color:var(--orange)"], .bad-narrative [style*="color: var(--orange)"],
+.bad-narrative [style*="color:var(--brand-orange)"], .bad-narrative [style*="color: var(--brand-orange)"],
+.bridge [style*="color:var(--caution)"], .bridge [style*="color: var(--caution)"],
+.bridge [style*="color:var(--orange)"], .bridge [style*="color: var(--orange)"],
+.bridge [style*="color:var(--brand-orange)"], .bridge [style*="color: var(--brand-orange)"],
+.attribution [style*="color:var(--caution)"], .attribution [style*="color: var(--caution)"],
+.attribution [style*="color:var(--orange)"], .attribution [style*="color: var(--orange)"],
+.attribution [style*="color:var(--brand-orange)"], .attribution [style*="color: var(--brand-orange)"],
+.rowhi [style*="color:var(--caution)"], .rowhi [style*="color: var(--caution)"],
+.rowhi [style*="color:var(--orange)"], .rowhi [style*="color: var(--orange)"],
+.rowhi [style*="color:var(--brand-orange)"], .rowhi [style*="color: var(--brand-orange)"],
+.banner.show-bad [style*="color:var(--caution)"], .banner.show-bad [style*="color: var(--caution)"],
+.banner.show-bad [style*="color:var(--orange)"], .banner.show-bad [style*="color: var(--orange)"],
+.banner.show-bad [style*="color:var(--brand-orange)"], .banner.show-bad [style*="color: var(--brand-orange)"],
+.banner.show-good [style*="color:var(--caution)"], .banner.show-good [style*="color: var(--caution)"],
+.banner.show-good [style*="color:var(--orange)"], .banner.show-good [style*="color: var(--orange)"],
+.banner.show-good [style*="color:var(--brand-orange)"], .banner.show-good [style*="color: var(--brand-orange)"],
+.chip [style*="color:var(--caution)"], .chip [style*="color: var(--caution)"],
+.chip [style*="color:var(--orange)"], .chip [style*="color: var(--orange)"],
+.chip [style*="color:var(--brand-orange)"], .chip [style*="color: var(--brand-orange)"],
+.sample [style*="color:var(--caution)"], .sample [style*="color: var(--caution)"],
+.sample [style*="color:var(--orange)"], .sample [style*="color: var(--orange)"],
+.sample [style*="color:var(--brand-orange)"], .sample [style*="color: var(--brand-orange)"],
+body:has(.rowhi) .hero [style*="color:var(--caution)"], body:has(.rowhi) .hero [style*="color: var(--caution)"],
+body:has(.rowhi) .hero [style*="color:var(--orange)"], body:has(.rowhi) .hero [style*="color: var(--orange)"],
+body:has(.rowhi) .hero [style*="color:var(--brand-orange)"], body:has(.rowhi) .hero [style*="color: var(--brand-orange)"] { color: #FF9B57 !important; }   /* 7.4+ */
+
+.card [style*="color:var(--success)"], .card [style*="color: var(--success)"],
+.play-card [style*="color:var(--success)"], .play-card [style*="color: var(--success)"],
+.deal-card [style*="color:var(--success)"], .deal-card [style*="color: var(--success)"],
+.fidelity-card [style*="color:var(--success)"], .fidelity-card [style*="color: var(--success)"],
+.phase-card [style*="color:var(--success)"], .phase-card [style*="color: var(--success)"],
+.leak [style*="color:var(--success)"], .leak [style*="color: var(--success)"],
+.milestone [style*="color:var(--success)"], .milestone [style*="color: var(--success)"],
+.note-strip [style*="color:var(--success)"], .note-strip [style*="color: var(--success)"],
+.bad-narrative [style*="color:var(--success)"], .bad-narrative [style*="color: var(--success)"],
+.bridge [style*="color:var(--success)"], .bridge [style*="color: var(--success)"],
+.attribution [style*="color:var(--success)"], .attribution [style*="color: var(--success)"],
+.rowhi [style*="color:var(--success)"], .rowhi [style*="color: var(--success)"],
+.banner.show-bad [style*="color:var(--success)"], .banner.show-bad [style*="color: var(--success)"],
+.banner.show-good [style*="color:var(--success)"], .banner.show-good [style*="color: var(--success)"],
+.chip [style*="color:var(--success)"], .chip [style*="color: var(--success)"],
+.sample [style*="color:var(--success)"], .sample [style*="color: var(--success)"],
+body:has(.rowhi) .hero [style*="color:var(--success)"], body:has(.rowhi) .hero [style*="color: var(--success)"] { color: #3DDC97 !important; }   /* 8.7+ */
+
+/* NOTE, recorded 2026-09-04 so the next person does not repeat my error.
+   .bn is an IVORY box in eight of the nine readouts. It is navy ONLY in
+   siq-website/aeo-report-coinflow.html, which navy-fills .hero and .bn
+   in its own CSS (commit 680f3d9). That per-file divergence is invisible
+   to this skin, and adding .bn to the dark-block lists here would put
+   light text on ivory in Demand Health, Marketing Signal, Romify AEO and
+   Romify Demand. It is NOT a skin bug. The Coinflow AEO report carries
+   its own measured <style data-siq-fix="aeo-navy-contrast-2026-09-04">
+   block instead. Either revert that file's navy-fill or promote it here
+   behind a real discriminator, the way .rowhi discriminates .hero.
+   ================================================================== */
+
+/* ==================================================================
+   TYPE SCALE, added 2026-08-31
+   reference_font_size_standard: body 11pt, headers 14pt, industry
+   standard, set by Marty. At 96dpi that is 14.67px body / 18.67px
+   header. The Coinflow readout was shipping body copy at 10-13px,
+   roughly 8-10pt, and set no font-size on body at all. Romify sets
+   body 16px, which is why the two looked nothing alike side by side.
+
+   Rule applied below:
+     body copy        -> 15px  (11pt, rounded up)
+     small body       -> 14px  (dense grids only)
+     UPPERCASE labels -> 11px floor (micro-labels stay small on purpose,
+                         but nothing ships at 9 or 10px)
+   Headers are already at or above 18px and are left alone.
+   ================================================================== */
+body { font-size: 15px; }
+
+/* body copy, lifted to the 11pt standard */
+.section-lead, .bn-text, .bad-narrative .bn-text, .attr-text,
+.attribution .attr-text, .cta-sub, .net-detail, .uplift-net .net-detail,
+.leak-cause, .leak-body .leak-cause, .dim-note, .baseline-note,
+.milestone-desc, .phase-features, .phase-features li, .phase-term,
+.phase-cadence, .play-trigger, .play-specs, .uplift-note,
+.uplift-card .uplift-note, .bridge-sub, .bridge-foot, .deal-flag,
+.fid-note, .dd-math, .dd-name, footer, footer div { font-size: 15px; }
+
+/* dense grid values, one step down but still above the old 11-12px */
+.bridge-label, .bridge-val, .dd-val, .dim-delta, .role { font-size: 14px; }
+.bridge-val.total { font-size: 16px; }
+
+/* uppercase micro-labels: 11px floor, never 9 or 10 */
+.card-label, .fid-label, .spec-label, .play-spec .spec-label, .bn-label,
+.bad-narrative .bn-label, .attr-label, .attribution .attr-label,
+.bridge-head, .deal-meta, .meta-item .label, .kicker, .uplift-card .kicker,
+.net-label, .uplift-net .net-label, .milestone-day, .phase-badge,
+.hitl-badge, .leak-play, .state-pill, .toggle button, .dd summary,
+.assess-banner, .cta-btn { font-size: 11px; }
+
+/* a note strip immediately after a card grid was sitting flush against the
+   last card and its shadow */
+.deal-grid + .note-strip, .fidelity-grid + .note-strip { margin-top: 18px; }
+
+/* Role chips in the deal grid sit on #16273F, a lighter navy than the card.
+   Measured there: .role.missing 3.75, .role.champion 3.93, both under AA. */
+.role.missing { color: #FF8A8F !important; }   /* 7.18 on navy */
+.role.champion { color: #5B9AFF !important; }  /* 5.81 on navy */
+
+/* Demand Health CTA button: white on brand orange is 2.94, the same pattern
+   already fixed on .phase-badge and .section-number. */
+.cta a, .cta > a { color: #1A1205 !important; }   /* 6.31 on #FF6600 */
+
+
+/* ===================== BOX PASS COMPLETION (2026-09-10) =====================
+   v3 re-pointed the surface tokens to navy for ten box classes only. Five
+   templates carry their own panel class names, which the v3 README flagged as
+   the outstanding per-template box pass. Those panels use background:
+   var(--surface) and so rendered ivory-on-ivory: .bn (demand, aeo),
+   .dim (demand, marketing-signal), .stage (full-funnel, campaign), .fid
+   (marketing-signal). This block finishes the pass. Contrast-checked below.
+   =========================================================================== */
+
+/* 1. surface tokens, so background:var(--surface) resolves to navy */
+.bn, .dim, .stage, .fid {
+  --surface: var(--navy) !important;
+  --surface-2: #16273F !important;
+  --border: rgba(255,255,255,0.10) !important;
+  --border-strong: rgba(255,255,255,0.20) !important;
+}
+
+/* 2. default body text inside those panels */
+.bn, .dim, .stage, .fid,
+.bn p, .dim p, .stage p, .fid p,
+.bn span, .dim span, .stage span, .fid span,
+.bn b, .dim b, .stage b, .fid b,
+.bn strong, .dim strong, .stage strong, .fid strong,
+.bn .big, .dim .big, .stage .big, .fid .big { color: #F4F0E7 !important; }
+
+/* 3. muted labels and secondary copy */
+.bn .l, .dim .l, .stage .l, .fid .l,
+.bn .k, .dim .k, .stage .k, .fid .k,
+.bn .ns, .dim .ns, .dim .dim-ns,
+.dim .dim-name, .dim .dim-wt, .dim .dim-top,
+.fid .fid-label { color: #93A3B8 !important; }
+
+.bn .sub, .dim .sub, .stage .sub, .fid .sub,
+.dim .dim-note, .fid .fid-note { color: #C6D0DE !important; }
+
+/* 4. semantic colours last so they win over rule 2 */
+.bn .r, .dim .r, .stage .r, .fid .r,
+.bn .big-danger, .dim .big-danger, .stage .big-danger, .fid .big-danger,
+.bn .zero, .dim .zero, .dim .dim-score.r, .fid .fid-val { color: #FF6169 !important; }
+
+.bn .g, .dim .g, .stage .g, .fid .g,
+.bn .big-good, .dim .big-good, .stage .big-good, .fid .big-good,
+.bn .win, .dim .win, .dim .dim-score.g { color: #3DDC97 !important; }
+
+.bn .a, .dim .a, .stage .a, .fid .a,
+.bn .some, .dim .some, .dim .dim-score.a { color: #FF9B57 !important; }
+
+/* 5. mirrored from every .card-scoped rule in v3 */
+.bn,
+.dim,
+.stage,
+.fid { --surface: var(--navy); --surface-2: #16273F; --border: rgba(255,255,255,0.10); --border-strong: rgba(255,255,255,0.20); --text-primary: #F4F0E7; --text-secondary: #C6D0DE; --text-tertiary: #8FA0B6; --track: #2A3B57; color: var(--text-primary); background: var(--navy) !important; border-color: rgba(255,255,255,0.10) !important; box-shadow: 0 18px 42px -28px rgba(16,23,34,0.75); }
+.bn.shr-hero,
+.dim.shr-hero,
+.stage.shr-hero,
+.fid.shr-hero { background: var(--ink) !important; }
+.bn.shr-hero .score,
+.dim.shr-hero .score,
+.stage.shr-hero .score,
+.fid.shr-hero .score { color: var(--brand-orange); }
+.bn.shr-hero .score-unit,
+.dim.shr-hero .score-unit,
+.stage.shr-hero .score-unit,
+.fid.shr-hero .score-unit { color: rgba(244,240,231,0.5); }
+.bn.featured,
+.dim.featured,
+.stage.featured,
+.fid.featured { background: var(--ink) !important; border: 2px solid var(--ink) !important; }
+.bn.featured .phase-badge,
+.dim.featured .phase-badge,
+.stage.featured .phase-badge,
+.fid.featured .phase-badge { background: var(--brand-orange); }
+.bn,
+.dim,
+.stage,
+.fid { border-left: 3px solid var(--brand-orange) !important; }
+.bn,
+.dim,
+.stage,
+.fid { border-left: 3px solid var(--brand-blue) !important; }
+.bn .card-label,
+.dim .card-label,
+.stage .card-label,
+.fid .card-label,
+.bn .fid-label,
+.dim .fid-label,
+.stage .fid-label,
+.fid .fid-label,
+.bn .spec-label,
+.dim .spec-label,
+.stage .spec-label,
+.fid .spec-label,
+.bn .milestone-day,
+.dim .milestone-day,
+.stage .milestone-day,
+.fid .milestone-day,
+.bn .deal-meta,
+.dim .deal-meta,
+.stage .deal-meta,
+.fid .deal-meta,
+.bn .meta-item .label,
+.dim .meta-item .label,
+.stage .meta-item .label,
+.fid .meta-item .label { color: #93A3B8 !important; }
+.bn .bn-label,
+.dim .bn-label,
+.stage .bn-label,
+.fid .bn-label,
+.bn .leak-play span,
+.dim .leak-play span,
+.stage .leak-play span,
+.fid .leak-play span,
+.bn .state-pill.red-text,
+.dim .state-pill.red-text,
+.stage .state-pill.red-text,
+.fid .state-pill.red-text,
+.bn .bridge-val,
+.dim .bridge-val,
+.stage .bridge-val,
+.fid .bridge-val { color: #FF6169 !important; }
+.bn.featured .phase-badge,
+.dim.featured .phase-badge,
+.stage.featured .phase-badge,
+.fid.featured .phase-badge { color: #1A1205 !important; }
+.bn.red .deal-score,
+.dim.red .deal-score,
+.stage.red .deal-score,
+.fid.red .deal-score,
+.bn .fid-note strong,
+.dim .fid-note strong,
+.stage .fid-note strong,
+.fid .fid-note strong { color: #FF6169 !important; }
+.bn .dim-score,
+.dim .dim-score,
+.stage .dim-score,
+.fid .dim-score { color: #F4F0E7 !important; }
+.bn .a,
+.dim .a,
+.stage .a,
+.fid .a,
+.bn .some,
+.dim .some,
+.stage .some,
+.fid .some { color: #FF9B57 !important; }
+.bn .g,
+.dim .g,
+.stage .g,
+.fid .g,
+.bn .win,
+.dim .win,
+.stage .win,
+.fid .win { color: #3DDC97 !important; }
+.bn .r,
+.dim .r,
+.stage .r,
+.fid .r,
+.bn .leak-\$,
+.dim .leak-\$,
+.stage .leak-\$,
+.fid .leak-\$ { color: #FF6169 !important; }
+.bn .l,
+.dim .l,
+.stage .l,
+.fid .l { color: #FF9B57 !important; }
+.bn [style*="color:var(--danger)"],
+.dim [style*="color:var(--danger)"],
+.stage [style*="color:var(--danger)"],
+.fid [style*="color:var(--danger)"],
+.bn [style*="color: var(--danger)"],
+.dim [style*="color: var(--danger)"],
+.stage [style*="color: var(--danger)"],
+.fid [style*="color: var(--danger)"] { color: #FF6169 !important; }
+.bn [style*="color:var(--caution)"],
+.dim [style*="color:var(--caution)"],
+.stage [style*="color:var(--caution)"],
+.fid [style*="color:var(--caution)"],
+.bn [style*="color: var(--caution)"],
+.dim [style*="color: var(--caution)"],
+.stage [style*="color: var(--caution)"],
+.fid [style*="color: var(--caution)"],
+.bn [style*="color:var(--orange)"],
+.dim [style*="color:var(--orange)"],
+.stage [style*="color:var(--orange)"],
+.fid [style*="color:var(--orange)"],
+.bn [style*="color: var(--orange)"],
+.dim [style*="color: var(--orange)"],
+.stage [style*="color: var(--orange)"],
+.fid [style*="color: var(--orange)"],
+.bn [style*="color:var(--brand-orange)"],
+.dim [style*="color:var(--brand-orange)"],
+.stage [style*="color:var(--brand-orange)"],
+.fid [style*="color:var(--brand-orange)"],
+.bn [style*="color: var(--brand-orange)"],
+.dim [style*="color: var(--brand-orange)"],
+.stage [style*="color: var(--brand-orange)"],
+.fid [style*="color: var(--brand-orange)"] { color: #FF9B57 !important; }
+.bn [style*="color:var(--success)"],
+.dim [style*="color:var(--success)"],
+.stage [style*="color:var(--success)"],
+.fid [style*="color:var(--success)"],
+.bn [style*="color: var(--success)"],
+.dim [style*="color: var(--success)"],
+.stage [style*="color: var(--success)"],
+.fid [style*="color: var(--success)"] { color: #3DDC97 !important; }
+.bn .bn-text,
+.dim .bn-text,
+.stage .bn-text,
+.fid .bn-text { font-size: 15px; }
+.bn .bn-label,
+.dim .bn-label,
+.stage .bn-label,
+.fid .bn-label { font-size: 11px; }
+.deal-grid + .bn,
+.deal-grid + .dim,
+.deal-grid + .stage,
+.deal-grid + .fid,
+.fidelity-grid + .bn,
+.fidelity-grid + .dim,
+.fidelity-grid + .stage,
+.fidelity-grid + .fid { margin-top: 18px; }
+
+
+/* --- box pass, second sweep (2026-09-10) -------------------------------
+   Found by computing every panel background in headless Chromium rather than
+   eyeballing: .seam and .cta (demand, full-funnel) and the recommendation
+   cards in ul.rec (aeo) also paint background:var(--surface) and so rendered
+   ivory-on-ivory. Same treatment as the first sweep. ---------------------- */
+.seam, .cta, ul.rec > li {
+  --surface: var(--navy) !important;
+  --surface-2: #16273F !important;
+  --border: rgba(255,255,255,0.10) !important;
+  --border-strong: rgba(255,255,255,0.20) !important;
+  background: var(--navy) !important;
+  color: #F4F0E7 !important;
+}
+.seam p, .cta p, .seam span, .cta span, .seam div, .cta div,
+.seam b, .cta b, .seam strong, .cta strong,
+ul.rec > li, ul.rec > li b, ul.rec > li strong, ul.rec > li span { color: #F4F0E7 !important; }
+
+.seam .l, .cta .l, .seam .k, .cta .k,
+.seam .label, .cta .label, .seam .sub, .cta .sub { color: #93A3B8 !important; }
+
+.seam .r, .cta .r, .seam .big-danger, .cta .big-danger,
+.seam .danger-text, .cta .danger-text { color: #FF6169 !important; }
+.seam .g, .cta .g, .seam .big-good, .cta .big-good { color: #3DDC97 !important; }
+.seam .a, .cta .a, ul.rec > li .a { color: #FF9B57 !important; }
+
+</style>
 </head>
 <body data-theme="dark" data-assessment="bad">
 <div class="wrap">
@@ -109,8 +863,8 @@ footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertia
   </div>
 
   <div class="sample">Sample report · Acme Corp and all figures are synthetic, for demonstration only.</div>
-  <div class="banner show-bad">&#9888; Pre-assessment view — current state of Acme's demand engine. Toggle to "Post-assessment" to see what Cortex orchestration delivers.</div>
-  <div class="banner show-good">&#10003; Post-assessment projection — Cortex live for 90 days, modeled against Acme's own numbers. Toggle back to see today's gaps.</div>
+  <div class="banner show-bad">&#9888; Pre-assessment view, current state of Acme's demand engine. Toggle to "Post-assessment" to see what Cortex orchestration delivers.</div>
+  <div class="banner show-good">&#10003; Post-assessment projection: Cortex live for 90 days, modeled against Acme's own numbers. Toggle back to see today's gaps.</div>
 
   <div class="section">
     <div class="section-head"><div class="section-number">1</div><div class="section-title">Demand Health Report</div></div>
@@ -118,14 +872,14 @@ footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertia
     <div class="shr show-bad">
       <div>
         <div class="score-big a">55</div>
-        <div class="score-tag a" style="background:var(--caution-soft)">Amber — six dimensions</div>
+        <div class="score-tag a" style="background:var(--caution-soft)">Amber, six dimensions</div>
       </div>
-      <div class="section-lead" style="margin:0">A mid-band demand engine: the funnel converts well, but a third of the database has gone dark, a quarter of pipeline is unattributed, and Acme is nearly invisible in AI search — the fastest-growing place buyers start.</div>
+      <div class="section-lead" style="margin:0">A mid-band demand engine: the funnel converts well, but a third of the database has gone dark, a quarter of pipeline is unattributed, and Acme is nearly invisible in AI search, the fastest-growing place buyers start.</div>
     </div>
     <div class="shr show-good">
       <div>
         <div class="score-big g">80</div>
-        <div class="score-tag g" style="background:var(--success-soft)">Green — projected, 90 days</div>
+        <div class="score-tag g" style="background:var(--success-soft)">Green, projected, 90 days</div>
       </div>
       <div class="section-lead" style="margin:0">Modeled after 90 days of Cortex: the dark database reactivated, source enforced so pipeline is traceable, MQL quality gated, and AI-search visibility monitored and climbing. Every lift is bottom-up from the plays below, not a top-down multiple.</div>
     </div>
@@ -140,14 +894,14 @@ footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertia
     <div class="dim-grid show-good">
       <div class="dim"><div class="dim-top"><div class="dim-name">Demand health</div><div class="dim-score g">74</div></div><div class="bar"><i style="width:74%;background:var(--success)"></i></div><div class="dim-note">MQL quality gate lifts acceptance; sales sees only the leads that convert.</div><div class="dim-wt">Weight 20%</div></div>
       <div class="dim"><div class="dim-top"><div class="dim-name">Funnel conversion</div><div class="dim-score g">84</div></div><div class="bar"><i style="width:84%;background:var(--success)"></i></div><div class="dim-note">Velocity held, qualified flow up as top-of-funnel noise drops.</div><div class="dim-wt">Weight 20%</div></div>
-      <div class="dim"><div class="dim-top"><div class="dim-name">Attribution fidelity</div><div class="dim-score g">88</div></div><div class="bar"><i style="width:88%;background:var(--success)"></i></div><div class="dim-note">Source enforced on every record — pipeline steerable, spend defensible.</div><div class="dim-wt">Weight 20%</div></div>
+      <div class="dim"><div class="dim-top"><div class="dim-name">Attribution fidelity</div><div class="dim-score g">88</div></div><div class="bar"><i style="width:88%;background:var(--success)"></i></div><div class="dim-note">Source enforced on every record, pipeline steerable, spend defensible.</div><div class="dim-wt">Weight 20%</div></div>
       <div class="dim"><div class="dim-top"><div class="dim-name">Marketing data fidelity</div><div class="dim-score g">82</div></div><div class="bar"><i style="width:82%;background:var(--success)"></i></div><div class="dim-note">Dark database reactivated on a cadence; decay held under 10%.</div><div class="dim-wt">Weight 15%</div></div>
       <div class="dim"><div class="dim-top"><div class="dim-name">Brand visibility (AEO/GEO)</div><div class="dim-score a">68</div></div><div class="bar"><i style="width:68%;background:var(--caution)"></i></div><div class="dim-note">Monitored across all AI engines; share of voice climbing on the priority prompts.</div><div class="dim-wt">Weight 15%</div></div>
       <div class="dim"><div class="dim-top"><div class="dim-name">ABM / committee coverage</div><div class="dim-score g">80</div></div><div class="bar"><i style="width:80%;background:var(--success)"></i></div><div class="dim-note">Committee-fill plays running on the single-threaded accounts.</div><div class="dim-wt">Weight 10%</div></div>
     </div>
     <div class="hero show-bad">
-      <div class="l">The hero finding — brand visibility in AI search</div>
-      <div style="margin-top:8px;font-size:14px;color:var(--text-secondary)">Buyers increasingly start in ChatGPT, Perplexity, Gemini, and Claude. Acme shows up in <strong style="color:var(--text-primary)">2 of 12</strong> category prompts — a demand channel that barely exists in the stack, and a gap no competitor is measuring. This is where the assessment opens eyes.</div>
+      <div class="l">The hero finding, brand visibility in AI search</div>
+      <div style="margin-top:8px;font-size:14px;color:var(--text-secondary)">Buyers increasingly start in ChatGPT, Perplexity, Gemini, and Claude. Acme shows up in <strong style="color:var(--text-primary)">2 of 12</strong> category prompts, a demand channel that barely exists in the stack, and a gap no competitor is measuring. This is where the assessment opens eyes.</div>
     </div>
     <div class="hero show-good">
       <div class="l">The hero, now a managed channel</div>
@@ -156,34 +910,34 @@ footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertia
   </div>
 
   <div class="section">
-    <div class="section-head"><div class="section-number">2</div><div class="section-title">Marketing &rarr; Revenue &mdash; Board View</div></div>
-    <div class="section-lead show-bad">The demand score in the language the CFO and board actually use &mdash; pipeline, revenue, CAC, and payback. This is the layer that keeps marketing defensible in the boardroom, where tenure is won and lost. Every figure below traces to a source metric in the sections that follow.</div>
+    <div class="section-head"><div class="section-number">2</div><div class="section-title">Marketing &rarr; Revenue: Board View</div></div>
+    <div class="section-lead show-bad">The demand score in the language the CFO and board actually use, pipeline, revenue, CAC, and payback. This is the layer that keeps marketing defensible in the boardroom, where tenure is won and lost. Every figure below traces to a source metric in the sections that follow.</div>
     <div class="section-lead show-good">The same board metrics after 90 days of Cortex, modeled on Acme's own pipeline and conversion rates.</div>
     <div class="fid-grid show-bad">
-      <div class="fid"><div class="fid-label">Marketing-sourced pipeline</div><div class="fid-val" style="color:var(--text-primary)">$8.9M</div><div class="fid-note">of $11.98M open &mdash; only 74% traceable. $3.1M (26%) is unattributable and not defensible to finance.</div></div>
+      <div class="fid"><div class="fid-label">Marketing-sourced pipeline</div><div class="fid-val" style="color:var(--text-primary)">$8.9M</div><div class="fid-note">of $11.98M open, only 74% traceable. $3.1M (26%) is unattributable and not defensible to finance.</div></div>
       <div class="fid"><div class="fid-label">Marketing-sourced ARR (won)</div><div class="fid-val" style="color:var(--text-primary)">$4.2M</div><div class="fid-note">Closed-won revenue with a marketing source of record, trailing 12 months.</div></div>
       <div class="fid"><div class="fid-label">Blended CAC</div><div class="fid-val" style="color:var(--caution)">$18.4K</div><div class="fid-note">Fully-loaded cost per new customer. Inflated by paid-for demand decaying uncontacted.</div></div>
       <div class="fid"><div class="fid-label">CAC payback</div><div class="fid-val" style="color:var(--caution)">14 mo</div><div class="fid-note">Months to recover acquisition cost. Above the &lt;12-month line boards want to see.</div></div>
-      <div class="fid"><div class="fid-label">Pipeline ROI</div><div class="fid-val" style="color:var(--text-primary)">3.8&times;</div><div class="fid-note">Pipeline generated per marketing dollar &mdash; but only on the 74% you can actually measure.</div></div>
+      <div class="fid"><div class="fid-label">Pipeline ROI</div><div class="fid-val" style="color:var(--text-primary)">3.8&times;</div><div class="fid-note">Pipeline generated per marketing dollar, but only on the 74% you can actually measure.</div></div>
     </div>
-    <div class="bn show-bad"><div class="l">The board line</div><div><span class="big-danger">26% of pipeline is undefendable to the CFO</span><br><span style="color:var(--text-secondary);font-size:14px">$3.1M of open pipeline has no traceable source, so it can't be defended, forecast, or steered in a board meeting. Combined with a 14-month payback, that's the exact gap that costs CMOs their seat. The fix isn't more spend &mdash; it's making the demand you already own measurable.</span></div></div>
+    <div class="bn show-bad"><div class="l">The board line</div><div><span class="big-danger">26% of pipeline is undefendable to the CFO</span><br><span style="color:var(--text-secondary);font-size:14px">$3.1M of open pipeline has no traceable source, so it can't be defended, forecast, or steered in a board meeting. Combined with a 14-month payback, that's the exact gap that costs CMOs their seat. The fix isn't more spend, it's making the demand you already own measurable.</span></div></div>
     <div class="fid-grid show-good">
-      <div class="fid"><div class="fid-label">Pipeline attributable</div><div class="fid-val" style="color:var(--success)">96%</div><div class="fid-note">Source enforced on every record &mdash; pipeline steerable and defensible in the boardroom.</div></div>
+      <div class="fid"><div class="fid-label">Pipeline attributable</div><div class="fid-val" style="color:var(--success)">96%</div><div class="fid-note">Source enforced on every record, pipeline steerable and defensible in the boardroom.</div></div>
       <div class="fid"><div class="fid-label">Blended CAC</div><div class="fid-val" style="color:var(--success)">$15.9K</div><div class="fid-note">Down ~14% as reactivated demand lowers cost per new opportunity.</div></div>
       <div class="fid"><div class="fid-label">CAC payback</div><div class="fid-val" style="color:var(--success)">11 mo</div><div class="fid-note">Back under the 12-month line boards use as the health threshold.</div></div>
       <div class="fid"><div class="fid-label">Pipeline ROI</div><div class="fid-val" style="color:var(--success)">4.6&times;</div><div class="fid-note">Higher and now measured across the full funnel, not just the traceable slice.</div></div>
     </div>
-    <div class="uplift show-good"><div class="l" style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--orange);font-weight:600">What the board sees in the QBR</div><div class="v">$410K&ndash;$620K recovered, full pipeline defensible</div><div style="color:var(--text-secondary);font-size:13px;margin-top:6px">Marketing walks into the review with every dollar of pipeline sourced, CAC trending down, and payback under a year. The same numbers, now answerable to finance.</div></div>
-    <div class="note-strip"><strong>Method note.</strong> Figures modeled from Acme's live pipeline and conversion rates; illustrative on synthetic data. This section is the one-page summary a CMO takes into a QBR or board meeting &mdash; the demand engine translated into the CFO's language.</div>
+    <div class="uplift show-good"><div class="l" style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--orange);font-weight:600">What the board sees in the QBR</div><div class="v">$410K to $620K recovered, full pipeline defensible</div><div style="color:var(--text-secondary);font-size:13px;margin-top:6px">Marketing walks into the review with every dollar of pipeline sourced, CAC trending down, and payback under a year. The same numbers, now answerable to finance.</div></div>
+    <div class="note-strip"><strong>Method note.</strong> Figures modeled from Acme's live pipeline and conversion rates; illustrative on synthetic data. This section is the one-page summary a CMO takes into a QBR or board meeting, the demand engine translated into the CFO's language.</div>
   </div>
 
   <div class="section">
     <div class="section-head"><div class="section-number">3</div><div class="section-title">Wasted Spend &amp; Unattributed Pipeline</div></div>
     <div class="section-lead show-bad">Current-state dollars flying blind, quantified from Acme's live pipeline.</div>
     <div class="section-lead show-good">What tightening attribution and reactivating the database is worth, modeled at Acme's own conversion rates.</div>
-    <div class="bn show-bad"><div class="l">Quantified exposure — today</div><div><span class="big-danger">$3.1M unattributed · 2,890 contacts gone dark</span><br><span style="color:var(--text-secondary);font-size:14px">26% of the $11.98M open pipeline can't be traced to a source, so budget can't be steered. And 34% of the database (2,890 contacts) has had no activity in 180+ days — demand you already paid to create, now decaying.</span></div></div>
-    <div class="uplift show-good"><div class="l" style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--orange);font-weight:600">Attributable uplift — year 1 (modeled)</div><div class="v">$410K–$620K recovered</div><div style="color:var(--text-secondary);font-size:13px;margin-top:6px">Reactivating 20–30% of the dark database at Acme's 28% SQL&rarr;customer rate, plus reallocating the newly-attributed spend. Bottom-up from the plays below.</div></div>
-    <div class="note-strip"><strong>Benchmark.</strong> Gartner's 2025 survey puts martech utilization at 49% — Acme is leaving demand on the table it already owns. Cortex sits above the stack to work it.</div>
+    <div class="bn show-bad"><div class="l">Quantified exposure, today</div><div><span class="big-danger">$3.1M unattributed · 2,890 contacts gone dark</span><br><span style="color:var(--text-secondary);font-size:14px">26% of the $11.98M open pipeline can't be traced to a source, so budget can't be steered. And 34% of the database (2,890 contacts) has had no activity in 180+ days, demand you already paid to create, now decaying.</span></div></div>
+    <div class="uplift show-good"><div class="l" style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--orange);font-weight:600">Attributable uplift, year 1 (modeled)</div><div class="v">$410K to $620K recovered</div><div style="color:var(--text-secondary);font-size:13px;margin-top:6px">Reactivating 20 to 30% of the dark database at Acme's 28% SQL&rarr;customer rate, plus reallocating the newly-attributed spend. Bottom-up from the plays below.</div></div>
+    <div class="note-strip"><strong>Benchmark.</strong> Gartner's 2025 survey puts martech utilization at 49%: Acme is leaving demand on the table it already owns. Cortex sits above the stack to work it.</div>
   </div>
 
   <div class="section">
@@ -191,13 +945,13 @@ footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertia
     <div class="section-lead">Ranked by dollars and risk. Each maps to a play in the Play Book.</div>
     <div class="leak"><div class="leak-rank">1</div><div><div class="leak-name">Invisible in AI search</div><div class="leak-cause">2 of 12 category prompts return Acme. Buyers researching in ChatGPT/Perplexity never see you.</div></div><div class="leak-$">demand channel dark</div></div>
     <div class="leak"><div class="leak-rank">2</div><div><div class="leak-name">Database decay</div><div class="leak-cause">2,890 contacts (34%) cold 180d+. Paid-for demand rotting in the CRM.</div></div><div class="leak-$">$ sunk</div></div>
-    <div class="leak"><div class="leak-rank">3</div><div><div class="leak-name">Unattributed pipeline</div><div class="leak-cause">$3.1M of open pipeline with no traceable source — spend steered on guesswork.</div></div><div class="leak-$">$3.1M blind</div></div>
-    <div class="leak"><div class="leak-rank">4</div><div><div class="leak-name">MQL quality gap</div><div class="leak-cause">Only 44% of MQLs are accepted as SQLs — over half are noise sales rejects.</div></div><div class="leak-$">56% rejected</div></div>
-    <div class="leak"><div class="leak-rank">5</div><div><div class="leak-name">Single-threaded accounts</div><div class="leak-cause">59% of target accounts run on one contact — no committee coverage.</div></div><div class="leak-$">59% exposed</div></div>
+    <div class="leak"><div class="leak-rank">3</div><div><div class="leak-name">Unattributed pipeline</div><div class="leak-cause">$3.1M of open pipeline with no traceable source, spend steered on guesswork.</div></div><div class="leak-$">$3.1M blind</div></div>
+    <div class="leak"><div class="leak-rank">4</div><div><div class="leak-name">MQL quality gap</div><div class="leak-cause">Only 44% of MQLs are accepted as SQLs, over half are noise sales rejects.</div></div><div class="leak-$">56% rejected</div></div>
+    <div class="leak"><div class="leak-rank">5</div><div><div class="leak-name">Single-threaded accounts</div><div class="leak-cause">59% of target accounts run on one contact, no committee coverage.</div></div><div class="leak-$">59% exposed</div></div>
   </div>
 
   <div class="section bad-only">
-    <div class="section-head"><div class="section-number">5</div><div class="section-title">Play Book — Not Running</div></div>
+    <div class="section-head"><div class="section-number">5</div><div class="section-title">Play Book: Not Running</div></div>
     <div class="section-lead">No Cortex plays orchestrating against Acme's stack today. The dark database isn't worked, AI-search visibility isn't tracked, and attribution gaps compound weekly.</div>
   </div>
   <div class="section good-only">
@@ -214,12 +968,12 @@ footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertia
   <div class="section">
     <div class="section-head"><div class="section-number">6</div><div class="section-title">ABM Buying-Committee Coverage</div></div>
     <div class="section-lead">Which target accounts have air cover across the committee versus which run single-threaded.</div>
-    <div class="bn"><div class="l">Coverage today</div><div><span class="big-danger">41% multi-threaded</span><br><span style="color:var(--text-secondary);font-size:14px">Only 41% of target accounts have more than one engaged contact. The rest hinge on a single person — the deal dies if they leave. Cortex flags single-threaded accounts and queues committee-fill plays.</span></div></div>
+    <div class="bn"><div class="l">Coverage today</div><div><span class="big-danger">41% multi-threaded</span><br><span style="color:var(--text-secondary);font-size:14px">Only 41% of target accounts have more than one engaged contact. The rest hinge on a single person, the deal dies if they leave. Cortex flags single-threaded accounts and queues committee-fill plays.</span></div></div>
   </div>
 
   <div class="section">
     <div class="section-head"><div class="section-number">7</div><div class="section-title">Marketing Data Fidelity Diagnostic</div></div>
-    <div class="section-lead show-bad">Hygiene today — every number is demand leaking or spend flying blind.</div>
+    <div class="section-lead show-bad">Hygiene today, every number is demand leaking or spend flying blind.</div>
     <div class="section-lead show-good">Hygiene after 90 days of Fidelity Automation.</div>
     <div class="fid-grid">
       <div class="fid"><div class="fid-label">Database decay</div><div class="fid-val">34%<span class="show-good" style="color:var(--success);font-size:15px"> &rarr; &lt;10%</span></div><div class="fid-note">2,890 contacts with no activity in 180+ days.</div></div>
@@ -232,13 +986,13 @@ footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertia
   <div class="section">
     <div class="section-head"><div class="section-number">8</div><div class="section-title">Stack Efficiency Diagnostic</div></div>
     <div class="section-lead">What Acme owns vs. uses. A CFO-ready number, separate from the demand score.</div>
-    <div class="bn"><div class="l">Own vs. use</div><div><span class="big-danger">$186K/yr in redundant + dormant tools</span><br><span style="color:var(--text-secondary);font-size:14px">Acme runs 38 martech tools across 11 categories. 15 show no active signal (dormant), and 3 categories carry overlapping tools doing the same job. Roughly $186K a year in licenses feeding nothing — before buying anything new. We orchestrate what's there; we don't tell you to rip-and-replace.</span></div></div>
+    <div class="bn"><div class="l">Own vs. use</div><div><span class="big-danger">$186K/yr in redundant + dormant tools</span><br><span style="color:var(--text-secondary);font-size:14px">Acme runs 38 martech tools across 11 categories. 15 show no active signal (dormant), and 3 categories carry overlapping tools doing the same job. Roughly $186K a year in licenses feeding nothing, before buying anything new. We orchestrate what's there; we don't tell you to rip-and-replace.</span></div></div>
     <div class="note-strip">The two-sided gap map: 3 signal categories with <strong>no source</strong> (including AI-search visibility), and 3 with <strong>redundant</strong> tools. Both surface in the Path Forward.</div>
   </div>
 
   <div class="section">
     <div class="section-head"><div class="section-number">9</div><div class="section-title">Path Forward</div></div>
-    <div class="section-lead">The Cortex orchestration path that acts on everything above — read-only, nothing installed in your environment, every external action human-approved.</div>
+    <div class="section-lead">The Cortex orchestration path that acts on everything above, read-only, nothing installed in your environment, every external action human-approved.</div>
     <div class="cta">
       <div class="show-bad"><div style="font-size:18px;font-weight:600">This is a sample. Yours runs on your own data.</div><div style="color:var(--text-secondary);font-size:14px;margin-top:6px">A 30-day read of your demand engine, marketing-lens: demand, funnel, attribution, data fidelity, AI-search visibility, and stack efficiency.</div></div>
       <div class="show-good"><div style="font-size:18px;font-weight:600">Ready to put Cortex on your demand engine?</div><div style="color:var(--text-secondary);font-size:14px;margin-top:6px">Phase 1 acts on the dark database and the AI-search gap from day one, with your team approving every move.</div></div>
@@ -246,7 +1000,7 @@ footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertia
     </div>
   </div>
 
-  <footer>Scalient IQ — GTM Orchestration. Marketing Signal Assessment, sample report on synthetic data (Acme Corp). All figures illustrative. Six-dimension Demand Health composite. scalientiq.com</footer>
+  <footer>Scalient IQ: GTM Signal Intelligence. Marketing Signal Assessment, sample report on synthetic data (Acme Corp). All figures illustrative. Six-dimension Demand Health composite. scalientiq.com</footer>
 </div>
 <script>
 (function(){
