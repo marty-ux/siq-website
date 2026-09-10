@@ -813,6 +813,25 @@ ul.rec > li, ul.rec > li b, ul.rec > li strong, ul.rec > li span { color: #F4F0E
 .seam .g, .cta .g, .seam .big-good, .cta .big-good { color: #3DDC97 !important; }
 .seam .a, .cta .a, ul.rec > li .a { color: #FF9B57 !important; }
 
+
+/* --- box pass, third sweep (2026-09-10) -------------------------------
+   Caught by _verify/sweep.js, not by eye: campaign-update went from 1 AA
+   failure at baseline to 9 under the skin. Cause: <ol><li> items inside a
+   painted .seam kept their dark text on the now-navy ground (ratio 1.99
+   against a 4.5 requirement). The earlier sweeps covered div/span/p/b/strong
+   but not list items, table cells or links inside a painted panel. --------- */
+.bn li, .dim li, .stage li, .fid li, .seam li, .cta li,
+.bn ol, .dim ol, .stage ol, .fid ol, .seam ol, .cta ol,
+.bn ul, .dim ul, .stage ul, .fid ul, .seam ul, .cta ul,
+.bn td, .dim td, .stage td, .fid td, .seam td, .cta td,
+.bn th, .dim th, .stage th, .fid th, .seam th, .cta th,
+.bn em, .dim em, .stage em, .fid em, .seam em, .cta em,
+.bn small, .dim small, .stage small, .fid small, .seam small, .cta small
+  { color: #F4F0E7 !important; }
+
+.bn a, .dim a[href], .stage a[href], .fid a[href], .seam a[href], .cta a[href]
+  { color: #FF9B57 !important; }
+
 </style>
 </head>
 <body data-theme="dark" class="siq-locked">
