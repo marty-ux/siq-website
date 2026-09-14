@@ -18,8 +18,10 @@
  * passphrase check.
  *
  * Env vars required (already set for get-runbook):
- *   GITHUB_PAT       - fine-grained PAT with Contents:Read on marty-ux/siq-website
- *   ADMIN_PASS_HASH  - sha256 hex digest of the admin passphrase
+ *   GITHUB_PAT       - REQUIRED. Fine-grained PAT with Contents:Read on marty-ux/siq-website
+ *   ADMIN_PASS_HASH  - OPTIONAL. sha256 hex digest of the admin passphrase. When absent,
+ *                      the admin override is unavailable and client passphrase access
+ *                      still works. Do NOT make this required.
  *
  * Response:
  *   200 { ok: true, admin: true|false, evidence: {...}|null, register: {...}|null }
@@ -113,10 +115,10 @@ module.exports = async (req, res) => {
     res.status(500).json({ ok: false, error: 'server not configured (no PAT)' });
     return;
   }
-  if (!ADMIN_PASS_HASH) {
-    res.status(500).json({ ok: false, error: 'server not configured (no ADMIN_PASS_HASH)' });
-    return;
-  }
+  // ADMIN_PASS_HASH is OPTIONAL. When it is not set, the admin override is simply
+  // unavailable and client passphrase access still works. Treating it as required
+  // is what silently broke /api/get-runbook in production: the var was never set on
+  // the Vercel project, so every request 500'd before it ever checked the client hash.
 
   // 1. Authenticate against the same passHash the runbook uses.
   let config;
@@ -132,7 +134,7 @@ module.exports = async (req, res) => {
   }
 
   const hash = sha256(passphrase);
-  const isAdmin = hash === ADMIN_PASS_HASH;
+  const isAdmin = !!ADMIN_PASS_HASH && hash === ADMIN_PASS_HASH;
   const isClient = !!(config.passHash && hash === config.passHash);
   if (!isAdmin && !isClient) {
     res.status(401).json({ ok: false, error: 'invalid passphrase' });

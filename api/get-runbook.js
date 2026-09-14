@@ -11,8 +11,11 @@
  * Reads source JSON from GitHub via PAT to avoid exposing the static file path.
  *
  * Env vars required:
- *   GITHUB_PAT       - fine-grained PAT with Contents:Read+Write on marty-ux/siq-website
- *   ADMIN_PASS_HASH  - sha256 hex digest of the admin passphrase
+ *   GITHUB_PAT       - REQUIRED. Fine-grained PAT with Contents:Read on marty-ux/siq-website
+ *   ADMIN_PASS_HASH  - OPTIONAL. sha256 hex digest of the admin passphrase. When absent,
+ *                      the admin override is unavailable and client passphrase access
+ *                      still works. Do NOT make this required again (2026-09-14: it was,
+ *                      it was never set on Vercel, and every request 500'd as a result).
  *
  * Response:
  *   200 { ok: true, admin: true|false, config: {...} }
@@ -86,10 +89,9 @@ module.exports = async (req, res) => {
     res.status(500).json({ ok: false, error: 'server not configured (no PAT)' });
     return;
   }
-  if (!ADMIN_PASS_HASH) {
-    res.status(500).json({ ok: false, error: 'server not configured (no ADMIN_PASS_HASH)' });
-    return;
-  }
+  // ADMIN_PASS_HASH is OPTIONAL. It was never set on the Vercel project, and treating
+  // it as required meant every runbook request returned 500 before the client passphrase
+  // was ever checked. Without it the admin override is unavailable; client access works.
   const filePath = `clients/${slug}/config.json`;
   const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}?ref=${BRANCH}`;
   let config = null;
@@ -118,7 +120,7 @@ module.exports = async (req, res) => {
     return;
   }
   const hash = sha256(passphrase);
-  if (hash === ADMIN_PASS_HASH) {
+  if (ADMIN_PASS_HASH && hash === ADMIN_PASS_HASH) {
     res.status(200).json({ ok: true, admin: true, config });
     return;
   }
