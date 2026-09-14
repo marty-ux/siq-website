@@ -3,77 +3,53 @@
  *
  * POST body: { slug, passphrase, doc, asof }
  *
- *   doc = "evidence"  -> clients/{slug}/evidence-{asof}.json   (record-level drill-down)
- *   doc = "register"  -> clients/{slug}/register.json          (finding register + targets)
- *   doc = "both"      -> both of the above in one response     (default)
+ *   doc = "evidence"  -> record-level drill-down for the given as-of date
+ *   doc = "register"  -> finding register: baselines, targets, owners, status
+ *   doc = "both"      -> both in one response (default)
  *
- * Mirrors /api/get-runbook exactly:
- *   - passphrase is validated SERVER SIDE against the client's passHash in
- *     clients/{slug}/config.json, or against ADMIN_PASS_HASH
- *   - source JSON is read from GitHub via PAT, never served as a static file
- *   - middleware.js blocks the static paths so there is no way around this route
+ * SECURITY MODEL
+ *   - The passphrase is validated SERVER SIDE against the client's passHash
+ *     (sha256) in clients/<slug>/config.json, or against ADMIN_PASS_HASH.
+ *   - middleware.js blocks the static clients/<slug>/*.json paths, so the only
+ *     route to this data is through this function.
+ *   - The payload carries named accounts, deal values, owners and HubSpot record
+ *     links. It must never sit in static HTML behind a client-side check.
  *
- * This matters: the evidence payload carries named accounts, deal values, owners
- * and HubSpot record links. It must never sit in static HTML behind a client-side
- * passphrase check.
+ * NO CREDENTIALS REQUIRED. The data is bundled with the deployment via
+ * api/_data/index.js rather than fetched from GitHub with a PAT. That PAT was
+ * found expired on 2026-09-14 (GitHub 401 Bad credentials), which is one of the
+ * two reasons /api/get-runbook had been failing in production. Nothing here can
+ * expire. Do not reintroduce a network fetch for this data.
  *
- * Env vars required (already set for get-runbook):
- *   GITHUB_PAT       - REQUIRED. Fine-grained PAT with Contents:Read on marty-ux/siq-website
- *   ADMIN_PASS_HASH  - OPTIONAL. sha256 hex digest of the admin passphrase. When absent,
- *                      the admin override is unavailable and client passphrase access
- *                      still works. Do NOT make this required.
+ * Env vars:
+ *   ADMIN_PASS_HASH  - OPTIONAL. sha256 hex digest of the admin passphrase. When
+ *                      absent the admin override is unavailable and client
+ *                      passphrase access still works. Do NOT make this required:
+ *                      it was, it was never set on Vercel, and every request 500'd.
  *
  * Response:
- *   200 { ok: true, admin: true|false, evidence: {...}|null, register: {...}|null }
- *   400 { ok: false, error: 'missing slug or passphrase' }
+ *   200 { ok: true, admin: bool, evidence: {...}|null, register: {...}|null }
+ *   400 { ok: false, error: 'missing slug or passphrase' | 'bad slug' | ... }
  *   401 { ok: false, error: 'invalid passphrase' }
  *   404 { ok: false, error: 'client not found' | 'document not found' }
- *   500 { ok: false, error: '...' }
  */
 
 const crypto = require('crypto');
-
-const REPO_OWNER = 'marty-ux';
-const REPO_NAME = 'siq-website';
-const BRANCH = 'main';
+const DATA = require('./_data/index.js');
 
 function sha256(s) {
   return crypto.createHash('sha256').update(s).digest('hex');
 }
-
-// Guard against path traversal in anything that reaches a GitHub path.
 function safeSegment(s) {
   return /^[A-Za-z0-9_-]+$/.test(s || '');
 }
 function safeDate(s) {
   return /^\d{4}-\d{2}-\d{2}$/.test(s || '');
 }
-
-async function ghJson(filePath, pat) {
-  const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}?ref=${BRANCH}`;
-  const r = await fetch(apiUrl, {
-    headers: {
-      'Authorization': `Bearer ${pat}`,
-      'Accept': 'application/vnd.github.v3+json',
-      'User-Agent': 'siq-evidence-api'
-    }
-  });
-  if (r.status === 404) return { missing: true };
-  if (!r.ok) {
-    const t = await r.text();
-    throw new Error('github fetch failed: ' + r.status + ' ' + t.slice(0, 200));
-  }
-  const j = await r.json();
-  // The contents API returns empty content above ~1MB. Fall back to the raw
-  // download_url so a large evidence file still resolves.
-  if ((!j.content || j.content.length === 0) && j.download_url) {
-    const raw = await fetch(j.download_url, {
-      headers: { 'Authorization': `Bearer ${pat}`, 'User-Agent': 'siq-evidence-api' }
-    });
-    if (!raw.ok) throw new Error('raw fetch failed: ' + raw.status);
-    return JSON.parse(await raw.text());
-  }
-  return JSON.parse(Buffer.from(j.content, 'base64').toString('utf-8'));
+// Constant-time compare so a wrong passphrase cannot be narrowed by timing.
+function sameHash(a, b) {
+  if (!a || !b || a.length !== b.length) return false;
+  return crypto.timingSafeEqual(Buffer.from(a), Buffer.from(b));
 }
 
 module.exports = async (req, res) => {
@@ -104,65 +80,45 @@ module.exports = async (req, res) => {
     res.status(400).json({ ok: false, error: 'bad asof, expected YYYY-MM-DD' });
     return;
   }
-  if (!['evidence', 'register', 'both'].includes(doc)) {
+  if (['evidence', 'register', 'both'].indexOf(doc) === -1) {
     res.status(400).json({ ok: false, error: 'bad doc' });
     return;
   }
 
-  const pat = process.env.GITHUB_PAT;
-  const ADMIN_PASS_HASH = process.env.ADMIN_PASS_HASH;
-  if (!pat) {
-    res.status(500).json({ ok: false, error: 'server not configured (no PAT)' });
-    return;
-  }
-  // ADMIN_PASS_HASH is OPTIONAL. When it is not set, the admin override is simply
-  // unavailable and client passphrase access still works. Treating it as required
-  // is what silently broke /api/get-runbook in production: the var was never set on
-  // the Vercel project, so every request 500'd before it ever checked the client hash.
-
-  // 1. Authenticate against the same passHash the runbook uses.
-  let config;
-  try {
-    config = await ghJson(`clients/${slug}/config.json`, pat);
-  } catch (e) {
-    res.status(500).json({ ok: false, error: e.message });
-    return;
-  }
-  if (config && config.missing) {
+  const client = DATA[slug];
+  if (!client) {
     res.status(404).json({ ok: false, error: 'client not found' });
     return;
   }
 
+  // ---- authenticate ----
   const hash = sha256(passphrase);
-  const isAdmin = !!ADMIN_PASS_HASH && hash === ADMIN_PASS_HASH;
-  const isClient = !!(config.passHash && hash === config.passHash);
+  const ADMIN_PASS_HASH = process.env.ADMIN_PASS_HASH;
+  const isAdmin = !!ADMIN_PASS_HASH && sameHash(hash, ADMIN_PASS_HASH);
+  // Report gate passphrase first, then the runbook config passphrase as a fallback,
+  // so either credential opens this page for an authorised viewer.
+  const isClient = sameHash(hash, client.passHash) ||
+                   sameHash(hash, client.config && client.config.passHash);
   if (!isAdmin && !isClient) {
     res.status(401).json({ ok: false, error: 'invalid passphrase' });
     return;
   }
 
-  // 2. Serve the requested documents.
+  // ---- serve ----
   const out = { ok: true, admin: isAdmin, evidence: null, register: null };
-  try {
-    if (doc === 'register' || doc === 'both') {
-      const r = await ghJson(`clients/${slug}/register.json`, pat);
-      out.register = (r && r.missing) ? null : r;
+
+  if (doc === 'register' || doc === 'both') {
+    out.register = client.register || null;
+  }
+
+  if (doc === 'evidence' || doc === 'both') {
+    const date = asof || (client.register && client.register.baselineDate) || '';
+    if (safeDate(date)) {
+      out.evidence = (client.evidence && client.evidence[date]) || null;
+    } else if (doc === 'evidence') {
+      res.status(400).json({ ok: false, error: 'no asof given and no baselineDate on register' });
+      return;
     }
-    if (doc === 'evidence' || doc === 'both') {
-      const date = asof || (out.register && out.register.baselineDate) || '';
-      if (!safeDate(date)) {
-        if (doc === 'evidence') {
-          res.status(400).json({ ok: false, error: 'no asof given and no baselineDate on register' });
-          return;
-        }
-      } else {
-        const e = await ghJson(`clients/${slug}/evidence-${date}.json`, pat);
-        out.evidence = (e && e.missing) ? null : e;
-      }
-    }
-  } catch (e) {
-    res.status(500).json({ ok: false, error: e.message });
-    return;
   }
 
   if (doc === 'evidence' && !out.evidence) {
