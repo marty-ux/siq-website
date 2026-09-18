@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stack Health Report | Scalient IQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canvas:#0A1628; --surface:#0F1F33; --surface-2:#132840;
+    --text-1:#FFFFFF; --text-2:#A8B8CC; --text-3:#6E819A;
+    --border:#1E3450; --border-strong:#2A4A6E;
+    --brand-blue:#0073E6; --brand-orange:#FF6600;
+    --success:#12B76A; --caution:#FF7A00; --danger:#E5484D;
+    --success-soft:rgba(18,183,106,.12); --caution-soft:rgba(255,122,0,.12); --danger-soft:rgba(229,72,77,.12);
+  }
+  html[data-theme="light"]{
+    --canvas:#FFFFFF; --surface:#F4F6F9; --surface-2:#EAEEF4;
+    --text-1:#0A1628; --text-2:#41546E; --text-3:#6E819A;
+    --border:#D8DEE6; --border-strong:#B8C4D2;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--canvas);color:var(--text-1);
+       font-family:'DM Sans',-apple-system,Segoe UI,Arial,sans-serif;
+       font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  body.siq-locked{overflow:hidden;height:100vh}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px 96px}
+  a{color:var(--brand-blue)}
+
+  /* gate */
+  #siq-gate{position:fixed;inset:0;background:#0A1628;display:flex;align-items:center;justify-content:center;z-index:99999}
+  .gate-box{text-align:center;max-width:390px;width:90%;padding:32px}
+  .gate-logo{font-size:28px;font-weight:700;color:#0073E6;margin-bottom:20px}
+  .gate-logo span{color:#FF6600}
+  .gate-title{color:#fff;font-size:21px;font-weight:600;margin-bottom:6px}
+  .gate-sub{color:#8A9BB0;font-size:15px;margin-bottom:22px;line-height:1.5}
+  #gate-input{width:100%;padding:13px 14px;font-size:17px;border:1px solid #24364d;background:#0f1f33;color:#fff;border-radius:0;margin-bottom:12px}
+  #gate-input:focus{outline:none;border-color:#0073E6}
+  #gate-btn{width:100%;padding:13px;background:#FF6600;color:#fff;border:none;font-weight:600;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;font-size:16px}
+  #gate-btn:disabled{opacity:.6;cursor:default}
+  #gate-err{color:#ff5a5a;font-size:15px;margin-top:12px;display:none}
+
+  /* header */
+  .top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;
+       padding:28px 0 20px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+  .brand{font-size:22px;font-weight:700;color:var(--brand-blue)}
+  .brand span{color:var(--brand-orange)}
+  .toggles{display:flex;gap:8px;flex-wrap:wrap}
+  .tg{display:flex;border:1px solid var(--border)}
+  .tg button{background:transparent;border:0;color:var(--text-2);font:inherit;font-size:13px;
+             padding:7px 13px;cursor:pointer;white-space:nowrap}
+  .tg button.on{background:var(--brand-blue);color:#fff}
+  .eyebrow{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--brand-orange);
+           font-weight:600;margin:26px 0 8px}
+  h1{font-size:40px;line-height:1.14;margin:0 0 14px;font-weight:700;letter-spacing:-.5px}
+  .lede{font-size:17px;color:var(--text-2);max-width:74ch;margin:0 0 22px}
+
+  .strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:1px;
+         background:var(--border);border:1px solid var(--border);margin:22px 0}
+  .strip>div{background:var(--surface);padding:14px 16px}
+  .k{font-size:10.5px;letter-spacing:1.1px;text-transform:uppercase;color:var(--text-3);font-weight:600}
+  .v{font-size:16px;font-weight:600;margin-top:3px}
+
+  .note{border:1px dashed var(--border-strong);background:var(--surface);padding:13px 17px;
+        font-size:14px;color:var(--text-2);margin:16px 0}
+  .banner{padding:12px 18px;font-size:13px;letter-spacing:.6px;text-transform:uppercase;
+          font-weight:600;text-align:center;border:1px solid;margin:16px 0}
+  .banner.warn{background:var(--danger-soft);color:var(--danger);border-color:var(--danger)}
+  .banner.good{background:var(--success-soft);color:var(--success);border-color:var(--success)}
+
+  section{margin-top:52px;scroll-margin-top:20px}
+  .sec-h{display:flex;align-items:baseline;gap:13px;margin-bottom:6px}
+  .sec-n{background:var(--brand-orange);color:#fff;font-size:13px;font-weight:700;
+         width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+  h2{font-size:27px;margin:0;font-weight:700;letter-spacing:-.3px}
+  .sec-sub{color:var(--text-2);max-width:78ch;margin:8px 0 20px}
+  h3{font-size:18px;margin:30px 0 10px;font-weight:600}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;margin:18px 0}
+  .card{background:var(--surface);border:1px solid var(--border);padding:17px 19px}
+  .card .big{font-size:29px;font-weight:700;line-height:1.1;margin:5px 0 7px}
+  .card .cap{font-size:13.5px;color:var(--text-2);line-height:1.5}
+  .big.good{color:var(--success)} .big.warn{color:var(--caution)} .big.bad{color:var(--danger)}
+
+  .anchor{background:#000;border:1px solid var(--border-strong);padding:26px 28px;margin:22px 0}
+  .anchor .score{font-size:64px;font-weight:700;line-height:1}
+  .anchor .score.good{color:var(--success)} .anchor .score.warn{color:var(--caution)} .anchor .score.bad{color:var(--danger)}
+  .anchor .band{font-size:17px;font-weight:600;margin-top:6px}
+  .anchor .why{color:var(--text-2);margin-top:12px;max-width:72ch}
+
+  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14.5px}
+  th{background:var(--surface-2);text-align:left;padding:11px 13px;font-size:11px;
+     letter-spacing:1px;text-transform:uppercase;color:var(--text-2);font-weight:600;
+     border-bottom:1px solid var(--border)}
+  td{padding:11px 13px;border-bottom:1px solid var(--border);vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  td.num,th.num{text-align:right;white-space:nowrap}
+  .pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.7px;
+        text-transform:uppercase;padding:3px 8px;white-space:nowrap}
+  .p-live{background:var(--success-soft);color:var(--success)}
+  .p-weak{background:var(--caution-soft);color:var(--caution)}
+  .p-dark{background:var(--danger-soft);color:var(--danger)}
+  .p-red{background:var(--danger-soft);color:var(--danger)}
+  .p-missed{background:var(--danger);color:#fff}
+  .p-urgent{background:var(--caution);color:#fff}
+  .p-open{background:var(--surface-2);color:var(--text-2)}
+  .p-none{background:var(--surface-2);color:var(--text-3)}
+  .tier{font-size:11px;color:var(--text-3);letter-spacing:.5px}
+
+  .find{background:var(--surface);border-left:3px solid var(--danger);padding:17px 20px;margin:13px 0}
+  .find.redundant{border-left-color:var(--caution)}
+  .find-top{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:baseline}
+  .find-name{font-size:17px;font-weight:600}
+  .find-cost{font-size:19px;font-weight:700;color:var(--danger)}
+  .find.redundant .find-cost{color:var(--caution)}
+  .find-meta{font-size:13px;color:var(--text-3);margin-top:4px}
+  .find-ev{font-size:14px;color:var(--text-2);margin-top:10px}
+  .promise{background:var(--danger-soft);border:1px solid var(--danger);padding:11px 14px;margin-top:11px;font-size:14px}
+  .promise .pl{font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--danger);font-weight:700;margin-bottom:4px}
+  .seats{display:flex;gap:18px;margin-top:11px;flex-wrap:wrap}
+  .seats div{font-size:13px;color:var(--text-2)}
+  .seats b{color:var(--text-1);font-size:16px;display:block}
+
+  .bar{height:9px;background:var(--surface-2);display:flex;margin-top:7px;overflow:hidden}
+  .bar i{display:block;height:100%}
+  .bar .s-live{background:var(--success)} .bar .s-weak{background:var(--caution)}
+  .bar .s-dark{background:var(--danger)} .bar .s-redundant{background:#8A3A3D}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--text-2);margin-top:9px}
+  .legend i{width:11px;height:11px;display:inline-block;margin-right:5px;vertical-align:-1px}
+
+  footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--border);
+         font-size:13px;color:var(--text-3);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .hide{display:none !important}
+  @media(max-width:640px){
+    h1{font-size:30px} .anchor .score{font-size:48px} .wrap{padding:0 16px 64px}
+    table{font-size:13px} td,th{padding:9px 8px}
+  }
+</style>
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/51005472.js"></script>
+<!-- siq first-party signal beacon --><script>(function(){try{if(localStorage.getItem("siq_no")==="1")return;var K="siq_vid",v=localStorage.getItem(K);if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem(K,v);}var q=new URLSearchParams(location.search),d={vid:v,path:location.pathname,title:document.title,ref:document.referrer,utm_source:q.get("utm_source")||"",utm_medium:q.get("utm_medium")||"",utm_campaign:q.get("utm_campaign")||"",utm_term:q.get("utm_term")||"",utm_content:q.get("utm_content")||"",screen:innerWidth+"x"+innerHeight,type:"pageview"},s=JSON.stringify(d);if(navigator.sendBeacon){navigator.sendBeacon("/api/e",new Blob([s],{type:"application/json"}));}else{fetch("/api/e",{method:"POST",headers:{"Content-Type":"application/json"},body:s,keepalive:true});}}catch(e){}})();</script>
+</head>
+<body class="siq-locked">
+
+<div id="siq-gate"><div class="gate-box">
+  <div class="gate-logo">Scalient<span>IQ</span></div>
+  <div class="gate-title">Stack Health Report</div>
+  <div class="gate-sub" id="gate-sub">Enter the access passphrase to view.</div>
+  <input id="gate-input" type="password" placeholder="Access passphrase" autocomplete="off" />
+  <button id="gate-btn">View Report</button>
+  <div id="gate-err">Incorrect passphrase. Please try again.</div>
+</div></div>
+
+<div class="wrap" id="doc" style="visibility:hidden">
+
+  <div class="top">
+    <div class="brand">Scalient<span>IQ</span></div>
+    <div class="toggles">
+      <div class="tg" id="tg-view">
+        <button data-view="today" class="on">Today</button>
+        <button data-view="projected">After Renewal Watch</button>
+      </div>
+      <div class="tg" id="tg-theme">
+        <button data-theme-btn="dark" class="on">Dark</button>
+        <button data-theme-btn="light">Light</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="eyebrow" id="eyebrow"></div>
+  <h1>Stack Health Report</h1>
+  <p class="lede" id="lede"></p>
+
+  <div class="strip" id="strip"></div>
+  <div id="sample-note"></div>
+  <div class="banner" id="view-banner"></div>
+
+  <!-- 1 -->
+  <section id="s1">
+    <div class="sec-h"><span class="sec-n">1</span><h2>Executive Summary: Own vs. Use</h2></div>
+    <p class="sec-sub">One number to bring to the budget meeting: what is owned across the GTM stack, what is actually used, and what is feeding nothing. This is the layer no seat-utilization tool measures, because it scores whether a tool's output reaches a revenue decision, not whether somebody logged in.</p>
+    <div class="cards" id="s1-cards"></div>
+    <div class="anchor" id="s1-anchor"></div>
+  </section>
+
+  <!-- 2 -->
+  <section id="s2">
+    <div class="sec-h"><span class="sec-n">2</span><h2>Signal-to-Spend Composite</h2></div>
+    <p class="sec-sub">Every tool is scored on whether its output reaches a revenue decision. The composite is spend-weighted, so a dormant six-figure platform moves it and a dormant seat licence does not. Governance risk the raw score cannot see is then subtracted.</p>
+    <div class="anchor" id="s2-anchor"></div>
+    <div class="bar" id="s2-bar"></div>
+    <div class="legend" id="s2-legend"></div>
+    <h3>How the number was built</h3>
+    <table id="s2-table"></table>
+    <div class="note" id="s2-method"></div>
+  </section>
+
+  <!-- 3 -->
+  <section id="s3">
+    <div class="sec-h"><span class="sec-n">3</span><h2>Business-Unit Rollup</h2></div>
+    <p class="sec-sub">One score per unit, spend-weighted, reconciling to the whole-stack composite above.</p>
+    <table id="s3-table"></table>
+  </section>
+
+  <!-- 4 -->
+  <section id="s4">
+    <div class="sec-h"><span class="sec-n">4</span><h2>Top Dark Stack Findings</h2></div>
+    <p class="sec-sub">Ranked by annual value. Every finding carries its evidence tier, and nothing is called dark on a client-supplied admin export alone.</p>
+    <div id="s4-list"></div>
+  </section>
+
+  <!-- 5 -->
+  <section id="s5">
+    <div class="sec-h"><span class="sec-n">5</span><h2>Contracts and Commitments</h2></div>
+    <p class="sec-sub">What the agreements say you bought, against what the telemetry says you use. Seats contracted versus active, and the outcomes a vendor committed to in writing that never arrived.</p>
+    <div class="cards" id="s5-cards"></div>
+    <h3>Committed outcomes with no evidence of delivery</h3>
+    <table id="s5-promises"></table>
+    <div class="note" id="s5-note"></div>
+  </section>
+
+  <!-- 6 -->
+  <section id="s6">
+    <div class="sec-h"><span class="sec-n">6</span><h2>Renewal Calendar and Notice Deadlines</h2></div>
+    <p class="sec-sub">The renewal date is not the deadline. An auto-renewing agreement locks for another term unless written notice lands a set number of days before, so the date that actually matters is the renewal date minus the notice period in the contract. Those are the dates below.</p>
+    <div class="banner warn" id="s6-alarm"></div>
+    <table id="s6-table"></table>
+    <div class="note" id="s6-note"></div>
+  </section>
+
+  <!-- 7 -->
+  <section id="s7">
+    <div class="sec-h"><span class="sec-n">7</span><h2>Access and Governance</h2></div>
+    <p class="sec-sub">The lowest access ask of any Scalient IQ lens, and that is deliberate.</p>
+    <div class="cards" id="s7-cards"></div>
+    <div class="note" id="s7-note"></div>
+  </section>
+
+  <!-- 8 -->
+  <section id="s8">
+    <div class="sec-h"><span class="sec-n">8</span><h2>Path Forward</h2></div>
+    <p class="sec-sub">The report is one-time. The condition is not.</p>
+    <div id="s8-body"></div>
+  </section>
+
+  <footer>
+    <div id="foot-left"></div>
+    <div>scalientiq.com &middot; info@scalientiq.com</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var qs = new URLSearchParams(location.search);
+  var SLUG = (qs.get('c') || 'acme').toLowerCase().replace(/[^a-z0-9_-]/g,'');
+  var ASOF = qs.get('asof') || '';
+  var PACK = null, VIEW = 'today';
+
+  var gate = document.getElementById('siq-gate');
+  var inp  = document.getElementById('gate-input');
+  var btn  = document.getElementById('gate-btn');
+  var err  = document.getElementById('gate-err');
+  var doc  = document.getElementById('doc');
+
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function money(n){
+    if(n==null) return '';
+    n = Number(n);
+    if(Math.abs(n) >= 1000000) return '$' + (n/1000000).toFixed(n<10000000?1:0) + 'M';
+    if(Math.abs(n) >= 1000) return '$' + Math.round(n/1000) + 'K';
+    return '$' + Math.round(n);
+  }
+  function exact(n){return n==null?'':'$'+Number(n).toLocaleString('en-US',{maximumFractionDigits:0});}
+  function num(n){return n==null?'':Number(n).toLocaleString('en-US');}
+  function bandClass(b){return b==='Green'?'good':(b==='Amber'?'warn':'bad');}
+  function stateClass(s){return s==='live'?'p-live':(s==='weak'?'p-weak':(s==='redundant'?'p-red':'p-dark'));}
+  function stateLabel(s){return {live:'Live',weak:'Weak',dark:'Dark',redundant:'Redundant'}[s]||s;}
+  function dmy(d){
+    if(!d) return '';
+    var p = d.split('-'); var m = ['January','February','March','April','May','June','July',
+      'August','September','October','November','December'];
+    return m[Number(p[1])-1] + ' ' + Number(p[2]) + ', ' + p[0];
+  }
+
+  /* ---------- gate ---------- */
+  function unlock(){
+    gate.style.display='none';
+    document.body.classList.remove('siq-locked');
+    doc.style.visibility='visible';
+  }
+  function tryUnlock(){
+    var v=(inp.value||'').trim();
+    if(!v) return;
+    btn.disabled=true; btn.textContent='Checking...'; err.style.display='none';
+    fetch('/api/get-stack-health',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({slug:SLUG, passphrase:v, asof:ASOF})
+    }).then(function(r){
+      if(r.status===401) throw new Error('bad-pass');
+      if(!r.ok) return r.json().then(function(j){throw new Error(j.error||('HTTP '+r.status));});
+      return r.json();
+    }).then(function(j){
+      PACK=j.pack;
+      try{sessionStorage.setItem('siq_sh_'+SLUG, v);}catch(e){}
+      unlock(); render();
+    }).catch(function(e){
+      btn.disabled=false; btn.textContent='View Report';
+      err.textContent = (e.message==='bad-pass') ? 'Incorrect passphrase. Please try again.'
+                                                 : 'Could not load: '+e.message;
+      err.style.display='block';
+    });
+  }
+  btn.addEventListener('click', tryUnlock);
+  inp.addEventListener('keydown', function(e){ if(e.key==='Enter') tryUnlock(); });
+  try{ var saved=sessionStorage.getItem('siq_sh_'+SLUG); if(saved){ inp.value=saved; tryUnlock(); } }catch(e){}
+
+  /* ---------- toggles ---------- */
+  document.getElementById('tg-theme').addEventListener('click', function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    document.documentElement.setAttribute('data-theme', b.getAttribute('data-theme-btn'));
+    [].forEach.call(this.children, function(x){x.classList.remove('on');}); b.classList.add('on');
+  });
+  document.getElementById('tg-view').addEventListener('click', function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    VIEW=b.getAttribute('data-view');
+    [].forEach.call(this.children, function(x){x.classList.remove('on');}); b.classList.add('on');
+    if(PACK) render();
+  });
+
+  /* ---------- render ---------- */
+  function render(){
+    var p=PACK, projected = (VIEW==='projected' && p.score.projected);
+    var s = projected ? p.score.projected : p.score;
+    var t = p.totals, c = p.contracts;
+
+    document.title = 'Stack Health Report: ' + p.client + ' | Scalient IQ';
+    document.getElementById('eyebrow').textContent =
+      'Stack Health Report · Prepared for ' + p.client + ' · As of ' + dmy(p.asOf);
+    document.getElementById('lede').textContent =
+      'Read-only across the tools you already run, Scalient IQ scores what ' + p.client +
+      ' owns against what it actually uses, prices what is dark, and attaches the notice deadline to every renewal so nothing locks in by default.';
+
+    document.getElementById('strip').innerHTML =
+      row('Tools inventoried', num(t.tools) + ' across ' + p.businessUnits.length + ' business units') +
+      row('Annual GTM stack spend', exact(t.annualSpend)) +
+      row('Contracts on file', num(c.contractsOnFile) + ' of ' + num(c.toolsTotal) + ' (' + c.coveragePct + '%)') +
+      row('Sources, read-only', 'Spend export · Connector telemetry · Subscription contracts') +
+      row('Report date', dmy(p.asOf));
+
+    document.getElementById('sample-note').innerHTML = p.sampleData
+      ? '<div class="note"><strong>Sample report.</strong> "' + esc(p.client) +
+        '" is a synthetic multi-business-unit B2B SaaS enterprise. Every figure is illustrative and exists to show what your own read looks like.</div>'
+      : '';
+
+    var vb=document.getElementById('view-banner');
+    vb.className = 'banner ' + (projected ? 'good' : 'warn');
+    vb.textContent = projected
+      ? 'Projected view: modeled after about two quarters of Renewal Watch. Toggle back to Today for the current state.'
+      : 'Today: the current state of ' + p.client + "'s GTM stack. Toggle to After Renewal Watch to see what continuous monitoring catches.";
+
+    /* 1 */
+    document.getElementById('s1-cards').innerHTML =
+      card('Annual GTM stack spend', exact(t.annualSpend), '', num(t.tools) + ' tools across ' + p.businessUnits.length + ' business units, before buying anything new.') +
+      card('Redundant and dormant', money(projected ? Math.round(t.annualSpend * (p.score.projected.remainingDarkPct/100)) : t.darkSpend) + '/yr', 'bad',
+           projected ? p.score.projected.remainingDarkPct + '% of spend still dark, held for a natural renewal date rather than cancelled early.'
+                     : Math.round(100*t.darkSpend/t.annualSpend) + '% of spend feeding nothing or duplicating another tool.') +
+      card('Dark or redundant tools', num(t.darkTools) + ' of ' + num(t.tools), 'bad', 'Licensed, paid for, and producing no signal that reaches a decision.') +
+      card('Cross-unit duplicate categories', num(t.duplicateCategories), 'warn', 'Two or more units paying for tools doing the same job.') +
+      card('Renewals reviewed pre-lock', (projected ? 96 : t.renewalReviewPct) + '%', projected?'good':'bad',
+           projected ? 'Every renewal now flagged before its notice deadline, not its renewal date.'
+                     : 'Most agreements auto-renew before anyone checks whether the tool still earns its spend.') +
+      card('Signal-to-Spend score', String(s.signalToSpend), bandClass(s.band), s.band + '. Full breakdown in the next section.');
+
+    document.getElementById('s1-anchor').innerHTML =
+      '<div class="k">The number to bring to the budget meeting</div>' +
+      '<div class="score ' + (projected?'good':'bad') + '" style="font-size:44px">' +
+        (projected ? money(Math.round(t.annualSpend * (p.score.projected.remainingDarkPct/100))) : money(t.darkSpend)) + '/yr feeding nothing</div>' +
+      '<div class="why">' + (projected
+        ? 'What remains is not waste that was missed. It is spend held deliberately until its natural renewal date, so nothing is cancelled into a penalty.'
+        : 'That is before ' + esc(p.client) + ' buys a single new tool next year. It does not require a new process, a new hire, or a behaviour change from a single seller. It requires somebody not clicking renew.') + '</div>';
+
+    /* 2 */
+    var pen = p.score.governancePenalty;
+    document.getElementById('s2-anchor').innerHTML =
+      '<div class="score ' + bandClass(s.band) + '">' + s.signalToSpend + '</div>' +
+      '<div class="band">' + s.band + ': ' + (s.bandTag||'') + ', Signal-to-Spend across the whole stack</div>' +
+      '<div class="why">' + (projected
+          ? esc(s.basis||'')
+          : 'A stack that runs but leaks. Seat-utilization tools tell you nobody logs in. This tells you nobody acts on what the tool produces, which is a different and usually much bigger gap.') + '</div>';
+
+    var order=['live','weak','dark','redundant'], bar='', leg='';
+    order.forEach(function(k){
+      var st=p.byState[k];
+      bar += '<i class="s-'+k+'" style="width:'+st.sharePct+'%"></i>';
+      leg += '<span><i class="s-'+k+'" style="background:'+
+             ({live:'#12B76A',weak:'#FF7A00',dark:'#E5484D',redundant:'#8A3A3D'}[k])+'"></i>'+
+             stateLabel(k)+' '+st.sharePct+'% of spend, '+st.tools+' tools</span>';
+    });
+    document.getElementById('s2-bar').innerHTML=bar;
+    document.getElementById('s2-legend').innerHTML=leg;
+
+    document.getElementById('s2-table').innerHTML =
+      '<tr><th>Step</th><th class="num">Points</th><th>What it measures</th></tr>' +
+      tr('Spend-weighted raw score', p.score.raw, 'Live 100, Weak 50, Dark 0, Redundant 0, weighted by annual cost.') +
+      tr('Renewal review coverage', pen.renewalReview, t.renewalReviewPct + '% of annual spend had its renewal reviewed before lock in the last 12 months.') +
+      tr('Ownership clarity', pen.ownershipClarity, t.ownershipPct + '% of annual spend has a single named cancel owner.') +
+      tr('Category duplication', pen.categoryDuplication, num(t.duplicateCategories) + ' categories carry more than one active instance.') +
+      '<tr><td><strong>Signal-to-Spend</strong></td><td class="num"><strong>' + p.score.signalToSpend +
+        '</strong></td><td><strong>' + p.score.band + '</strong>. Recomputes exactly from the tool table in this report.</td></tr>';
+
+    document.getElementById('s2-method').innerHTML =
+      '<strong>Scale.</strong> ' + esc(p.method.scale) + ' <strong>States.</strong> ' + esc(p.method.states) +
+      ' <strong>Evidence.</strong> ' + esc(p.method.evidence);
+
+    /* 3 */
+    var h='<tr><th>Business unit</th><th class="num">Tools</th><th class="num">Annual spend</th><th class="num">Signal-to-Spend</th><th>Band</th></tr>';
+    p.businessUnits.forEach(function(b){
+      h+='<tr><td><strong>'+esc(b.name)+'</strong></td><td class="num">'+num(b.tools)+'</td>'+
+         '<td class="num">'+exact(b.spend)+'</td><td class="num"><strong>'+b.signalToSpend+'</strong></td>'+
+         '<td><span class="pill '+(b.band==='Green'?'p-live':(b.band==='Amber'?'p-weak':'p-dark'))+'">'+b.band+'</span></td></tr>';
+    });
+    document.getElementById('s3-table').innerHTML=h;
+
+    /* 4 */
+    var fh='';
+    p.findings.forEach(function(f){
+      var ct=f.contract||{onFile:false};
+      var seats='';
+      if(ct.onFile && ct.seatsContracted){
+        seats='<div class="seats">'+
+          '<div>Seats contracted<b>'+num(ct.seatsContracted)+'</b></div>'+
+          '<div>Provisioned<b>'+num(ct.seatsProvisioned)+'</b></div>'+
+          '<div>Active in the window<b>'+num(ct.seatsActive)+'</b></div>'+
+          '<div>Renewal<b>'+dmy(ct.renewalDate)+'</b></div>'+
+          (ct.noticeDeadline?'<div>Notice deadline<b>'+dmy(ct.noticeDeadline)+'</b></div>':'')+
+        '</div>';
+      }
+      var prom='';
+      (ct.promisedOutcomes||[]).forEach(function(o){
+        if(o.delivered) return;
+        prom+='<div class="promise"><div class="pl">Committed in the agreement, no evidence of delivery</div>'+
+              esc(o.text)+(o.note?' <span style="color:var(--text-2)">'+esc(o.note)+'</span>':'')+'</div>';
+      });
+      fh+='<div class="find'+(f.signalState==='redundant'?' redundant':'')+'">'+
+        '<div class="find-top"><span class="find-name">'+esc(f.name)+'</span>'+
+        '<span class="find-cost">'+exact(f.annualCost)+'/yr</span></div>'+
+        '<div class="find-meta">'+esc(f.category)+' · '+esc(buName(p,f.bu))+' · '+
+          '<span class="pill '+stateClass(f.signalState)+'">'+stateLabel(f.signalState)+'</span> '+
+          '<span class="tier">Evidence tier '+f.evidenceTier+'</span>'+
+          (ct.onFile?'':' · <span class="pill p-none">No contract on file</span>')+'</div>'+
+        '<div class="find-ev">'+esc(f.evidenceNote)+'</div>'+ seats + prom +
+      '</div>';
+    });
+    document.getElementById('s4-list').innerHTML=fh;
+
+    /* 5 */
+    document.getElementById('s5-cards').innerHTML =
+      card('Contracts on file', num(c.contractsOnFile)+' of '+num(c.toolsTotal), c.coveragePct<80?'warn':'good',
+           c.coveragePct+'% of the stack has an agreement we can read. The rest is scored on telemetry alone.') +
+      card('Seats contracted', num(c.seatsContracted), '', 'Across every agreement carrying a seat count.') +
+      card('Seats active', num(c.seatsActive), c.seatUtilPct<50?'bad':'warn',
+           c.seatUtilPct+'% of contracted seats show activity in the measurement window.') +
+      card('Committed outcomes undelivered', num(c.undeliveredPromises.length), 'bad',
+           'Written vendor commitments with no evidence they were ever turned on.');
+
+    var ph='<tr><th>Tool</th><th>What the agreement committed to</th><th>What we found</th></tr>';
+    if(!c.undeliveredPromises.length){
+      ph+='<tr><td colspan="3">No undelivered commitments found in the agreements on file.</td></tr>';
+    }
+    c.undeliveredPromises.forEach(function(u){
+      ph+='<tr><td><strong>'+esc(u.tool)+'</strong></td><td>'+esc(u.promise)+'</td>'+
+          '<td style="color:var(--danger)">'+esc(u.note||'No evidence of delivery.')+'</td></tr>';
+    });
+    document.getElementById('s5-promises').innerHTML=ph;
+
+    document.getElementById('s5-note').innerHTML =
+      '<strong>Why this section exists.</strong> A tool can be technically live and still be failing its contract. '+
+      'Seat counts show what was bought against what is used. Committed outcomes show what the vendor put in writing '+
+      'and never delivered, which is leverage at renegotiation rather than only a cancellation argument.';
+
+    /* 6 */
+    var missed=c.noticeMissed, urgent=c.noticeUrgent;
+    var alarm=document.getElementById('s6-alarm');
+    if(missed||urgent){
+      alarm.className='banner warn';
+      alarm.textContent = (missed? num(missed)+' agreements worth '+money(c.noticeMissedSpend)+' have already passed their notice deadline. ':'') +
+                          (urgent? num(urgent)+' more worth '+money(c.noticeUrgentSpend)+' fall due within 30 days.':'');
+    } else { alarm.className='banner good'; alarm.textContent='No notice deadline is missed or falling due within 30 days.'; }
+
+    var rh='<tr><th>Tool</th><th class="num">Annual value</th><th>Signal</th><th>Renewal date</th><th>Notice</th><th>Last day to serve notice</th><th>Status</th></tr>';
+    p.renewalCalendar.slice(0,40).forEach(function(r){
+      var st=r.noticeStatus, cls={missed:'p-missed',urgent:'p-urgent',open:'p-open',no_auto_renew:'p-none'}[st]||'p-none';
+      var lbl={missed:'Missed',urgent:'Due within 30 days',open:'Open',no_auto_renew:'No auto-renew'}[st]||st;
+      rh+='<tr><td>'+esc(r.name)+'</td><td class="num">'+exact(r.annualCost)+'</td>'+
+          '<td><span class="pill '+stateClass(r.signalState)+'">'+stateLabel(r.signalState)+'</span></td>'+
+          '<td>'+dmy(r.renewalDate)+'</td><td class="num">'+num(r.noticeDays)+' days</td>'+
+          '<td><strong>'+dmy(r.noticeDeadline)+'</strong></td>'+
+          '<td><span class="pill '+cls+'">'+lbl+'</span></td></tr>';
+    });
+    document.getElementById('s6-table').innerHTML=rh;
+    document.getElementById('s6-note').innerHTML =
+      '<strong>How to read this.</strong> ' + esc(p.method.notice) +
+      ' Rows marked Missed have already auto-renewed or will, and the decision on those moves to the following term. ' +
+      'Showing the first 40 of ' + num(p.renewalCalendar.length) + ' agreements, ordered by how soon notice is due.';
+
+    /* 7 */
+    document.getElementById('s7-cards').innerHTML =
+      card('Systems written to', '0', 'good', 'Read-only throughout. Nothing was created, changed or deleted in any connected system.') +
+      card('Call recordings read', '0', 'good', 'This lens needs none. That is what keeps the access ask small.') +
+      card('Evidence tiers used', '1, 2 and 3', '', 'Dark requires tier 1 or tier 2. A client-supplied admin export alone can only support Weak.') +
+      card('Findings confirmed with you', 'Before publication', 'good', 'Every Dark call was put in front of your team before this report was issued. Disputed items moved to Watch rather than being deleted.');
+    document.getElementById('s7-note').innerHTML='<strong>Access.</strong> '+esc(p.method.access);
+
+    /* 8 */
+    document.getElementById('s8-body').innerHTML =
+      '<p class="sec-sub">Dormant spend found today gets cancelled and is gone. Re-running this same analysis in six months finds much less, so the recurring product is not re-finding waste. Business units keep buying tools, and every new agreement arrives with its own auto-renewal clause and its own notice period.</p>' +
+      '<div class="cards">' +
+        card('Renewal Watch', 'Continuous', '', 'Every agreement flagged ahead of its notice deadline, not its renewal date, with what the tool produced since the last review and a recommendation to renew, renegotiate, consolidate or cancel.') +
+        card('Anchor metric', 'Signal-to-Spend', '', 'The trendline, never dollars saved. Stack condition keeps moving. A savings figure is a one-time argument you eventually win and then stop needing.') +
+        card('Credit', '100%', 'good', 'This report credits in full toward any Scalient IQ engagement within 30 days.') +
+      '</div>' +
+      '<div class="note">' + esc(p.asOfNote) + '</div>';
+
+    document.getElementById('foot-left').textContent =
+      'Stack Health Report · ' + p.client + ' · As of ' + dmy(p.asOf) +
+      ' · Read-only across ' + num(t.tools) + ' tools and ' + num(c.contractsOnFile) + ' agreements.';
+  }
+
+  function buName(p,id){
+    for(var i=0;i<p.businessUnits.length;i++) if(p.businessUnits[i].id===id) return p.businessUnits[i].name;
+    return id;
+  }
+  function row(k,v){return '<div><div class="k">'+esc(k)+'</div><div class="v">'+esc(v)+'</div></div>';}
+  function card(k,big,cls,cap){
+    return '<div class="card"><div class="k">'+esc(k)+'</div>'+
+           '<div class="big '+(cls||'')+'">'+esc(big)+'</div>'+
+           '<div class="cap">'+esc(cap)+'</div></div>';
+  }
+  function tr(a,b,c){
+    var sign = (typeof b==='number' && b>0 && a.indexOf('raw')===-1) ? '+' : '';
+    return '<tr><td>'+esc(a)+'</td><td class="num">'+sign+b+'</td><td>'+esc(c)+'</td></tr>';
+  }
+})();
+</script>
+</body>
+</html>
