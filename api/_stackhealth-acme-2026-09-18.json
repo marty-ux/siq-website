@@ -1,0 +1,3246 @@
+{
+ "schemaVersion": 1,
+ "client": "Acme Corp",
+ "slug": "acme",
+ "asOf": "2026-09-18",
+ "sampleData": true,
+ "currency": "USD",
+ "asOfNote": "Staleness and notice deadlines are measured against the as-of date above, not against today. Re-reading an older export later does not move these numbers.",
+ "score": {
+  "signalToSpend": 58,
+  "band": "Amber",
+  "bandTag": "Leaking",
+  "raw": 68.0,
+  "governancePenalty": {
+   "renewalReview": -6,
+   "ownershipClarity": -2,
+   "categoryDuplication": -2,
+   "total": -10
+  },
+  "totalSpend": 9600000,
+  "projected": {
+   "signalToSpend": 81,
+   "band": "Green",
+   "bandTag": "Earning its spend",
+   "basis": "Modeled on about two quarters of Renewal Watch: dormant tools cancelled at their natural renewal date, duplicate categories consolidated to one instance, and every renewal reviewed before its notice deadline.",
+   "remainingDarkPct": 9
+  }
+ },
+ "totals": {
+  "tools": 94,
+  "annualSpend": 9600000,
+  "darkSpend": 2400000,
+  "darkTools": 19,
+  "duplicateCategories": 6,
+  "renewalReviewPct": 22,
+  "ownershipPct": 65
+ },
+ "byState": {
+  "live": {
+   "tools": 61,
+   "spend": 5856000,
+   "sharePct": 61.0
+  },
+  "weak": {
+   "tools": 14,
+   "spend": 1344000,
+   "sharePct": 14.0
+  },
+  "dark": {
+   "tools": 11,
+   "spend": 1344000,
+   "sharePct": 14.0
+  },
+  "redundant": {
+   "tools": 8,
+   "spend": 1056000,
+   "sharePct": 11.0
+  }
+ },
+ "businessUnits": [
+  {
+   "id": "core",
+   "name": "Core Platform",
+   "tools": 24,
+   "spend": 2585100,
+   "signalToSpend": 47,
+   "band": "Red"
+  },
+  {
+   "id": "datacloud",
+   "name": "Data Cloud",
+   "tools": 24,
+   "spend": 2470700,
+   "signalToSpend": 59,
+   "band": "Amber"
+  },
+  {
+   "id": "trust",
+   "name": "Trust & Security",
+   "tools": 23,
+   "spend": 2374000,
+   "signalToSpend": 69,
+   "band": "Amber"
+  },
+  {
+   "id": "smb",
+   "name": "SMB / Self-Serve",
+   "tools": 23,
+   "spend": 2170200,
+   "signalToSpend": 57,
+   "band": "Amber"
+  }
+ ],
+ "contracts": {
+  "toolsTotal": 94,
+  "contractsOnFile": 65,
+  "coveragePct": 69.1,
+  "noticeMissed": 6,
+  "noticeMissedSpend": 1072500,
+  "noticeUrgent": 7,
+  "noticeUrgentSpend": 623000,
+  "seatsContracted": 5115,
+  "seatsActive": 2055,
+  "seatUtilPct": 40.2,
+  "undeliveredPromises": [
+   {
+    "tool": "Legacy sales-engagement platform",
+    "promise": "Bi-directional CRM sync on all activity types",
+    "note": "Activity sync has written nothing to the CRM in 214 days."
+   },
+   {
+    "tool": "Legacy sales-engagement platform",
+    "promise": "Dedicated customer success manager, quarterly business review",
+    "note": "No QBR on record since the renewal."
+   },
+   {
+    "tool": "Duplicate BI and reporting licence",
+    "promise": "Embedded analytics in the customer portal",
+    "note": "Embedding was never enabled. The portal renders the other vendor's charts."
+   },
+   {
+    "tool": "Dormant ABM enrichment seats",
+    "promise": "Account scoring model tuned on your closed-won set",
+    "note": "Model was never trained. Default scoring is still live."
+   },
+   {
+    "tool": "Orphaned trial-to-paid conversion tool",
+    "promise": "Conversion funnel instrumentation across the self-serve flow",
+    "note": "The flow it instrumented was replaced in March. Nothing points at it."
+   }
+  ]
+ },
+ "findings": [
+  {
+   "id": "T002",
+   "name": "Duplicate BI and reporting licence",
+   "category": "BI and dashboards",
+   "bu": "core",
+   "annualCost": 422400,
+   "signalState": "redundant",
+   "evidenceTier": 1,
+   "evidenceNote": "Duplicated by a higher-value instance in the same category.",
+   "contract": {
+    "seatsContracted": 150,
+    "seatsProvisioned": 150,
+    "seatsActive": 9,
+    "renewalDate": "2026-10-15",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [
+     {
+      "text": "Embedded analytics in the customer portal",
+      "delivered": false,
+      "note": "Embedding was never enabled. The portal renders the other vendor's charts."
+     }
+    ],
+    "sourceDoc": "Enterprise Agreement, 2025-10-15",
+    "onFile": true,
+    "noticeDeadline": "2026-08-16",
+    "noticeStatus": "missed",
+    "noticeDaysLeft": -33
+   }
+  },
+  {
+   "id": "T001",
+   "name": "Legacy sales-engagement platform",
+   "category": "Sales engagement",
+   "bu": "core",
+   "annualCost": 219100,
+   "signalState": "dark",
+   "evidenceTier": 1,
+   "evidenceNote": "No output reaching any revenue system in the lookback window.",
+   "contract": {
+    "seatsContracted": 200,
+    "seatsProvisioned": 40,
+    "seatsActive": 11,
+    "renewalDate": "2026-12-01",
+    "autoRenew": true,
+    "noticeDays": 90,
+    "promisedOutcomes": [
+     {
+      "text": "Bi-directional CRM sync on all activity types",
+      "delivered": false,
+      "note": "Activity sync has written nothing to the CRM in 214 days."
+     },
+     {
+      "text": "Dedicated customer success manager, quarterly business review",
+      "delivered": false,
+      "note": "No QBR on record since the renewal."
+     }
+    ],
+    "sourceDoc": "MSA and Order Form, countersigned 2024-11-14",
+    "onFile": true,
+    "noticeDeadline": "2026-09-02",
+    "noticeStatus": "missed",
+    "noticeDaysLeft": -16
+   }
+  },
+  {
+   "id": "T005",
+   "name": "Orphaned trial-to-paid conversion tool",
+   "category": "Product analytics",
+   "bu": "smb",
+   "annualCost": 185000,
+   "signalState": "dark",
+   "evidenceTier": 2,
+   "evidenceNote": "No output reaching any revenue system in the lookback window.",
+   "contract": {
+    "seatsContracted": 40,
+    "seatsProvisioned": 12,
+    "seatsActive": 0,
+    "renewalDate": "2026-10-01",
+    "autoRenew": true,
+    "noticeDays": 90,
+    "promisedOutcomes": [
+     {
+      "text": "Conversion funnel instrumentation across the self-serve flow",
+      "delivered": false,
+      "note": "The flow it instrumented was replaced in March. Nothing points at it."
+     }
+    ],
+    "sourceDoc": "Order Form, 2025-10-01",
+    "onFile": true,
+    "noticeDeadline": "2026-07-03",
+    "noticeStatus": "missed",
+    "noticeDaysLeft": -77
+   }
+  },
+  {
+   "id": "T003",
+   "name": "Duplicate intent-data feed",
+   "category": "Intent data",
+   "bu": "datacloud",
+   "annualCost": 145000,
+   "signalState": "redundant",
+   "evidenceTier": 2,
+   "evidenceNote": "Duplicated by a higher-value instance in the same category.",
+   "contract": {
+    "seatsContracted": null,
+    "seatsProvisioned": null,
+    "seatsActive": null,
+    "renewalDate": "2027-02-28",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [
+     {
+      "text": "Weekly surge scoring written to the CRM",
+      "delivered": true,
+      "note": ""
+     }
+    ],
+    "sourceDoc": "Subscription Agreement, 2026-02-28",
+    "onFile": true,
+    "noticeDeadline": "2027-01-29",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 133
+   }
+  },
+  {
+   "id": "T084",
+   "name": "Content management tool 84",
+   "category": "Content management",
+   "bu": "core",
+   "annualCost": 119700,
+   "signalState": "dark",
+   "evidenceTier": 1,
+   "evidenceNote": "No output reaching any revenue system in the lookback window.",
+   "contract": {
+    "seatsContracted": 80,
+    "seatsProvisioned": 57,
+    "seatsActive": 11,
+    "renewalDate": "2027-02-09",
+    "autoRenew": false,
+    "noticeDays": 90,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2026-11-11",
+    "noticeStatus": "no_auto_renew",
+    "noticeDaysLeft": 54
+   }
+  },
+  {
+   "id": "T085",
+   "name": "Video tool 85",
+   "category": "Video",
+   "bu": "datacloud",
+   "annualCost": 115200,
+   "signalState": "dark",
+   "evidenceTier": 2,
+   "evidenceNote": "CRM-side fingerprint: no attributable writes in the lookback window.",
+   "contract": {
+    "seatsContracted": 50,
+    "seatsProvisioned": 34,
+    "seatsActive": 7,
+    "renewalDate": "2027-05-04",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-04-04",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 198
+   }
+  },
+  {
+   "id": "T086",
+   "name": "Community tool 86",
+   "category": "Community",
+   "bu": "trust",
+   "annualCost": 114500,
+   "signalState": "dark",
+   "evidenceTier": 1,
+   "evidenceNote": "No output reaching any revenue system in the lookback window.",
+   "contract": {
+    "seatsContracted": null,
+    "seatsProvisioned": null,
+    "seatsActive": null,
+    "renewalDate": "2027-09-29",
+    "autoRenew": true,
+    "noticeDays": 90,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-07-01",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 286
+   }
+  },
+  {
+   "id": "T087",
+   "name": "Events tool 87",
+   "category": "Events",
+   "bu": "smb",
+   "annualCost": 109800,
+   "signalState": "dark",
+   "evidenceTier": 1,
+   "evidenceNote": "No output reaching any revenue system in the lookback window.",
+   "contract": {
+    "seatsContracted": null,
+    "seatsProvisioned": null,
+    "seatsActive": null,
+    "renewalDate": "2026-11-04",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2026",
+    "onFile": true,
+    "noticeDeadline": "2026-09-05",
+    "noticeStatus": "missed",
+    "noticeDaysLeft": -13
+   }
+  },
+  {
+   "id": "T088",
+   "name": "Survey tool 88",
+   "category": "Survey",
+   "bu": "core",
+   "annualCost": 109300,
+   "signalState": "dark",
+   "evidenceTier": 2,
+   "evidenceNote": "No output reaching any revenue system in the lookback window.",
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T083",
+   "name": "Enablement tool 83",
+   "category": "Enablement",
+   "bu": "smb",
+   "annualCost": 107400,
+   "signalState": "dark",
+   "evidenceTier": 1,
+   "evidenceNote": "No output reaching any revenue system in the lookback window.",
+   "contract": {
+    "seatsContracted": 50,
+    "seatsProvisioned": 47,
+    "seatsActive": 17,
+    "renewalDate": "2026-11-18",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2026",
+    "onFile": true,
+    "noticeDeadline": "2026-10-19",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 31
+   }
+  },
+  {
+   "id": "T092",
+   "name": "Compliance tool 92",
+   "category": "Compliance",
+   "bu": "core",
+   "annualCost": 99200,
+   "signalState": "redundant",
+   "evidenceTier": 2,
+   "evidenceNote": "Duplicated by a higher-value instance in the same category.",
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T004",
+   "name": "Dormant ABM enrichment seats",
+   "category": "ABM",
+   "bu": "smb",
+   "annualCost": 96000,
+   "signalState": "dark",
+   "evidenceTier": 1,
+   "evidenceNote": "No output reaching any revenue system in the lookback window.",
+   "contract": {
+    "seatsContracted": 75,
+    "seatsProvisioned": 75,
+    "seatsActive": 3,
+    "renewalDate": "2026-11-30",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [
+     {
+      "text": "Account scoring model tuned on your closed-won set",
+      "delivered": false,
+      "note": "Model was never trained. Default scoring is still live."
+     }
+    ],
+    "sourceDoc": "Order Form, 2025-11-30",
+    "onFile": true,
+    "noticeDeadline": "2026-10-01",
+    "noticeStatus": "urgent",
+    "noticeDaysLeft": 13
+   }
+  }
+ ],
+ "renewalCalendar": [
+  {
+   "id": "T005",
+   "name": "Orphaned trial-to-paid conversion tool",
+   "annualCost": 185000,
+   "signalState": "dark",
+   "renewalDate": "2026-10-01",
+   "noticeDays": 90,
+   "noticeDeadline": "2026-07-03",
+   "noticeStatus": "missed",
+   "noticeDaysLeft": -77
+  },
+  {
+   "id": "T073",
+   "name": "Forecasting tool 73",
+   "annualCost": 73400,
+   "signalState": "weak",
+   "renewalDate": "2026-11-09",
+   "noticeDays": 90,
+   "noticeDeadline": "2026-08-11",
+   "noticeStatus": "missed",
+   "noticeDaysLeft": -38
+  },
+  {
+   "id": "T002",
+   "name": "Duplicate BI and reporting licence",
+   "annualCost": 422400,
+   "signalState": "redundant",
+   "renewalDate": "2026-10-15",
+   "noticeDays": 60,
+   "noticeDeadline": "2026-08-16",
+   "noticeStatus": "missed",
+   "noticeDaysLeft": -33
+  },
+  {
+   "id": "T076",
+   "name": "Customer success tool 76",
+   "annualCost": 62800,
+   "signalState": "weak",
+   "renewalDate": "2026-10-21",
+   "noticeDays": 60,
+   "noticeDeadline": "2026-08-22",
+   "noticeStatus": "missed",
+   "noticeDaysLeft": -27
+  },
+  {
+   "id": "T001",
+   "name": "Legacy sales-engagement platform",
+   "annualCost": 219100,
+   "signalState": "dark",
+   "renewalDate": "2026-12-01",
+   "noticeDays": 90,
+   "noticeDeadline": "2026-09-02",
+   "noticeStatus": "missed",
+   "noticeDaysLeft": -16
+  },
+  {
+   "id": "T087",
+   "name": "Events tool 87",
+   "annualCost": 109800,
+   "signalState": "dark",
+   "renewalDate": "2026-11-04",
+   "noticeDays": 60,
+   "noticeDeadline": "2026-09-05",
+   "noticeStatus": "missed",
+   "noticeDaysLeft": -13
+  },
+  {
+   "id": "T069",
+   "name": "ABM tool 69",
+   "annualCost": 95100,
+   "signalState": "live",
+   "renewalDate": "2026-11-19",
+   "noticeDays": 60,
+   "noticeDeadline": "2026-09-20",
+   "noticeStatus": "urgent",
+   "noticeDaysLeft": 2
+  },
+  {
+   "id": "T020",
+   "name": "iPaaS tool 20",
+   "annualCost": 82800,
+   "signalState": "live",
+   "renewalDate": "2026-11-27",
+   "noticeDays": 60,
+   "noticeDeadline": "2026-09-28",
+   "noticeStatus": "urgent",
+   "noticeDaysLeft": 10
+  },
+  {
+   "id": "T004",
+   "name": "Dormant ABM enrichment seats",
+   "annualCost": 96000,
+   "signalState": "dark",
+   "renewalDate": "2026-11-30",
+   "noticeDays": 60,
+   "noticeDeadline": "2026-10-01",
+   "noticeStatus": "urgent",
+   "noticeDaysLeft": 13
+  },
+  {
+   "id": "T027",
+   "name": "Chat tool 27",
+   "annualCost": 55600,
+   "signalState": "live",
+   "renewalDate": "2026-11-04",
+   "noticeDays": 30,
+   "noticeDeadline": "2026-10-05",
+   "noticeStatus": "urgent",
+   "noticeDaysLeft": 17
+  },
+  {
+   "id": "T071",
+   "name": "BI and dashboards tool 71",
+   "annualCost": 91800,
+   "signalState": "weak",
+   "renewalDate": "2026-12-08",
+   "noticeDays": 60,
+   "noticeDeadline": "2026-10-09",
+   "noticeStatus": "urgent",
+   "noticeDaysLeft": 21
+  },
+  {
+   "id": "T022",
+   "name": "Content management tool 22",
+   "annualCost": 102900,
+   "signalState": "live",
+   "renewalDate": "2026-12-14",
+   "noticeDays": 60,
+   "noticeDeadline": "2026-10-15",
+   "noticeStatus": "urgent",
+   "noticeDaysLeft": 27
+  },
+  {
+   "id": "T052",
+   "name": "Enablement tool 52",
+   "annualCost": 98800,
+   "signalState": "live",
+   "renewalDate": "2026-11-17",
+   "noticeDays": 30,
+   "noticeDeadline": "2026-10-18",
+   "noticeStatus": "urgent",
+   "noticeDaysLeft": 30
+  },
+  {
+   "id": "T083",
+   "name": "Enablement tool 83",
+   "annualCost": 107400,
+   "signalState": "dark",
+   "renewalDate": "2026-11-18",
+   "noticeDays": 30,
+   "noticeDeadline": "2026-10-19",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 31
+  },
+  {
+   "id": "T079",
+   "name": "ETL tool 79",
+   "annualCost": 71200,
+   "signalState": "weak",
+   "renewalDate": "2026-12-19",
+   "noticeDays": 60,
+   "noticeDeadline": "2026-10-20",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 32
+  },
+  {
+   "id": "T035",
+   "name": "Intent data tool 35",
+   "annualCost": 126700,
+   "signalState": "live",
+   "renewalDate": "2026-12-25",
+   "noticeDays": 60,
+   "noticeDeadline": "2026-10-26",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 38
+  },
+  {
+   "id": "T075",
+   "name": "Contract lifecycle tool 75",
+   "annualCost": 108000,
+   "signalState": "weak",
+   "renewalDate": "2027-01-06",
+   "noticeDays": 60,
+   "noticeDeadline": "2026-11-07",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 50
+  },
+  {
+   "id": "T015",
+   "name": "Product analytics tool 15",
+   "annualCost": 56900,
+   "signalState": "live",
+   "renewalDate": "2027-02-08",
+   "noticeDays": 90,
+   "noticeDeadline": "2026-11-10",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 53
+  },
+  {
+   "id": "T084",
+   "name": "Content management tool 84",
+   "annualCost": 119700,
+   "signalState": "dark",
+   "renewalDate": "2027-02-09",
+   "noticeDays": 90,
+   "noticeDeadline": "2026-11-11",
+   "noticeStatus": "no_auto_renew",
+   "noticeDaysLeft": 54
+  },
+  {
+   "id": "T038",
+   "name": "ABM tool 38",
+   "annualCost": 124800,
+   "signalState": "live",
+   "renewalDate": "2027-01-14",
+   "noticeDays": 60,
+   "noticeDeadline": "2026-11-15",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 58
+  },
+  {
+   "id": "T008",
+   "name": "Enterprise scheduling suite",
+   "annualCost": 62000,
+   "signalState": "weak",
+   "renewalDate": "2026-12-20",
+   "noticeDays": 30,
+   "noticeDeadline": "2026-11-20",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 63
+  },
+  {
+   "id": "T019",
+   "name": "Data quality tool 19",
+   "annualCost": 117900,
+   "signalState": "live",
+   "renewalDate": "2027-01-23",
+   "noticeDays": 60,
+   "noticeDeadline": "2026-11-24",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 67
+  },
+  {
+   "id": "T034",
+   "name": "Conversation intelligence tool 34",
+   "annualCost": 97800,
+   "signalState": "live",
+   "renewalDate": "2026-12-24",
+   "noticeDays": 30,
+   "noticeDeadline": "2026-11-24",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 67
+  },
+  {
+   "id": "T059",
+   "name": "Dialer tool 59",
+   "annualCost": 98900,
+   "signalState": "live",
+   "renewalDate": "2026-12-25",
+   "noticeDays": 30,
+   "noticeDeadline": "2026-11-25",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 68
+  },
+  {
+   "id": "T032",
+   "name": "Marketing automation tool 32",
+   "annualCost": 65500,
+   "signalState": "live",
+   "renewalDate": "2027-01-28",
+   "noticeDays": 60,
+   "noticeDeadline": "2026-11-29",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 72
+  },
+  {
+   "id": "T016",
+   "name": "Reverse ETL tool 16",
+   "annualCost": 115800,
+   "signalState": "live",
+   "renewalDate": "2026-12-31",
+   "noticeDays": 30,
+   "noticeDeadline": "2026-12-01",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 74
+  },
+  {
+   "id": "T024",
+   "name": "Community tool 24",
+   "annualCost": 127400,
+   "signalState": "live",
+   "renewalDate": "2027-01-01",
+   "noticeDays": 30,
+   "noticeDeadline": "2026-12-02",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 75
+  },
+  {
+   "id": "T042",
+   "name": "Forecasting tool 42",
+   "annualCost": 61000,
+   "signalState": "live",
+   "renewalDate": "2027-03-04",
+   "noticeDays": 90,
+   "noticeDeadline": "2026-12-04",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 77
+  },
+  {
+   "id": "T067",
+   "name": "Enrichment tool 67",
+   "annualCost": 83400,
+   "signalState": "live",
+   "renewalDate": "2027-01-22",
+   "noticeDays": 30,
+   "noticeDeadline": "2026-12-23",
+   "noticeStatus": "no_auto_renew",
+   "noticeDaysLeft": 96
+  },
+  {
+   "id": "T012",
+   "name": "CPQ tool 12",
+   "annualCost": 98200,
+   "signalState": "live",
+   "renewalDate": "2027-01-27",
+   "noticeDays": 30,
+   "noticeDeadline": "2026-12-28",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 101
+  },
+  {
+   "id": "T030",
+   "name": "Compliance tool 30",
+   "annualCost": 74900,
+   "signalState": "live",
+   "renewalDate": "2027-02-04",
+   "noticeDays": 30,
+   "noticeDeadline": "2027-01-05",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 109
+  },
+  {
+   "id": "T048",
+   "name": "ETL tool 48",
+   "annualCost": 81700,
+   "signalState": "live",
+   "renewalDate": "2027-04-05",
+   "noticeDays": 90,
+   "noticeDeadline": "2027-01-05",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 109
+  },
+  {
+   "id": "T014",
+   "name": "Customer success tool 14",
+   "annualCost": 57200,
+   "signalState": "live",
+   "renewalDate": "2027-02-10",
+   "noticeDays": 30,
+   "noticeDeadline": "2027-01-11",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 115
+  },
+  {
+   "id": "T091",
+   "name": "Security tool 91",
+   "annualCost": 81900,
+   "signalState": "redundant",
+   "renewalDate": "2027-04-13",
+   "noticeDays": 90,
+   "noticeDeadline": "2027-01-13",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 117
+  },
+  {
+   "id": "T006",
+   "name": "Reverse ETL to the warehouse",
+   "annualCost": 292200,
+   "signalState": "weak",
+   "renewalDate": "2027-01-20",
+   "noticeDays": 0,
+   "noticeDeadline": "2027-01-20",
+   "noticeStatus": "no_auto_renew",
+   "noticeDaysLeft": 124
+  },
+  {
+   "id": "T072",
+   "name": "Attribution tool 72",
+   "annualCost": 64900,
+   "signalState": "weak",
+   "renewalDate": "2027-03-26",
+   "noticeDays": 60,
+   "noticeDeadline": "2027-01-25",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 129
+  },
+  {
+   "id": "T033",
+   "name": "Sales engagement tool 33",
+   "annualCost": 104900,
+   "signalState": "live",
+   "renewalDate": "2027-02-26",
+   "noticeDays": 30,
+   "noticeDeadline": "2027-01-27",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 131
+  },
+  {
+   "id": "T003",
+   "name": "Duplicate intent-data feed",
+   "annualCost": 145000,
+   "signalState": "redundant",
+   "renewalDate": "2027-02-28",
+   "noticeDays": 30,
+   "noticeDeadline": "2027-01-29",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 133
+  },
+  {
+   "id": "T009",
+   "name": "Security posture monitoring",
+   "annualCost": 369500,
+   "signalState": "live",
+   "renewalDate": "2027-03-31",
+   "noticeDays": 60,
+   "noticeDeadline": "2027-01-30",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 134
+  },
+  {
+   "id": "T011",
+   "name": "Forecasting tool 11",
+   "annualCost": 56000,
+   "signalState": "live",
+   "renewalDate": "2027-04-06",
+   "noticeDays": 60,
+   "noticeDeadline": "2027-02-05",
+   "noticeStatus": "no_auto_renew",
+   "noticeDaysLeft": 140
+  },
+  {
+   "id": "T061",
+   "name": "Compliance tool 61",
+   "annualCost": 73100,
+   "signalState": "live",
+   "renewalDate": "2027-04-10",
+   "noticeDays": 60,
+   "noticeDeadline": "2027-02-09",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 144
+  },
+  {
+   "id": "T058",
+   "name": "Chat tool 58",
+   "annualCost": 123900,
+   "signalState": "live",
+   "renewalDate": "2027-03-19",
+   "noticeDays": 30,
+   "noticeDeadline": "2027-02-17",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 152
+  },
+  {
+   "id": "T062",
+   "name": "CRM tool 62",
+   "annualCost": 88700,
+   "signalState": "live",
+   "renewalDate": "2027-03-30",
+   "noticeDays": 30,
+   "noticeDeadline": "2027-02-28",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 163
+  },
+  {
+   "id": "T057",
+   "name": "Survey tool 57",
+   "annualCost": 58800,
+   "signalState": "live",
+   "renewalDate": "2027-04-12",
+   "noticeDays": 30,
+   "noticeDeadline": "2027-03-13",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 176
+  },
+  {
+   "id": "T044",
+   "name": "Contract lifecycle tool 44",
+   "annualCost": 75300,
+   "signalState": "live",
+   "renewalDate": "2027-06-15",
+   "noticeDays": 90,
+   "noticeDeadline": "2027-03-17",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 180
+  },
+  {
+   "id": "T049",
+   "name": "CDP tool 49",
+   "annualCost": 53100,
+   "signalState": "live",
+   "renewalDate": "2027-06-15",
+   "noticeDays": 90,
+   "noticeDeadline": "2027-03-17",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 180
+  },
+  {
+   "id": "T043",
+   "name": "CPQ tool 43",
+   "annualCost": 128200,
+   "signalState": "live",
+   "renewalDate": "2027-05-28",
+   "noticeDays": 60,
+   "noticeDeadline": "2027-03-29",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 192
+  },
+  {
+   "id": "T085",
+   "name": "Video tool 85",
+   "annualCost": 115200,
+   "signalState": "dark",
+   "renewalDate": "2027-05-04",
+   "noticeDays": 30,
+   "noticeDeadline": "2027-04-04",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 198
+  },
+  {
+   "id": "T054",
+   "name": "Video tool 54",
+   "annualCost": 70800,
+   "signalState": "live",
+   "renewalDate": "2027-05-11",
+   "noticeDays": 30,
+   "noticeDeadline": "2027-04-11",
+   "noticeStatus": "no_auto_renew",
+   "noticeDaysLeft": 205
+  },
+  {
+   "id": "T028",
+   "name": "Dialer tool 28",
+   "annualCost": 107500,
+   "signalState": "live",
+   "renewalDate": "2027-07-19",
+   "noticeDays": 90,
+   "noticeDeadline": "2027-04-20",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 214
+  },
+  {
+   "id": "T021",
+   "name": "Enablement tool 21",
+   "annualCost": 123200,
+   "signalState": "live",
+   "renewalDate": "2027-05-29",
+   "noticeDays": 30,
+   "noticeDeadline": "2027-04-29",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 223
+  },
+  {
+   "id": "T029",
+   "name": "Security tool 29",
+   "annualCost": 79200,
+   "signalState": "live",
+   "renewalDate": "2027-07-05",
+   "noticeDays": 60,
+   "noticeDeadline": "2027-05-06",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 230
+  },
+  {
+   "id": "T082",
+   "name": "iPaaS tool 82",
+   "annualCost": 89600,
+   "signalState": "dark",
+   "renewalDate": "2027-07-12",
+   "noticeDays": 60,
+   "noticeDeadline": "2027-05-13",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 237
+  },
+  {
+   "id": "T074",
+   "name": "CPQ tool 74",
+   "annualCost": 72100,
+   "signalState": "weak",
+   "renewalDate": "2027-07-13",
+   "noticeDays": 60,
+   "noticeDeadline": "2027-05-14",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 238
+  },
+  {
+   "id": "T089",
+   "name": "Chat tool 89",
+   "annualCost": 78400,
+   "signalState": "dark",
+   "renewalDate": "2027-07-18",
+   "noticeDays": 60,
+   "noticeDeadline": "2027-05-19",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 243
+  },
+  {
+   "id": "T065",
+   "name": "Conversation intelligence tool 65",
+   "annualCost": 123400,
+   "signalState": "live",
+   "renewalDate": "2027-07-25",
+   "noticeDays": 60,
+   "noticeDeadline": "2027-05-26",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 250
+  },
+  {
+   "id": "T025",
+   "name": "Events tool 25",
+   "annualCost": 81700,
+   "signalState": "live",
+   "renewalDate": "2027-07-26",
+   "noticeDays": 60,
+   "noticeDeadline": "2027-05-27",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 251
+  },
+  {
+   "id": "T036",
+   "name": "Enrichment tool 36",
+   "annualCost": 81200,
+   "signalState": "live",
+   "renewalDate": "2027-07-07",
+   "noticeDays": 30,
+   "noticeDeadline": "2027-06-07",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 262
+  },
+  {
+   "id": "T064",
+   "name": "Sales engagement tool 64",
+   "annualCost": 109400,
+   "signalState": "live",
+   "renewalDate": "2027-08-16",
+   "noticeDays": 60,
+   "noticeDeadline": "2027-06-17",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 272
+  },
+  {
+   "id": "T086",
+   "name": "Community tool 86",
+   "annualCost": 114500,
+   "signalState": "dark",
+   "renewalDate": "2027-09-29",
+   "noticeDays": 90,
+   "noticeDeadline": "2027-07-01",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 286
+  },
+  {
+   "id": "T078",
+   "name": "Reverse ETL tool 78",
+   "annualCost": 112000,
+   "signalState": "weak",
+   "renewalDate": "2027-09-01",
+   "noticeDays": 60,
+   "noticeDeadline": "2027-07-03",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 288
+  },
+  {
+   "id": "T041",
+   "name": "Attribution tool 41",
+   "annualCost": 106300,
+   "signalState": "live",
+   "renewalDate": "2027-09-12",
+   "noticeDays": 60,
+   "noticeDeadline": "2027-07-14",
+   "noticeStatus": "no_auto_renew",
+   "noticeDaysLeft": 299
+  },
+  {
+   "id": "T013",
+   "name": "Contract lifecycle tool 13",
+   "annualCost": 76300,
+   "signalState": "live",
+   "renewalDate": "2027-09-23",
+   "noticeDays": 60,
+   "noticeDeadline": "2027-07-25",
+   "noticeStatus": "open",
+   "noticeDaysLeft": 310
+  },
+  {
+   "id": "T093",
+   "name": "CRM tool 93",
+   "annualCost": 84200,
+   "signalState": "redundant",
+   "renewalDate": "2027-09-01",
+   "noticeDays": 30,
+   "noticeDeadline": "2027-08-02",
+   "noticeStatus": "no_auto_renew",
+   "noticeDaysLeft": 318
+  },
+  {
+   "id": "T018",
+   "name": "CDP tool 18",
+   "annualCost": 61900,
+   "signalState": "live",
+   "renewalDate": "2027-10-06",
+   "noticeDays": 60,
+   "noticeDeadline": "2027-08-07",
+   "noticeStatus": "no_auto_renew",
+   "noticeDaysLeft": 323
+  }
+ ],
+ "tools": [
+  {
+   "id": "T001",
+   "name": "Legacy sales-engagement platform",
+   "category": "Sales engagement",
+   "bu": "core",
+   "annualCost": 219100,
+   "signalState": "dark",
+   "evidenceTier": 1,
+   "evidenceNote": "No output reaching any revenue system in the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 200,
+    "seatsProvisioned": 40,
+    "seatsActive": 11,
+    "renewalDate": "2026-12-01",
+    "autoRenew": true,
+    "noticeDays": 90,
+    "promisedOutcomes": [
+     {
+      "text": "Bi-directional CRM sync on all activity types",
+      "delivered": false,
+      "note": "Activity sync has written nothing to the CRM in 214 days."
+     },
+     {
+      "text": "Dedicated customer success manager, quarterly business review",
+      "delivered": false,
+      "note": "No QBR on record since the renewal."
+     }
+    ],
+    "sourceDoc": "MSA and Order Form, countersigned 2024-11-14",
+    "onFile": true,
+    "noticeDeadline": "2026-09-02",
+    "noticeStatus": "missed",
+    "noticeDaysLeft": -16
+   }
+  },
+  {
+   "id": "T002",
+   "name": "Duplicate BI and reporting licence",
+   "category": "BI and dashboards",
+   "bu": "core",
+   "annualCost": 422400,
+   "signalState": "redundant",
+   "evidenceTier": 1,
+   "evidenceNote": "Duplicated by a higher-value instance in the same category.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 150,
+    "seatsProvisioned": 150,
+    "seatsActive": 9,
+    "renewalDate": "2026-10-15",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [
+     {
+      "text": "Embedded analytics in the customer portal",
+      "delivered": false,
+      "note": "Embedding was never enabled. The portal renders the other vendor's charts."
+     }
+    ],
+    "sourceDoc": "Enterprise Agreement, 2025-10-15",
+    "onFile": true,
+    "noticeDeadline": "2026-08-16",
+    "noticeStatus": "missed",
+    "noticeDaysLeft": -33
+   }
+  },
+  {
+   "id": "T003",
+   "name": "Duplicate intent-data feed",
+   "category": "Intent data",
+   "bu": "datacloud",
+   "annualCost": 145000,
+   "signalState": "redundant",
+   "evidenceTier": 2,
+   "evidenceNote": "Duplicated by a higher-value instance in the same category.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": null,
+    "seatsProvisioned": null,
+    "seatsActive": null,
+    "renewalDate": "2027-02-28",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [
+     {
+      "text": "Weekly surge scoring written to the CRM",
+      "delivered": true,
+      "note": ""
+     }
+    ],
+    "sourceDoc": "Subscription Agreement, 2026-02-28",
+    "onFile": true,
+    "noticeDeadline": "2027-01-29",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 133
+   }
+  },
+  {
+   "id": "T004",
+   "name": "Dormant ABM enrichment seats",
+   "category": "ABM",
+   "bu": "smb",
+   "annualCost": 96000,
+   "signalState": "dark",
+   "evidenceTier": 1,
+   "evidenceNote": "No output reaching any revenue system in the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 75,
+    "seatsProvisioned": 75,
+    "seatsActive": 3,
+    "renewalDate": "2026-11-30",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [
+     {
+      "text": "Account scoring model tuned on your closed-won set",
+      "delivered": false,
+      "note": "Model was never trained. Default scoring is still live."
+     }
+    ],
+    "sourceDoc": "Order Form, 2025-11-30",
+    "onFile": true,
+    "noticeDeadline": "2026-10-01",
+    "noticeStatus": "urgent",
+    "noticeDaysLeft": 13
+   }
+  },
+  {
+   "id": "T005",
+   "name": "Orphaned trial-to-paid conversion tool",
+   "category": "Product analytics",
+   "bu": "smb",
+   "annualCost": 185000,
+   "signalState": "dark",
+   "evidenceTier": 2,
+   "evidenceNote": "No output reaching any revenue system in the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 40,
+    "seatsProvisioned": 12,
+    "seatsActive": 0,
+    "renewalDate": "2026-10-01",
+    "autoRenew": true,
+    "noticeDays": 90,
+    "promisedOutcomes": [
+     {
+      "text": "Conversion funnel instrumentation across the self-serve flow",
+      "delivered": false,
+      "note": "The flow it instrumented was replaced in March. Nothing points at it."
+     }
+    ],
+    "sourceDoc": "Order Form, 2025-10-01",
+    "onFile": true,
+    "noticeDeadline": "2026-07-03",
+    "noticeStatus": "missed",
+    "noticeDaysLeft": -77
+   }
+  },
+  {
+   "id": "T006",
+   "name": "Reverse ETL to the warehouse",
+   "category": "Reverse ETL",
+   "bu": "datacloud",
+   "annualCost": 292200,
+   "signalState": "weak",
+   "evidenceTier": 1,
+   "evidenceNote": "Produces output that terminates in a silo. Nothing downstream consumes it.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": null,
+    "seatsProvisioned": null,
+    "seatsActive": null,
+    "renewalDate": "2027-01-20",
+    "autoRenew": false,
+    "noticeDays": 0,
+    "promisedOutcomes": [
+     {
+      "text": "Syncs to CRM, MAP and the data warehouse",
+      "delivered": true,
+      "note": ""
+     }
+    ],
+    "sourceDoc": "Subscription Agreement, 2026-01-20",
+    "onFile": true,
+    "noticeDeadline": "2027-01-20",
+    "noticeStatus": "no_auto_renew",
+    "noticeDaysLeft": 124
+   }
+  },
+  {
+   "id": "T007",
+   "name": "Second data-quality vendor",
+   "category": "Data quality",
+   "bu": "datacloud",
+   "annualCost": 74000,
+   "signalState": "redundant",
+   "evidenceTier": 2,
+   "evidenceNote": "Duplicated by a higher-value instance in the same category.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T008",
+   "name": "Enterprise scheduling suite",
+   "category": "Scheduling",
+   "bu": "core",
+   "annualCost": 62000,
+   "signalState": "weak",
+   "evidenceTier": 3,
+   "evidenceNote": "Produces output that terminates in a silo. Nothing downstream consumes it.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 300,
+    "seatsProvisioned": 300,
+    "seatsActive": 188,
+    "renewalDate": "2026-12-20",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [
+     {
+      "text": "Round-robin routing with CRM ownership rules",
+      "delivered": true,
+      "note": ""
+     }
+    ],
+    "sourceDoc": "Order Form, 2025-12-20",
+    "onFile": true,
+    "noticeDeadline": "2026-11-20",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 63
+   }
+  },
+  {
+   "id": "T009",
+   "name": "Security posture monitoring",
+   "category": "Security",
+   "bu": "trust",
+   "annualCost": 369500,
+   "signalState": "live",
+   "evidenceTier": 1,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": null,
+    "seatsProvisioned": null,
+    "seatsActive": null,
+    "renewalDate": "2027-03-31",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [
+     {
+      "text": "Continuous control monitoring",
+      "delivered": true,
+      "note": ""
+     }
+    ],
+    "sourceDoc": "Enterprise Agreement, 2026-03-31",
+    "onFile": true,
+    "noticeDeadline": "2027-01-30",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 134
+   }
+  },
+  {
+   "id": "T010",
+   "name": "Attribution tool 10",
+   "category": "Attribution",
+   "bu": "trust",
+   "annualCost": 126300,
+   "signalState": "live",
+   "evidenceTier": 3,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T011",
+   "name": "Forecasting tool 11",
+   "category": "Forecasting",
+   "bu": "smb",
+   "annualCost": 56000,
+   "signalState": "live",
+   "evidenceTier": 1,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 250,
+    "seatsProvisioned": 165,
+    "seatsActive": 43,
+    "renewalDate": "2027-04-06",
+    "autoRenew": false,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-02-05",
+    "noticeStatus": "no_auto_renew",
+    "noticeDaysLeft": 140
+   }
+  },
+  {
+   "id": "T012",
+   "name": "CPQ tool 12",
+   "category": "CPQ",
+   "bu": "core",
+   "annualCost": 98200,
+   "signalState": "live",
+   "evidenceTier": 3,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 25,
+    "seatsProvisioned": 23,
+    "seatsActive": 7,
+    "renewalDate": "2027-01-27",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2026-12-28",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 101
+   }
+  },
+  {
+   "id": "T013",
+   "name": "Contract lifecycle tool 13",
+   "category": "Contract lifecycle",
+   "bu": "datacloud",
+   "annualCost": 76300,
+   "signalState": "live",
+   "evidenceTier": 3,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 50,
+    "seatsProvisioned": 38,
+    "seatsActive": 29,
+    "renewalDate": "2027-09-23",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-07-25",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 310
+   }
+  },
+  {
+   "id": "T014",
+   "name": "Customer success tool 14",
+   "category": "Customer success",
+   "bu": "trust",
+   "annualCost": 57200,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 250,
+    "seatsProvisioned": 199,
+    "seatsActive": 35,
+    "renewalDate": "2027-02-10",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-01-11",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 115
+   }
+  },
+  {
+   "id": "T015",
+   "name": "Product analytics tool 15",
+   "category": "Product analytics",
+   "bu": "smb",
+   "annualCost": 56900,
+   "signalState": "live",
+   "evidenceTier": 1,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 25,
+    "seatsProvisioned": 15,
+    "seatsActive": 19,
+    "renewalDate": "2027-02-08",
+    "autoRenew": true,
+    "noticeDays": 90,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2026-11-10",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 53
+   }
+  },
+  {
+   "id": "T016",
+   "name": "Reverse ETL tool 16",
+   "category": "Reverse ETL",
+   "bu": "core",
+   "annualCost": 115800,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 120,
+    "seatsProvisioned": 103,
+    "seatsActive": 8,
+    "renewalDate": "2026-12-31",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2026",
+    "onFile": true,
+    "noticeDeadline": "2026-12-01",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 74
+   }
+  },
+  {
+   "id": "T017",
+   "name": "ETL tool 17",
+   "category": "ETL",
+   "bu": "datacloud",
+   "annualCost": 104700,
+   "signalState": "live",
+   "evidenceTier": 1,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T018",
+   "name": "CDP tool 18",
+   "category": "CDP",
+   "bu": "trust",
+   "annualCost": 61900,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 80,
+    "seatsProvisioned": 41,
+    "seatsActive": 31,
+    "renewalDate": "2027-10-06",
+    "autoRenew": false,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-08-07",
+    "noticeStatus": "no_auto_renew",
+    "noticeDaysLeft": 323
+   }
+  },
+  {
+   "id": "T019",
+   "name": "Data quality tool 19",
+   "category": "Data quality",
+   "bu": "smb",
+   "annualCost": 117900,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": null,
+    "seatsProvisioned": null,
+    "seatsActive": null,
+    "renewalDate": "2027-01-23",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2026-11-24",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 67
+   }
+  },
+  {
+   "id": "T020",
+   "name": "iPaaS tool 20",
+   "category": "iPaaS",
+   "bu": "core",
+   "annualCost": 82800,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": null,
+    "seatsProvisioned": null,
+    "seatsActive": null,
+    "renewalDate": "2026-11-27",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2026",
+    "onFile": true,
+    "noticeDeadline": "2026-09-28",
+    "noticeStatus": "urgent",
+    "noticeDaysLeft": 10
+   }
+  },
+  {
+   "id": "T021",
+   "name": "Enablement tool 21",
+   "category": "Enablement",
+   "bu": "datacloud",
+   "annualCost": 123200,
+   "signalState": "live",
+   "evidenceTier": 1,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 180,
+   "contract": {
+    "seatsContracted": 80,
+    "seatsProvisioned": 47,
+    "seatsActive": 52,
+    "renewalDate": "2027-05-29",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-04-29",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 223
+   }
+  },
+  {
+   "id": "T022",
+   "name": "Content management tool 22",
+   "category": "Content management",
+   "bu": "trust",
+   "annualCost": 102900,
+   "signalState": "live",
+   "evidenceTier": 1,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 180,
+   "contract": {
+    "seatsContracted": 25,
+    "seatsProvisioned": 18,
+    "seatsActive": 16,
+    "renewalDate": "2026-12-14",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2026",
+    "onFile": true,
+    "noticeDeadline": "2026-10-15",
+    "noticeStatus": "urgent",
+    "noticeDaysLeft": 27
+   }
+  },
+  {
+   "id": "T023",
+   "name": "Video tool 23",
+   "category": "Video",
+   "bu": "smb",
+   "annualCost": 107300,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 180,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T024",
+   "name": "Community tool 24",
+   "category": "Community",
+   "bu": "core",
+   "annualCost": 127400,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 50,
+    "seatsProvisioned": 48,
+    "seatsActive": 41,
+    "renewalDate": "2027-01-01",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2026-12-02",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 75
+   }
+  },
+  {
+   "id": "T025",
+   "name": "Events tool 25",
+   "category": "Events",
+   "bu": "datacloud",
+   "annualCost": 81700,
+   "signalState": "live",
+   "evidenceTier": 1,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 80,
+    "seatsProvisioned": 42,
+    "seatsActive": 58,
+    "renewalDate": "2027-07-26",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-05-27",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 251
+   }
+  },
+  {
+   "id": "T026",
+   "name": "Survey tool 26",
+   "category": "Survey",
+   "bu": "trust",
+   "annualCost": 123800,
+   "signalState": "live",
+   "evidenceTier": 3,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T027",
+   "name": "Chat tool 27",
+   "category": "Chat",
+   "bu": "smb",
+   "annualCost": 55600,
+   "signalState": "live",
+   "evidenceTier": 3,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 25,
+    "seatsProvisioned": 23,
+    "seatsActive": 16,
+    "renewalDate": "2026-11-04",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2026",
+    "onFile": true,
+    "noticeDeadline": "2026-10-05",
+    "noticeStatus": "urgent",
+    "noticeDaysLeft": 17
+   }
+  },
+  {
+   "id": "T028",
+   "name": "Dialer tool 28",
+   "category": "Dialer",
+   "bu": "core",
+   "annualCost": 107500,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 25,
+    "seatsProvisioned": 15,
+    "seatsActive": 20,
+    "renewalDate": "2027-07-19",
+    "autoRenew": true,
+    "noticeDays": 90,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-04-20",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 214
+   }
+  },
+  {
+   "id": "T029",
+   "name": "Security tool 29",
+   "category": "Security",
+   "bu": "datacloud",
+   "annualCost": 79200,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 120,
+    "seatsProvisioned": 77,
+    "seatsActive": 64,
+    "renewalDate": "2027-07-05",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-05-06",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 230
+   }
+  },
+  {
+   "id": "T030",
+   "name": "Compliance tool 30",
+   "category": "Compliance",
+   "bu": "trust",
+   "annualCost": 74900,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 80,
+    "seatsProvisioned": 44,
+    "seatsActive": 20,
+    "renewalDate": "2027-02-04",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-01-05",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 109
+   }
+  },
+  {
+   "id": "T031",
+   "name": "CRM tool 31",
+   "category": "CRM",
+   "bu": "smb",
+   "annualCost": 108000,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T032",
+   "name": "Marketing automation tool 32",
+   "category": "Marketing automation",
+   "bu": "core",
+   "annualCost": 65500,
+   "signalState": "live",
+   "evidenceTier": 1,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": null,
+    "seatsProvisioned": null,
+    "seatsActive": null,
+    "renewalDate": "2027-01-28",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2026-11-29",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 72
+   }
+  },
+  {
+   "id": "T033",
+   "name": "Sales engagement tool 33",
+   "category": "Sales engagement",
+   "bu": "datacloud",
+   "annualCost": 104900,
+   "signalState": "live",
+   "evidenceTier": 3,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": null,
+    "seatsProvisioned": null,
+    "seatsActive": null,
+    "renewalDate": "2027-02-26",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-01-27",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 131
+   }
+  },
+  {
+   "id": "T034",
+   "name": "Conversation intelligence tool 34",
+   "category": "Conversation intelligence",
+   "bu": "trust",
+   "annualCost": 97800,
+   "signalState": "live",
+   "evidenceTier": 3,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": null,
+    "seatsProvisioned": null,
+    "seatsActive": null,
+    "renewalDate": "2026-12-24",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2026",
+    "onFile": true,
+    "noticeDeadline": "2026-11-24",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 67
+   }
+  },
+  {
+   "id": "T035",
+   "name": "Intent data tool 35",
+   "category": "Intent data",
+   "bu": "smb",
+   "annualCost": 126700,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 120,
+    "seatsProvisioned": 81,
+    "seatsActive": 16,
+    "renewalDate": "2026-12-25",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2026",
+    "onFile": true,
+    "noticeDeadline": "2026-10-26",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 38
+   }
+  },
+  {
+   "id": "T036",
+   "name": "Enrichment tool 36",
+   "category": "Enrichment",
+   "bu": "core",
+   "annualCost": 81200,
+   "signalState": "live",
+   "evidenceTier": 1,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 250,
+    "seatsProvisioned": 204,
+    "seatsActive": 183,
+    "renewalDate": "2027-07-07",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-06-07",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 262
+   }
+  },
+  {
+   "id": "T037",
+   "name": "Visitor identification tool 37",
+   "category": "Visitor identification",
+   "bu": "datacloud",
+   "annualCost": 111100,
+   "signalState": "live",
+   "evidenceTier": 1,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T038",
+   "name": "ABM tool 38",
+   "category": "ABM",
+   "bu": "trust",
+   "annualCost": 124800,
+   "signalState": "live",
+   "evidenceTier": 1,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 120,
+    "seatsProvisioned": 74,
+    "seatsActive": 64,
+    "renewalDate": "2027-01-14",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2026-11-15",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 58
+   }
+  },
+  {
+   "id": "T039",
+   "name": "Scheduling tool 39",
+   "category": "Scheduling",
+   "bu": "smb",
+   "annualCost": 84700,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T040",
+   "name": "BI and dashboards tool 40",
+   "category": "BI and dashboards",
+   "bu": "core",
+   "annualCost": 76600,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T041",
+   "name": "Attribution tool 41",
+   "category": "Attribution",
+   "bu": "datacloud",
+   "annualCost": 106300,
+   "signalState": "live",
+   "evidenceTier": 1,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 250,
+    "seatsProvisioned": 233,
+    "seatsActive": 177,
+    "renewalDate": "2027-09-12",
+    "autoRenew": false,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-07-14",
+    "noticeStatus": "no_auto_renew",
+    "noticeDaysLeft": 299
+   }
+  },
+  {
+   "id": "T042",
+   "name": "Forecasting tool 42",
+   "category": "Forecasting",
+   "bu": "trust",
+   "annualCost": 61000,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 25,
+    "seatsProvisioned": 16,
+    "seatsActive": 18,
+    "renewalDate": "2027-03-04",
+    "autoRenew": true,
+    "noticeDays": 90,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2026-12-04",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 77
+   }
+  },
+  {
+   "id": "T043",
+   "name": "CPQ tool 43",
+   "category": "CPQ",
+   "bu": "smb",
+   "annualCost": 128200,
+   "signalState": "live",
+   "evidenceTier": 3,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 250,
+    "seatsProvisioned": 155,
+    "seatsActive": 149,
+    "renewalDate": "2027-05-28",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-03-29",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 192
+   }
+  },
+  {
+   "id": "T044",
+   "name": "Contract lifecycle tool 44",
+   "category": "Contract lifecycle",
+   "bu": "core",
+   "annualCost": 75300,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 250,
+    "seatsProvisioned": 209,
+    "seatsActive": 190,
+    "renewalDate": "2027-06-15",
+    "autoRenew": true,
+    "noticeDays": 90,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-03-17",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 180
+   }
+  },
+  {
+   "id": "T045",
+   "name": "Customer success tool 45",
+   "category": "Customer success",
+   "bu": "datacloud",
+   "annualCost": 132600,
+   "signalState": "live",
+   "evidenceTier": 1,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T046",
+   "name": "Product analytics tool 46",
+   "category": "Product analytics",
+   "bu": "trust",
+   "annualCost": 99700,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T047",
+   "name": "Reverse ETL tool 47",
+   "category": "Reverse ETL",
+   "bu": "smb",
+   "annualCost": 62600,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T048",
+   "name": "ETL tool 48",
+   "category": "ETL",
+   "bu": "core",
+   "annualCost": 81700,
+   "signalState": "live",
+   "evidenceTier": 3,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 120,
+    "seatsProvisioned": 103,
+    "seatsActive": 30,
+    "renewalDate": "2027-04-05",
+    "autoRenew": true,
+    "noticeDays": 90,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-01-05",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 109
+   }
+  },
+  {
+   "id": "T049",
+   "name": "CDP tool 49",
+   "category": "CDP",
+   "bu": "datacloud",
+   "annualCost": 53100,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 25,
+    "seatsProvisioned": 20,
+    "seatsActive": 17,
+    "renewalDate": "2027-06-15",
+    "autoRenew": true,
+    "noticeDays": 90,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-03-17",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 180
+   }
+  },
+  {
+   "id": "T050",
+   "name": "Data quality tool 50",
+   "category": "Data quality",
+   "bu": "trust",
+   "annualCost": 61500,
+   "signalState": "live",
+   "evidenceTier": 1,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T051",
+   "name": "iPaaS tool 51",
+   "category": "iPaaS",
+   "bu": "smb",
+   "annualCost": 68000,
+   "signalState": "live",
+   "evidenceTier": 3,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T052",
+   "name": "Enablement tool 52",
+   "category": "Enablement",
+   "bu": "core",
+   "annualCost": 98800,
+   "signalState": "live",
+   "evidenceTier": 1,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 180,
+   "contract": {
+    "seatsContracted": 25,
+    "seatsProvisioned": 15,
+    "seatsActive": 5,
+    "renewalDate": "2026-11-17",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2026",
+    "onFile": true,
+    "noticeDeadline": "2026-10-18",
+    "noticeStatus": "urgent",
+    "noticeDaysLeft": 30
+   }
+  },
+  {
+   "id": "T053",
+   "name": "Content management tool 53",
+   "category": "Content management",
+   "bu": "datacloud",
+   "annualCost": 116400,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 180,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T054",
+   "name": "Video tool 54",
+   "category": "Video",
+   "bu": "trust",
+   "annualCost": 70800,
+   "signalState": "live",
+   "evidenceTier": 1,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 180,
+   "contract": {
+    "seatsContracted": 80,
+    "seatsProvisioned": 65,
+    "seatsActive": 28,
+    "renewalDate": "2027-05-11",
+    "autoRenew": false,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-04-11",
+    "noticeStatus": "no_auto_renew",
+    "noticeDaysLeft": 205
+   }
+  },
+  {
+   "id": "T055",
+   "name": "Community tool 55",
+   "category": "Community",
+   "bu": "smb",
+   "annualCost": 57500,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T056",
+   "name": "Events tool 56",
+   "category": "Events",
+   "bu": "core",
+   "annualCost": 74600,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T057",
+   "name": "Survey tool 57",
+   "category": "Survey",
+   "bu": "datacloud",
+   "annualCost": 58800,
+   "signalState": "live",
+   "evidenceTier": 1,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 25,
+    "seatsProvisioned": 17,
+    "seatsActive": 12,
+    "renewalDate": "2027-04-12",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-03-13",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 176
+   }
+  },
+  {
+   "id": "T058",
+   "name": "Chat tool 58",
+   "category": "Chat",
+   "bu": "trust",
+   "annualCost": 123900,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 50,
+    "seatsProvisioned": 28,
+    "seatsActive": 35,
+    "renewalDate": "2027-03-19",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-02-17",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 152
+   }
+  },
+  {
+   "id": "T059",
+   "name": "Dialer tool 59",
+   "category": "Dialer",
+   "bu": "smb",
+   "annualCost": 98900,
+   "signalState": "live",
+   "evidenceTier": 1,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": null,
+    "seatsProvisioned": null,
+    "seatsActive": null,
+    "renewalDate": "2026-12-25",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2026",
+    "onFile": true,
+    "noticeDeadline": "2026-11-25",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 68
+   }
+  },
+  {
+   "id": "T060",
+   "name": "Security tool 60",
+   "category": "Security",
+   "bu": "core",
+   "annualCost": 88800,
+   "signalState": "live",
+   "evidenceTier": 3,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T061",
+   "name": "Compliance tool 61",
+   "category": "Compliance",
+   "bu": "datacloud",
+   "annualCost": 73100,
+   "signalState": "live",
+   "evidenceTier": 1,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 25,
+    "seatsProvisioned": 19,
+    "seatsActive": 5,
+    "renewalDate": "2027-04-10",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-02-09",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 144
+   }
+  },
+  {
+   "id": "T062",
+   "name": "CRM tool 62",
+   "category": "CRM",
+   "bu": "trust",
+   "annualCost": 88700,
+   "signalState": "live",
+   "evidenceTier": 1,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 250,
+    "seatsProvisioned": 241,
+    "seatsActive": 89,
+    "renewalDate": "2027-03-30",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-02-28",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 163
+   }
+  },
+  {
+   "id": "T063",
+   "name": "Marketing automation tool 63",
+   "category": "Marketing automation",
+   "bu": "smb",
+   "annualCost": 107400,
+   "signalState": "live",
+   "evidenceTier": 3,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T064",
+   "name": "Sales engagement tool 64",
+   "category": "Sales engagement",
+   "bu": "core",
+   "annualCost": 109400,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 25,
+    "seatsProvisioned": 14,
+    "seatsActive": 13,
+    "renewalDate": "2027-08-16",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-06-17",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 272
+   }
+  },
+  {
+   "id": "T065",
+   "name": "Conversation intelligence tool 65",
+   "category": "Conversation intelligence",
+   "bu": "datacloud",
+   "annualCost": 123400,
+   "signalState": "live",
+   "evidenceTier": 3,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 50,
+    "seatsProvisioned": 35,
+    "seatsActive": 28,
+    "renewalDate": "2027-07-25",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-05-26",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 250
+   }
+  },
+  {
+   "id": "T066",
+   "name": "Intent data tool 66",
+   "category": "Intent data",
+   "bu": "trust",
+   "annualCost": 108700,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T067",
+   "name": "Enrichment tool 67",
+   "category": "Enrichment",
+   "bu": "smb",
+   "annualCost": 83400,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 80,
+    "seatsProvisioned": 57,
+    "seatsActive": 49,
+    "renewalDate": "2027-01-22",
+    "autoRenew": false,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2026-12-23",
+    "noticeStatus": "no_auto_renew",
+    "noticeDaysLeft": 96
+   }
+  },
+  {
+   "id": "T068",
+   "name": "Visitor identification tool 68",
+   "category": "Visitor identification",
+   "bu": "core",
+   "annualCost": 60000,
+   "signalState": "live",
+   "evidenceTier": 3,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T069",
+   "name": "ABM tool 69",
+   "category": "ABM",
+   "bu": "datacloud",
+   "annualCost": 95100,
+   "signalState": "live",
+   "evidenceTier": 2,
+   "evidenceNote": "Output reaches a revenue decision inside the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 80,
+    "seatsProvisioned": 64,
+    "seatsActive": 32,
+    "renewalDate": "2026-11-19",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2026",
+    "onFile": true,
+    "noticeDeadline": "2026-09-20",
+    "noticeStatus": "urgent",
+    "noticeDaysLeft": 2
+   }
+  },
+  {
+   "id": "T070",
+   "name": "Scheduling tool 70",
+   "category": "Scheduling",
+   "bu": "trust",
+   "annualCost": 83100,
+   "signalState": "weak",
+   "evidenceTier": 2,
+   "evidenceNote": "Produces output that terminates in a silo. Nothing downstream consumes it.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T071",
+   "name": "BI and dashboards tool 71",
+   "category": "BI and dashboards",
+   "bu": "smb",
+   "annualCost": 91800,
+   "signalState": "weak",
+   "evidenceTier": 2,
+   "evidenceNote": "Produces output that terminates in a silo. Nothing downstream consumes it.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 50,
+    "seatsProvisioned": 25,
+    "seatsActive": 32,
+    "renewalDate": "2026-12-08",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2026",
+    "onFile": true,
+    "noticeDeadline": "2026-10-09",
+    "noticeStatus": "urgent",
+    "noticeDaysLeft": 21
+   }
+  },
+  {
+   "id": "T072",
+   "name": "Attribution tool 72",
+   "category": "Attribution",
+   "bu": "core",
+   "annualCost": 64900,
+   "signalState": "weak",
+   "evidenceTier": 3,
+   "evidenceNote": "Produces output that terminates in a silo. Nothing downstream consumes it.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 25,
+    "seatsProvisioned": 17,
+    "seatsActive": 8,
+    "renewalDate": "2027-03-26",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-01-25",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 129
+   }
+  },
+  {
+   "id": "T073",
+   "name": "Forecasting tool 73",
+   "category": "Forecasting",
+   "bu": "datacloud",
+   "annualCost": 73400,
+   "signalState": "weak",
+   "evidenceTier": 2,
+   "evidenceNote": "Produces output that terminates in a silo. Nothing downstream consumes it.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 50,
+    "seatsProvisioned": 39,
+    "seatsActive": 3,
+    "renewalDate": "2026-11-09",
+    "autoRenew": true,
+    "noticeDays": 90,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2026",
+    "onFile": true,
+    "noticeDeadline": "2026-08-11",
+    "noticeStatus": "missed",
+    "noticeDaysLeft": -38
+   }
+  },
+  {
+   "id": "T074",
+   "name": "CPQ tool 74",
+   "category": "CPQ",
+   "bu": "trust",
+   "annualCost": 72100,
+   "signalState": "weak",
+   "evidenceTier": 1,
+   "evidenceNote": "Produces output that terminates in a silo. Nothing downstream consumes it.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 25,
+    "seatsProvisioned": 19,
+    "seatsActive": 5,
+    "renewalDate": "2027-07-13",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-05-14",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 238
+   }
+  },
+  {
+   "id": "T075",
+   "name": "Contract lifecycle tool 75",
+   "category": "Contract lifecycle",
+   "bu": "smb",
+   "annualCost": 108000,
+   "signalState": "weak",
+   "evidenceTier": 2,
+   "evidenceNote": "Produces output that terminates in a silo. Nothing downstream consumes it.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 120,
+    "seatsProvisioned": 80,
+    "seatsActive": 22,
+    "renewalDate": "2027-01-06",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2026-11-07",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 50
+   }
+  },
+  {
+   "id": "T076",
+   "name": "Customer success tool 76",
+   "category": "Customer success",
+   "bu": "core",
+   "annualCost": 62800,
+   "signalState": "weak",
+   "evidenceTier": 3,
+   "evidenceNote": "Produces output that terminates in a silo. Nothing downstream consumes it.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": null,
+    "seatsProvisioned": null,
+    "seatsActive": null,
+    "renewalDate": "2026-10-21",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2026",
+    "onFile": true,
+    "noticeDeadline": "2026-08-22",
+    "noticeStatus": "missed",
+    "noticeDaysLeft": -27
+   }
+  },
+  {
+   "id": "T077",
+   "name": "Product analytics tool 77",
+   "category": "Product analytics",
+   "bu": "datacloud",
+   "annualCost": 64900,
+   "signalState": "weak",
+   "evidenceTier": 2,
+   "evidenceNote": "Produces output that terminates in a silo. Nothing downstream consumes it.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T078",
+   "name": "Reverse ETL tool 78",
+   "category": "Reverse ETL",
+   "bu": "trust",
+   "annualCost": 112000,
+   "signalState": "weak",
+   "evidenceTier": 1,
+   "evidenceNote": "Produces output that terminates in a silo. Nothing downstream consumes it.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 250,
+    "seatsProvisioned": 215,
+    "seatsActive": 47,
+    "renewalDate": "2027-09-01",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-07-03",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 288
+   }
+  },
+  {
+   "id": "T079",
+   "name": "ETL tool 79",
+   "category": "ETL",
+   "bu": "smb",
+   "annualCost": 71200,
+   "signalState": "weak",
+   "evidenceTier": 2,
+   "evidenceNote": "Produces output that terminates in a silo. Nothing downstream consumes it.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": null,
+    "seatsProvisioned": null,
+    "seatsActive": null,
+    "renewalDate": "2026-12-19",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2026",
+    "onFile": true,
+    "noticeDeadline": "2026-10-20",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 32
+   }
+  },
+  {
+   "id": "T080",
+   "name": "CDP tool 80",
+   "category": "CDP",
+   "bu": "core",
+   "annualCost": 82100,
+   "signalState": "weak",
+   "evidenceTier": 2,
+   "evidenceNote": "Produces output that terminates in a silo. Nothing downstream consumes it.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T081",
+   "name": "Data quality tool 81",
+   "category": "Data quality",
+   "bu": "datacloud",
+   "annualCost": 103500,
+   "signalState": "weak",
+   "evidenceTier": 1,
+   "evidenceNote": "Produces output that terminates in a silo. Nothing downstream consumes it.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T082",
+   "name": "iPaaS tool 82",
+   "category": "iPaaS",
+   "bu": "trust",
+   "annualCost": 89600,
+   "signalState": "dark",
+   "evidenceTier": 2,
+   "evidenceNote": "No output reaching any revenue system in the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 120,
+    "seatsProvisioned": 95,
+    "seatsActive": 29,
+    "renewalDate": "2027-07-12",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-05-13",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 237
+   }
+  },
+  {
+   "id": "T083",
+   "name": "Enablement tool 83",
+   "category": "Enablement",
+   "bu": "smb",
+   "annualCost": 107400,
+   "signalState": "dark",
+   "evidenceTier": 1,
+   "evidenceNote": "No output reaching any revenue system in the lookback window.",
+   "lookbackDays": 180,
+   "contract": {
+    "seatsContracted": 50,
+    "seatsProvisioned": 47,
+    "seatsActive": 17,
+    "renewalDate": "2026-11-18",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2026",
+    "onFile": true,
+    "noticeDeadline": "2026-10-19",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 31
+   }
+  },
+  {
+   "id": "T084",
+   "name": "Content management tool 84",
+   "category": "Content management",
+   "bu": "core",
+   "annualCost": 119700,
+   "signalState": "dark",
+   "evidenceTier": 1,
+   "evidenceNote": "No output reaching any revenue system in the lookback window.",
+   "lookbackDays": 180,
+   "contract": {
+    "seatsContracted": 80,
+    "seatsProvisioned": 57,
+    "seatsActive": 11,
+    "renewalDate": "2027-02-09",
+    "autoRenew": false,
+    "noticeDays": 90,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2026-11-11",
+    "noticeStatus": "no_auto_renew",
+    "noticeDaysLeft": 54
+   }
+  },
+  {
+   "id": "T085",
+   "name": "Video tool 85",
+   "category": "Video",
+   "bu": "datacloud",
+   "annualCost": 115200,
+   "signalState": "dark",
+   "evidenceTier": 2,
+   "evidenceNote": "CRM-side fingerprint: no attributable writes in the lookback window.",
+   "lookbackDays": 180,
+   "contract": {
+    "seatsContracted": 50,
+    "seatsProvisioned": 34,
+    "seatsActive": 7,
+    "renewalDate": "2027-05-04",
+    "autoRenew": true,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-04-04",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 198
+   }
+  },
+  {
+   "id": "T086",
+   "name": "Community tool 86",
+   "category": "Community",
+   "bu": "trust",
+   "annualCost": 114500,
+   "signalState": "dark",
+   "evidenceTier": 1,
+   "evidenceNote": "No output reaching any revenue system in the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": null,
+    "seatsProvisioned": null,
+    "seatsActive": null,
+    "renewalDate": "2027-09-29",
+    "autoRenew": true,
+    "noticeDays": 90,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-07-01",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 286
+   }
+  },
+  {
+   "id": "T087",
+   "name": "Events tool 87",
+   "category": "Events",
+   "bu": "smb",
+   "annualCost": 109800,
+   "signalState": "dark",
+   "evidenceTier": 1,
+   "evidenceNote": "No output reaching any revenue system in the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": null,
+    "seatsProvisioned": null,
+    "seatsActive": null,
+    "renewalDate": "2026-11-04",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2026",
+    "onFile": true,
+    "noticeDeadline": "2026-09-05",
+    "noticeStatus": "missed",
+    "noticeDaysLeft": -13
+   }
+  },
+  {
+   "id": "T088",
+   "name": "Survey tool 88",
+   "category": "Survey",
+   "bu": "core",
+   "annualCost": 109300,
+   "signalState": "dark",
+   "evidenceTier": 2,
+   "evidenceNote": "No output reaching any revenue system in the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T089",
+   "name": "Chat tool 89",
+   "category": "Chat",
+   "bu": "datacloud",
+   "annualCost": 78400,
+   "signalState": "dark",
+   "evidenceTier": 1,
+   "evidenceNote": "No output reaching any revenue system in the lookback window.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 120,
+    "seatsProvisioned": 77,
+    "seatsActive": 57,
+    "renewalDate": "2027-07-18",
+    "autoRenew": true,
+    "noticeDays": 60,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-05-19",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 243
+   }
+  },
+  {
+   "id": "T090",
+   "name": "Dialer tool 90",
+   "category": "Dialer",
+   "bu": "trust",
+   "annualCost": 71900,
+   "signalState": "redundant",
+   "evidenceTier": 2,
+   "evidenceNote": "Duplicated by a higher-value instance in the same category.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T091",
+   "name": "Security tool 91",
+   "category": "Security",
+   "bu": "smb",
+   "annualCost": 81900,
+   "signalState": "redundant",
+   "evidenceTier": 2,
+   "evidenceNote": "Duplicated by a higher-value instance in the same category.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": 25,
+    "seatsProvisioned": 21,
+    "seatsActive": 7,
+    "renewalDate": "2027-04-13",
+    "autoRenew": true,
+    "noticeDays": 90,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-01-13",
+    "noticeStatus": "open",
+    "noticeDaysLeft": 117
+   }
+  },
+  {
+   "id": "T092",
+   "name": "Compliance tool 92",
+   "category": "Compliance",
+   "bu": "core",
+   "annualCost": 99200,
+   "signalState": "redundant",
+   "evidenceTier": 2,
+   "evidenceNote": "Duplicated by a higher-value instance in the same category.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  },
+  {
+   "id": "T093",
+   "name": "CRM tool 93",
+   "category": "CRM",
+   "bu": "datacloud",
+   "annualCost": 84200,
+   "signalState": "redundant",
+   "evidenceTier": 2,
+   "evidenceNote": "Duplicated by a higher-value instance in the same category.",
+   "lookbackDays": 90,
+   "contract": {
+    "seatsContracted": null,
+    "seatsProvisioned": null,
+    "seatsActive": null,
+    "renewalDate": "2027-09-01",
+    "autoRenew": false,
+    "noticeDays": 30,
+    "promisedOutcomes": [],
+    "sourceDoc": "Order Form, 2027",
+    "onFile": true,
+    "noticeDeadline": "2027-08-02",
+    "noticeStatus": "no_auto_renew",
+    "noticeDaysLeft": 318
+   }
+  },
+  {
+   "id": "T094",
+   "name": "Marketing automation tool 94",
+   "category": "Marketing automation",
+   "bu": "trust",
+   "annualCost": 77400,
+   "signalState": "redundant",
+   "evidenceTier": 3,
+   "evidenceNote": "Duplicated by a higher-value instance in the same category.",
+   "lookbackDays": 90,
+   "contract": {
+    "onFile": false
+   }
+  }
+ ],
+ "method": {
+  "scale": "Signal-to-Spend is 0 to 100, spend-weighted. Green 80+, Amber 55 to 79, Red under 55.",
+  "states": "Live 100, Weak 50, Dark 0, Redundant 0 and priced once at the lower instance.",
+  "evidence": "Tier 1 direct read-only connector telemetry, Tier 2 CRM-side fingerprints, Tier 3 client-supplied admin export. Dark requires Tier 1 or Tier 2. Tier 3 alone can only support Weak.",
+  "notice": "Every auto-renewing contract has a notice deadline, which is the renewal date minus the notice period written into the agreement. That deadline, not the renewal date, is the last day a cancellation can be served.",
+  "access": "Read-only throughout. No call recordings, no deal history, no personally identifiable data, and no write permission to any system."
+ }
+}
