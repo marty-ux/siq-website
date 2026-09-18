@@ -1,247 +1,1029 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Stack Health Report | Scalient IQ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --canvas:#0A1628; --surface:#0F1F33; --surface-2:#132840;
-    --text-1:#FFFFFF; --text-2:#A8B8CC; --text-3:#6E819A;
-    --border:#1E3450; --border-strong:#2A4A6E;
-    --brand-blue:#0073E6; --brand-orange:#FF6600;
-    --success:#12B76A; --caution:#FF7A00; --danger:#E5484D;
-    --success-soft:rgba(18,183,106,.12); --caution-soft:rgba(255,122,0,.12); --danger-soft:rgba(229,72,77,.12);
+  :root,
+  [data-theme="dark"] {
+    --canvas: #0A1628; --surface: #0F1E35; --surface-2: #142642; --border: #1F3352; --border-strong: #2B4265;
+    --text-primary: #F5F7FA; --text-secondary: #B8C5D6; --text-tertiary: #8FA3BF;
+    --brand-blue: #0073E6; --brand-orange: #FF6600;
+    --success: #22C55E; --success-soft: rgba(34, 197, 94, 0.12);
+    --caution: #FBBF24; --caution-soft: rgba(251, 191, 36, 0.12);
+    --danger: #EF4444; --danger-soft: rgba(239, 68, 68, 0.12); --track: #1F3352;
   }
-  html[data-theme="light"]{
-    --canvas:#FFFFFF; --surface:#F4F6F9; --surface-2:#EAEEF4;
-    --text-1:#0A1628; --text-2:#41546E; --text-3:#6E819A;
-    --border:#D8DEE6; --border-strong:#B8C4D2;
+  [data-theme="light"] {
+    --canvas: #F8FAFC; --surface: #FFFFFF; --surface-2: #F1F5F9; --border: #E2E8F0; --border-strong: #CBD5E1;
+    --text-primary: #0A1628; --text-secondary: #475569; --text-tertiary: #94A3B8;
+    --brand-blue: #0073E6; --brand-orange: #FF6600;
+    --success: #16A34A; --success-soft: rgba(22, 163, 74, 0.10);
+    --caution: #F59E0B; --caution-soft: rgba(245, 158, 11, 0.12);
+    --danger: #DC2626; --danger-soft: rgba(220, 38, 38, 0.10); --track: #E2E8F0;
   }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--canvas);color:var(--text-1);
-       font-family:'DM Sans',-apple-system,Segoe UI,Arial,sans-serif;
-       font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { font-size: 16px; font-family: 'DM Sans', system-ui, -apple-system, sans-serif; background: var(--canvas); color: var(--text-primary); -webkit-font-smoothing: antialiased; transition: background 0.2s ease, color 0.2s ease;  line-height: 1.6; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 40px 32px 80px; }
+  .top { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 32px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+  .brand { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+  .brand .scalient { color: var(--brand-blue); } .brand .iq { color: var(--brand-orange); }
+  .cobrand { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
+  .cobrand .cb-label { font-size:12.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-tertiary); font-weight: 500; }
+  .cobrand img { height: 26px; }
+  .top-meta { margin-top: 24px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .meta-item .label { font-size:11px; letter-spacing: 1px; color: var(--text-tertiary); text-transform: uppercase; font-weight: 500; margin-bottom: 6px; }
+  .meta-item .value { font-size:16px; color: var(--text-primary); font-weight: 500; }
+  .toggle { display: flex; gap: 4px; background: var(--surface); border: 1px solid var(--border); padding: 4px; }
+  .toggle button { font-family: inherit; font-size:12.5px; letter-spacing: 1px; font-weight: 500; text-transform: uppercase; padding: 8px 16px; background: transparent; color: var(--text-tertiary); border: 0; cursor: pointer; transition: all 0.15s ease; }
+  .toggle button.active { background: var(--brand-orange); color: #FFFFFF; }
+  h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 8px; }
+  .subtitle { font-size:16px; color: var(--text-secondary); max-width: 760px; line-height: 1.5; }
+  .section { margin-top: 56px; }
+  .section-head { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+  .section-number { width: 32px; height: 32px; background: var(--brand-orange); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size:16px; font-weight: 700; }
+  .section-title { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+  .section-lead { font-size:16px; color: var(--text-secondary); margin-bottom: 24px; max-width: 820px; line-height: 1.6; }
+  .card { background: var(--surface); border: 1px solid var(--border); padding: 20px; }
+  .card-label { font-size:11px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-tertiary); font-weight: 500; margin-bottom: 10px; }
+  .shr-grid { display: grid; grid-template-columns: 1.2fr 2fr; gap: 16px; }
+  .shr-hero { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 32px 24px; text-align: center; }
+  .shr-hero .score { font-size: 72px; font-weight: 700; line-height: 1; letter-spacing: -2px; }
+  .shr-hero .score-unit { font-size: 20px; color: var(--text-tertiary); margin-left: 4px; }
+  .state-pill { display: inline-block; padding: 6px 16px; font-size:12.5px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin-top: 16px; }
+  .state-pill.green { background: var(--success-soft); color: var(--success); }
+  .state-pill.amber { background: var(--caution-soft); color: var(--caution); }
+  .state-pill.red { background: var(--danger-soft); color: var(--danger); }
+  .baseline-note { font-size:14px; color: var(--text-secondary); margin-top: 14px; line-height: 1.5; }
+  .dim-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .dim-card .dim-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .dim-delta { font-size:14px; font-weight: 500; color: var(--success); }
+  .dim-score { font-size: 36px; font-weight: 700; line-height: 1; letter-spacing: -1px; }
+  .dim-score-unit { font-size:16px; color: var(--text-tertiary); margin-left: 2px; }
+  .dim-bar { height: 6px; background: var(--track); margin: 14px 0 12px; overflow: hidden; }
+  .dim-bar-fill { height: 100%; transition: width 0.3s ease; }
+  .dim-bar-fill.green { background: var(--success); } .dim-bar-fill.amber { background: var(--caution); } .dim-bar-fill.red { background: var(--danger); } .dim-bar-fill.pending { background: var(--border-strong); }
+  .dim-note { font-size:14px; color: var(--text-secondary); line-height: 1.5; }
+  .pending-pill { display:inline-block; padding:4px 12px; font-size:11px; letter-spacing:1px; text-transform:uppercase; font-weight:500; background: var(--surface-2); color: var(--text-tertiary); border:1px dashed var(--border-strong); }
+  .leak { display: grid; grid-template-columns: 32px 1fr 170px 150px; gap: 16px; padding: 16px 20px; background: var(--surface); border: 1px solid var(--border); margin-bottom: 8px; align-items: center; }
+  .leak-rank { font-size: 18px; font-weight: 700; color: var(--brand-orange); }
+  .leak-body .leak-name { font-size:16px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+  .leak-body .leak-cause { font-size:14px; color: var(--text-secondary); line-height: 1.5; }
+  .leak-dollar { font-size:17px; font-weight: 500; color: var(--caution); text-align: right; }
+  .leak-play { font-size:12.5px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--brand-blue); text-align: right; font-weight: 500; }
+  .plays-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .play-card { background: var(--surface); border: 1px solid var(--border); padding: 20px; }
+  .play-name { font-size:16px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+  .play-trigger { font-size:14px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+  .play-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; font-size:14px; }
+  .play-spec .spec-label { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-tertiary); font-weight: 500; margin-bottom: 3px; }
+  .play-spec .spec-val { color: var(--text-primary); font-weight: 500; }
+  .play-spec .spec-val.success { color: var(--success); } .play-spec .spec-val.caution { color: var(--caution); }
+  .hitl-badge { display: inline-block; padding: 3px 10px; background: var(--success-soft); color: var(--success); font-size:11px; letter-spacing: 0.5px; text-transform: uppercase; font-weight: 500; margin-top: 12px; }
+  .deal-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .deal-card { background: var(--surface); border: 1px solid var(--border); padding: 16px; border-left: 3px solid var(--brand-blue); }
+  .deal-card.amber { border-left-color: var(--caution); } .deal-card.red { border-left-color: var(--danger); }
+  .deal-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+  .deal-name { font-size:16px; font-weight: 500; color: var(--text-primary); }
+  .deal-score { font-size:15px; font-weight: 700; color: var(--text-tertiary); }
+  .deal-meta { display: flex; gap: 12px; font-size:11px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-tertiary); font-weight: 500; margin-bottom: 10px; }
+  .deal-flag { font-size:12.5px; color: var(--text-secondary); line-height: 1.5; padding-top: 10px; border-top: 1px solid var(--border); }
+  .fidelity-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .fidelity-card { background: var(--surface); border: 1px solid var(--border); padding: 20px; }
+  .fid-label { font-size:12.5px; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text-tertiary); font-weight: 500; margin-bottom: 12px; }
+  .fid-comparison { display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px; }
+  .fid-arrow { font-size:16px; color: var(--text-tertiary); }
+  .fid-after { font-size:28px; font-weight: 700; color: var(--success); letter-spacing: -0.5px; }
+  .fid-note { font-size:12.5px; color: var(--text-secondary); line-height: 1.5; }
+  .phase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+  .phase-card { background: var(--surface); border: 1px solid var(--border); padding: 24px; }
+  .phase-card.featured { border: 2px solid var(--brand-orange); }
+  .phase-badge { display: inline-block; padding: 4px 12px; background: var(--brand-blue); color: #FFFFFF; font-size:11px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; margin-bottom: 14px; }
+  .phase-card.featured .phase-badge { background: var(--brand-orange); }
+  .phase-title { font-size: 16px; font-weight: 500; margin-bottom: 4px; }
+  .phase-term { font-size:14px; color: var(--text-tertiary); margin-bottom: 16px; }
+  .phase-price { font-size:28px; font-weight: 700; letter-spacing: -0.5px; line-height: 1.1; margin-bottom: 4px; }
+  .phase-cadence { font-size:14px; color: var(--text-secondary); margin-bottom: 16px; }
+  .phase-features { list-style: none; font-size:14px; color: var(--text-secondary); line-height: 1.7; }
+  .phase-features li::before { content: "\00b7 "; color: var(--brand-orange); font-weight: 700; margin-right: 4px; }
+  .milestones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+  .milestone { background: var(--surface-2); padding: 20px; border-left: 3px solid var(--brand-blue); }
+  .milestone-day { font-size:12.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--brand-blue); font-weight: 500; margin-bottom: 10px; }
+  .milestone-title { font-size:16px; font-weight: 500; margin-bottom: 8px; }
+  .milestone-desc { font-size:14px; color: var(--text-secondary); line-height: 1.6; }
+  .cta-banner { background: var(--brand-orange); padding: 28px 32px; margin-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  .cta-text { color: #FFFFFF; } .cta-title { font-size: 20px; font-weight: 700; margin-bottom: 6px; } .cta-sub { font-size:15px; opacity: 0.92; max-width:620px; line-height:1.5; }
+  .cta-btn { background: #FFFFFF; color: var(--brand-orange); padding: 14px 28px; font-family: inherit; font-size:14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border: 0; cursor: pointer; }
+  footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size:12.5px; color: var(--text-tertiary); letter-spacing: 0.3px; }
+  @media (max-width: 960px) {
+    .shr-grid, .plays-grid, .deal-grid, .phase-grid, .milestones { grid-template-columns: 1fr; }
+    .dim-grid, .fidelity-grid { grid-template-columns: repeat(2, 1fr); }
+    .top-meta { grid-template-columns: repeat(2, 1fr); }
+    .leak { grid-template-columns: 24px 1fr; } .leak-dollar, .leak-play { text-align: left; grid-column: 2; }
+  }
+  body[data-assessment="bad"] .show-good { display: none !important; }
+  body[data-assessment="good"] .show-bad { display: none !important; }
+  body[data-assessment="bad"] .section.good-only { display: none !important; }
+  body[data-assessment="good"] .section.bad-only { display: none !important; }
+  .header-controls { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+  .toggle.assess button.active { background: var(--brand-blue); color: #FFFFFF; }
+  .assess-banner { margin-top: 12px; padding: 10px 16px; font-size:12.5px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; text-align: center; border: 1px solid var(--border); }
+  body[data-assessment="bad"] .assess-banner { background: var(--danger-soft); color: var(--danger); border-color: var(--danger); }
+  body[data-assessment="good"] .assess-banner { background: var(--success-soft); color: var(--success); border-color: var(--success); }
+  .bad-narrative { background: var(--danger-soft); border-left: 4px solid var(--danger); padding: 20px 24px; margin-top: 8px; }
+  .bad-narrative .bn-label { font-size:11px; letter-spacing: 1px; text-transform: uppercase; color: var(--danger); font-weight: 500; margin-bottom: 8px; }
+  .bad-narrative .bn-text { font-size:15px; color: var(--text-secondary); line-height: 1.6; }
+  .note-strip { background: var(--surface-2); border: 1px dashed var(--border-strong); padding: 14px 18px; font-size:14px; color: var(--text-secondary); line-height: 1.6; margin-top: 12px; }
+  .note-strip strong { color: var(--text-primary); }
+
+  #siq-gate{position:fixed;inset:0;background:#0A1628;display:flex;align-items:center;justify-content:center;z-index:99999;font-family:'DM Sans',Arial,sans-serif}
+  .siq-gate-box{text-align:center;max-width:380px;width:90%;padding:32px}
+  .siq-gate-logo{font-size:28px;font-weight:700;color:#0073E6;margin-bottom:20px}
+  .siq-gate-logo span{color:#FF6600}
+  .siq-gate-title{color:#fff;font-size:21px;font-weight:600;margin-bottom:6px}
+  .siq-gate-sub{color:#8A9BB0;font-size:15px;margin-bottom:22px;line-height:1.5}
+  #siq-gate-input{width:100%;padding:13px 14px;font-size:17px;border:1px solid #24364d;background:#0f1f33;color:#fff;border-radius:0;margin-bottom:12px;box-sizing:border-box}
+  #siq-gate-input:focus{outline:none;border-color:#0073E6}
+  #siq-gate-btn{width:100%;padding:13px;background:#FF6600;color:#fff;border:none;font-weight:600;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;border-radius:0;font-size:16px}
+  #siq-gate-err{color:#ff5a5a;font-size:15px;margin-top:12px;display:none}
   body.siq-locked{overflow:hidden;height:100vh}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 24px 96px}
-  a{color:var(--brand-blue)}
-
-  /* gate */
-  #siq-gate{position:fixed;inset:0;background:#0A1628;display:flex;align-items:center;justify-content:center;z-index:99999}
-  .gate-box{text-align:center;max-width:390px;width:90%;padding:32px}
-  .gate-logo{font-size:28px;font-weight:700;color:#0073E6;margin-bottom:20px}
-  .gate-logo span{color:#FF6600}
-  .gate-title{color:#fff;font-size:21px;font-weight:600;margin-bottom:6px}
-  .gate-sub{color:#8A9BB0;font-size:15px;margin-bottom:22px;line-height:1.5}
-  #gate-input{width:100%;padding:13px 14px;font-size:17px;border:1px solid #24364d;background:#0f1f33;color:#fff;border-radius:0;margin-bottom:12px}
-  #gate-input:focus{outline:none;border-color:#0073E6}
-  #gate-btn{width:100%;padding:13px;background:#FF6600;color:#fff;border:none;font-weight:600;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;font-size:16px}
-  #gate-btn:disabled{opacity:.6;cursor:default}
-  #gate-err{color:#ff5a5a;font-size:15px;margin-top:12px;display:none}
-
-  /* header */
-  .top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;
-       padding:28px 0 20px;border-bottom:1px solid var(--border);flex-wrap:wrap}
-  .brand{font-size:22px;font-weight:700;color:var(--brand-blue)}
-  .brand span{color:var(--brand-orange)}
-  .toggles{display:flex;gap:8px;flex-wrap:wrap}
-  .tg{display:flex;border:1px solid var(--border)}
-  .tg button{background:transparent;border:0;color:var(--text-2);font:inherit;font-size:13px;
-             padding:7px 13px;cursor:pointer;white-space:nowrap}
-  .tg button.on{background:var(--brand-blue);color:#fff}
-  .eyebrow{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--brand-orange);
-           font-weight:600;margin:26px 0 8px}
-  h1{font-size:40px;line-height:1.14;margin:0 0 14px;font-weight:700;letter-spacing:-.5px}
-  .lede{font-size:17px;color:var(--text-2);max-width:74ch;margin:0 0 22px}
-
-  .strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:1px;
-         background:var(--border);border:1px solid var(--border);margin:22px 0}
-  .strip>div{background:var(--surface);padding:14px 16px}
-  .k{font-size:10.5px;letter-spacing:1.1px;text-transform:uppercase;color:var(--text-3);font-weight:600}
-  .v{font-size:16px;font-weight:600;margin-top:3px}
-
-  .note{border:1px dashed var(--border-strong);background:var(--surface);padding:13px 17px;
-        font-size:14px;color:var(--text-2);margin:16px 0}
-  .banner{padding:12px 18px;font-size:13px;letter-spacing:.6px;text-transform:uppercase;
-          font-weight:600;text-align:center;border:1px solid;margin:16px 0}
-  .banner.warn{background:var(--danger-soft);color:var(--danger);border-color:var(--danger)}
-  .banner.good{background:var(--success-soft);color:var(--success);border-color:var(--success)}
-
-  section{margin-top:52px;scroll-margin-top:20px}
-  .sec-h{display:flex;align-items:baseline;gap:13px;margin-bottom:6px}
-  .sec-n{background:var(--brand-orange);color:#fff;font-size:13px;font-weight:700;
-         width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;flex:none}
-  h2{font-size:27px;margin:0;font-weight:700;letter-spacing:-.3px}
-  .sec-sub{color:var(--text-2);max-width:78ch;margin:8px 0 20px}
-  h3{font-size:18px;margin:30px 0 10px;font-weight:600}
-
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;margin:18px 0}
-  .card{background:var(--surface);border:1px solid var(--border);padding:17px 19px}
-  .card .big{font-size:29px;font-weight:700;line-height:1.1;margin:5px 0 7px}
-  .card .cap{font-size:13.5px;color:var(--text-2);line-height:1.5}
-  .big.good{color:var(--success)} .big.warn{color:var(--caution)} .big.bad{color:var(--danger)}
-
-  .anchor{background:#000;border:1px solid var(--border-strong);padding:26px 28px;margin:22px 0}
-  .anchor .score{font-size:64px;font-weight:700;line-height:1}
-  .anchor .score.good{color:var(--success)} .anchor .score.warn{color:var(--caution)} .anchor .score.bad{color:var(--danger)}
-  .anchor .band{font-size:17px;font-weight:600;margin-top:6px}
-  .anchor .why{color:var(--text-2);margin-top:12px;max-width:72ch}
-
-  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14.5px}
-  th{background:var(--surface-2);text-align:left;padding:11px 13px;font-size:11px;
-     letter-spacing:1px;text-transform:uppercase;color:var(--text-2);font-weight:600;
-     border-bottom:1px solid var(--border)}
-  td{padding:11px 13px;border-bottom:1px solid var(--border);vertical-align:top}
-  tr:last-child td{border-bottom:0}
-  td.num,th.num{text-align:right;white-space:nowrap}
-  .pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.7px;
-        text-transform:uppercase;padding:3px 8px;white-space:nowrap}
-  .p-live{background:var(--success-soft);color:var(--success)}
-  .p-weak{background:var(--caution-soft);color:var(--caution)}
-  .p-dark{background:var(--danger-soft);color:var(--danger)}
-  .p-red{background:var(--danger-soft);color:var(--danger)}
-  .p-missed{background:var(--danger);color:#fff}
-  .p-urgent{background:var(--caution);color:#fff}
-  .p-open{background:var(--surface-2);color:var(--text-2)}
-  .p-none{background:var(--surface-2);color:var(--text-3)}
-  .tier{font-size:11px;color:var(--text-3);letter-spacing:.5px}
-
-  .find{background:var(--surface);border-left:3px solid var(--danger);padding:17px 20px;margin:13px 0}
-  .find.redundant{border-left-color:var(--caution)}
-  .find-top{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:baseline}
-  .find-name{font-size:17px;font-weight:600}
-  .find-cost{font-size:19px;font-weight:700;color:var(--danger)}
-  .find.redundant .find-cost{color:var(--caution)}
-  .find-meta{font-size:13px;color:var(--text-3);margin-top:4px}
-  .find-ev{font-size:14px;color:var(--text-2);margin-top:10px}
-  .promise{background:var(--danger-soft);border:1px solid var(--danger);padding:11px 14px;margin-top:11px;font-size:14px}
-  .promise .pl{font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--danger);font-weight:700;margin-bottom:4px}
-  .seats{display:flex;gap:18px;margin-top:11px;flex-wrap:wrap}
-  .seats div{font-size:13px;color:var(--text-2)}
-  .seats b{color:var(--text-1);font-size:16px;display:block}
-
-  .bar{height:9px;background:var(--surface-2);display:flex;margin-top:7px;overflow:hidden}
-  .bar i{display:block;height:100%}
-  .bar .s-live{background:var(--success)} .bar .s-weak{background:var(--caution)}
-  .bar .s-dark{background:var(--danger)} .bar .s-redundant{background:#8A3A3D}
-  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--text-2);margin-top:9px}
-  .legend i{width:11px;height:11px;display:inline-block;margin-right:5px;vertical-align:-1px}
-
-  footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--border);
-         font-size:13px;color:var(--text-3);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-  .hide{display:none !important}
-  @media(max-width:640px){
-    h1{font-size:30px} .anchor .score{font-size:48px} .wrap{padding:0 16px 64px}
-    table{font-size:13px} td,th{padding:9px 8px}
-  }
 </style>
-<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/51005472.js"></script>
-<!-- siq first-party signal beacon --><script>(function(){try{if(localStorage.getItem("siq_no")==="1")return;var K="siq_vid",v=localStorage.getItem(K);if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem(K,v);}var q=new URLSearchParams(location.search),d={vid:v,path:location.pathname,title:document.title,ref:document.referrer,utm_source:q.get("utm_source")||"",utm_medium:q.get("utm_medium")||"",utm_campaign:q.get("utm_campaign")||"",utm_term:q.get("utm_term")||"",utm_content:q.get("utm_content")||"",screen:innerWidth+"x"+innerHeight,type:"pageview"},s=JSON.stringify(d);if(navigator.sendBeacon){navigator.sendBeacon("/api/e",new Blob([s],{type:"application/json"}));}else{fetch("/api/e",{method:"POST",headers:{"Content-Type":"application/json"},body:s,keepalive:true});}}catch(e){}})();</script>
-</head>
-<body class="siq-locked">
+  <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/51005472.js"></script>
+  <!-- siq first-party signal beacon --><script>(function(){try{if(localStorage.getItem("siq_no")==="1")return;var K="siq_vid",v=localStorage.getItem(K);if(v==="mthrc8423q99gzql"||v==="mtgop71aab363pkm"){localStorage.setItem("siq_no","1");return;}if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem(K,v);}var q=new URLSearchParams(location.search),d={vid:v,path:location.pathname,title:document.title,ref:document.referrer,utm_source:q.get("utm_source")||"",utm_medium:q.get("utm_medium")||"",utm_campaign:q.get("utm_campaign")||"",utm_term:q.get("utm_term")||"",utm_content:q.get("utm_content")||"",screen:innerWidth+"x"+innerHeight,type:"pageview"},s=JSON.stringify(d);if(navigator.sendBeacon){navigator.sendBeacon("/api/e",new Blob([s],{type:"application/json"}));}else{fetch("/api/e",{method:"POST",headers:{"Content-Type":"application/json"},body:s,keepalive:true});}}catch(e){}})();</script>
 
-<div id="siq-gate"><div class="gate-box">
-  <div class="gate-logo">Scalient<span>IQ</span></div>
-  <div class="gate-title">Stack Health Report</div>
-  <div class="gate-sub" id="gate-sub">Enter the access passphrase to view.</div>
-  <input id="gate-input" type="password" placeholder="Access passphrase" autocomplete="off" />
-  <button id="gate-btn">View Report</button>
-  <div id="gate-err">Incorrect passphrase. Please try again.</div>
-</div></div>
+<style data-siq-skin="03_ivory-navy-v3">
+/* ============================================================
+   SiQ Readout Skin - 02 - Ivory / Navy v2
+   Supersedes 01_ivory-navy-solid.css. Same look, three defects fixed.
+   01 is left in place untouched for comparison.
+
+   CHANGED FROM 01, and why:
+
+   1. The three *-soft tokens are NO LONGER declared here.
+      01 set --danger-soft:#E5484D, --caution-soft:#FF7A00,
+      --success-soft:#12B76A. Those tokens are not brand hues, they are
+      background SURFACES, and the readouts hardcode light text on top
+      of them:
+          .hero {background:var(--danger-soft); color:#F5F7FA}
+          .rowhi{background:var(--danger-soft); color:#F5F7FA}
+      Re-pointing them at saturated brand colour dropped that text from
+      16.17:1 to 3.65:1, and .hero .sub (#B8C5D6) to 2.24:1. Both fail
+      WCAG AA. This is the same defect fixed in the AEO template on
+      2026-08-26; skin 01 would have reintroduced it.
+      Leaving them undeclared means each readout keeps its own value:
+          AEO family      opaque dark hex   -> stays a dark anchor, 16:1
+          Coinflow readout rgba(...,0.10)   -> tints the ivory ground
+      Both are correct. DO NOT add these three tokens to a skin.
+
+   2. .bridge and .attribution added to the navy re-scope. They use
+      var(--surface) / var(--surface-2) and sit directly beneath
+      navy-filled .leak cards, so under 01 they rendered as light boxes
+      in the middle of a navy stack.
+
+   3. The palette block now names [data-theme="light"] explicitly.
+      Under 01 the theme toggle was silently inert: the skin's :root
+      matched the file's [data-theme="light"] on specificity and won on
+      source order. Ivory in both states is the intended look, so this
+      is now deliberate rather than accidental. To restore the dark
+      editorial look on the dark side, delete [data-theme="dark"] from
+      the selector below.
+   ============================================================ */
+
+/* --- palette: ivory ground, solid brand, solid health tiers --- */
+/* NOTE: no --danger-soft / --caution-soft / --success-soft here. See 1. */
+/* SPECIFICITY NOTE, 2026-08-31. The AEO / Demand / Campaign / Full-Funnel /
+   Marketing templates declare their palette on `body[data-theme="dark"]`,
+   which is specificity (0,1,1). A bare `:root` is (0,1,0) and LOSES to it no
+   matter how late it is injected. That is why those reports flipped to an
+   ivory background while their text tokens stayed at dark-theme white, and
+   why the Signal Assessment (which declares on `:root`) was the only file
+   that skinned cleanly. Matching every shape below fixes all of them.
+   Do not simplify this selector list. */
+:root,
+[data-theme="dark"],
+[data-theme="light"],
+html[data-theme="dark"],
+html[data-theme="light"],
+body[data-theme="dark"],
+body[data-theme="light"] {
+  --canvas: #EFE8D8; --surface: #FBF8F1; --surface-2: #E7DECB;
+  --border: rgba(20,25,34,0.14); --border-strong: rgba(20,25,34,0.32);
+  --text-primary: #14181F; --text-secondary: #46505F; --text-tertiary: #5A636F;
+  --brand-blue: #2E7DFF; --brand-orange: #FF6600; --ink: #101722; --navy: #12203A;
+  --success: #12B76A; --caution: #FF7A00; --danger: #E5484D; --track: #E1D7C4;
+}
+
+/* --- ivory paper + navy editorial grid --- */
+html { background-color: var(--canvas); }
+body {
+  background-color: var(--canvas);
+  background-image:
+    linear-gradient(rgba(18,32,58,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18,32,58,0.06) 1px, transparent 1px);
+  background-size: 34px 34px; background-position: -1px -1px;
+}
+.wrap { background: transparent; }
+
+/* --- filled navy data boxes on ivory (token re-scope flips inner text) --- */
+.card, .play-card, .deal-card, .fidelity-card, .phase-card, .leak, .milestone,
+.note-strip, .bad-narrative, .bridge, .attribution {
+  --surface: var(--navy); --surface-2: #16273F;
+  --border: rgba(255,255,255,0.10); --border-strong: rgba(255,255,255,0.20);
+  --text-primary: #F4F0E7; --text-secondary: #C6D0DE; --text-tertiary: #8FA0B6;
+  --track: #2A3B57;
+  color: var(--text-primary);
+  background: var(--navy) !important; border-color: rgba(255,255,255,0.10) !important;
+  box-shadow: 0 18px 42px -28px rgba(16,23,34,0.75);
+}
+/* label colours are handled in the CONTRAST REPAIRS block below */
+/* .attribution is a dashed memo box, keep the dashed rail readable on navy */
+.attribution { border-style: dashed !important; border-color: rgba(255,255,255,0.28) !important; }
+
+/* --- black anchors: overall score + featured phase --- */
+.card.shr-hero { background: var(--ink) !important; }
+.card.shr-hero .score { color: var(--brand-orange); }
+.card.shr-hero .score-unit { color: rgba(244,240,231,0.5); }
+.phase-card.featured { background: var(--ink) !important; border: 2px solid var(--ink) !important; }
+.phase-card.featured .phase-badge { background: var(--brand-orange); }
+
+/* --- orange / blue rails --- */
+.dim-card { border-top: 3px solid var(--brand-orange) !important; }
+.dim-score { color: #F4F0E7; }
+.dim-score-unit { color: rgba(244,240,231,0.5); }
+.leak { border-left: 3px solid var(--brand-orange) !important; }
+.milestone { border-left: 3px solid var(--brand-blue) !important; }
+.section-number { box-shadow: 0 6px 18px -8px rgba(255,102,0,0.55); }
+
+/* --- SOLID status chips + bars (no translucency) --- */
+.state-pill.green { background: var(--success) !important; color: #08130C !important; }
+.state-pill.amber { background: var(--caution) !important; color: #1A1205 !important; }
+.state-pill.red   { background: var(--danger)  !important; color: #FFFFFF !important; }
+.hitl-badge { background: var(--success) !important; color: #08130C !important; }
+.assess-banner { border: 0 !important; color: #FFFFFF; }
+body[data-assessment="bad"] .assess-banner { background: var(--danger) !important; color: #FFFFFF !important; }
+body[data-assessment="good"] .assess-banner { background: var(--success) !important; color: #08130C !important; }
+.dim-bar-fill.green { background: var(--success); } .dim-bar-fill.amber { background: var(--caution); } .dim-bar-fill.red { background: var(--danger); }
+.fid-after { color: var(--success); }
+
+/* ==================================================================
+   CONTRAST REPAIRS  (added v3, 2026-08-31)
+   Every value below was chosen by measuring the rendered page in
+   headless Chromium, not by eye. Each line names the ratio it fixes.
+   Re-run Design Library/_verify/sweep.js after touching any of them.
+   ================================================================== */
+
+/* Labels. v2 forced #93A3B8 everywhere; on the ivory ground that is
+   2.11:1. Mid-grey now applies only inside the navy boxes.           */
+.card-label, .fid-label, .spec-label, .milestone-day, .deal-meta,
+.meta-item .label { color: #5F6875 !important; }            /* 4.62 on ivory */
+.card .card-label, .card .fid-label, .card .spec-label, .card .milestone-day,
+.card .deal-meta, .card .meta-item .label, .leak .card-label,
+.play-card .card-label, .deal-card .deal-meta, .fidelity-card .fid-label,
+.phase-card .spec-label, .milestone .milestone-day, .bridge .card-label,
+.attribution .card-label { color: #93A3B8 !important; }     /* on navy */
+
+/* Toggle buttons. Two separate problems:
+   (a) white on --brand-blue #2E7DFF as a BACKGROUND is 3.82, and white
+       on --brand-orange is 2.94;
+   (b) an earlier version of this rule painted EVERY button, which
+       destroyed the active-state affordance. Inactive buttons must
+       stay transparent, exactly as the baseline has them.            */
+.toggle button { background: transparent !important; color: #46505F !important; }        /* on near-white */
+.toggle button.active { background: var(--brand-orange) !important; color: #1A1205 !important; }        /* 6.31 */
+.toggle.assess button.active { background: #1F63D6 !important; color: #FFFFFF !important; }             /* 5.51 */
+
+/* Solid red bar + red pill. White on #E5484D is 3.91. Still a solid
+   red bar, just one that passes.                                     */
+body[data-assessment="bad"] .assess-banner,
+.assess-banner.show-bad, .banner.show-bad { background: #C22B32 !important; color: #FFFFFF !important; }  /* 5.70 */
+.state-pill.red { background: #C22B32 !important; color: #FFFFFF !important; }                            /* 5.70 */
+
+/* Red TEXT sitting on the navy boxes. #E5484D is 4.15 there.         */
+.bad-narrative .bn-label, .leak .leak-play span, .leak-play .show-bad,
+.card .state-pill.red-text, .bridge .bridge-val { color: #FF6169 !important; }                            /* 5.54 */
+
+/* Phase badge. White on brand orange is 2.94. Dark ink on orange
+   matches the amber pill treatment already in the skin.              */
+.phase-badge, .phase-card.featured .phase-badge { color: #1A1205 !important; }                            /* 6.31 */
+
+/* Semantic red on the dark .rowhi ground (AEO family). --danger-soft
+   stays a dark hex, so #E5484D there is 4.43, just under AA.         */
+.rowhi .zero, tr.rowhi .zero { color: #F0565B !important; }                                               /* 5.11 */
+
+/* Drill-down summary. Pre-existing 3.65 at baseline on the ink hero;
+   the ivory skin's brand-blue lifts it to 4.70. Pinned so a future
+   token change cannot quietly drop it back.                          */
+.dd summary { color: #2E7DFF !important; }                                                                /* 4.70 */
+
+/* Footer sits on the ivory ground, not in a navy box. --text-tertiary
+   (#717B8A) is 3.51 there.                                           */
+footer, footer div, footer a { color: #46505F !important; }                                               /* 6.69 */
+
+/* Closing CTA banner. Pre-existing at baseline too: white on brand
+   orange is 2.94, and the white button's orange label is also 2.94.
+   Fixed here for the skin; the baseline template still needs the same
+   two lines applied at source.                                       */
+.cta-banner, .cta-banner .cta-title, .cta-banner .cta-sub { color: #1A1205 !important; }                  /* 6.31 */
+.cta-btn { color: #993D00 !important; }                                                                   /* 6.95 */
+
+/* --- second pass, measured across all nine readouts ---------------- */
+
+/* Wordmark. --brand-orange on the ivory ground is 2.41 (needs 3.0 at
+   this size). Darkened for the mark only; the token is untouched, so
+   orange rails and badges keep the brand value.                       */
+.brand .iq { color: #C74B00 !important; }                                                                 /* 3.55 */
+
+/* "Prepared for" and friends: same tertiary-grey-on-ivory case as the
+   footer.                                                             */
+.cobrand .cb-label, .cb-label { color: #5F6875 !important; }                                              /* 4.62 */
+
+/* White on brand orange is 2.94 wherever it appears. Same dark-ink
+   treatment already used for the phase badge and the amber pill.      */
+.section-number, .siq-gate-box button, .gate-btn { color: #1A1205 !important; }                           /* 6.31 */
+
+/* Red text on the navy boxes, remaining selectors.                    */
+.deal-card.red .deal-score, .fid-note strong, .fidelity-card .fid-note strong { color: #FF6169 !important; } /* 5.54 */
+
+/* ==================================================================
+   IVORY GROUND REPAIRS, third pass 2026-08-31
+   The templates below use saturated brand colour as TEXT on the light
+   ground. Those values are correct as BACKGROUNDS (chips, bars, pills)
+   and unreadable as type: orange 2.41, green 2.15, red 3.21. The tokens
+   are therefore left alone and only the text uses are darkened.
+   ================================================================== */
+
+/* Score numbers, table figures and callouts rendered in brand colour.
+   This selector list is taken from the templates themselves: every rule
+   that sets color:var(--success|--caution|--danger|--brand-orange) and
+   does NOT also set its own background. The tokens keep their saturated
+   values because chips, bars and rails need them. Only the type moves. */
+.a, .some, .correction .l, .caution-text,
+.score-big.a, .num.a, td.num.a, .big.a, .qcat { color: #A83F00 !important; }           /* 5.10 / 5.86 */
+.g, .win, td.win, .bn .big-good, .big-good, .big.g, .success-text { color: #0A6E40 !important; }  /* 5.19 / 5.97 */
+.r, .num.r, td.num.r, .zero, .leak-\$, .fid-val,
+.big-danger, .bn .big-danger, .danger-text { color: #C22B32 !important; }              /* 4.67 / 5.37 */
+
+/* .hero means two opposite things depending on the template:
+       AEO family      background:var(--danger-soft)  -> a DARK box
+       Demand/Marketing background:var(--surface)     -> a LIGHT box
+   Same class name, inverted treatment. The discriminator is .rowhi,
+   which appears in the DOM only in the two dark-hero templates
+   (verified across all nine readouts). Scoping with :has() keeps the
+   light-on-dark rules off the light heroes, where an earlier version
+   of this block turned readable text white on near-white.            */
+body:has(.rowhi) .hero,
+body:has(.rowhi) .hero td, body:has(.rowhi) .hero th,
+body:has(.rowhi) .hero span, body:has(.rowhi) .hero div,
+body:has(.rowhi) .hero b, body:has(.rowhi) .hero strong,
+body:has(.rowhi) .hero i, body:has(.rowhi) .hero em { color: #F5F7FA !important; }
+body:has(.rowhi) .hero .sub { color: #B8C5D6 !important; }
+body:has(.rowhi) .hero .k { color: #F0565B !important; }
+
+.rowhi, .rowhi td, .rowhi th, .rowhi span, .rowhi b, .rowhi strong,
+.rowhi i, .rowhi em, .rowhi .a, .rowhi .g, .rowhi .win,
+.rowhi .some { color: #F5F7FA !important; }
+.rowhi .zero, tr.rowhi .zero, .rowhi .r { color: #F0565B !important; }
+
+/* .dim-score is light because it normally sits in a navy card. In the
+   AEO / Demand family it sits on the light surface instead, where the
+   skin's own card colour made it 1.07:1, effectively invisible.       */
+.dim-score { color: var(--text-primary); }
+.card .dim-score, .dim-card .dim-score, .leak .dim-score { color: #F4F0E7 !important; }
+
+/* ==================================================================
+   DARK-GROUND OVERRIDES, fourth pass
+   Some blocks keep an OPAQUE DARK background under this skin, because
+   their --*-soft token is a dark hex the skin deliberately does not
+   redeclare. Extracted from the templates, those blocks are exactly:
+   .hero (AEO family only), .rowhi, .banner.show-bad, .banner.show-good,
+   .chip, .sample. Plus the navy card family. Text inside any of them
+   needs the LIGHT semantic variants, not the ivory-ground dark ones,
+   or the dark-on-dark lands near 1:1.
+   ================================================================== */
+.banner.show-bad, .banner.show-good, .chip, .sample,
+.banner.show-bad *, .banner.show-good *, .chip *, .sample * { color: #F5F7FA !important; }
+
+/* semantic colour inside any dark block */
+.card .a, .card .some, .leak .a, .leak .some, .play-card .a, .bridge .a,
+.deal-card .a, .fidelity-card .a, .phase-card .a, .milestone .a,
+.bad-narrative .a, .attribution .a, .note-strip .a,
+.score.a, .score-tag.a, .banner .a, .chip .a, .sample .a,
+body:has(.rowhi) .hero .a, .rowhi .a { color: #FF9B57 !important; }   /* >=7.4 on every dark ground */
+
+.card .g, .card .win, .leak .g, .play-card .g, .deal-card .g,
+.fidelity-card .g, .phase-card .g, .milestone .g, .bad-narrative .g,
+.attribution .g, .note-strip .g, .bridge .g,
+.score.g, .score-tag.g, .banner .g, .chip .g, .sample .g,
+body:has(.rowhi) .hero .g, .rowhi .g, .rowhi .win { color: #3DDC97 !important; }   /* >=8.7 */
+
+.card .r, .leak .r, .leak-\$, .leak .leak-\$, .play-card .r, .deal-card .r,
+.fidelity-card .r, .phase-card .r, .milestone .r, .bad-narrative .r,
+.attribution .r, .note-strip .r, .bridge .r,
+.score.r, .score-tag.r, .banner .r, .chip .r, .sample .r,
+body:has(.rowhi) .hero .r, .rowhi .r { color: #FF6169 !important; }   /* >=5.2 */
+
+/* Fifth pass. Lead-in lines (.l) inside .hero / .seam blocks, and the
+   bare-span wordmark in the marketing template, both carry brand orange
+   as type on the light ground. The dark-block overrides below repeat
+   afterwards so they still win inside .rowhi / .card / a dark .hero.   */
+.l, .hero .l, .seam .l, .correction .l { color: #A83F00 !important; }   /* 5.10 / 5.86 */
+.brand span, .brand .iq { color: #C74B00 !important; }                  /* 3.55, large type */
+
+/* re-assert the dark grounds last so they outrank everything above */
+.rowhi, .rowhi td, .rowhi th, .rowhi span, .rowhi b, .rowhi strong,
+.rowhi i, .rowhi em, .rowhi .l { color: #F5F7FA !important; }
+.rowhi .zero, tr.rowhi .zero, .rowhi .r { color: #F0565B !important; }
+.rowhi .a, .rowhi .some { color: #FF9B57 !important; }
+.rowhi .g, .rowhi .win { color: #3DDC97 !important; }
+body:has(.rowhi) .hero .l, .banner .l, .chip .l, .sample .l,
+.card .l, .leak .l { color: #FF9B57 !important; }
+
+/* ==================================================================
+   SIXTH PASS, 2026-09-04. Tokens used as text via INLINE style.
+   The fifth pass fixed every CLASSED use of the saturated tokens as
+   type. It could not see the uses that carry the token inline, which
+   is how the Romify AEO and Demand templates colour their table cells:
+       <td style="color:var(--success)">76</td>
+   An author !important rule outranks a non-important inline style, and
+   an attribute substring selector can see which token was used. The
+   selectors match "color:var(" specifically, so an inline BORDER or
+   BACKGROUND written with the same token is never recoloured.
+   Measured on the ivory ground:
+     var(--orange)  #FF6600  2.41  ->  #A83F00  5.10
+     var(--caution) #FF7A00  2.46  ->  #A83F00  5.10
+     var(--success) #12B76A  2.47  ->  #0A6E40  5.19
+     var(--danger)  #E5484D  3.69  ->  #C22B32  4.67
+   ================================================================== */
+[style*="color:var(--orange)"],       [style*="color: var(--orange)"],
+[style*="color:var(--brand-orange)"], [style*="color: var(--brand-orange)"],
+[style*="color:var(--caution)"],      [style*="color: var(--caution)"]  { color: #A83F00 !important; }
+[style*="color:var(--success)"],      [style*="color: var(--success)"]  { color: #0A6E40 !important; }
+[style*="color:var(--danger)"],       [style*="color: var(--danger)"]   { color: #C22B32 !important; }
+
+/* ------------------------------------------------------------------
+   The inverse case. A table row painted inline with one of the dark
+   *-soft SURFACES, which this skin deliberately never redeclares:
+       <tr style="background:var(--danger-soft)">
+   It is the .rowhi pattern without the .rowhi class, so every
+   fifth-pass rule missed it and its cells kept --text-primary #14181F
+   on #2a1416, which measures 1.03:1. Effectively invisible.
+   Measured on #2a1416:
+     #F5F7FA 15.9   #B8C5D6 9.9   #3DDC97 8.7   #FF9B57 7.4   #FF6169 5.2
+   These sit AFTER the ivory rules above and outrank them on
+   specificity, (0,2,1) against (0,2,0), so a token-coloured cell
+   inside a dark row lands on the light variant, not the ivory one.
+   ------------------------------------------------------------------ */
+tr[style*="var(--danger-soft)"],  tr[style*="var(--caution-soft)"],  tr[style*="var(--success-soft)"],
+tr[style*="var(--danger-soft)"] td,     tr[style*="var(--danger-soft)"] th,
+tr[style*="var(--danger-soft)"] b,      tr[style*="var(--danger-soft)"] strong,
+tr[style*="var(--danger-soft)"] span,   tr[style*="var(--danger-soft)"] i,
+tr[style*="var(--caution-soft)"] td,    tr[style*="var(--caution-soft)"] th,
+tr[style*="var(--caution-soft)"] b,     tr[style*="var(--caution-soft)"] span,
+tr[style*="var(--success-soft)"] td,    tr[style*="var(--success-soft)"] th,
+tr[style*="var(--success-soft)"] b,     tr[style*="var(--success-soft)"] span { color: #F5F7FA !important; }
+
+tr[style*="-soft)"] [style*="color:var(--danger)"],  tr[style*="-soft)"] [style*="color: var(--danger)"]  { color: #FF6169 !important; }
+tr[style*="-soft)"] [style*="color:var(--caution)"], tr[style*="-soft)"] [style*="color: var(--caution)"] { color: #FF9B57 !important; }
+tr[style*="-soft)"] [style*="color:var(--orange)"],  tr[style*="-soft)"] [style*="color: var(--orange)"]  { color: #FF9B57 !important; }
+tr[style*="-soft)"] [style*="color:var(--success)"], tr[style*="-soft)"] [style*="color: var(--success)"] { color: #3DDC97 !important; }
+tr[style*="-soft)"] [style*="--text-tertiary"],      tr[style*="-soft)"] [style*="--text-secondary"]      { color: #B8C5D6 !important; }
+
+/* ==================================================================
+   SEVENTH PASS, 2026-09-04. The sixth pass, corrected.
+   The sixth pass recoloured every inline-styled token use for the IVORY
+   ground. That is right on ivory and wrong inside the navy boxes, where
+   the same inline styles are how the Signal Assessment sets its big
+   fidelity numbers:
+       <span class="fid-before" style="color:var(--danger);font-size:32px">
+   Measured: applying the sixth pass alone took coinflow-signal from 0
+   to 8 failures and romify-signal from 0 to 16, because #C22B32 on navy
+   is 2.85 while the untouched #E5484D was 4.15 and passing at 32px.
+   These rules restore the light variants inside every container this
+   skin fills dark. Same container list as the fourth-pass block above.
+   They sit after the sixth pass and win on source order.
+   On #12203A / #16273F / #2a1416:
+     #FF6169  5.2+     #FF9B57  7.4+     #3DDC97  8.7+
+   ================================================================== */
+.card [style*="color:var(--danger)"], .card [style*="color: var(--danger)"],
+.play-card [style*="color:var(--danger)"], .play-card [style*="color: var(--danger)"],
+.deal-card [style*="color:var(--danger)"], .deal-card [style*="color: var(--danger)"],
+.fidelity-card [style*="color:var(--danger)"], .fidelity-card [style*="color: var(--danger)"],
+.phase-card [style*="color:var(--danger)"], .phase-card [style*="color: var(--danger)"],
+.leak [style*="color:var(--danger)"], .leak [style*="color: var(--danger)"],
+.milestone [style*="color:var(--danger)"], .milestone [style*="color: var(--danger)"],
+.note-strip [style*="color:var(--danger)"], .note-strip [style*="color: var(--danger)"],
+.bad-narrative [style*="color:var(--danger)"], .bad-narrative [style*="color: var(--danger)"],
+.bridge [style*="color:var(--danger)"], .bridge [style*="color: var(--danger)"],
+.attribution [style*="color:var(--danger)"], .attribution [style*="color: var(--danger)"],
+.rowhi [style*="color:var(--danger)"], .rowhi [style*="color: var(--danger)"],
+.banner.show-bad [style*="color:var(--danger)"], .banner.show-bad [style*="color: var(--danger)"],
+.banner.show-good [style*="color:var(--danger)"], .banner.show-good [style*="color: var(--danger)"],
+.chip [style*="color:var(--danger)"], .chip [style*="color: var(--danger)"],
+.sample [style*="color:var(--danger)"], .sample [style*="color: var(--danger)"],
+body:has(.rowhi) .hero [style*="color:var(--danger)"], body:has(.rowhi) .hero [style*="color: var(--danger)"] { color: #FF6169 !important; }   /* 5.2+ on every dark ground */
+
+.card [style*="color:var(--caution)"], .card [style*="color: var(--caution)"],
+.card [style*="color:var(--orange)"], .card [style*="color: var(--orange)"],
+.card [style*="color:var(--brand-orange)"], .card [style*="color: var(--brand-orange)"],
+.play-card [style*="color:var(--caution)"], .play-card [style*="color: var(--caution)"],
+.play-card [style*="color:var(--orange)"], .play-card [style*="color: var(--orange)"],
+.play-card [style*="color:var(--brand-orange)"], .play-card [style*="color: var(--brand-orange)"],
+.deal-card [style*="color:var(--caution)"], .deal-card [style*="color: var(--caution)"],
+.deal-card [style*="color:var(--orange)"], .deal-card [style*="color: var(--orange)"],
+.deal-card [style*="color:var(--brand-orange)"], .deal-card [style*="color: var(--brand-orange)"],
+.fidelity-card [style*="color:var(--caution)"], .fidelity-card [style*="color: var(--caution)"],
+.fidelity-card [style*="color:var(--orange)"], .fidelity-card [style*="color: var(--orange)"],
+.fidelity-card [style*="color:var(--brand-orange)"], .fidelity-card [style*="color: var(--brand-orange)"],
+.phase-card [style*="color:var(--caution)"], .phase-card [style*="color: var(--caution)"],
+.phase-card [style*="color:var(--orange)"], .phase-card [style*="color: var(--orange)"],
+.phase-card [style*="color:var(--brand-orange)"], .phase-card [style*="color: var(--brand-orange)"],
+.leak [style*="color:var(--caution)"], .leak [style*="color: var(--caution)"],
+.leak [style*="color:var(--orange)"], .leak [style*="color: var(--orange)"],
+.leak [style*="color:var(--brand-orange)"], .leak [style*="color: var(--brand-orange)"],
+.milestone [style*="color:var(--caution)"], .milestone [style*="color: var(--caution)"],
+.milestone [style*="color:var(--orange)"], .milestone [style*="color: var(--orange)"],
+.milestone [style*="color:var(--brand-orange)"], .milestone [style*="color: var(--brand-orange)"],
+.note-strip [style*="color:var(--caution)"], .note-strip [style*="color: var(--caution)"],
+.note-strip [style*="color:var(--orange)"], .note-strip [style*="color: var(--orange)"],
+.note-strip [style*="color:var(--brand-orange)"], .note-strip [style*="color: var(--brand-orange)"],
+.bad-narrative [style*="color:var(--caution)"], .bad-narrative [style*="color: var(--caution)"],
+.bad-narrative [style*="color:var(--orange)"], .bad-narrative [style*="color: var(--orange)"],
+.bad-narrative [style*="color:var(--brand-orange)"], .bad-narrative [style*="color: var(--brand-orange)"],
+.bridge [style*="color:var(--caution)"], .bridge [style*="color: var(--caution)"],
+.bridge [style*="color:var(--orange)"], .bridge [style*="color: var(--orange)"],
+.bridge [style*="color:var(--brand-orange)"], .bridge [style*="color: var(--brand-orange)"],
+.attribution [style*="color:var(--caution)"], .attribution [style*="color: var(--caution)"],
+.attribution [style*="color:var(--orange)"], .attribution [style*="color: var(--orange)"],
+.attribution [style*="color:var(--brand-orange)"], .attribution [style*="color: var(--brand-orange)"],
+.rowhi [style*="color:var(--caution)"], .rowhi [style*="color: var(--caution)"],
+.rowhi [style*="color:var(--orange)"], .rowhi [style*="color: var(--orange)"],
+.rowhi [style*="color:var(--brand-orange)"], .rowhi [style*="color: var(--brand-orange)"],
+.banner.show-bad [style*="color:var(--caution)"], .banner.show-bad [style*="color: var(--caution)"],
+.banner.show-bad [style*="color:var(--orange)"], .banner.show-bad [style*="color: var(--orange)"],
+.banner.show-bad [style*="color:var(--brand-orange)"], .banner.show-bad [style*="color: var(--brand-orange)"],
+.banner.show-good [style*="color:var(--caution)"], .banner.show-good [style*="color: var(--caution)"],
+.banner.show-good [style*="color:var(--orange)"], .banner.show-good [style*="color: var(--orange)"],
+.banner.show-good [style*="color:var(--brand-orange)"], .banner.show-good [style*="color: var(--brand-orange)"],
+.chip [style*="color:var(--caution)"], .chip [style*="color: var(--caution)"],
+.chip [style*="color:var(--orange)"], .chip [style*="color: var(--orange)"],
+.chip [style*="color:var(--brand-orange)"], .chip [style*="color: var(--brand-orange)"],
+.sample [style*="color:var(--caution)"], .sample [style*="color: var(--caution)"],
+.sample [style*="color:var(--orange)"], .sample [style*="color: var(--orange)"],
+.sample [style*="color:var(--brand-orange)"], .sample [style*="color: var(--brand-orange)"],
+body:has(.rowhi) .hero [style*="color:var(--caution)"], body:has(.rowhi) .hero [style*="color: var(--caution)"],
+body:has(.rowhi) .hero [style*="color:var(--orange)"], body:has(.rowhi) .hero [style*="color: var(--orange)"],
+body:has(.rowhi) .hero [style*="color:var(--brand-orange)"], body:has(.rowhi) .hero [style*="color: var(--brand-orange)"] { color: #FF9B57 !important; }   /* 7.4+ */
+
+.card [style*="color:var(--success)"], .card [style*="color: var(--success)"],
+.play-card [style*="color:var(--success)"], .play-card [style*="color: var(--success)"],
+.deal-card [style*="color:var(--success)"], .deal-card [style*="color: var(--success)"],
+.fidelity-card [style*="color:var(--success)"], .fidelity-card [style*="color: var(--success)"],
+.phase-card [style*="color:var(--success)"], .phase-card [style*="color: var(--success)"],
+.leak [style*="color:var(--success)"], .leak [style*="color: var(--success)"],
+.milestone [style*="color:var(--success)"], .milestone [style*="color: var(--success)"],
+.note-strip [style*="color:var(--success)"], .note-strip [style*="color: var(--success)"],
+.bad-narrative [style*="color:var(--success)"], .bad-narrative [style*="color: var(--success)"],
+.bridge [style*="color:var(--success)"], .bridge [style*="color: var(--success)"],
+.attribution [style*="color:var(--success)"], .attribution [style*="color: var(--success)"],
+.rowhi [style*="color:var(--success)"], .rowhi [style*="color: var(--success)"],
+.banner.show-bad [style*="color:var(--success)"], .banner.show-bad [style*="color: var(--success)"],
+.banner.show-good [style*="color:var(--success)"], .banner.show-good [style*="color: var(--success)"],
+.chip [style*="color:var(--success)"], .chip [style*="color: var(--success)"],
+.sample [style*="color:var(--success)"], .sample [style*="color: var(--success)"],
+body:has(.rowhi) .hero [style*="color:var(--success)"], body:has(.rowhi) .hero [style*="color: var(--success)"] { color: #3DDC97 !important; }   /* 8.7+ */
+
+/* NOTE, recorded 2026-09-04 so the next person does not repeat my error.
+   .bn is an IVORY box in eight of the nine readouts. It is navy ONLY in
+   siq-website/aeo-report-coinflow.html, which navy-fills .hero and .bn
+   in its own CSS (commit 680f3d9). That per-file divergence is invisible
+   to this skin, and adding .bn to the dark-block lists here would put
+   light text on ivory in Demand Health, Marketing Signal, Romify AEO and
+   Romify Demand. It is NOT a skin bug. The Coinflow AEO report carries
+   its own measured <style data-siq-fix="aeo-navy-contrast-2026-09-04">
+   block instead. Either revert that file's navy-fill or promote it here
+   behind a real discriminator, the way .rowhi discriminates .hero.
+   ================================================================== */
+
+/* ==================================================================
+   TYPE SCALE, added 2026-08-31
+   reference_font_size_standard: body 11pt, headers 14pt, industry
+   standard, set by Marty. At 96dpi that is 14.67px body / 18.67px
+   header. The Coinflow readout was shipping body copy at 10-13px,
+   roughly 8-10pt, and set no font-size on body at all. Romify sets
+   body 16px, which is why the two looked nothing alike side by side.
+
+   Rule applied below:
+     body copy        -> 15px  (11pt, rounded up)
+     small body       -> 14px  (dense grids only)
+     UPPERCASE labels -> 11px floor (micro-labels stay small on purpose,
+                         but nothing ships at 9 or 10px)
+   Headers are already at or above 18px and are left alone.
+   ================================================================== */
+body { font-size: 15px; }
+
+/* body copy, lifted to the 11pt standard */
+.section-lead, .bn-text, .bad-narrative .bn-text, .attr-text,
+.attribution .attr-text, .cta-sub, .net-detail, .uplift-net .net-detail,
+.leak-cause, .leak-body .leak-cause, .dim-note, .baseline-note,
+.milestone-desc, .phase-features, .phase-features li, .phase-term,
+.phase-cadence, .play-trigger, .play-specs, .uplift-note,
+.uplift-card .uplift-note, .bridge-sub, .bridge-foot, .deal-flag,
+.fid-note, .dd-math, .dd-name, footer, footer div { font-size: 15px; }
+
+/* dense grid values, one step down but still above the old 11-12px */
+.bridge-label, .bridge-val, .dd-val, .dim-delta, .role { font-size: 14px; }
+.bridge-val.total { font-size: 16px; }
+
+/* uppercase micro-labels: 11px floor, never 9 or 10 */
+.card-label, .fid-label, .spec-label, .play-spec .spec-label, .bn-label,
+.bad-narrative .bn-label, .attr-label, .attribution .attr-label,
+.bridge-head, .deal-meta, .meta-item .label, .kicker, .uplift-card .kicker,
+.net-label, .uplift-net .net-label, .milestone-day, .phase-badge,
+.hitl-badge, .leak-play, .state-pill, .toggle button, .dd summary,
+.assess-banner, .cta-btn { font-size: 11px; }
+
+/* a note strip immediately after a card grid was sitting flush against the
+   last card and its shadow */
+.deal-grid + .note-strip, .fidelity-grid + .note-strip { margin-top: 18px; }
+
+/* Role chips in the deal grid sit on #16273F, a lighter navy than the card.
+   Measured there: .role.missing 3.75, .role.champion 3.93, both under AA. */
+.role.missing { color: #FF8A8F !important; }   /* 7.18 on navy */
+.role.champion { color: #5B9AFF !important; }  /* 5.81 on navy */
+
+/* Demand Health CTA button: white on brand orange is 2.94, the same pattern
+   already fixed on .phase-badge and .section-number. */
+.cta a, .cta > a { color: #1A1205 !important; }   /* 6.31 on #FF6600 */
+
+
+/* ===================== BOX PASS COMPLETION (2026-09-10) =====================
+   v3 re-pointed the surface tokens to navy for ten box classes only. Five
+   templates carry their own panel class names, which the v3 README flagged as
+   the outstanding per-template box pass. Those panels use background:
+   var(--surface) and so rendered ivory-on-ivory: .bn (demand, aeo),
+   .dim (demand, marketing-signal), .stage (full-funnel, campaign), .fid
+   (marketing-signal). This block finishes the pass. Contrast-checked below.
+   =========================================================================== */
+
+/* 1. surface tokens, so background:var(--surface) resolves to navy */
+.bn, .dim, .stage, .fid {
+  --surface: var(--navy) !important;
+  --surface-2: #16273F !important;
+  --border: rgba(255,255,255,0.10) !important;
+  --border-strong: rgba(255,255,255,0.20) !important;
+}
+
+/* 2. default body text inside those panels */
+.bn, .dim, .stage, .fid,
+.bn p, .dim p, .stage p, .fid p,
+.bn span, .dim span, .stage span, .fid span,
+.bn b, .dim b, .stage b, .fid b,
+.bn strong, .dim strong, .stage strong, .fid strong,
+.bn .big, .dim .big, .stage .big, .fid .big { color: #F4F0E7 !important; }
+
+/* 3. muted labels and secondary copy */
+.bn .l, .dim .l, .stage .l, .fid .l,
+.bn .k, .dim .k, .stage .k, .fid .k,
+.bn .ns, .dim .ns, .dim .dim-ns,
+.dim .dim-name, .dim .dim-wt, .dim .dim-top,
+.fid .fid-label { color: #93A3B8 !important; }
+
+.bn .sub, .dim .sub, .stage .sub, .fid .sub,
+.dim .dim-note, .fid .fid-note { color: #C6D0DE !important; }
+
+/* 4. semantic colours last so they win over rule 2 */
+.bn .r, .dim .r, .stage .r, .fid .r,
+.bn .big-danger, .dim .big-danger, .stage .big-danger, .fid .big-danger,
+.bn .zero, .dim .zero, .dim .dim-score.r, .fid .fid-val { color: #FF6169 !important; }
+
+.bn .g, .dim .g, .stage .g, .fid .g,
+.bn .big-good, .dim .big-good, .stage .big-good, .fid .big-good,
+.bn .win, .dim .win, .dim .dim-score.g { color: #3DDC97 !important; }
+
+.bn .a, .dim .a, .stage .a, .fid .a,
+.bn .some, .dim .some, .dim .dim-score.a { color: #FF9B57 !important; }
+
+/* 5. mirrored from every .card-scoped rule in v3 */
+.bn,
+.dim,
+.stage,
+.fid { --surface: var(--navy); --surface-2: #16273F; --border: rgba(255,255,255,0.10); --border-strong: rgba(255,255,255,0.20); --text-primary: #F4F0E7; --text-secondary: #C6D0DE; --text-tertiary: #8FA0B6; --track: #2A3B57; color: var(--text-primary); background: var(--navy) !important; border-color: rgba(255,255,255,0.10) !important; box-shadow: 0 18px 42px -28px rgba(16,23,34,0.75); }
+.bn.shr-hero,
+.dim.shr-hero,
+.stage.shr-hero,
+.fid.shr-hero { background: var(--ink) !important; }
+.bn.shr-hero .score,
+.dim.shr-hero .score,
+.stage.shr-hero .score,
+.fid.shr-hero .score { color: var(--brand-orange); }
+.bn.shr-hero .score-unit,
+.dim.shr-hero .score-unit,
+.stage.shr-hero .score-unit,
+.fid.shr-hero .score-unit { color: rgba(244,240,231,0.5); }
+.bn.featured,
+.dim.featured,
+.stage.featured,
+.fid.featured { background: var(--ink) !important; border: 2px solid var(--ink) !important; }
+.bn.featured .phase-badge,
+.dim.featured .phase-badge,
+.stage.featured .phase-badge,
+.fid.featured .phase-badge { background: var(--brand-orange); }
+.bn,
+.dim,
+.stage,
+.fid { border-left: 3px solid var(--brand-orange) !important; }
+.bn,
+.dim,
+.stage,
+.fid { border-left: 3px solid var(--brand-blue) !important; }
+.bn .card-label,
+.dim .card-label,
+.stage .card-label,
+.fid .card-label,
+.bn .fid-label,
+.dim .fid-label,
+.stage .fid-label,
+.fid .fid-label,
+.bn .spec-label,
+.dim .spec-label,
+.stage .spec-label,
+.fid .spec-label,
+.bn .milestone-day,
+.dim .milestone-day,
+.stage .milestone-day,
+.fid .milestone-day,
+.bn .deal-meta,
+.dim .deal-meta,
+.stage .deal-meta,
+.fid .deal-meta,
+.bn .meta-item .label,
+.dim .meta-item .label,
+.stage .meta-item .label,
+.fid .meta-item .label { color: #93A3B8 !important; }
+.bn .bn-label,
+.dim .bn-label,
+.stage .bn-label,
+.fid .bn-label,
+.bn .leak-play span,
+.dim .leak-play span,
+.stage .leak-play span,
+.fid .leak-play span,
+.bn .state-pill.red-text,
+.dim .state-pill.red-text,
+.stage .state-pill.red-text,
+.fid .state-pill.red-text,
+.bn .bridge-val,
+.dim .bridge-val,
+.stage .bridge-val,
+.fid .bridge-val { color: #FF6169 !important; }
+.bn.featured .phase-badge,
+.dim.featured .phase-badge,
+.stage.featured .phase-badge,
+.fid.featured .phase-badge { color: #1A1205 !important; }
+.bn.red .deal-score,
+.dim.red .deal-score,
+.stage.red .deal-score,
+.fid.red .deal-score,
+.bn .fid-note strong,
+.dim .fid-note strong,
+.stage .fid-note strong,
+.fid .fid-note strong { color: #FF6169 !important; }
+.bn .dim-score,
+.dim .dim-score,
+.stage .dim-score,
+.fid .dim-score { color: #F4F0E7 !important; }
+.bn .a,
+.dim .a,
+.stage .a,
+.fid .a,
+.bn .some,
+.dim .some,
+.stage .some,
+.fid .some { color: #FF9B57 !important; }
+.bn .g,
+.dim .g,
+.stage .g,
+.fid .g,
+.bn .win,
+.dim .win,
+.stage .win,
+.fid .win { color: #3DDC97 !important; }
+.bn .r,
+.dim .r,
+.stage .r,
+.fid .r,
+.bn .leak-\$,
+.dim .leak-\$,
+.stage .leak-\$,
+.fid .leak-\$ { color: #FF6169 !important; }
+.bn .l,
+.dim .l,
+.stage .l,
+.fid .l { color: #FF9B57 !important; }
+.bn [style*="color:var(--danger)"],
+.dim [style*="color:var(--danger)"],
+.stage [style*="color:var(--danger)"],
+.fid [style*="color:var(--danger)"],
+.bn [style*="color: var(--danger)"],
+.dim [style*="color: var(--danger)"],
+.stage [style*="color: var(--danger)"],
+.fid [style*="color: var(--danger)"] { color: #FF6169 !important; }
+.bn [style*="color:var(--caution)"],
+.dim [style*="color:var(--caution)"],
+.stage [style*="color:var(--caution)"],
+.fid [style*="color:var(--caution)"],
+.bn [style*="color: var(--caution)"],
+.dim [style*="color: var(--caution)"],
+.stage [style*="color: var(--caution)"],
+.fid [style*="color: var(--caution)"],
+.bn [style*="color:var(--orange)"],
+.dim [style*="color:var(--orange)"],
+.stage [style*="color:var(--orange)"],
+.fid [style*="color:var(--orange)"],
+.bn [style*="color: var(--orange)"],
+.dim [style*="color: var(--orange)"],
+.stage [style*="color: var(--orange)"],
+.fid [style*="color: var(--orange)"],
+.bn [style*="color:var(--brand-orange)"],
+.dim [style*="color:var(--brand-orange)"],
+.stage [style*="color:var(--brand-orange)"],
+.fid [style*="color:var(--brand-orange)"],
+.bn [style*="color: var(--brand-orange)"],
+.dim [style*="color: var(--brand-orange)"],
+.stage [style*="color: var(--brand-orange)"],
+.fid [style*="color: var(--brand-orange)"] { color: #FF9B57 !important; }
+.bn [style*="color:var(--success)"],
+.dim [style*="color:var(--success)"],
+.stage [style*="color:var(--success)"],
+.fid [style*="color:var(--success)"],
+.bn [style*="color: var(--success)"],
+.dim [style*="color: var(--success)"],
+.stage [style*="color: var(--success)"],
+.fid [style*="color: var(--success)"] { color: #3DDC97 !important; }
+.bn .bn-text,
+.dim .bn-text,
+.stage .bn-text,
+.fid .bn-text { font-size: 15px; }
+.bn .bn-label,
+.dim .bn-label,
+.stage .bn-label,
+.fid .bn-label { font-size: 11px; }
+.deal-grid + .bn,
+.deal-grid + .dim,
+.deal-grid + .stage,
+.deal-grid + .fid,
+.fidelity-grid + .bn,
+.fidelity-grid + .dim,
+.fidelity-grid + .stage,
+.fidelity-grid + .fid { margin-top: 18px; }
+
+
+/* --- box pass, second sweep (2026-09-10) -------------------------------
+   Found by computing every panel background in headless Chromium rather than
+   eyeballing: .seam and .cta (demand, full-funnel) and the recommendation
+   cards in ul.rec (aeo) also paint background:var(--surface) and so rendered
+   ivory-on-ivory. Same treatment as the first sweep. ---------------------- */
+.seam, .cta, ul.rec > li {
+  --surface: var(--navy) !important;
+  --surface-2: #16273F !important;
+  --border: rgba(255,255,255,0.10) !important;
+  --border-strong: rgba(255,255,255,0.20) !important;
+  background: var(--navy) !important;
+  color: #F4F0E7 !important;
+}
+.seam p, .cta p, .seam span, .cta span, .seam div, .cta div,
+.seam b, .cta b, .seam strong, .cta strong,
+ul.rec > li, ul.rec > li b, ul.rec > li strong, ul.rec > li span { color: #F4F0E7 !important; }
+
+.seam .l, .cta .l, .seam .k, .cta .k,
+.seam .label, .cta .label, .seam .sub, .cta .sub { color: #93A3B8 !important; }
+
+.seam .r, .cta .r, .seam .big-danger, .cta .big-danger,
+.seam .danger-text, .cta .danger-text { color: #FF6169 !important; }
+.seam .g, .cta .g, .seam .big-good, .cta .big-good { color: #3DDC97 !important; }
+.seam .a, .cta .a, ul.rec > li .a { color: #FF9B57 !important; }
+
+
+/* --- box pass, third sweep (2026-09-10) -------------------------------
+   Caught by _verify/sweep.js, not by eye: campaign-update went from 1 AA
+   failure at baseline to 9 under the skin. Cause: <ol><li> items inside a
+   painted .seam kept their dark text on the now-navy ground (ratio 1.99
+   against a 4.5 requirement). The earlier sweeps covered div/span/p/b/strong
+   but not list items, table cells or links inside a painted panel. --------- */
+.bn li, .dim li, .stage li, .fid li, .seam li, .cta li,
+.bn ol, .dim ol, .stage ol, .fid ol, .seam ol, .cta ol,
+.bn ul, .dim ul, .stage ul, .fid ul, .seam ul, .cta ul,
+.bn td, .dim td, .stage td, .fid td, .seam td, .cta td,
+.bn th, .dim th, .stage th, .fid th, .seam th, .cta th,
+.bn em, .dim em, .stage em, .fid em, .seam em, .cta em,
+.bn small, .dim small, .stage small, .fid small, .seam small, .cta small
+  { color: #F4F0E7 !important; }
+
+.bn a, .dim a[href], .stage a[href], .fid a[href], .seam a[href], .cta a[href]
+  { color: #FF9B57 !important; }
+
+</style>
+</head><body data-theme="dark" data-assessment="bad" class="siq-locked">
+<div id="siq-gate"><div class="siq-gate-box"><div class="siq-gate-logo">Scalient<span>IQ</span></div><div class="siq-gate-title">Stack Health Report</div><div class="siq-gate-sub">Confidential client report. Enter the access passphrase to view.</div><input id="siq-gate-input" type="password" placeholder="Access passphrase" autocomplete="off" /><button id="siq-gate-btn">View Report</button><div id="siq-gate-err">Incorrect passphrase. Please try again.</div></div></div>
 
 <div class="wrap" id="doc" style="visibility:hidden">
 
+  <!-- HEADER -->
   <div class="top">
-    <div class="brand">Scalient<span>IQ</span></div>
-    <div class="toggles">
-      <div class="tg" id="tg-view">
-        <button data-view="today" class="on">Today</button>
-        <button data-view="projected">After Renewal Watch</button>
+    <div>
+      <div class="brand"><span class="scalient">Scalient</span><span class="iq">IQ</span></div>
+      <div class="cobrand" id="cobrand"></div>
+      <h1 style="margin-top: 24px;">Stack Health Report</h1>
+      <div class="subtitle" id="lede"></div>
+      <div class="top-meta" id="strip"></div>
+    </div>
+    <div class="header-controls">
+      <div class="toggle assess" role="tablist" aria-label="View">
+        <button class="active" data-assess-btn="bad">Today</button>
+        <button data-assess-btn="good">After Renewal Watch</button>
       </div>
-      <div class="tg" id="tg-theme">
-        <button data-theme-btn="dark" class="on">Dark</button>
+      <div class="toggle" role="tablist" aria-label="Theme">
+        <button class="active" data-theme-btn="dark">Dark</button>
         <button data-theme-btn="light">Light</button>
       </div>
     </div>
   </div>
 
-  <div class="eyebrow" id="eyebrow"></div>
-  <h1>Stack Health Report</h1>
-  <p class="lede" id="lede"></p>
-
-  <div class="strip" id="strip"></div>
   <div id="sample-note"></div>
-  <div class="banner" id="view-banner"></div>
+  <div class="assess-banner" id="view-banner"></div>
 
   <!-- 1 -->
-  <section id="s1">
-    <div class="sec-h"><span class="sec-n">1</span><h2>Executive Summary: Own vs. Use</h2></div>
-    <p class="sec-sub">One number to bring to the budget meeting: what is owned across the GTM stack, what is actually used, and what is feeding nothing. This is the layer no seat-utilization tool measures, because it scores whether a tool's output reaches a revenue decision, not whether somebody logged in.</p>
-    <div class="cards" id="s1-cards"></div>
-    <div class="anchor" id="s1-anchor"></div>
-  </section>
+  <div class="section">
+    <div class="section-head"><div class="section-number">1</div><div class="section-title">Executive Summary: Own vs. Use</div></div>
+    <div class="section-lead">One number to bring to the budget meeting: what is owned across the GTM stack, what is actually used, and what is feeding nothing. This is the layer no seat-utilization tool measures, because it scores whether a tool's output reaches a revenue decision, not whether somebody logged in.</div>
+    <div class="fidelity-grid" id="s1-cards"></div>
+    <div class="card shr-hero" id="s1-anchor" style="margin-top:16px"></div>
+  </div>
 
   <!-- 2 -->
-  <section id="s2">
-    <div class="sec-h"><span class="sec-n">2</span><h2>Signal-to-Spend Composite</h2></div>
-    <p class="sec-sub">Every tool is scored on whether its output reaches a revenue decision. The composite is spend-weighted, so a dormant six-figure platform moves it and a dormant seat licence does not. Governance risk the raw score cannot see is then subtracted.</p>
-    <div class="anchor" id="s2-anchor"></div>
-    <div class="bar" id="s2-bar"></div>
-    <div class="legend" id="s2-legend"></div>
-    <h3>How the number was built</h3>
-    <table id="s2-table"></table>
-    <div class="note" id="s2-method"></div>
-  </section>
+  <div class="section">
+    <div class="section-head"><div class="section-number">2</div><div class="section-title">Signal-to-Spend Composite</div></div>
+    <div class="section-lead">Every tool is scored on whether its output reaches a revenue decision. The composite is spend-weighted, so a dormant six-figure platform moves it and a dormant seat licence does not. Governance risk the raw score cannot see is then subtracted.</div>
+    <div class="shr-grid">
+      <div class="card shr-hero" id="s2-anchor"></div>
+      <div class="card" id="s2-split"></div>
+    </div>
+    <div class="section-lead" style="margin-top:28px;margin-bottom:12px">How the number was built.</div>
+    <div class="dim-grid" id="s2-steps"></div>
+    <div class="note-strip" id="s2-method"></div>
+  </div>
 
   <!-- 3 -->
-  <section id="s3">
-    <div class="sec-h"><span class="sec-n">3</span><h2>Business-Unit Rollup</h2></div>
-    <p class="sec-sub">One score per unit, spend-weighted, reconciling to the whole-stack composite above.</p>
-    <table id="s3-table"></table>
-  </section>
+  <div class="section">
+    <div class="section-head"><div class="section-number">3</div><div class="section-title">Business-Unit Rollup</div></div>
+    <div class="section-lead">One score per unit, spend-weighted, reconciling to the whole-stack composite above.</div>
+    <div class="dim-grid" id="s3-units"></div>
+  </div>
 
   <!-- 4 -->
-  <section id="s4">
-    <div class="sec-h"><span class="sec-n">4</span><h2>Top Dark Stack Findings</h2></div>
-    <p class="sec-sub">Ranked by annual value. Every finding carries its evidence tier, and nothing is called dark on a client-supplied admin export alone.</p>
+  <div class="section">
+    <div class="section-head"><div class="section-number">4</div><div class="section-title">Top Dark Stack Findings</div></div>
+    <div class="section-lead">Ranked by annual value. Every finding carries its evidence tier, and nothing is called dark on a client-supplied admin export alone.</div>
     <div id="s4-list"></div>
-  </section>
+  </div>
 
   <!-- 5 -->
-  <section id="s5">
-    <div class="sec-h"><span class="sec-n">5</span><h2>Contracts and Commitments</h2></div>
-    <p class="sec-sub">What the agreements say you bought, against what the telemetry says you use. Seats contracted versus active, and the outcomes a vendor committed to in writing that never arrived.</p>
-    <div class="cards" id="s5-cards"></div>
-    <h3>Committed outcomes with no evidence of delivery</h3>
-    <table id="s5-promises"></table>
-    <div class="note" id="s5-note"></div>
-  </section>
+  <div class="section">
+    <div class="section-head"><div class="section-number">5</div><div class="section-title">Contracts and Commitments</div></div>
+    <div class="section-lead">What the agreements say you bought, against what the telemetry says you use. Seats contracted versus active, and the outcomes a vendor committed to in writing that never arrived.</div>
+    <div class="fidelity-grid" id="s5-cards"></div>
+    <div class="section-lead" style="margin-top:28px;margin-bottom:12px">Committed outcomes with no evidence of delivery.</div>
+    <div id="s5-promises"></div>
+    <div class="note-strip" id="s5-note"></div>
+  </div>
 
   <!-- 6 -->
-  <section id="s6">
-    <div class="sec-h"><span class="sec-n">6</span><h2>Renewal Calendar and Notice Deadlines</h2></div>
-    <p class="sec-sub">The renewal date is not the deadline. An auto-renewing agreement locks for another term unless written notice lands a set number of days before, so the date that actually matters is the renewal date minus the notice period in the contract. Those are the dates below.</p>
-    <div class="banner warn" id="s6-alarm"></div>
-    <table id="s6-table"></table>
-    <div class="note" id="s6-note"></div>
-  </section>
+  <div class="section">
+    <div class="section-head"><div class="section-number">6</div><div class="section-title">Renewal Calendar and Notice Deadlines</div></div>
+    <div class="section-lead">The renewal date is not the deadline. An auto-renewing agreement locks for another term unless written notice lands a set number of days before, so the date that actually matters is the renewal date minus the notice period in the contract. Those are the dates below.</div>
+    <div class="bad-narrative" id="s6-alarm"></div>
+    <div id="s6-list" style="margin-top:16px"></div>
+    <div class="note-strip" id="s6-note"></div>
+  </div>
 
   <!-- 7 -->
-  <section id="s7">
-    <div class="sec-h"><span class="sec-n">7</span><h2>Access and Governance</h2></div>
-    <p class="sec-sub">The lowest access ask of any Scalient IQ lens, and that is deliberate.</p>
-    <div class="cards" id="s7-cards"></div>
-    <div class="note" id="s7-note"></div>
-  </section>
+  <div class="section">
+    <div class="section-head"><div class="section-number">7</div><div class="section-title">Access and Governance</div></div>
+    <div class="section-lead">The lowest access ask of any Scalient IQ lens, and that is deliberate.</div>
+    <div class="fidelity-grid" id="s7-cards"></div>
+    <div class="note-strip" id="s7-note"></div>
+  </div>
 
   <!-- 8 -->
-  <section id="s8">
-    <div class="sec-h"><span class="sec-n">8</span><h2>Path Forward</h2></div>
-    <p class="sec-sub">The report is one-time. The condition is not.</p>
-    <div id="s8-body"></div>
-  </section>
+  <div class="section">
+    <div class="section-head"><div class="section-number">8</div><div class="section-title">Path Forward</div></div>
+    <div class="section-lead">Dormant spend found today gets cancelled and is gone. Re-running this same analysis in six months finds much less, so the recurring product is not re-finding waste. Business units keep buying tools, and every new agreement arrives with its own auto-renewal clause and its own notice period.</div>
+    <div class="milestones" id="s8-cards"></div>
+    <div class="note-strip" id="s8-note"></div>
+  </div>
 
   <footer>
     <div id="foot-left"></div>
@@ -251,15 +1033,15 @@
 
 <script>
 (function(){
-  var qs = new URLSearchParams(location.search);
+  var qs   = new URLSearchParams(location.search);
   var SLUG = (qs.get('c') || 'acme').toLowerCase().replace(/[^a-z0-9_-]/g,'');
   var ASOF = qs.get('asof') || '';
-  var PACK = null, VIEW = 'today';
+  var PACK = null;
 
   var gate = document.getElementById('siq-gate');
-  var inp  = document.getElementById('gate-input');
-  var btn  = document.getElementById('gate-btn');
-  var err  = document.getElementById('gate-err');
+  var inp  = document.getElementById('siq-gate-input');
+  var btn  = document.getElementById('siq-gate-btn');
+  var err  = document.getElementById('siq-gate-err');
   var doc  = document.getElementById('doc');
 
   function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){
@@ -273,8 +1055,9 @@
   }
   function exact(n){return n==null?'':'$'+Number(n).toLocaleString('en-US',{maximumFractionDigits:0});}
   function num(n){return n==null?'':Number(n).toLocaleString('en-US');}
-  function bandClass(b){return b==='Green'?'good':(b==='Amber'?'warn':'bad');}
-  function stateClass(s){return s==='live'?'p-live':(s==='weak'?'p-weak':(s==='redundant'?'p-red':'p-dark'));}
+  function bandPill(b){return b==='Green'?'green':(b==='Amber'?'amber':'red');}
+  function bandTone(b){return b==='Green'?'g':(b==='Amber'?'a':'r');}
+  function statePill(s){return s==='live'?'green':(s==='weak'?'amber':(s==='redundant'?'amber':'red'));}
   function stateLabel(s){return {live:'Live',weak:'Weak',dark:'Dark',redundant:'Redundant'}[s]||s;}
   function dmy(d){
     if(!d) return '';
@@ -282,6 +1065,7 @@
       'August','September','October','November','December'];
     return m[Number(p[1])-1] + ' ' + Number(p[2]) + ', ' + p[0];
   }
+  function isProjected(){ return document.body.getAttribute('data-assessment') === 'good'; }
 
   /* ---------- gate ---------- */
   function unlock(){
@@ -315,162 +1099,191 @@
   inp.addEventListener('keydown', function(e){ if(e.key==='Enter') tryUnlock(); });
   try{ var saved=sessionStorage.getItem('siq_sh_'+SLUG); if(saved){ inp.value=saved; tryUnlock(); } }catch(e){}
 
-  /* ---------- toggles ---------- */
-  document.getElementById('tg-theme').addEventListener('click', function(e){
-    var b=e.target.closest('button'); if(!b) return;
-    document.documentElement.setAttribute('data-theme', b.getAttribute('data-theme-btn'));
-    [].forEach.call(this.children, function(x){x.classList.remove('on');}); b.classList.add('on');
-  });
-  document.getElementById('tg-view').addEventListener('click', function(e){
-    var b=e.target.closest('button'); if(!b) return;
-    VIEW=b.getAttribute('data-view');
-    [].forEach.call(this.children, function(x){x.classList.remove('on');}); b.classList.add('on');
+  /* ---------- toggles (canonical mechanism) ---------- */
+  var themeButtons = document.querySelectorAll('[data-theme-btn]');
+  themeButtons.forEach(function(b){ b.addEventListener('click', function(){
+    document.body.setAttribute('data-theme', b.getAttribute('data-theme-btn'));
+    themeButtons.forEach(function(x){x.classList.remove('active');}); b.classList.add('active');
+  });});
+  var assessButtons = document.querySelectorAll('[data-assess-btn]');
+  assessButtons.forEach(function(b){ b.addEventListener('click', function(){
+    document.body.setAttribute('data-assessment', b.getAttribute('data-assess-btn'));
+    assessButtons.forEach(function(x){x.classList.remove('active');}); b.classList.add('active');
     if(PACK) render();
-  });
+  });});
+
+  /* ---------- small builders, canonical classes only ---------- */
+  function meta(k,v){
+    return '<div class="meta-item"><div class="label">'+esc(k)+'</div><div class="value">'+esc(v)+'</div></div>';
+  }
+  function fcard(label, big, tone, note){
+    return '<div class="fidelity-card"><div class="fid-label">'+esc(label)+'</div>'+
+           '<div class="dim-score'+(tone?' '+tone:'')+'">'+esc(big)+'</div>'+
+           '<div class="fid-note" style="margin-top:10px">'+esc(note)+'</div></div>';
+  }
+  function step(label, points, note){
+    var tone = (typeof points==='number' && points<0) ? 'r' : '';
+    var sign = (typeof points==='number' && points>0) ? '+' : '';
+    return '<div class="card"><div class="card-label">'+esc(label)+'</div>'+
+           '<div class="dim-score'+(tone?' '+tone:'')+'">'+sign+esc(String(points))+'</div>'+
+           '<div class="dim-note" style="margin-top:10px">'+esc(note)+'</div></div>';
+  }
+  function milestone(day, title, desc){
+    return '<div class="milestone"><div class="milestone-day">'+esc(day)+'</div>'+
+           '<div class="milestone-title">'+esc(title)+'</div>'+
+           '<div class="milestone-desc">'+esc(desc)+'</div></div>';
+  }
+  function buName(p,id){
+    for(var i=0;i<p.businessUnits.length;i++) if(p.businessUnits[i].id===id) return p.businessUnits[i].name;
+    return id;
+  }
 
   /* ---------- render ---------- */
   function render(){
-    var p=PACK, projected = (VIEW==='projected' && p.score.projected);
+    var p=PACK, projected = (isProjected() && p.score.projected);
     var s = projected ? p.score.projected : p.score;
     var t = p.totals, c = p.contracts;
 
     document.title = 'Stack Health Report: ' + p.client + ' | Scalient IQ';
-    document.getElementById('eyebrow').textContent =
-      'Stack Health Report · Prepared for ' + p.client + ' · As of ' + dmy(p.asOf);
+
+    document.getElementById('cobrand').innerHTML =
+      '<span class="cb-label">Prepared for</span>' +
+      (p.clientLogo ? '<img src="'+p.clientLogo+'" alt="'+esc(p.client)+'" />'
+                    : '<span class="cb-label" style="letter-spacing:0;text-transform:none;font-size:16px">'+esc(p.client)+'</span>');
+
     document.getElementById('lede').textContent =
       'Read-only across the tools you already run, Scalient IQ scores what ' + p.client +
       ' owns against what it actually uses, prices what is dark, and attaches the notice deadline to every renewal so nothing locks in by default.';
 
     document.getElementById('strip').innerHTML =
-      row('Tools inventoried', num(t.tools) + ' across ' + p.businessUnits.length + ' business units') +
-      row('Annual GTM stack spend', exact(t.annualSpend)) +
-      row('Contracts on file', num(c.contractsOnFile) + ' of ' + num(c.toolsTotal) + ' (' + c.coveragePct + '%)') +
-      row('Sources, read-only', 'Spend export · Connector telemetry · Subscription contracts') +
-      row('Report date', dmy(p.asOf));
+      meta('Tools inventoried', num(t.tools) + ' across ' + p.businessUnits.length + ' business units') +
+      meta('Annual GTM stack spend', exact(t.annualSpend)) +
+      meta('Contracts on file', num(c.contractsOnFile) + ' of ' + num(c.toolsTotal) + ' (' + c.coveragePct + '%)') +
+      meta('Report date', dmy(p.asOf));
 
     document.getElementById('sample-note').innerHTML = p.sampleData
-      ? '<div class="note"><strong>Sample report.</strong> "' + esc(p.client) +
+      ? '<div class="note-strip"><strong>Sample report.</strong> "' + esc(p.client) +
         '" is a synthetic multi-business-unit B2B SaaS enterprise. Every figure is illustrative and exists to show what your own read looks like.</div>'
       : '';
 
-    var vb=document.getElementById('view-banner');
-    vb.className = 'banner ' + (projected ? 'good' : 'warn');
-    vb.textContent = projected
+    document.getElementById('view-banner').textContent = projected
       ? 'Projected view: modeled after about two quarters of Renewal Watch. Toggle back to Today for the current state.'
       : 'Today: the current state of ' + p.client + "'s GTM stack. Toggle to After Renewal Watch to see what continuous monitoring catches.";
 
     /* 1 */
+    var darkNow = projected ? Math.round(t.annualSpend * (p.score.projected.remainingDarkPct/100)) : t.darkSpend;
     document.getElementById('s1-cards').innerHTML =
-      card('Annual GTM stack spend', exact(t.annualSpend), '', num(t.tools) + ' tools across ' + p.businessUnits.length + ' business units, before buying anything new.') +
-      card('Redundant and dormant', money(projected ? Math.round(t.annualSpend * (p.score.projected.remainingDarkPct/100)) : t.darkSpend) + '/yr', 'bad',
+      fcard('Annual GTM stack spend', exact(t.annualSpend), '', num(t.tools) + ' tools across ' + p.businessUnits.length + ' business units, before buying anything new.') +
+      fcard('Redundant and dormant', money(darkNow) + '/yr', 'r',
            projected ? p.score.projected.remainingDarkPct + '% of spend still dark, held for a natural renewal date rather than cancelled early.'
                      : Math.round(100*t.darkSpend/t.annualSpend) + '% of spend feeding nothing or duplicating another tool.') +
-      card('Dark or redundant tools', num(t.darkTools) + ' of ' + num(t.tools), 'bad', 'Licensed, paid for, and producing no signal that reaches a decision.') +
-      card('Cross-unit duplicate categories', num(t.duplicateCategories), 'warn', 'Two or more units paying for tools doing the same job.') +
-      card('Renewals reviewed pre-lock', (projected ? 96 : t.renewalReviewPct) + '%', projected?'good':'bad',
+      fcard('Dark or redundant tools', num(t.darkTools) + ' of ' + num(t.tools), 'r', 'Licensed, paid for, and producing no signal that reaches a decision.') +
+      fcard('Cross-unit duplicate categories', num(t.duplicateCategories), 'a', 'Two or more units paying for tools doing the same job.') +
+      fcard('Renewals reviewed pre-lock', (projected ? 96 : t.renewalReviewPct) + '%', projected?'g':'r',
            projected ? 'Every renewal now flagged before its notice deadline, not its renewal date.'
                      : 'Most agreements auto-renew before anyone checks whether the tool still earns its spend.') +
-      card('Signal-to-Spend score', String(s.signalToSpend), bandClass(s.band), s.band + '. Full breakdown in the next section.');
+      fcard('Signal-to-Spend score', String(s.signalToSpend), bandTone(s.band), s.band + '. Full breakdown in the next section.');
 
     document.getElementById('s1-anchor').innerHTML =
-      '<div class="k">The number to bring to the budget meeting</div>' +
-      '<div class="score ' + (projected?'good':'bad') + '" style="font-size:44px">' +
-        (projected ? money(Math.round(t.annualSpend * (p.score.projected.remainingDarkPct/100))) : money(t.darkSpend)) + '/yr feeding nothing</div>' +
-      '<div class="why">' + (projected
+      '<div class="card-label">The number to bring to the budget meeting</div>' +
+      '<div class="score" style="font-size:52px">' + money(darkNow) + '<span class="score-unit">/yr feeding nothing</span></div>' +
+      '<div class="baseline-note">' + (projected
         ? 'What remains is not waste that was missed. It is spend held deliberately until its natural renewal date, so nothing is cancelled into a penalty.'
         : 'That is before ' + esc(p.client) + ' buys a single new tool next year. It does not require a new process, a new hire, or a behaviour change from a single seller. It requires somebody not clicking renew.') + '</div>';
 
     /* 2 */
-    var pen = p.score.governancePenalty;
     document.getElementById('s2-anchor').innerHTML =
-      '<div class="score ' + bandClass(s.band) + '">' + s.signalToSpend + '</div>' +
-      '<div class="band">' + s.band + ': ' + (s.bandTag||'') + ', Signal-to-Spend across the whole stack</div>' +
-      '<div class="why">' + (projected
-          ? esc(s.basis||'')
+      '<div class="card-label">Signal-to-Spend, whole stack</div>' +
+      '<div class="score">' + s.signalToSpend + '<span class="score-unit">/100</span></div>' +
+      '<div class="state-pill ' + bandPill(s.band) + '">' + esc(s.band + (s.bandTag ? ': ' + s.bandTag : '')) + '</div>' +
+      '<div class="baseline-note">' + (projected ? esc(s.basis||'')
           : 'A stack that runs but leaks. Seat-utilization tools tell you nobody logs in. This tells you nobody acts on what the tool produces, which is a different and usually much bigger gap.') + '</div>';
 
-    var order=['live','weak','dark','redundant'], bar='', leg='';
+    var order=['live','weak','dark','redundant'], split='';
     order.forEach(function(k){
       var st=p.byState[k];
-      bar += '<i class="s-'+k+'" style="width:'+st.sharePct+'%"></i>';
-      leg += '<span><i class="s-'+k+'" style="background:'+
-             ({live:'#12B76A',weak:'#FF7A00',dark:'#E5484D',redundant:'#8A3A3D'}[k])+'"></i>'+
-             stateLabel(k)+' '+st.sharePct+'% of spend, '+st.tools+' tools</span>';
+      split += '<div style="margin-bottom:14px">' +
+        '<div class="dim-head"><div class="dim-note"><strong>'+stateLabel(k)+'</strong> &middot; '+num(st.tools)+' tools</div>' +
+        '<div class="dim-delta '+(k==='live'?'g':(k==='weak'?'a':'r'))+'">'+st.sharePct+'% of spend</div></div>' +
+        '<div class="dim-bar"><div class="dim-bar-fill '+(k==='live'?'green':(k==='weak'?'amber':'red'))+'" style="width:'+st.sharePct+'%"></div></div>' +
+      '</div>';
     });
-    document.getElementById('s2-bar').innerHTML=bar;
-    document.getElementById('s2-legend').innerHTML=leg;
+    document.getElementById('s2-split').innerHTML =
+      '<div class="card-label">Where the spend sits</div>' + split;
 
-    document.getElementById('s2-table').innerHTML =
-      '<tr><th>Step</th><th class="num">Points</th><th>What it measures</th></tr>' +
-      tr('Spend-weighted raw score', p.score.raw, 'Live 100, Weak 50, Dark 0, Redundant 0, weighted by annual cost.') +
-      tr('Renewal review coverage', pen.renewalReview, t.renewalReviewPct + '% of annual spend had its renewal reviewed before lock in the last 12 months.') +
-      tr('Ownership clarity', pen.ownershipClarity, t.ownershipPct + '% of annual spend has a single named cancel owner.') +
-      tr('Category duplication', pen.categoryDuplication, num(t.duplicateCategories) + ' categories carry more than one active instance.') +
-      '<tr><td><strong>Signal-to-Spend</strong></td><td class="num"><strong>' + p.score.signalToSpend +
-        '</strong></td><td><strong>' + p.score.band + '</strong>. Recomputes exactly from the tool table in this report.</td></tr>';
+    var pen = p.score.governancePenalty;
+    document.getElementById('s2-steps').innerHTML =
+      step('Spend-weighted raw score', p.score.raw, 'Live 100, Weak 50, Dark 0, Redundant 0, weighted by annual cost.') +
+      step('Renewal review coverage', pen.renewalReview, t.renewalReviewPct + '% of annual spend had its renewal reviewed before lock in the last 12 months.') +
+      step('Ownership clarity', pen.ownershipClarity, t.ownershipPct + '% of annual spend has a single named cancel owner.') +
+      step('Category duplication', pen.categoryDuplication, num(t.duplicateCategories) + ' categories carry more than one active instance.') +
+      '<div class="card"><div class="card-label">Signal-to-Spend</div>' +
+        '<div class="dim-score ' + bandTone(p.score.band) + '">' + p.score.signalToSpend + '</div>' +
+        '<div class="dim-note" style="margin-top:10px"><strong>' + esc(p.score.band) + '</strong>. Recomputes exactly from the tool inventory in this report.</div></div>';
 
     document.getElementById('s2-method').innerHTML =
       '<strong>Scale.</strong> ' + esc(p.method.scale) + ' <strong>States.</strong> ' + esc(p.method.states) +
       ' <strong>Evidence.</strong> ' + esc(p.method.evidence);
 
     /* 3 */
-    var h='<tr><th>Business unit</th><th class="num">Tools</th><th class="num">Annual spend</th><th class="num">Signal-to-Spend</th><th>Band</th></tr>';
+    var uh='';
     p.businessUnits.forEach(function(b){
-      h+='<tr><td><strong>'+esc(b.name)+'</strong></td><td class="num">'+num(b.tools)+'</td>'+
-         '<td class="num">'+exact(b.spend)+'</td><td class="num"><strong>'+b.signalToSpend+'</strong></td>'+
-         '<td><span class="pill '+(b.band==='Green'?'p-live':(b.band==='Amber'?'p-weak':'p-dark'))+'">'+b.band+'</span></td></tr>';
+      uh += '<div class="card dim-card">' +
+        '<div class="dim-head"><div class="dim-name" style="font-weight:500">'+esc(b.name)+'</div>' +
+        '<div class="state-pill '+bandPill(b.band)+'">'+esc(b.band)+'</div></div>' +
+        '<div class="dim-score">'+b.signalToSpend+'<span class="dim-score-unit">/100</span></div>' +
+        '<div class="dim-bar"><div class="dim-bar-fill '+bandPill(b.band)+'" style="width:'+b.signalToSpend+'%"></div></div>' +
+        '<div class="dim-note">'+num(b.tools)+' tools &middot; '+exact(b.spend)+' a year</div></div>';
     });
-    document.getElementById('s3-table').innerHTML=h;
+    document.getElementById('s3-units').innerHTML=uh;
 
     /* 4 */
     var fh='';
-    p.findings.forEach(function(f){
+    p.findings.forEach(function(f,i){
       var ct=f.contract||{onFile:false};
-      var seats='';
+      var detail = esc(f.evidenceNote);
       if(ct.onFile && ct.seatsContracted){
-        seats='<div class="seats">'+
-          '<div>Seats contracted<b>'+num(ct.seatsContracted)+'</b></div>'+
-          '<div>Provisioned<b>'+num(ct.seatsProvisioned)+'</b></div>'+
-          '<div>Active in the window<b>'+num(ct.seatsActive)+'</b></div>'+
-          '<div>Renewal<b>'+dmy(ct.renewalDate)+'</b></div>'+
-          (ct.noticeDeadline?'<div>Notice deadline<b>'+dmy(ct.noticeDeadline)+'</b></div>':'')+
-        '</div>';
+        detail += ' Contract: ' + num(ct.seatsContracted) + ' seats bought, ' + num(ct.seatsActive) +
+                  ' active. Renews ' + dmy(ct.renewalDate) +
+                  (ct.noticeDeadline ? ', notice by ' + dmy(ct.noticeDeadline) + '.' : '.');
+      } else if(!ct.onFile){
+        detail += ' No contract on file, scored on telemetry alone.';
       }
-      var prom='';
-      (ct.promisedOutcomes||[]).forEach(function(o){
-        if(o.delivered) return;
-        prom+='<div class="promise"><div class="pl">Committed in the agreement, no evidence of delivery</div>'+
-              esc(o.text)+(o.note?' <span style="color:var(--text-2)">'+esc(o.note)+'</span>':'')+'</div>';
-      });
-      fh+='<div class="find'+(f.signalState==='redundant'?' redundant':'')+'">'+
-        '<div class="find-top"><span class="find-name">'+esc(f.name)+'</span>'+
-        '<span class="find-cost">'+exact(f.annualCost)+'/yr</span></div>'+
-        '<div class="find-meta">'+esc(f.category)+' · '+esc(buName(p,f.bu))+' · '+
-          '<span class="pill '+stateClass(f.signalState)+'">'+stateLabel(f.signalState)+'</span> '+
-          '<span class="tier">Evidence tier '+f.evidenceTier+'</span>'+
-          (ct.onFile?'':' · <span class="pill p-none">No contract on file</span>')+'</div>'+
-        '<div class="find-ev">'+esc(f.evidenceNote)+'</div>'+ seats + prom +
+      var undel = (ct.promisedOutcomes||[]).filter(function(o){return !o.delivered;});
+      fh += '<div class="leak">' +
+        '<div class="leak-rank">'+(i+1)+'</div>' +
+        '<div class="leak-body"><div class="leak-name">'+esc(f.name)+'</div>' +
+          '<div class="leak-cause">'+esc(f.category)+' &middot; '+esc(buName(p,f.bu))+' &middot; Evidence tier '+f.evidenceTier+'. '+detail+'</div></div>' +
+        '<div class="leak-dollar">'+exact(f.annualCost)+'/yr</div>' +
+        '<div class="leak-play"><span class="state-pill '+statePill(f.signalState)+'">'+stateLabel(f.signalState)+'</span></div>' +
       '</div>';
+      undel.forEach(function(o){
+        fh += '<div class="bad-narrative" style="margin:0 0 8px 0">' +
+              '<div class="bn-label">'+esc(f.name)+' &middot; committed in the agreement, no evidence of delivery</div>' +
+              '<div class="bn-text">'+esc(o.text)+(o.note?' '+esc(o.note):'')+'</div></div>';
+      });
     });
     document.getElementById('s4-list').innerHTML=fh;
 
     /* 5 */
     document.getElementById('s5-cards').innerHTML =
-      card('Contracts on file', num(c.contractsOnFile)+' of '+num(c.toolsTotal), c.coveragePct<80?'warn':'good',
+      fcard('Contracts on file', num(c.contractsOnFile)+' of '+num(c.toolsTotal), c.coveragePct<80?'a':'g',
            c.coveragePct+'% of the stack has an agreement we can read. The rest is scored on telemetry alone.') +
-      card('Seats contracted', num(c.seatsContracted), '', 'Across every agreement carrying a seat count.') +
-      card('Seats active', num(c.seatsActive), c.seatUtilPct<50?'bad':'warn',
+      fcard('Seats contracted', num(c.seatsContracted), '', 'Across every agreement carrying a seat count.') +
+      fcard('Seats active', num(c.seatsActive), c.seatUtilPct<50?'r':'a',
            c.seatUtilPct+'% of contracted seats show activity in the measurement window.') +
-      card('Committed outcomes undelivered', num(c.undeliveredPromises.length), 'bad',
+      fcard('Committed outcomes undelivered', num(c.undeliveredPromises.length), 'r',
            'Written vendor commitments with no evidence they were ever turned on.');
 
-    var ph='<tr><th>Tool</th><th>What the agreement committed to</th><th>What we found</th></tr>';
+    var ph='';
     if(!c.undeliveredPromises.length){
-      ph+='<tr><td colspan="3">No undelivered commitments found in the agreements on file.</td></tr>';
+      ph = '<div class="note-strip">No undelivered commitments found in the agreements on file.</div>';
     }
     c.undeliveredPromises.forEach(function(u){
-      ph+='<tr><td><strong>'+esc(u.tool)+'</strong></td><td>'+esc(u.promise)+'</td>'+
-          '<td style="color:var(--danger)">'+esc(u.note||'No evidence of delivery.')+'</td></tr>';
+      ph += '<div class="bad-narrative" style="margin:0 0 8px 0">' +
+            '<div class="bn-label">'+esc(u.tool)+'</div>' +
+            '<div class="bn-text"><strong>Committed:</strong> '+esc(u.promise)+' <strong>Found:</strong> '+
+            esc(u.note||'No evidence of delivery.')+'</div></div>';
     });
     document.getElementById('s5-promises').innerHTML=ph;
 
@@ -482,23 +1295,30 @@
     /* 6 */
     var missed=c.noticeMissed, urgent=c.noticeUrgent;
     var alarm=document.getElementById('s6-alarm');
-    if(missed||urgent){
-      alarm.className='banner warn';
-      alarm.textContent = (missed? num(missed)+' agreements worth '+money(c.noticeMissedSpend)+' have already passed their notice deadline. ':'') +
-                          (urgent? num(urgent)+' more worth '+money(c.noticeUrgentSpend)+' fall due within 30 days.':'');
-    } else { alarm.className='banner good'; alarm.textContent='No notice deadline is missed or falling due within 30 days.'; }
+    alarm.innerHTML = (missed||urgent)
+      ? '<div class="bn-label">Notice deadlines</div><div class="bn-text">' +
+        (missed? '<strong>'+num(missed)+' agreements worth '+money(c.noticeMissedSpend)+'</strong> have already passed their notice deadline. ':'') +
+        (urgent? '<strong>'+num(urgent)+' more worth '+money(c.noticeUrgentSpend)+'</strong> fall due within 30 days.':'') + '</div>'
+      : '<div class="bn-label">Notice deadlines</div><div class="bn-text">No notice deadline is missed or falling due within 30 days.</div>';
 
-    var rh='<tr><th>Tool</th><th class="num">Annual value</th><th>Signal</th><th>Renewal date</th><th>Notice</th><th>Last day to serve notice</th><th>Status</th></tr>';
-    p.renewalCalendar.slice(0,40).forEach(function(r){
-      var st=r.noticeStatus, cls={missed:'p-missed',urgent:'p-urgent',open:'p-open',no_auto_renew:'p-none'}[st]||'p-none';
+    var rh='';
+    p.renewalCalendar.slice(0,40).forEach(function(r,i){
+      var st=r.noticeStatus;
       var lbl={missed:'Missed',urgent:'Due within 30 days',open:'Open',no_auto_renew:'No auto-renew'}[st]||st;
-      rh+='<tr><td>'+esc(r.name)+'</td><td class="num">'+exact(r.annualCost)+'</td>'+
-          '<td><span class="pill '+stateClass(r.signalState)+'">'+stateLabel(r.signalState)+'</span></td>'+
-          '<td>'+dmy(r.renewalDate)+'</td><td class="num">'+num(r.noticeDays)+' days</td>'+
-          '<td><strong>'+dmy(r.noticeDeadline)+'</strong></td>'+
-          '<td><span class="pill '+cls+'">'+lbl+'</span></td></tr>';
+      var chip = (st==='missed') ? '<span class="state-pill red">'+lbl+'</span>'
+               : (st==='urgent') ? '<span class="state-pill amber">'+lbl+'</span>'
+               : '<span class="pending-pill">'+lbl+'</span>';
+      rh += '<div class="leak">' +
+        '<div class="leak-rank">'+(i+1)+'</div>' +
+        '<div class="leak-body"><div class="leak-name">'+esc(r.name)+'</div>' +
+          '<div class="leak-cause">Renews '+dmy(r.renewalDate)+' &middot; '+num(r.noticeDays)+' days notice required &middot; ' +
+          '<strong>last day to serve notice '+dmy(r.noticeDeadline)+'</strong> &middot; '+stateLabel(r.signalState)+'</div></div>' +
+        '<div class="leak-dollar">'+exact(r.annualCost)+'/yr</div>' +
+        '<div class="leak-play">'+chip+'</div>' +
+      '</div>';
     });
-    document.getElementById('s6-table').innerHTML=rh;
+    document.getElementById('s6-list').innerHTML=rh;
+
     document.getElementById('s6-note').innerHTML =
       '<strong>How to read this.</strong> ' + esc(p.method.notice) +
       ' Rows marked Missed have already auto-renewed or will, and the decision on those moves to the following term. ' +
@@ -506,40 +1326,22 @@
 
     /* 7 */
     document.getElementById('s7-cards').innerHTML =
-      card('Systems written to', '0', 'good', 'Read-only throughout. Nothing was created, changed or deleted in any connected system.') +
-      card('Call recordings read', '0', 'good', 'This lens needs none. That is what keeps the access ask small.') +
-      card('Evidence tiers used', '1, 2 and 3', '', 'Dark requires tier 1 or tier 2. A client-supplied admin export alone can only support Weak.') +
-      card('Findings confirmed with you', 'Before publication', 'good', 'Every Dark call was put in front of your team before this report was issued. Disputed items moved to Watch rather than being deleted.');
+      fcard('Systems written to', '0', 'g', 'Read-only throughout. Nothing was created, changed or deleted in any connected system.') +
+      fcard('Call recordings read', '0', 'g', 'This lens needs none. That is what keeps the access ask small.') +
+      fcard('Evidence tiers used', '1, 2 and 3', '', 'Dark requires tier 1 or tier 2. A client-supplied admin export alone can only support Weak.') +
+      fcard('Findings confirmed with you', 'Before publication', 'g', 'Every Dark call was put in front of your team before this report was issued. Disputed items moved to Watch rather than being deleted.');
     document.getElementById('s7-note').innerHTML='<strong>Access.</strong> '+esc(p.method.access);
 
     /* 8 */
-    document.getElementById('s8-body').innerHTML =
-      '<p class="sec-sub">Dormant spend found today gets cancelled and is gone. Re-running this same analysis in six months finds much less, so the recurring product is not re-finding waste. Business units keep buying tools, and every new agreement arrives with its own auto-renewal clause and its own notice period.</p>' +
-      '<div class="cards">' +
-        card('Renewal Watch', 'Continuous', '', 'Every agreement flagged ahead of its notice deadline, not its renewal date, with what the tool produced since the last review and a recommendation to renew, renegotiate, consolidate or cancel.') +
-        card('Anchor metric', 'Signal-to-Spend', '', 'The trendline, never dollars saved. Stack condition keeps moving. A savings figure is a one-time argument you eventually win and then stop needing.') +
-        card('Credit', '100%', 'good', 'This report credits in full toward any Scalient IQ engagement within 30 days.') +
-      '</div>' +
-      '<div class="note">' + esc(p.asOfNote) + '</div>';
+    document.getElementById('s8-cards').innerHTML =
+      milestone('Continuous', 'Renewal Watch', 'Every agreement flagged ahead of its notice deadline, not its renewal date, with what the tool produced since the last review and a recommendation to renew, renegotiate, consolidate or cancel.') +
+      milestone('Anchor metric', 'Signal-to-Spend', 'The trendline, never dollars saved. Stack condition keeps moving. A savings figure is a one-time argument you eventually win and then stop needing.') +
+      milestone('100%', 'Credit toward an engagement', 'This report credits in full toward any Scalient IQ engagement within 30 days.');
+    document.getElementById('s8-note').textContent = p.asOfNote;
 
     document.getElementById('foot-left').textContent =
       'Stack Health Report · ' + p.client + ' · As of ' + dmy(p.asOf) +
       ' · Read-only across ' + num(t.tools) + ' tools and ' + num(c.contractsOnFile) + ' agreements.';
-  }
-
-  function buName(p,id){
-    for(var i=0;i<p.businessUnits.length;i++) if(p.businessUnits[i].id===id) return p.businessUnits[i].name;
-    return id;
-  }
-  function row(k,v){return '<div><div class="k">'+esc(k)+'</div><div class="v">'+esc(v)+'</div></div>';}
-  function card(k,big,cls,cap){
-    return '<div class="card"><div class="k">'+esc(k)+'</div>'+
-           '<div class="big '+(cls||'')+'">'+esc(big)+'</div>'+
-           '<div class="cap">'+esc(cap)+'</div></div>';
-  }
-  function tr(a,b,c){
-    var sign = (typeof b==='number' && b>0 && a.indexOf('raw')===-1) ? '+' : '';
-    return '<tr><td>'+esc(a)+'</td><td class="num">'+sign+b+'</td><td>'+esc(c)+'</td></tr>';
   }
 })();
 </script>
