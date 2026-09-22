@@ -1255,7 +1255,7 @@ ul.rec > li, ul.rec > li b, ul.rec > li strong, ul.rec > li span { color: #F4F0E
         '<div class="leak-body"><div class="leak-name">'+esc(f.name)+'</div>' +
           '<div class="leak-cause">'+esc(f.category)+' &middot; '+esc(buName(p,f.bu))+' &middot; Evidence tier '+f.evidenceTier+'. '+detail+'</div></div>' +
         '<div class="leak-dollar">'+exact(f.annualCost)+'/yr</div>' +
-        '<div class="leak-play"><span class="state-pill '+statePill(f.signalState)+'">'+stateLabel(f.signalState)+'</span></div>' +
+        '<div class="leak-play"><div class="state-pill '+statePill(f.signalState)+'">'+stateLabel(f.signalState)+'</div></div>' +
       '</div>';
       undel.forEach(function(o){
         fh += '<div class="bad-narrative" style="margin:0 0 8px 0">' +
@@ -1305,9 +1305,13 @@ ul.rec > li, ul.rec > li b, ul.rec > li strong, ul.rec > li span { color: #F4F0E
     p.renewalCalendar.slice(0,40).forEach(function(r,i){
       var st=r.noticeStatus;
       var lbl={missed:'Missed',urgent:'Due within 30 days',open:'Open',no_auto_renew:'No auto-renew'}[st]||st;
-      var chip = (st==='missed') ? '<span class="state-pill red">'+lbl+'</span>'
-               : (st==='urgent') ? '<span class="state-pill amber">'+lbl+'</span>'
-               : '<span class="pending-pill">'+lbl+'</span>';
+      /* These chips must be DIVs, not SPANs. The skin carries
+         `.leak .leak-play span { color:#FF6169 !important }` at specificity (0,3,0),
+         written for the flagship's bare red-text span, and it outranks
+         `.state-pill.red` (0,2,0). A span here renders salmon-on-red. */
+      var chip = (st==='missed') ? '<div class="state-pill red">'+lbl+'</div>'
+               : (st==='urgent') ? '<div class="state-pill amber">'+lbl+'</div>'
+               : '<div class="pending-pill">'+lbl+'</div>';
       rh += '<div class="leak">' +
         '<div class="leak-rank">'+(i+1)+'</div>' +
         '<div class="leak-body"><div class="leak-name">'+esc(r.name)+'</div>' +
