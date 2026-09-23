@@ -2,849 +2,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Search Visibility Report: Romify | Scalient IQ</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{--blue:#0073E6;--orange:#FF6600;--danger:#EF4444;--danger-soft:#2a1416;--caution:#FBBF24;--caution-soft:#2a2410;--success:#22C55E;--success-soft:#0f2417;}
-body[data-theme="dark"]{--bg:#0A1628;--surface:#0F1E35;--surface2:#132540;--border:#1F3352;--text-primary:#F5F7FA;--text-secondary:#B8C5D6;--text-tertiary:#8FA3BF;}
-body[data-theme="light"]{--bg:#F8FAFC;--surface:#FFFFFF;--surface2:#F1F5F9;--border:#E2E8F0;--text-primary:#0A1628;--text-secondary:#475569;--text-tertiary:#94A3B8;}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text-primary);line-height:1.55;padding:0 20px 60px}
-.wrap{max-width:940px;margin:0 auto}
-.head{padding:28px 0 6px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px}
-.brands{display:flex;align-items:center;gap:16px}.brands img{height:34px}
-.cobrand{color:var(--text-tertiary);font-size:20px;font-weight:300}
-.prepared{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-tertiary);margin:14px 0 4px}
-.title{font-size:34px;font-weight:700;letter-spacing:-.6px;margin:2px 0 8px}
-.subtitle{color:var(--text-secondary);font-size:15px;max-width:660px}
-.toggle{display:inline-flex;border:1px solid var(--border);overflow:hidden}
-.toggle button{background:var(--surface);color:var(--text-secondary);border:none;padding:8px 13px;font-family:inherit;font-size:12px;font-weight:500;cursor:pointer}
-.toggle button.active{background:var(--blue);color:#fff}
-.metarow{display:flex;gap:30px;flex-wrap:wrap;margin:22px 0 6px;padding-top:16px;border-top:1px solid var(--border)}
-.meta-item .label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-tertiary)}
-.meta-item .value{font-size:15px;font-weight:500;margin-top:3px}
-/* NOTE 2026-08-26: --danger-soft / --caution-soft / --success-soft are OPAQUE dark hexes
-   declared once on :root and are NOT redefined per theme. Any text placed on them must use a
-   fixed light colour. Using var(--text-*) there renders at ~1:1 contrast in light mode. */
-.hero{background:var(--danger-soft);border:1px solid var(--danger);padding:22px;margin:24px 0 6px;color:#F5F7FA}
-.hero .k{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--danger);font-weight:600}
-.hero .big{font-size:30px;font-weight:700;letter-spacing:-.5px;margin:8px 0 6px;color:#F5F7FA}
-.hero .sub{font-size:14px;color:#B8C5D6;max-width:680px}
-.section{padding:26px 0;border-top:1px solid var(--border)}
-.section-head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
-.section-number{width:26px;height:26px;background:var(--orange);color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
-.section-title{font-size:21px;font-weight:600}
-.section-lead{color:var(--text-secondary);font-size:14px;margin-bottom:16px;max-width:700px}
-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
-th{color:var(--text-tertiary);text-align:left;font-size:11px;letter-spacing:.5px;text-transform:uppercase;font-weight:600;padding:6px 8px 6px 0}
-td{padding:8px 8px 8px 0;border-top:1px solid var(--border)}
-.eng-name{font-weight:600}
-.zero{color:var(--danger);font-weight:700}
-.some{color:var(--caution);font-weight:700}
-.win{color:var(--success);font-weight:600}
-.bn{background:var(--surface);border:1px solid var(--border);padding:16px;margin-bottom:14px}
-.bn .l{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:6px}
-.bn .big-danger{color:var(--danger);font-size:22px;font-weight:700}
-.bn .big-good{color:var(--success);font-size:22px;font-weight:700}
-.rowhi{background:var(--danger-soft);color:#F5F7FA}
-/* NOTE: colour is set on the ROW, not on td. Setting it on td (specificity 0,1,1) would
-   outrank .zero / .some / .win (0,1,0) and strip the semantic red from the counts. */
-/* defensive: inline color:var(--text-*) inside a fixed-dark box would render ~1:1 in light mode */
-.hero b,.hero strong,.hero i,.hero span:not([class]){color:#F5F7FA!important}
-ul.rec{list-style:none;margin-top:8px}
-ul.rec li{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--blue);padding:11px 13px;margin-bottom:8px;font-size:13.5px;color:var(--text-secondary)}
-ul.rec li b{color:var(--text-primary)}
-ol.q{margin:6px 0 0 20px;font-size:13px;color:var(--text-secondary);columns:2;column-gap:28px}
-ol.q li{margin-bottom:5px;break-inside:avoid}
-.qcat{color:var(--orange);font-weight:600;font-size:11px;letter-spacing:.5px;text-transform:uppercase;margin:12px 0 4px}
-footer{padding:26px 0;border-top:1px solid var(--border);color:var(--text-tertiary);font-size:12px;margin-top:8px}
-@media(max-width:640px){ol.q{columns:1}}
-
-#siq-gate{position:fixed;inset:0;background:#0A1628;display:flex;align-items:center;justify-content:center;z-index:99999;font-family:'DM Sans',Arial,sans-serif}
-  .siq-gate-box{text-align:center;max-width:380px;width:90%;padding:32px}
-  .siq-gate-logo{font-size:28px;font-weight:700;color:#0073E6;margin-bottom:20px}
-  .siq-gate-logo span{color:#FF6600}
-  .siq-gate-title{color:#fff;font-size:19px;font-weight:600;margin-bottom:6px}
-  .siq-gate-sub{color:#8A9BB0;font-size:13px;margin-bottom:22px;line-height:1.5}
-  #siq-gate-input{width:100%;padding:13px 14px;font-size:15px;border:1px solid #24364d;background:#0f1f33;color:#fff;border-radius:0;margin-bottom:12px;box-sizing:border-box}
-  #siq-gate-input:focus{outline:none;border-color:#0073E6}
-  #siq-gate-btn{width:100%;padding:13px;background:#FF6600;color:#fff;border:none;font-weight:600;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;border-radius:0;font-size:14px}
-  #siq-gate-err{color:#ff5a5a;font-size:13px;margin-top:12px;display:none}
-  body.siq-locked{overflow:hidden;height:100vh}
-</style>  <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/51005472.js"></script>
-  <!-- siq first-party signal beacon --><script>(function(){try{if(localStorage.getItem("siq_no")==="1")return;var K="siq_vid",v=localStorage.getItem(K);if(v==="mthrc8423q99gzql"||v==="mtgop71aab363pkm"){localStorage.setItem("siq_no","1");return;}if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem(K,v);}var q=new URLSearchParams(location.search),d={vid:v,path:location.pathname,title:document.title,ref:document.referrer,utm_source:q.get("utm_source")||"",utm_medium:q.get("utm_medium")||"",utm_campaign:q.get("utm_campaign")||"",utm_term:q.get("utm_term")||"",utm_content:q.get("utm_content")||"",screen:innerWidth+"x"+innerHeight,type:"pageview"},s=JSON.stringify(d);if(navigator.sendBeacon){navigator.sendBeacon("/api/e",new Blob([s],{type:"application/json"}));}else{fetch("/api/e",{method:"POST",headers:{"Content-Type":"application/json"},body:s,keepalive:true});}}catch(e){}})();</script>
-
-<style data-siq-skin="03_ivory-navy-v3">
-/* ============================================================
-   SiQ Readout Skin - 02 - Ivory / Navy v2
-   Supersedes 01_ivory-navy-solid.css. Same look, three defects fixed.
-   01 is left in place untouched for comparison.
-
-   CHANGED FROM 01, and why:
-
-   1. The three *-soft tokens are NO LONGER declared here.
-      01 set --danger-soft:#E5484D, --caution-soft:#FF7A00,
-      --success-soft:#12B76A. Those tokens are not brand hues, they are
-      background SURFACES, and the readouts hardcode light text on top
-      of them:
-          .hero {background:var(--danger-soft); color:#F5F7FA}
-          .rowhi{background:var(--danger-soft); color:#F5F7FA}
-      Re-pointing them at saturated brand colour dropped that text from
-      16.17:1 to 3.65:1, and .hero .sub (#B8C5D6) to 2.24:1. Both fail
-      WCAG AA. This is the same defect fixed in the AEO template on
-      2026-08-26; skin 01 would have reintroduced it.
-      Leaving them undeclared means each readout keeps its own value:
-          AEO family      opaque dark hex   -> stays a dark anchor, 16:1
-          Coinflow readout rgba(...,0.10)   -> tints the ivory ground
-      Both are correct. DO NOT add these three tokens to a skin.
-
-   2. .bridge and .attribution added to the navy re-scope. They use
-      var(--surface) / var(--surface-2) and sit directly beneath
-      navy-filled .leak cards, so under 01 they rendered as light boxes
-      in the middle of a navy stack.
-
-   3. The palette block now names [data-theme="light"] explicitly.
-      Under 01 the theme toggle was silently inert: the skin's :root
-      matched the file's [data-theme="light"] on specificity and won on
-      source order. Ivory in both states is the intended look, so this
-      is now deliberate rather than accidental. To restore the dark
-      editorial look on the dark side, delete [data-theme="dark"] from
-      the selector below.
-   ============================================================ */
-
-/* --- palette: ivory ground, solid brand, solid health tiers --- */
-/* NOTE: no --danger-soft / --caution-soft / --success-soft here. See 1. */
-/* SPECIFICITY NOTE, 2026-08-31. The AEO / Demand / Campaign / Full-Funnel /
-   Marketing templates declare their palette on `body[data-theme="dark"]`,
-   which is specificity (0,1,1). A bare `:root` is (0,1,0) and LOSES to it no
-   matter how late it is injected. That is why those reports flipped to an
-   ivory background while their text tokens stayed at dark-theme white, and
-   why the Signal Assessment (which declares on `:root`) was the only file
-   that skinned cleanly. Matching every shape below fixes all of them.
-   Do not simplify this selector list. */
-:root,
-[data-theme="dark"],
-[data-theme="light"],
-html[data-theme="dark"],
-html[data-theme="light"],
-body[data-theme="dark"],
-body[data-theme="light"] {
-  --canvas: #EFE8D8; --surface: #FBF8F1; --surface-2: #E7DECB;
-  --border: rgba(20,25,34,0.14); --border-strong: rgba(20,25,34,0.32);
-  --text-primary: #14181F; --text-secondary: #46505F; --text-tertiary: #5A636F;
-  --brand-blue: #2E7DFF; --brand-orange: #FF6600; --ink: #101722; --navy: #12203A;
-  --success: #12B76A; --caution: #FF7A00; --danger: #E5484D; --track: #E1D7C4;
-}
-
-/* --- plain ivory paper --- */
-html { background-color: var(--canvas); }
-body {
-  background-color: var(--canvas);
-  background-image: none;
-}
-.wrap { background: transparent; }
-
-/* --- filled navy data boxes on ivory (token re-scope flips inner text) --- */
-.card, .play-card, .deal-card, .fidelity-card, .phase-card, .leak, .milestone,
-.note-strip, .bad-narrative, .bridge, .attribution {
-  --surface: var(--navy); --surface-2: #16273F;
-  --border: rgba(255,255,255,0.10); --border-strong: rgba(255,255,255,0.20);
-  --text-primary: #F4F0E7; --text-secondary: #C6D0DE; --text-tertiary: #8FA0B6;
-  --track: #2A3B57;
-  color: var(--text-primary);
-  background: var(--navy) !important; border-color: rgba(255,255,255,0.10) !important;
-  box-shadow: 0 18px 42px -28px rgba(16,23,34,0.75);
-}
-/* label colours are handled in the CONTRAST REPAIRS block below */
-/* .attribution is a dashed memo box, keep the dashed rail readable on navy */
-.attribution { border-style: dashed !important; border-color: rgba(255,255,255,0.28) !important; }
-
-/* --- black anchors: overall score + featured phase --- */
-.card.shr-hero { background: var(--ink) !important; }
-.card.shr-hero .score { color: var(--brand-orange); }
-.card.shr-hero .score-unit { color: rgba(244,240,231,0.5); }
-.phase-card.featured { background: var(--ink) !important; border: 2px solid var(--ink) !important; }
-.phase-card.featured .phase-badge { background: var(--brand-orange); }
-
-/* --- orange / blue rails --- */
-.dim-card { border-top: 3px solid var(--brand-orange) !important; }
-.dim-score { color: #F4F0E7; }
-.dim-score-unit { color: rgba(244,240,231,0.5); }
-.leak { border-left: 3px solid var(--brand-orange) !important; }
-.milestone { border-left: 3px solid var(--brand-blue) !important; }
-.section-number { box-shadow: 0 6px 18px -8px rgba(255,102,0,0.55); }
-
-/* --- SOLID status chips + bars (no translucency) --- */
-.state-pill.green { background: var(--success) !important; color: #08130C !important; }
-.state-pill.amber { background: var(--caution) !important; color: #1A1205 !important; }
-.state-pill.red   { background: var(--danger)  !important; color: #FFFFFF !important; }
-.hitl-badge { background: var(--success) !important; color: #08130C !important; }
-.assess-banner { border: 0 !important; color: #FFFFFF; }
-body[data-assessment="bad"] .assess-banner { background: var(--danger) !important; color: #FFFFFF !important; }
-body[data-assessment="good"] .assess-banner { background: var(--success) !important; color: #08130C !important; }
-.dim-bar-fill.green { background: var(--success); } .dim-bar-fill.amber { background: var(--caution); } .dim-bar-fill.red { background: var(--danger); }
-.fid-after { color: var(--success); }
-
-/* ==================================================================
-   CONTRAST REPAIRS  (added v3, 2026-08-31)
-   Every value below was chosen by measuring the rendered page in
-   headless Chromium, not by eye. Each line names the ratio it fixes.
-   Re-run Design Library/_verify/sweep.js after touching any of them.
-   ================================================================== */
-
-/* Labels. v2 forced #93A3B8 everywhere; on the ivory ground that is
-   2.11:1. Mid-grey now applies only inside the navy boxes.           */
-.card-label, .fid-label, .spec-label, .milestone-day, .deal-meta,
-.meta-item .label { color: #5F6875 !important; }            /* 4.62 on ivory */
-.card .card-label, .card .fid-label, .card .spec-label, .card .milestone-day,
-.card .deal-meta, .card .meta-item .label, .leak .card-label,
-.play-card .card-label, .deal-card .deal-meta, .fidelity-card .fid-label,
-.phase-card .spec-label, .milestone .milestone-day, .bridge .card-label,
-.attribution .card-label { color: #93A3B8 !important; }     /* on navy */
-
-/* Toggle buttons. Two separate problems:
-   (a) white on --brand-blue #2E7DFF as a BACKGROUND is 3.82, and white
-       on --brand-orange is 2.94;
-   (b) an earlier version of this rule painted EVERY button, which
-       destroyed the active-state affordance. Inactive buttons must
-       stay transparent, exactly as the baseline has them.            */
-.toggle button { background: transparent !important; color: #46505F !important; }        /* on near-white */
-.toggle button.active { background: var(--brand-orange) !important; color: #1A1205 !important; }        /* 6.31 */
-.toggle.assess button.active { background: #1F63D6 !important; color: #FFFFFF !important; }             /* 5.51 */
-
-/* Solid red bar + red pill. White on #E5484D is 3.91. Still a solid
-   red bar, just one that passes.                                     */
-body[data-assessment="bad"] .assess-banner,
-.assess-banner.show-bad, .banner.show-bad { background: #C22B32 !important; color: #FFFFFF !important; }  /* 5.70 */
-.state-pill.red { background: #C22B32 !important; color: #FFFFFF !important; }                            /* 5.70 */
-
-/* Red TEXT sitting on the navy boxes. #E5484D is 4.15 there.         */
-.bad-narrative .bn-label, .leak .leak-play span, .leak-play .show-bad,
-.card .state-pill.red-text, .bridge .bridge-val { color: #FF6169 !important; }                            /* 5.54 */
-
-/* Phase badge. White on brand orange is 2.94. Dark ink on orange
-   matches the amber pill treatment already in the skin.              */
-.phase-badge, .phase-card.featured .phase-badge { color: #1A1205 !important; }                            /* 6.31 */
-
-/* Semantic red on the dark .rowhi ground (AEO family). --danger-soft
-   stays a dark hex, so #E5484D there is 4.43, just under AA.         */
-.rowhi .zero, tr.rowhi .zero { color: #F0565B !important; }                                               /* 5.11 */
-
-/* Drill-down summary. Pre-existing 3.65 at baseline on the ink hero;
-   the ivory skin's brand-blue lifts it to 4.70. Pinned so a future
-   token change cannot quietly drop it back.                          */
-.dd summary { color: #2E7DFF !important; }                                                                /* 4.70 */
-
-/* Footer sits on the ivory ground, not in a navy box. --text-tertiary
-   (#717B8A) is 3.51 there.                                           */
-footer, footer div, footer a { color: #46505F !important; }                                               /* 6.69 */
-
-/* Closing CTA banner. Pre-existing at baseline too: white on brand
-   orange is 2.94, and the white button's orange label is also 2.94.
-   Fixed here for the skin; the baseline template still needs the same
-   two lines applied at source.                                       */
-.cta-banner, .cta-banner .cta-title, .cta-banner .cta-sub { color: #1A1205 !important; }                  /* 6.31 */
-.cta-btn { color: #993D00 !important; }                                                                   /* 6.95 */
-
-/* --- second pass, measured across all nine readouts ---------------- */
-
-/* Wordmark. --brand-orange on the ivory ground is 2.41 (needs 3.0 at
-   this size). Darkened for the mark only; the token is untouched, so
-   orange rails and badges keep the brand value.                       */
-.brand .iq { color: #C74B00 !important; }                                                                 /* 3.55 */
-
-/* "Prepared for" and friends: same tertiary-grey-on-ivory case as the
-   footer.                                                             */
-.cobrand .cb-label, .cb-label { color: #5F6875 !important; }                                              /* 4.62 */
-
-/* White on brand orange is 2.94 wherever it appears. Same dark-ink
-   treatment already used for the phase badge and the amber pill.      */
-.section-number, .siq-gate-box button, .gate-btn { color: #1A1205 !important; }                           /* 6.31 */
-
-/* Red text on the navy boxes, remaining selectors.                    */
-.deal-card.red .deal-score, .fid-note strong, .fidelity-card .fid-note strong { color: #FF6169 !important; } /* 5.54 */
-
-/* ==================================================================
-   IVORY GROUND REPAIRS, third pass 2026-08-31
-   The templates below use saturated brand colour as TEXT on the light
-   ground. Those values are correct as BACKGROUNDS (chips, bars, pills)
-   and unreadable as type: orange 2.41, green 2.15, red 3.21. The tokens
-   are therefore left alone and only the text uses are darkened.
-   ================================================================== */
-
-/* Score numbers, table figures and callouts rendered in brand colour.
-   This selector list is taken from the templates themselves: every rule
-   that sets color:var(--success|--caution|--danger|--brand-orange) and
-   does NOT also set its own background. The tokens keep their saturated
-   values because chips, bars and rails need them. Only the type moves. */
-.a, .some, .correction .l, .caution-text,
-.score-big.a, .num.a, td.num.a, .big.a, .qcat { color: #A83F00 !important; }           /* 5.10 / 5.86 */
-.g, .win, td.win, .bn .big-good, .big-good, .big.g, .success-text { color: #0A6E40 !important; }  /* 5.19 / 5.97 */
-.r, .num.r, td.num.r, .zero, .leak-\$, .fid-val,
-.big-danger, .bn .big-danger, .danger-text { color: #C22B32 !important; }              /* 4.67 / 5.37 */
-
-/* .hero means two opposite things depending on the template:
-       AEO family      background:var(--danger-soft)  -> a DARK box
-       Demand/Marketing background:var(--surface)     -> a LIGHT box
-   Same class name, inverted treatment. The discriminator is .rowhi,
-   which appears in the DOM only in the two dark-hero templates
-   (verified across all nine readouts). Scoping with :has() keeps the
-   light-on-dark rules off the light heroes, where an earlier version
-   of this block turned readable text white on near-white.            */
-body:has(.rowhi) .hero,
-body:has(.rowhi) .hero td, body:has(.rowhi) .hero th,
-body:has(.rowhi) .hero span, body:has(.rowhi) .hero div,
-body:has(.rowhi) .hero b, body:has(.rowhi) .hero strong,
-body:has(.rowhi) .hero i, body:has(.rowhi) .hero em { color: #F5F7FA !important; }
-body:has(.rowhi) .hero .sub { color: #B8C5D6 !important; }
-body:has(.rowhi) .hero .k { color: #F0565B !important; }
-
-.rowhi, .rowhi td, .rowhi th, .rowhi span, .rowhi b, .rowhi strong,
-.rowhi i, .rowhi em, .rowhi .a, .rowhi .g, .rowhi .win,
-.rowhi .some { color: #F5F7FA !important; }
-.rowhi .zero, tr.rowhi .zero, .rowhi .r { color: #F0565B !important; }
-
-/* .dim-score is light because it normally sits in a navy card. In the
-   AEO / Demand family it sits on the light surface instead, where the
-   skin's own card colour made it 1.07:1, effectively invisible.       */
-.dim-score { color: var(--text-primary); }
-.card .dim-score, .dim-card .dim-score, .leak .dim-score { color: #F4F0E7 !important; }
-
-/* ==================================================================
-   DARK-GROUND OVERRIDES, fourth pass
-   Some blocks keep an OPAQUE DARK background under this skin, because
-   their --*-soft token is a dark hex the skin deliberately does not
-   redeclare. Extracted from the templates, those blocks are exactly:
-   .hero (AEO family only), .rowhi, .banner.show-bad, .banner.show-good,
-   .chip, .sample. Plus the navy card family. Text inside any of them
-   needs the LIGHT semantic variants, not the ivory-ground dark ones,
-   or the dark-on-dark lands near 1:1.
-   ================================================================== */
-.banner.show-bad, .banner.show-good, .chip, .sample,
-.banner.show-bad *, .banner.show-good *, .chip *, .sample * { color: #F5F7FA !important; }
-
-/* semantic colour inside any dark block */
-.card .a, .card .some, .leak .a, .leak .some, .play-card .a, .bridge .a,
-.deal-card .a, .fidelity-card .a, .phase-card .a, .milestone .a,
-.bad-narrative .a, .attribution .a, .note-strip .a,
-.score.a, .score-tag.a, .banner .a, .chip .a, .sample .a,
-body:has(.rowhi) .hero .a, .rowhi .a { color: #FF9B57 !important; }   /* >=7.4 on every dark ground */
-
-.card .g, .card .win, .leak .g, .play-card .g, .deal-card .g,
-.fidelity-card .g, .phase-card .g, .milestone .g, .bad-narrative .g,
-.attribution .g, .note-strip .g, .bridge .g,
-.score.g, .score-tag.g, .banner .g, .chip .g, .sample .g,
-body:has(.rowhi) .hero .g, .rowhi .g, .rowhi .win { color: #3DDC97 !important; }   /* >=8.7 */
-
-.card .r, .leak .r, .leak-\$, .leak .leak-\$, .play-card .r, .deal-card .r,
-.fidelity-card .r, .phase-card .r, .milestone .r, .bad-narrative .r,
-.attribution .r, .note-strip .r, .bridge .r,
-.score.r, .score-tag.r, .banner .r, .chip .r, .sample .r,
-body:has(.rowhi) .hero .r, .rowhi .r { color: #FF6169 !important; }   /* >=5.2 */
-
-/* Fifth pass. Lead-in lines (.l) inside .hero / .seam blocks, and the
-   bare-span wordmark in the marketing template, both carry brand orange
-   as type on the light ground. The dark-block overrides below repeat
-   afterwards so they still win inside .rowhi / .card / a dark .hero.   */
-.l, .hero .l, .seam .l, .correction .l { color: #A83F00 !important; }   /* 5.10 / 5.86 */
-.brand span, .brand .iq { color: #C74B00 !important; }                  /* 3.55, large type */
-
-/* re-assert the dark grounds last so they outrank everything above */
-.rowhi, .rowhi td, .rowhi th, .rowhi span, .rowhi b, .rowhi strong,
-.rowhi i, .rowhi em, .rowhi .l { color: #F5F7FA !important; }
-.rowhi .zero, tr.rowhi .zero, .rowhi .r { color: #F0565B !important; }
-.rowhi .a, .rowhi .some { color: #FF9B57 !important; }
-.rowhi .g, .rowhi .win { color: #3DDC97 !important; }
-body:has(.rowhi) .hero .l, .banner .l, .chip .l, .sample .l,
-.card .l, .leak .l { color: #FF9B57 !important; }
-
-/* ==================================================================
-   SIXTH PASS, 2026-09-04. Tokens used as text via INLINE style.
-   The fifth pass fixed every CLASSED use of the saturated tokens as
-   type. It could not see the uses that carry the token inline, which
-   is how the Romify AEO and Demand templates colour their table cells:
-       <td style="color:var(--success)">76</td>
-   An author !important rule outranks a non-important inline style, and
-   an attribute substring selector can see which token was used. The
-   selectors match "color:var(" specifically, so an inline BORDER or
-   BACKGROUND written with the same token is never recoloured.
-   Measured on the ivory ground:
-     var(--orange)  #FF6600  2.41  ->  #A83F00  5.10
-     var(--caution) #FF7A00  2.46  ->  #A83F00  5.10
-     var(--success) #12B76A  2.47  ->  #0A6E40  5.19
-     var(--danger)  #E5484D  3.69  ->  #C22B32  4.67
-   ================================================================== */
-[style*="color:var(--orange)"],       [style*="color: var(--orange)"],
-[style*="color:var(--brand-orange)"], [style*="color: var(--brand-orange)"],
-[style*="color:var(--caution)"],      [style*="color: var(--caution)"]  { color: #A83F00 !important; }
-[style*="color:var(--success)"],      [style*="color: var(--success)"]  { color: #0A6E40 !important; }
-[style*="color:var(--danger)"],       [style*="color: var(--danger)"]   { color: #C22B32 !important; }
-
-/* ------------------------------------------------------------------
-   The inverse case. A table row painted inline with one of the dark
-   *-soft SURFACES, which this skin deliberately never redeclares:
-       <tr style="background:var(--danger-soft)">
-   It is the .rowhi pattern without the .rowhi class, so every
-   fifth-pass rule missed it and its cells kept --text-primary #14181F
-   on #2a1416, which measures 1.03:1. Effectively invisible.
-   Measured on #2a1416:
-     #F5F7FA 15.9   #B8C5D6 9.9   #3DDC97 8.7   #FF9B57 7.4   #FF6169 5.2
-   These sit AFTER the ivory rules above and outrank them on
-   specificity, (0,2,1) against (0,2,0), so a token-coloured cell
-   inside a dark row lands on the light variant, not the ivory one.
-   ------------------------------------------------------------------ */
-tr[style*="var(--danger-soft)"],  tr[style*="var(--caution-soft)"],  tr[style*="var(--success-soft)"],
-tr[style*="var(--danger-soft)"] td,     tr[style*="var(--danger-soft)"] th,
-tr[style*="var(--danger-soft)"] b,      tr[style*="var(--danger-soft)"] strong,
-tr[style*="var(--danger-soft)"] span,   tr[style*="var(--danger-soft)"] i,
-tr[style*="var(--caution-soft)"] td,    tr[style*="var(--caution-soft)"] th,
-tr[style*="var(--caution-soft)"] b,     tr[style*="var(--caution-soft)"] span,
-tr[style*="var(--success-soft)"] td,    tr[style*="var(--success-soft)"] th,
-tr[style*="var(--success-soft)"] b,     tr[style*="var(--success-soft)"] span { color: #F5F7FA !important; }
-
-tr[style*="-soft)"] [style*="color:var(--danger)"],  tr[style*="-soft)"] [style*="color: var(--danger)"]  { color: #FF6169 !important; }
-tr[style*="-soft)"] [style*="color:var(--caution)"], tr[style*="-soft)"] [style*="color: var(--caution)"] { color: #FF9B57 !important; }
-tr[style*="-soft)"] [style*="color:var(--orange)"],  tr[style*="-soft)"] [style*="color: var(--orange)"]  { color: #FF9B57 !important; }
-tr[style*="-soft)"] [style*="color:var(--success)"], tr[style*="-soft)"] [style*="color: var(--success)"] { color: #3DDC97 !important; }
-tr[style*="-soft)"] [style*="--text-tertiary"],      tr[style*="-soft)"] [style*="--text-secondary"]      { color: #B8C5D6 !important; }
-
-/* ==================================================================
-   SEVENTH PASS, 2026-09-04. The sixth pass, corrected.
-   The sixth pass recoloured every inline-styled token use for the IVORY
-   ground. That is right on ivory and wrong inside the navy boxes, where
-   the same inline styles are how the Signal Assessment sets its big
-   fidelity numbers:
-       <span class="fid-before" style="color:var(--danger);font-size:32px">
-   Measured: applying the sixth pass alone took coinflow-signal from 0
-   to 8 failures and romify-signal from 0 to 16, because #C22B32 on navy
-   is 2.85 while the untouched #E5484D was 4.15 and passing at 32px.
-   These rules restore the light variants inside every container this
-   skin fills dark. Same container list as the fourth-pass block above.
-   They sit after the sixth pass and win on source order.
-   On #12203A / #16273F / #2a1416:
-     #FF6169  5.2+     #FF9B57  7.4+     #3DDC97  8.7+
-   ================================================================== */
-.card [style*="color:var(--danger)"], .card [style*="color: var(--danger)"],
-.play-card [style*="color:var(--danger)"], .play-card [style*="color: var(--danger)"],
-.deal-card [style*="color:var(--danger)"], .deal-card [style*="color: var(--danger)"],
-.fidelity-card [style*="color:var(--danger)"], .fidelity-card [style*="color: var(--danger)"],
-.phase-card [style*="color:var(--danger)"], .phase-card [style*="color: var(--danger)"],
-.leak [style*="color:var(--danger)"], .leak [style*="color: var(--danger)"],
-.milestone [style*="color:var(--danger)"], .milestone [style*="color: var(--danger)"],
-.note-strip [style*="color:var(--danger)"], .note-strip [style*="color: var(--danger)"],
-.bad-narrative [style*="color:var(--danger)"], .bad-narrative [style*="color: var(--danger)"],
-.bridge [style*="color:var(--danger)"], .bridge [style*="color: var(--danger)"],
-.attribution [style*="color:var(--danger)"], .attribution [style*="color: var(--danger)"],
-.rowhi [style*="color:var(--danger)"], .rowhi [style*="color: var(--danger)"],
-.banner.show-bad [style*="color:var(--danger)"], .banner.show-bad [style*="color: var(--danger)"],
-.banner.show-good [style*="color:var(--danger)"], .banner.show-good [style*="color: var(--danger)"],
-.chip [style*="color:var(--danger)"], .chip [style*="color: var(--danger)"],
-.sample [style*="color:var(--danger)"], .sample [style*="color: var(--danger)"],
-body:has(.rowhi) .hero [style*="color:var(--danger)"], body:has(.rowhi) .hero [style*="color: var(--danger)"] { color: #FF6169 !important; }   /* 5.2+ on every dark ground */
-
-.card [style*="color:var(--caution)"], .card [style*="color: var(--caution)"],
-.card [style*="color:var(--orange)"], .card [style*="color: var(--orange)"],
-.card [style*="color:var(--brand-orange)"], .card [style*="color: var(--brand-orange)"],
-.play-card [style*="color:var(--caution)"], .play-card [style*="color: var(--caution)"],
-.play-card [style*="color:var(--orange)"], .play-card [style*="color: var(--orange)"],
-.play-card [style*="color:var(--brand-orange)"], .play-card [style*="color: var(--brand-orange)"],
-.deal-card [style*="color:var(--caution)"], .deal-card [style*="color: var(--caution)"],
-.deal-card [style*="color:var(--orange)"], .deal-card [style*="color: var(--orange)"],
-.deal-card [style*="color:var(--brand-orange)"], .deal-card [style*="color: var(--brand-orange)"],
-.fidelity-card [style*="color:var(--caution)"], .fidelity-card [style*="color: var(--caution)"],
-.fidelity-card [style*="color:var(--orange)"], .fidelity-card [style*="color: var(--orange)"],
-.fidelity-card [style*="color:var(--brand-orange)"], .fidelity-card [style*="color: var(--brand-orange)"],
-.phase-card [style*="color:var(--caution)"], .phase-card [style*="color: var(--caution)"],
-.phase-card [style*="color:var(--orange)"], .phase-card [style*="color: var(--orange)"],
-.phase-card [style*="color:var(--brand-orange)"], .phase-card [style*="color: var(--brand-orange)"],
-.leak [style*="color:var(--caution)"], .leak [style*="color: var(--caution)"],
-.leak [style*="color:var(--orange)"], .leak [style*="color: var(--orange)"],
-.leak [style*="color:var(--brand-orange)"], .leak [style*="color: var(--brand-orange)"],
-.milestone [style*="color:var(--caution)"], .milestone [style*="color: var(--caution)"],
-.milestone [style*="color:var(--orange)"], .milestone [style*="color: var(--orange)"],
-.milestone [style*="color:var(--brand-orange)"], .milestone [style*="color: var(--brand-orange)"],
-.note-strip [style*="color:var(--caution)"], .note-strip [style*="color: var(--caution)"],
-.note-strip [style*="color:var(--orange)"], .note-strip [style*="color: var(--orange)"],
-.note-strip [style*="color:var(--brand-orange)"], .note-strip [style*="color: var(--brand-orange)"],
-.bad-narrative [style*="color:var(--caution)"], .bad-narrative [style*="color: var(--caution)"],
-.bad-narrative [style*="color:var(--orange)"], .bad-narrative [style*="color: var(--orange)"],
-.bad-narrative [style*="color:var(--brand-orange)"], .bad-narrative [style*="color: var(--brand-orange)"],
-.bridge [style*="color:var(--caution)"], .bridge [style*="color: var(--caution)"],
-.bridge [style*="color:var(--orange)"], .bridge [style*="color: var(--orange)"],
-.bridge [style*="color:var(--brand-orange)"], .bridge [style*="color: var(--brand-orange)"],
-.attribution [style*="color:var(--caution)"], .attribution [style*="color: var(--caution)"],
-.attribution [style*="color:var(--orange)"], .attribution [style*="color: var(--orange)"],
-.attribution [style*="color:var(--brand-orange)"], .attribution [style*="color: var(--brand-orange)"],
-.rowhi [style*="color:var(--caution)"], .rowhi [style*="color: var(--caution)"],
-.rowhi [style*="color:var(--orange)"], .rowhi [style*="color: var(--orange)"],
-.rowhi [style*="color:var(--brand-orange)"], .rowhi [style*="color: var(--brand-orange)"],
-.banner.show-bad [style*="color:var(--caution)"], .banner.show-bad [style*="color: var(--caution)"],
-.banner.show-bad [style*="color:var(--orange)"], .banner.show-bad [style*="color: var(--orange)"],
-.banner.show-bad [style*="color:var(--brand-orange)"], .banner.show-bad [style*="color: var(--brand-orange)"],
-.banner.show-good [style*="color:var(--caution)"], .banner.show-good [style*="color: var(--caution)"],
-.banner.show-good [style*="color:var(--orange)"], .banner.show-good [style*="color: var(--orange)"],
-.banner.show-good [style*="color:var(--brand-orange)"], .banner.show-good [style*="color: var(--brand-orange)"],
-.chip [style*="color:var(--caution)"], .chip [style*="color: var(--caution)"],
-.chip [style*="color:var(--orange)"], .chip [style*="color: var(--orange)"],
-.chip [style*="color:var(--brand-orange)"], .chip [style*="color: var(--brand-orange)"],
-.sample [style*="color:var(--caution)"], .sample [style*="color: var(--caution)"],
-.sample [style*="color:var(--orange)"], .sample [style*="color: var(--orange)"],
-.sample [style*="color:var(--brand-orange)"], .sample [style*="color: var(--brand-orange)"],
-body:has(.rowhi) .hero [style*="color:var(--caution)"], body:has(.rowhi) .hero [style*="color: var(--caution)"],
-body:has(.rowhi) .hero [style*="color:var(--orange)"], body:has(.rowhi) .hero [style*="color: var(--orange)"],
-body:has(.rowhi) .hero [style*="color:var(--brand-orange)"], body:has(.rowhi) .hero [style*="color: var(--brand-orange)"] { color: #FF9B57 !important; }   /* 7.4+ */
-
-.card [style*="color:var(--success)"], .card [style*="color: var(--success)"],
-.play-card [style*="color:var(--success)"], .play-card [style*="color: var(--success)"],
-.deal-card [style*="color:var(--success)"], .deal-card [style*="color: var(--success)"],
-.fidelity-card [style*="color:var(--success)"], .fidelity-card [style*="color: var(--success)"],
-.phase-card [style*="color:var(--success)"], .phase-card [style*="color: var(--success)"],
-.leak [style*="color:var(--success)"], .leak [style*="color: var(--success)"],
-.milestone [style*="color:var(--success)"], .milestone [style*="color: var(--success)"],
-.note-strip [style*="color:var(--success)"], .note-strip [style*="color: var(--success)"],
-.bad-narrative [style*="color:var(--success)"], .bad-narrative [style*="color: var(--success)"],
-.bridge [style*="color:var(--success)"], .bridge [style*="color: var(--success)"],
-.attribution [style*="color:var(--success)"], .attribution [style*="color: var(--success)"],
-.rowhi [style*="color:var(--success)"], .rowhi [style*="color: var(--success)"],
-.banner.show-bad [style*="color:var(--success)"], .banner.show-bad [style*="color: var(--success)"],
-.banner.show-good [style*="color:var(--success)"], .banner.show-good [style*="color: var(--success)"],
-.chip [style*="color:var(--success)"], .chip [style*="color: var(--success)"],
-.sample [style*="color:var(--success)"], .sample [style*="color: var(--success)"],
-body:has(.rowhi) .hero [style*="color:var(--success)"], body:has(.rowhi) .hero [style*="color: var(--success)"] { color: #3DDC97 !important; }   /* 8.7+ */
-
-/* NOTE, recorded 2026-09-04 so the next person does not repeat my error.
-   .bn is an IVORY box in eight of the nine readouts. It is navy ONLY in
-   siq-website/aeo-report-coinflow, which navy-fills .hero and .bn
-   in its own CSS (commit 680f3d9). That per-file divergence is invisible
-   to this skin, and adding .bn to the dark-block lists here would put
-   light text on ivory in Demand Health, Marketing Signal, Romify AEO and
-   Romify Demand. It is NOT a skin bug. The Coinflow AEO report carries
-   its own measured <style data-siq-fix="aeo-navy-contrast-2026-09-04">
-   block instead. Either revert that file's navy-fill or promote it here
-   behind a real discriminator, the way .rowhi discriminates .hero.
-   ================================================================== */
-
-/* ==================================================================
-   TYPE SCALE, added 2026-08-31
-   reference_font_size_standard: body 11pt, headers 14pt, industry
-   standard, set by Marty. At 96dpi that is 14.67px body / 18.67px
-   header. The Coinflow readout was shipping body copy at 10-13px,
-   roughly 8-10pt, and set no font-size on body at all. Romify sets
-   body 16px, which is why the two looked nothing alike side by side.
-
-   Rule applied below:
-     body copy        -> 15px  (11pt, rounded up)
-     small body       -> 14px  (dense grids only)
-     UPPERCASE labels -> 11px floor (micro-labels stay small on purpose,
-                         but nothing ships at 9 or 10px)
-   Headers are already at or above 18px and are left alone.
-   ================================================================== */
-body { font-size: 15px; }
-
-/* body copy, lifted to the 11pt standard */
-.section-lead, .bn-text, .bad-narrative .bn-text, .attr-text,
-.attribution .attr-text, .cta-sub, .net-detail, .uplift-net .net-detail,
-.leak-cause, .leak-body .leak-cause, .dim-note, .baseline-note,
-.milestone-desc, .phase-features, .phase-features li, .phase-term,
-.phase-cadence, .play-trigger, .play-specs, .uplift-note,
-.uplift-card .uplift-note, .bridge-sub, .bridge-foot, .deal-flag,
-.fid-note, .dd-math, .dd-name, footer, footer div { font-size: 15px; }
-
-/* dense grid values, one step down but still above the old 11-12px */
-.bridge-label, .bridge-val, .dd-val, .dim-delta, .role { font-size: 14px; }
-.bridge-val.total { font-size: 16px; }
-
-/* uppercase micro-labels: 11px floor, never 9 or 10 */
-.card-label, .fid-label, .spec-label, .play-spec .spec-label, .bn-label,
-.bad-narrative .bn-label, .attr-label, .attribution .attr-label,
-.bridge-head, .deal-meta, .meta-item .label, .kicker, .uplift-card .kicker,
-.net-label, .uplift-net .net-label, .milestone-day, .phase-badge,
-.hitl-badge, .leak-play, .state-pill, .toggle button, .dd summary,
-.assess-banner, .cta-btn { font-size: 11px; }
-
-/* a note strip immediately after a card grid was sitting flush against the
-   last card and its shadow */
-.deal-grid + .note-strip, .fidelity-grid + .note-strip { margin-top: 18px; }
-
-/* Role chips in the deal grid sit on #16273F, a lighter navy than the card.
-   Measured there: .role.missing 3.75, .role.champion 3.93, both under AA. */
-.role.missing { color: #FF8A8F !important; }   /* 7.18 on navy */
-.role.champion { color: #5B9AFF !important; }  /* 5.81 on navy */
-
-/* Demand Health CTA button: white on brand orange is 2.94, the same pattern
-   already fixed on .phase-badge and .section-number. */
-.cta a, .cta > a { color: #1A1205 !important; }   /* 6.31 on #FF6600 */
-
-
-/* ===================== BOX PASS COMPLETION (2026-09-10) =====================
-   v3 re-pointed the surface tokens to navy for ten box classes only. Five
-   templates carry their own panel class names, which the v3 README flagged as
-   the outstanding per-template box pass. Those panels use background:
-   var(--surface) and so rendered ivory-on-ivory: .bn (demand, aeo),
-   .dim (demand, marketing-signal), .stage (full-funnel, campaign), .fid
-   (marketing-signal). This block finishes the pass. Contrast-checked below.
-   =========================================================================== */
-
-/* 1. surface tokens, so background:var(--surface) resolves to navy */
-.bn, .dim, .stage, .fid {
-  --surface: var(--navy) !important;
-  --surface-2: #16273F !important;
-  --border: rgba(255,255,255,0.10) !important;
-  --border-strong: rgba(255,255,255,0.20) !important;
-}
-
-/* 2. default body text inside those panels */
-.bn, .dim, .stage, .fid,
-.bn p, .dim p, .stage p, .fid p,
-.bn span, .dim span, .stage span, .fid span,
-.bn b, .dim b, .stage b, .fid b,
-.bn strong, .dim strong, .stage strong, .fid strong,
-.bn .big, .dim .big, .stage .big, .fid .big { color: #F4F0E7 !important; }
-
-/* 3. muted labels and secondary copy */
-.bn .l, .dim .l, .stage .l, .fid .l,
-.bn .k, .dim .k, .stage .k, .fid .k,
-.bn .ns, .dim .ns, .dim .dim-ns,
-.dim .dim-name, .dim .dim-wt, .dim .dim-top,
-.fid .fid-label { color: #93A3B8 !important; }
-
-.bn .sub, .dim .sub, .stage .sub, .fid .sub,
-.dim .dim-note, .fid .fid-note { color: #C6D0DE !important; }
-
-/* 4. semantic colours last so they win over rule 2 */
-.bn .r, .dim .r, .stage .r, .fid .r,
-.bn .big-danger, .dim .big-danger, .stage .big-danger, .fid .big-danger,
-.bn .zero, .dim .zero, .dim .dim-score.r, .fid .fid-val { color: #FF6169 !important; }
-
-.bn .g, .dim .g, .stage .g, .fid .g,
-.bn .big-good, .dim .big-good, .stage .big-good, .fid .big-good,
-.bn .win, .dim .win, .dim .dim-score.g { color: #3DDC97 !important; }
-
-.bn .a, .dim .a, .stage .a, .fid .a,
-.bn .some, .dim .some, .dim .dim-score.a { color: #FF9B57 !important; }
-
-/* 5. mirrored from every .card-scoped rule in v3 */
-.bn,
-.dim,
-.stage,
-.fid { --surface: var(--navy); --surface-2: #16273F; --border: rgba(255,255,255,0.10); --border-strong: rgba(255,255,255,0.20); --text-primary: #F4F0E7; --text-secondary: #C6D0DE; --text-tertiary: #8FA0B6; --track: #2A3B57; color: var(--text-primary); background: var(--navy) !important; border-color: rgba(255,255,255,0.10) !important; box-shadow: 0 18px 42px -28px rgba(16,23,34,0.75); }
-.bn.shr-hero,
-.dim.shr-hero,
-.stage.shr-hero,
-.fid.shr-hero { background: var(--ink) !important; }
-.bn.shr-hero .score,
-.dim.shr-hero .score,
-.stage.shr-hero .score,
-.fid.shr-hero .score { color: var(--brand-orange); }
-.bn.shr-hero .score-unit,
-.dim.shr-hero .score-unit,
-.stage.shr-hero .score-unit,
-.fid.shr-hero .score-unit { color: rgba(244,240,231,0.5); }
-.bn.featured,
-.dim.featured,
-.stage.featured,
-.fid.featured { background: var(--ink) !important; border: 2px solid var(--ink) !important; }
-.bn.featured .phase-badge,
-.dim.featured .phase-badge,
-.stage.featured .phase-badge,
-.fid.featured .phase-badge { background: var(--brand-orange); }
-.bn,
-.dim,
-.stage,
-.fid { border-left: 3px solid var(--brand-orange) !important; }
-.bn,
-.dim,
-.stage,
-.fid { border-left: 3px solid var(--brand-blue) !important; }
-.bn .card-label,
-.dim .card-label,
-.stage .card-label,
-.fid .card-label,
-.bn .fid-label,
-.dim .fid-label,
-.stage .fid-label,
-.fid .fid-label,
-.bn .spec-label,
-.dim .spec-label,
-.stage .spec-label,
-.fid .spec-label,
-.bn .milestone-day,
-.dim .milestone-day,
-.stage .milestone-day,
-.fid .milestone-day,
-.bn .deal-meta,
-.dim .deal-meta,
-.stage .deal-meta,
-.fid .deal-meta,
-.bn .meta-item .label,
-.dim .meta-item .label,
-.stage .meta-item .label,
-.fid .meta-item .label { color: #93A3B8 !important; }
-.bn .bn-label,
-.dim .bn-label,
-.stage .bn-label,
-.fid .bn-label,
-.bn .leak-play span,
-.dim .leak-play span,
-.stage .leak-play span,
-.fid .leak-play span,
-.bn .state-pill.red-text,
-.dim .state-pill.red-text,
-.stage .state-pill.red-text,
-.fid .state-pill.red-text,
-.bn .bridge-val,
-.dim .bridge-val,
-.stage .bridge-val,
-.fid .bridge-val { color: #FF6169 !important; }
-.bn.featured .phase-badge,
-.dim.featured .phase-badge,
-.stage.featured .phase-badge,
-.fid.featured .phase-badge { color: #1A1205 !important; }
-.bn.red .deal-score,
-.dim.red .deal-score,
-.stage.red .deal-score,
-.fid.red .deal-score,
-.bn .fid-note strong,
-.dim .fid-note strong,
-.stage .fid-note strong,
-.fid .fid-note strong { color: #FF6169 !important; }
-.bn .dim-score,
-.dim .dim-score,
-.stage .dim-score,
-.fid .dim-score { color: #F4F0E7 !important; }
-.bn .a,
-.dim .a,
-.stage .a,
-.fid .a,
-.bn .some,
-.dim .some,
-.stage .some,
-.fid .some { color: #FF9B57 !important; }
-.bn .g,
-.dim .g,
-.stage .g,
-.fid .g,
-.bn .win,
-.dim .win,
-.stage .win,
-.fid .win { color: #3DDC97 !important; }
-.bn .r,
-.dim .r,
-.stage .r,
-.fid .r,
-.bn .leak-\$,
-.dim .leak-\$,
-.stage .leak-\$,
-.fid .leak-\$ { color: #FF6169 !important; }
-.bn .l,
-.dim .l,
-.stage .l,
-.fid .l { color: #FF9B57 !important; }
-.bn [style*="color:var(--danger)"],
-.dim [style*="color:var(--danger)"],
-.stage [style*="color:var(--danger)"],
-.fid [style*="color:var(--danger)"],
-.bn [style*="color: var(--danger)"],
-.dim [style*="color: var(--danger)"],
-.stage [style*="color: var(--danger)"],
-.fid [style*="color: var(--danger)"] { color: #FF6169 !important; }
-.bn [style*="color:var(--caution)"],
-.dim [style*="color:var(--caution)"],
-.stage [style*="color:var(--caution)"],
-.fid [style*="color:var(--caution)"],
-.bn [style*="color: var(--caution)"],
-.dim [style*="color: var(--caution)"],
-.stage [style*="color: var(--caution)"],
-.fid [style*="color: var(--caution)"],
-.bn [style*="color:var(--orange)"],
-.dim [style*="color:var(--orange)"],
-.stage [style*="color:var(--orange)"],
-.fid [style*="color:var(--orange)"],
-.bn [style*="color: var(--orange)"],
-.dim [style*="color: var(--orange)"],
-.stage [style*="color: var(--orange)"],
-.fid [style*="color: var(--orange)"],
-.bn [style*="color:var(--brand-orange)"],
-.dim [style*="color:var(--brand-orange)"],
-.stage [style*="color:var(--brand-orange)"],
-.fid [style*="color:var(--brand-orange)"],
-.bn [style*="color: var(--brand-orange)"],
-.dim [style*="color: var(--brand-orange)"],
-.stage [style*="color: var(--brand-orange)"],
-.fid [style*="color: var(--brand-orange)"] { color: #FF9B57 !important; }
-.bn [style*="color:var(--success)"],
-.dim [style*="color:var(--success)"],
-.stage [style*="color:var(--success)"],
-.fid [style*="color:var(--success)"],
-.bn [style*="color: var(--success)"],
-.dim [style*="color: var(--success)"],
-.stage [style*="color: var(--success)"],
-.fid [style*="color: var(--success)"] { color: #3DDC97 !important; }
-.bn .bn-text,
-.dim .bn-text,
-.stage .bn-text,
-.fid .bn-text { font-size: 15px; }
-.bn .bn-label,
-.dim .bn-label,
-.stage .bn-label,
-.fid .bn-label { font-size: 11px; }
-.deal-grid + .bn,
-.deal-grid + .dim,
-.deal-grid + .stage,
-.deal-grid + .fid,
-.fidelity-grid + .bn,
-.fidelity-grid + .dim,
-.fidelity-grid + .stage,
-.fidelity-grid + .fid { margin-top: 18px; }
-
-
-/* --- box pass, second sweep (2026-09-10) -------------------------------
-   Found by computing every panel background in headless Chromium rather than
-   eyeballing: .seam and .cta (demand, full-funnel) and the recommendation
-   cards in ul.rec (aeo) also paint background:var(--surface) and so rendered
-   ivory-on-ivory. Same treatment as the first sweep. ---------------------- */
-.seam, .cta, ul.rec > li {
-  --surface: var(--navy) !important;
-  --surface-2: #16273F !important;
-  --border: rgba(255,255,255,0.10) !important;
-  --border-strong: rgba(255,255,255,0.20) !important;
-  background: var(--navy) !important;
-  color: #F4F0E7 !important;
-}
-.seam p, .cta p, .seam span, .cta span, .seam div, .cta div,
-.seam b, .cta b, .seam strong, .cta strong,
-ul.rec > li, ul.rec > li b, ul.rec > li strong, ul.rec > li span { color: #F4F0E7 !important; }
-
-.seam .l, .cta .l, .seam .k, .cta .k,
-.seam .label, .cta .label, .seam .sub, .cta .sub { color: #93A3B8 !important; }
-
-.seam .r, .cta .r, .seam .big-danger, .cta .big-danger,
-.seam .danger-text, .cta .danger-text { color: #FF6169 !important; }
-.seam .g, .cta .g, .seam .big-good, .cta .big-good { color: #3DDC97 !important; }
-.seam .a, .cta .a, ul.rec > li .a { color: #FF9B57 !important; }
-
-
-/* --- box pass, third sweep (2026-09-10) -------------------------------
-   Caught by _verify/sweep.js, not by eye: campaign-update went from 1 AA
-   failure at baseline to 9 under the skin. Cause: <ol><li> items inside a
-   painted .seam kept their dark text on the now-navy ground (ratio 1.99
-   against a 4.5 requirement). The earlier sweeps covered div/span/p/b/strong
-   but not list items, table cells or links inside a painted panel. --------- */
-.bn li, .dim li, .stage li, .fid li, .seam li, .cta li,
-.bn ol, .dim ol, .stage ol, .fid ol, .seam ol, .cta ol,
-.bn ul, .dim ul, .stage ul, .fid ul, .seam ul, .cta ul,
-.bn td, .dim td, .stage td, .fid td, .seam td, .cta td,
-.bn th, .dim th, .stage th, .fid th, .seam th, .cta th,
-.bn em, .dim em, .stage em, .fid em, .seam em, .cta em,
-.bn small, .dim small, .stage small, .fid small, .seam small, .cta small
-  { color: #F4F0E7 !important; }
-
-.bn a, .dim a[href], .stage a[href], .fid a[href], .seam a[href], .cta a[href]
-  { color: #FF9B57 !important; }
-
-</style>
-<link rel="stylesheet" href="/site-nav.css">
-<script src="/site-nav.js" defer></script>
+  <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/51005472.js"></script>
+  <!-- siq first-party signal beacon --><script>(function(){try{if(localStorage.getItem("siq_no")==="1")return;var K="siq_vid",v=localStorage.getItem(K);if(v==="mthrc8423q99gzql"||v==="mtgop71aab363pkm"){localStorage.setItem("siq_no","1");return;}if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem(K,v);}var q=new URLSearchParams(location.search),d={vid:v,path:location.pathname,title:document.title,ref:document.referrer,utm_source:q.get("utm_source")||"",utm_medium:q.get("utm_medium")||"",utm_campaign:q.get("utm_campaign")||"",utm_term:q.get("utm_term")||"",utm_content:q.get("utm_content")||"",screen:innerWidth+"x"+innerHeight,type:"pageview"},s=JSON.stringify(d);if(navigator.sendBeacon){navigator.sendBeacon("/api/e",new Blob([s],{type:"application/json"}));}else{fetch("/api/e",{method:"POST",headers:{"Content-Type":"application/json"},body:s,keepalive:true});}}catch(e){}})();</script><script src="/site-nav.js" defer></script>
+<link rel="stylesheet" href="/styles.css">
 </head>
-<body data-theme="dark" class="siq-locked">
+<body data-page="aeo-report-romify" data-theme="dark" class="siq-locked">
 <nav class="siq-site-nav siq-nav-edge" aria-label="Main navigation">
   <div class="siq-nav-inner">
     <a class="siq-nav-logo" href="/" aria-label="Scalient IQ home"><img src="/logo.svg" alt="Scalient IQ"></a>
@@ -891,15 +53,15 @@ ul.rec > li, ul.rec > li b, ul.rec > li strong, ul.rec > li span { color: #F4F0E
 <div class="hero">
   <div class="k">The finding, corrected</div>
   <div class="big">Romify is absent from what AI models remember, but present in what they find.</div>
-  <div class="sub">When ChatGPT and Claude answer from memory alone, Romify is named <b style="color:var(--text-primary)">zero</b> times. When those same engines are allowed to search the web before answering, both name Romify. ChatGPT ranked Romify <b style="color:var(--text-primary)">#1</b> on <span style="color:var(--text-secondary)">use case / problem</span>. Across 4 grounded runs Romify averages <b style="color:var(--text-primary)">8.0</b> mentions per run out of 84 opportunities. These are two different problems with two different fixes, and the second one is far more tractable than the first.</div>
+  <div class="sub">When ChatGPT and Claude answer from memory alone, Romify is named <b class="siq-inline-9badfd4820d0">zero</b> times. When those same engines are allowed to search the web before answering, both name Romify. ChatGPT ranked Romify <b class="siq-inline-9badfd4820d0">#1</b> on <span class="siq-inline-d5c60120f2f3">use case / problem</span>. Across 4 grounded runs Romify averages <b class="siq-inline-9badfd4820d0">8.0</b> mentions per run out of 84 opportunities. These are two different problems with two different fixes, and the second one is far more tractable than the first.</div>
 </div>
 
 <div class="section">
   <div class="section-head"><div class="section-number">1</div><div class="section-title">What changed since the August 3 report, and why</div></div>
   <div class="section-lead">We audited our own instrument and found a limitation in it. This section explains what it was, because it changes the conclusion.</div>
-  <div class="bn"><div class="l">What the August 3 report measured</div><div><span style="font-size:14px;color:var(--text-secondary)">That report asked four engines 28 questions and found Romify named zero times. That result was real, but the engines were queried <b style="color:var(--text-primary)">without web search enabled</b>. They answered purely from training. So the report measured whether the models had already absorbed Romify into memory. It did not measure what a buyer sees today when they ask ChatGPT a question and ChatGPT looks something up before replying.</span></div></div>
-  <div class="bn"><div class="l">What we did about it</div><div><span style="font-size:14px;color:var(--text-secondary)">We rebuilt the harness to run both ways and re-tested the identical 28 questions against the identical competitive field, changing one variable: whether the engine could search. We also began capturing every source URL the engines cite, which produces the citation map in section 5. We found this ourselves, before your agency or anyone else did, and we are reporting it rather than quietly restating the number. That is what an independent referee is for.</span></div></div>
-  <div class="bn"><div class="l">What it means for the conclusion</div><div><span style="font-size:14px;color:var(--text-secondary)">The headline moves from <i>&ldquo;AI never names Romify&rdquo;</i> to something more precise and more useful: <b style="color:var(--text-primary)">AI does not yet know Romify, but AI can find Romify.</b> The urgency is unchanged. The diagnosis, and therefore the fix, is different.</span></div></div>
+  <div class="bn"><div class="l">What the August 3 report measured</div><div><span class="siq-inline-df76d9f77994">That report asked four engines 28 questions and found Romify named zero times. That result was real, but the engines were queried <b class="siq-inline-9badfd4820d0">without web search enabled</b>. They answered purely from training. So the report measured whether the models had already absorbed Romify into memory. It did not measure what a buyer sees today when they ask ChatGPT a question and ChatGPT looks something up before replying.</span></div></div>
+  <div class="bn"><div class="l">What we did about it</div><div><span class="siq-inline-df76d9f77994">We rebuilt the harness to run both ways and re-tested the identical 28 questions against the identical competitive field, changing one variable: whether the engine could search. We also began capturing every source URL the engines cite, which produces the citation map in section 5. We found this ourselves, before your agency or anyone else did, and we are reporting it rather than quietly restating the number. That is what an independent referee is for.</span></div></div>
+  <div class="bn"><div class="l">What it means for the conclusion</div><div><span class="siq-inline-df76d9f77994">The headline moves from <i>&ldquo;AI never names Romify&rdquo;</i> to something more precise and more useful: <b class="siq-inline-9badfd4820d0">AI does not yet know Romify, but AI can find Romify.</b> The urgency is unchanged. The diagnosis, and therefore the fix, is different.</span></div></div>
 </div>
 
 <div class="section">
@@ -907,10 +69,10 @@ ul.rec > li, ul.rec > li b, ul.rec > li strong, ul.rec > li span { color: #F4F0E
   <div class="section-lead">This distinction is the whole report. It is also the thing most AI-visibility tooling does not separate.</div>
   <table>
     <tr><th>Mode</th><th>What happens</th><th>What it tells you</th></tr>
-    <tr><td><b>From memory</b></td><td style="color:var(--text-secondary)">The model answers from training alone. No lookup. Like asking a colleague off the top of their head.</td><td>Whether your brand has been absorbed into the model. Moves over quarters, not weeks.</td></tr>
-    <tr><td><b>By searching</b></td><td style="color:var(--text-secondary)">The model searches the live web, reads pages, then answers. This is what ChatGPT does today for most product questions.</td><td>Whether your content can be found and is good enough to cite. Moves in weeks.</td></tr>
+    <tr><td><b>From memory</b></td><td class="siq-inline-d5c60120f2f3">The model answers from training alone. No lookup. Like asking a colleague off the top of their head.</td><td>Whether your brand has been absorbed into the model. Moves over quarters, not weeks.</td></tr>
+    <tr><td><b>By searching</b></td><td class="siq-inline-d5c60120f2f3">The model searches the live web, reads pages, then answers. This is what ChatGPT does today for most product questions.</td><td>Whether your content can be found and is good enough to cite. Moves in weeks.</td></tr>
   </table>
-  <div class="bn" style="margin-top:16px"><div class="l">Why it matters commercially</div><div><span style="font-size:14px;color:var(--text-secondary)">A brand can be invisible in the first mode and perfectly visible in the second. Romify is exactly that case. Reporting only the first number would understate what is achievable this quarter and point the content program at the wrong goal.</span></div></div>
+  <div class="bn siq-inline-35a59f152033"><div class="l">Why it matters commercially</div><div><span class="siq-inline-df76d9f77994">A brand can be invisible in the first mode and perfectly visible in the second. Romify is exactly that case. Reporting only the first number would understate what is achievable this quarter and point the content program at the wrong goal.</span></div></div>
 </div>
 
 <div class="section">
@@ -918,12 +80,12 @@ ul.rec > li, ul.rec > li b, ul.rec > li strong, ul.rec > li span { color: #F4F0E
   <div class="section-lead">Identical questions, identical competitor field, same day. The only difference is whether the engine could search. Figures are mean mentions per run, with range across runs where they varied.</div>
   <table>
     <tr><th>AI engine</th><th>Type</th><th>From memory</th><th>When searching</th></tr>
-    <tr class="rowhi"><td class="eng-name">ChatGPT</td><td style="color:var(--text-tertiary)">Generative</td><td class="zero">0.0</td><td class="win">2.2 <span style='color:var(--text-tertiary);font-weight:400'>(1 to 4)</span></td></tr>
-<tr class="rowhi"><td class="eng-name">Perplexity</td><td style="color:var(--text-tertiary)">Web-grounded by design</td><td>4.0</td><td class="win">4.8 <span style='color:var(--text-tertiary);font-weight:400'>(4 to 6)</span></td></tr>
-<tr class="rowhi"><td class="eng-name">Claude</td><td style="color:var(--text-tertiary)">Generative</td><td class="zero">0.0</td><td class="win">1.0 <span style='color:var(--text-tertiary);font-weight:400'>(0 to 2)</span></td></tr>
+    <tr class="rowhi"><td class="eng-name">ChatGPT</td><td class="siq-inline-ef1ecb578f1e">Generative</td><td class="zero">0.0</td><td class="win">2.2 <span class="siq-inline-11839414a1c4">(1 to 4)</span></td></tr>
+<tr class="rowhi"><td class="eng-name">Perplexity</td><td class="siq-inline-ef1ecb578f1e">Web-grounded by design</td><td>4.0</td><td class="win">4.8 <span class="siq-inline-11839414a1c4">(4 to 6)</span></td></tr>
+<tr class="rowhi"><td class="eng-name">Claude</td><td class="siq-inline-ef1ecb578f1e">Generative</td><td class="zero">0.0</td><td class="win">1.0 <span class="siq-inline-11839414a1c4">(0 to 2)</span></td></tr>
   </table>
-  <div class="bn" style="margin-top:16px"><div class="l">Reading this table</div><div><span style="font-size:14px;color:var(--text-secondary)">The two generative engines, ChatGPT and Claude, go from a flat zero to naming Romify once search is switched on. That is the single most important number in this report: the models are not rejecting Romify, they simply have not memorised it, and they can find it when they look. Perplexity searches by default, which is why it was the only engine ever to surface Romify in earlier reads.</span></div></div>
-  <div class="bn"><div class="l">On Gemini</div><div><span style="font-size:14px;color:var(--text-secondary)">Gemini is not in this comparison. Google meters grounded search requests against a separate quota that was exhausted at test time, so a like-for-like grounded run was not possible. Rather than mix an ungrounded Gemini result into a grounded set and quietly distort the averages, we left it out and are telling you so. It will be added to the next scheduled run.</span></div></div>
+  <div class="bn siq-inline-35a59f152033"><div class="l">Reading this table</div><div><span class="siq-inline-df76d9f77994">The two generative engines, ChatGPT and Claude, go from a flat zero to naming Romify once search is switched on. That is the single most important number in this report: the models are not rejecting Romify, they simply have not memorised it, and they can find it when they look. Perplexity searches by default, which is why it was the only engine ever to surface Romify in earlier reads.</span></div></div>
+  <div class="bn"><div class="l">On Gemini</div><div><span class="siq-inline-df76d9f77994">Gemini is not in this comparison. Google meters grounded search requests against a separate quota that was exhausted at test time, so a like-for-like grounded run was not possible. Rather than mix an ungrounded Gemini result into a grounded set and quietly distort the averages, we left it out and are telling you so. It will be added to the next scheduled run.</span></div></div>
 </div>
 
 <div class="section">
@@ -931,25 +93,25 @@ ul.rec > li, ul.rec > li b, ul.rec > li strong, ul.rec > li span { color: #F4F0E
   <div class="section-lead">Every question where Romify was named in a grounded run, with its best position and how consistently it held across 4 runs. This is the ground Romify already has a claim to.</div>
   <table>
     <tr><th>Question</th><th>Category</th><th>Engine</th><th>Best rank</th><th>Consistency</th></tr>
-    <tr><td>p02</td><td style="color:var(--text-secondary)">Category discovery</td><td>ChatGPT</td><td class="win">#1</td><td style="color:var(--text-tertiary)">2 of 4 runs</td></tr>
-<tr><td>p19</td><td style="color:var(--text-secondary)">Use case / problem</td><td>ChatGPT</td><td class="win">#1</td><td style="color:var(--text-tertiary)">4 of 4 runs</td></tr>
-<tr><td>p19</td><td style="color:var(--text-secondary)">Use case / problem</td><td>Perplexity</td><td class="win">#1</td><td style="color:var(--text-tertiary)">4 of 4 runs</td></tr>
-<tr><td>p25</td><td style="color:var(--text-secondary)">Pricing / buying</td><td>ChatGPT</td><td class="win">#1</td><td style="color:var(--text-tertiary)">1 of 4 runs</td></tr>
-<tr><td>p02</td><td style="color:var(--text-secondary)">Category discovery</td><td>Perplexity</td><td class="win">#2</td><td style="color:var(--text-tertiary)">1 of 4 runs</td></tr>
-<tr><td>p04</td><td style="color:var(--text-secondary)">Category discovery</td><td>Perplexity</td><td class="win">#3</td><td style="color:var(--text-tertiary)">1 of 4 runs</td></tr>
-<tr><td>p24</td><td style="color:var(--text-secondary)">Competitive / alternatives</td><td>Perplexity</td><td class="win">#3</td><td style="color:var(--text-tertiary)">4 of 4 runs</td></tr>
-<tr><td>p24</td><td style="color:var(--text-secondary)">Competitive / alternatives</td><td>Claude</td><td class="win">#3</td><td style="color:var(--text-tertiary)">2 of 4 runs</td></tr>
-<tr><td>p01</td><td style="color:var(--text-secondary)">Category discovery</td><td>Perplexity</td><td>#4</td><td style="color:var(--text-tertiary)">1 of 4 runs</td></tr>
-<tr><td>p06</td><td style="color:var(--text-secondary)">Use case / problem</td><td>Perplexity</td><td>#4</td><td style="color:var(--text-tertiary)">1 of 4 runs</td></tr>
-<tr><td>p11</td><td style="color:var(--text-secondary)">Integration / fit</td><td>Perplexity</td><td>#4</td><td style="color:var(--text-tertiary)">2 of 4 runs</td></tr>
-<tr><td>p13</td><td style="color:var(--text-secondary)">Competitive / alternatives</td><td>Perplexity</td><td>#4</td><td style="color:var(--text-tertiary)">3 of 4 runs</td></tr>
-<tr><td>p17</td><td style="color:var(--text-secondary)">Category discovery</td><td>Perplexity</td><td>#4</td><td style="color:var(--text-tertiary)">1 of 4 runs</td></tr>
-<tr><td>p19</td><td style="color:var(--text-secondary)">Use case / problem</td><td>Claude</td><td>#4</td><td style="color:var(--text-tertiary)">1 of 4 runs</td></tr>
-<tr><td>p24</td><td style="color:var(--text-secondary)">Competitive / alternatives</td><td>ChatGPT</td><td>#5</td><td style="color:var(--text-tertiary)">2 of 4 runs</td></tr>
-<tr><td>p22</td><td style="color:var(--text-secondary)">Competitive / alternatives</td><td>Claude</td><td>#8</td><td style="color:var(--text-tertiary)">1 of 4 runs</td></tr>
-<tr><td>p12</td><td style="color:var(--text-secondary)">Competitive / alternatives</td><td>Perplexity</td><td>#10</td><td style="color:var(--text-tertiary)">1 of 4 runs</td></tr>
+    <tr><td>p02</td><td class="siq-inline-d5c60120f2f3">Category discovery</td><td>ChatGPT</td><td class="win">#1</td><td class="siq-inline-ef1ecb578f1e">2 of 4 runs</td></tr>
+<tr><td>p19</td><td class="siq-inline-d5c60120f2f3">Use case / problem</td><td>ChatGPT</td><td class="win">#1</td><td class="siq-inline-ef1ecb578f1e">4 of 4 runs</td></tr>
+<tr><td>p19</td><td class="siq-inline-d5c60120f2f3">Use case / problem</td><td>Perplexity</td><td class="win">#1</td><td class="siq-inline-ef1ecb578f1e">4 of 4 runs</td></tr>
+<tr><td>p25</td><td class="siq-inline-d5c60120f2f3">Pricing / buying</td><td>ChatGPT</td><td class="win">#1</td><td class="siq-inline-ef1ecb578f1e">1 of 4 runs</td></tr>
+<tr><td>p02</td><td class="siq-inline-d5c60120f2f3">Category discovery</td><td>Perplexity</td><td class="win">#2</td><td class="siq-inline-ef1ecb578f1e">1 of 4 runs</td></tr>
+<tr><td>p04</td><td class="siq-inline-d5c60120f2f3">Category discovery</td><td>Perplexity</td><td class="win">#3</td><td class="siq-inline-ef1ecb578f1e">1 of 4 runs</td></tr>
+<tr><td>p24</td><td class="siq-inline-d5c60120f2f3">Competitive / alternatives</td><td>Perplexity</td><td class="win">#3</td><td class="siq-inline-ef1ecb578f1e">4 of 4 runs</td></tr>
+<tr><td>p24</td><td class="siq-inline-d5c60120f2f3">Competitive / alternatives</td><td>Claude</td><td class="win">#3</td><td class="siq-inline-ef1ecb578f1e">2 of 4 runs</td></tr>
+<tr><td>p01</td><td class="siq-inline-d5c60120f2f3">Category discovery</td><td>Perplexity</td><td>#4</td><td class="siq-inline-ef1ecb578f1e">1 of 4 runs</td></tr>
+<tr><td>p06</td><td class="siq-inline-d5c60120f2f3">Use case / problem</td><td>Perplexity</td><td>#4</td><td class="siq-inline-ef1ecb578f1e">1 of 4 runs</td></tr>
+<tr><td>p11</td><td class="siq-inline-d5c60120f2f3">Integration / fit</td><td>Perplexity</td><td>#4</td><td class="siq-inline-ef1ecb578f1e">2 of 4 runs</td></tr>
+<tr><td>p13</td><td class="siq-inline-d5c60120f2f3">Competitive / alternatives</td><td>Perplexity</td><td>#4</td><td class="siq-inline-ef1ecb578f1e">3 of 4 runs</td></tr>
+<tr><td>p17</td><td class="siq-inline-d5c60120f2f3">Category discovery</td><td>Perplexity</td><td>#4</td><td class="siq-inline-ef1ecb578f1e">1 of 4 runs</td></tr>
+<tr><td>p19</td><td class="siq-inline-d5c60120f2f3">Use case / problem</td><td>Claude</td><td>#4</td><td class="siq-inline-ef1ecb578f1e">1 of 4 runs</td></tr>
+<tr><td>p24</td><td class="siq-inline-d5c60120f2f3">Competitive / alternatives</td><td>ChatGPT</td><td>#5</td><td class="siq-inline-ef1ecb578f1e">2 of 4 runs</td></tr>
+<tr><td>p22</td><td class="siq-inline-d5c60120f2f3">Competitive / alternatives</td><td>Claude</td><td>#8</td><td class="siq-inline-ef1ecb578f1e">1 of 4 runs</td></tr>
+<tr><td>p12</td><td class="siq-inline-d5c60120f2f3">Competitive / alternatives</td><td>Perplexity</td><td>#10</td><td class="siq-inline-ef1ecb578f1e">1 of 4 runs</td></tr>
   </table>
-  <div class="bn" style="margin-top:16px"><div class="l">How to use this</div><div><span style="font-size:14px;color:var(--text-secondary)">Positions that repeat across runs are real. Positions that appear once are noise until they repeat. The questions above that hold across multiple runs are the defensible beachhead: the fastest path to more visibility is usually widening ground you already hold, not contesting the ground the category leader owns.</span></div></div>
+  <div class="bn siq-inline-35a59f152033"><div class="l">How to use this</div><div><span class="siq-inline-df76d9f77994">Positions that repeat across runs are real. Positions that appear once are noise until they repeat. The questions above that hold across multiple runs are the defensible beachhead: the fastest path to more visibility is usually widening ground you already hold, not contesting the ground the category leader owns.</span></div></div>
 </div>
 
 <div class="section">
@@ -957,19 +119,19 @@ ul.rec > li, ul.rec > li b, ul.rec > li strong, ul.rec > li span { color: #F4F0E
   <div class="section-lead">New in this version. When an engine searches, it cites its sources. We now capture every one. This is the list of domains the AI engines relied on when answering these 28 questions, and it is effectively the gatekeeper list for the category.</div>
   <table>
     <tr><th>Source domain</th><th>Citations</th><th>Share</th></tr>
-    <tr><td>b2brain.com</td><td>355</td><td style="color:var(--text-tertiary)">7.1%</td></tr>
-<tr><td>blinq.me</td><td>245</td><td style="color:var(--text-tertiary)">4.9%</td></tr>
-<tr><td>wavecnct.com</td><td>236</td><td style="color:var(--text-tertiary)">4.7%</td></tr>
-<tr><td>popl.co</td><td>221</td><td style="color:var(--text-tertiary)">4.4%</td></tr>
-<tr><td>momencio.com</td><td>184</td><td style="color:var(--text-tertiary)">3.7%</td></tr>
-<tr><td>getboothiq.com</td><td>151</td><td style="color:var(--text-tertiary)">3.0%</td></tr>
-<tr><td>romify.io <span style="color:var(--orange);font-size:11px">Romify</span></td><td>145</td><td style="color:var(--text-tertiary)">2.9%</td></tr>
-<tr><td>g2.com</td><td>119</td><td style="color:var(--text-tertiary)">2.4%</td></tr>
-<tr><td>spreadly.app</td><td>107</td><td style="color:var(--text-tertiary)">2.1%</td></tr>
-<tr><td>getmobly.com</td><td>106</td><td style="color:var(--text-tertiary)">2.1%</td></tr>
+    <tr><td>b2brain.com</td><td>355</td><td class="siq-inline-ef1ecb578f1e">7.1%</td></tr>
+<tr><td>blinq.me</td><td>245</td><td class="siq-inline-ef1ecb578f1e">4.9%</td></tr>
+<tr><td>wavecnct.com</td><td>236</td><td class="siq-inline-ef1ecb578f1e">4.7%</td></tr>
+<tr><td>popl.co</td><td>221</td><td class="siq-inline-ef1ecb578f1e">4.4%</td></tr>
+<tr><td>momencio.com</td><td>184</td><td class="siq-inline-ef1ecb578f1e">3.7%</td></tr>
+<tr><td>getboothiq.com</td><td>151</td><td class="siq-inline-ef1ecb578f1e">3.0%</td></tr>
+<tr><td>romify.io <span class="siq-inline-2a3745f6c242">Romify</span></td><td>145</td><td class="siq-inline-ef1ecb578f1e">2.9%</td></tr>
+<tr><td>g2.com</td><td>119</td><td class="siq-inline-ef1ecb578f1e">2.4%</td></tr>
+<tr><td>spreadly.app</td><td>107</td><td class="siq-inline-ef1ecb578f1e">2.1%</td></tr>
+<tr><td>getmobly.com</td><td>106</td><td class="siq-inline-ef1ecb578f1e">2.1%</td></tr>
   </table>
-  <div class="bn" style="margin-top:16px"><div class="l">The single most actionable finding in this report</div><div><span style="font-size:14px;color:var(--text-secondary)">One third-party site sits at the top of this list and is cited more than any vendor&rsquo;s own website. Being present, accurate and well-positioned in that kind of roundup is likely to move AI visibility faster than another post on your own blog. Note also how much weight competitors&rsquo; <b style="color:var(--text-primary)">own domains</b> carry: they are being read directly. Romify&rsquo;s own domain appears but is outweighed by several competitors, which points at a content depth gap rather than a technical one.</span></div></div>
-  <div class="bn"><div class="l">A risk worth watching</div><div><span style="font-size:14px;color:var(--text-secondary)">Concentration in a single third-party domain is a dependency. In August 2026 Reddit lost roughly 86% of its ChatGPT citation share in four days because of an engine-side change no brand controlled. Tracking which sources carry your visibility, not just whether you are named, is how that risk becomes visible before it costs you.</span></div></div>
+  <div class="bn siq-inline-35a59f152033"><div class="l">The single most actionable finding in this report</div><div><span class="siq-inline-df76d9f77994">One third-party site sits at the top of this list and is cited more than any vendor&rsquo;s own website. Being present, accurate and well-positioned in that kind of roundup is likely to move AI visibility faster than another post on your own blog. Note also how much weight competitors&rsquo; <b class="siq-inline-9badfd4820d0">own domains</b> carry: they are being read directly. Romify&rsquo;s own domain appears but is outweighed by several competitors, which points at a content depth gap rather than a technical one.</span></div></div>
+  <div class="bn"><div class="l">A risk worth watching</div><div><span class="siq-inline-df76d9f77994">Concentration in a single third-party domain is a dependency. In August 2026 Reddit lost roughly 86% of its ChatGPT citation share in four days because of an engine-side change no brand controlled. Tracking which sources carry your visibility, not just whether you are named, is how that risk becomes visible before it costs you.</span></div></div>
 </div>
 
 <div class="section">
@@ -977,22 +139,22 @@ ul.rec > li, ul.rec > li b, ul.rec > li strong, ul.rec > li span { color: #F4F0E
   <div class="section-lead">Every vendor named across the 4 grounded runs, ranked by total mentions. Per-engine columns are ChatGPT / Perplexity / Claude.</div>
   <table>
     <tr><th>Vendor</th><th>Total mentions</th><th>By engine (C / P / Cl)</th></tr>
-    <tr><td><b>iCapture</b></td><td class="win">208</td><td style="color:var(--text-tertiary)">57 / 73 / 78</td></tr>
-<tr><td>Captello</td><td>159</td><td style="color:var(--text-tertiary)">55 / 46 / 58</td></tr>
-<tr><td>Popl <span style="color:var(--orange);font-size:11px">new</span></td><td>156</td><td style="color:var(--text-tertiary)">56 / 49 / 51</td></tr>
-<tr><td>Blinq <span style="color:var(--orange);font-size:11px">new</span></td><td>110</td><td style="color:var(--text-tertiary)">15 / 53 / 42</td></tr>
-<tr><td>Cvent LeadCapture</td><td>106</td><td style="color:var(--text-tertiary)">37 / 32 / 37</td></tr>
-<tr><td>momencio</td><td>97</td><td style="color:var(--text-tertiary)">13 / 38 / 46</td></tr>
-<tr><td>Mobly <span style="color:var(--orange);font-size:11px">new</span></td><td>90</td><td style="color:var(--text-tertiary)">23 / 30 / 37</td></tr>
-<tr><td>Wave Connect <span style="color:var(--orange);font-size:11px">new</span></td><td>80</td><td style="color:var(--text-tertiary)">1 / 41 / 38</td></tr>
-<tr><td>BoothIQ <span style="color:var(--orange);font-size:11px">new</span></td><td>78</td><td style="color:var(--text-tertiary)">16 / 30 / 32</td></tr>
-<tr><td>Whova <span style="color:var(--orange);font-size:11px">new</span></td><td>51</td><td style="color:var(--text-tertiary)">21 / 17 / 13</td></tr>
-<tr class="rowhi"><td><b>Romify</b> <span style="color:var(--text-tertiary);font-size:11px">Romify</span></td><td>32</td><td style="color:var(--text-tertiary)">9 / 19 / 4</td></tr>
-<tr><td>Leadature</td><td>11</td><td style="color:var(--text-tertiary)">1 / 4 / 6</td></tr>
-<tr><td>vFairs</td><td>10</td><td style="color:var(--text-tertiary)">0 / 6 / 4</td></tr>
-<tr><td>Zuant</td><td>1</td><td style="color:var(--text-tertiary)">0 / 0 / 1</td></tr>
+    <tr><td><b>iCapture</b></td><td class="win">208</td><td class="siq-inline-ef1ecb578f1e">57 / 73 / 78</td></tr>
+<tr><td>Captello</td><td>159</td><td class="siq-inline-ef1ecb578f1e">55 / 46 / 58</td></tr>
+<tr><td>Popl <span class="siq-inline-2a3745f6c242">new</span></td><td>156</td><td class="siq-inline-ef1ecb578f1e">56 / 49 / 51</td></tr>
+<tr><td>Blinq <span class="siq-inline-2a3745f6c242">new</span></td><td>110</td><td class="siq-inline-ef1ecb578f1e">15 / 53 / 42</td></tr>
+<tr><td>Cvent LeadCapture</td><td>106</td><td class="siq-inline-ef1ecb578f1e">37 / 32 / 37</td></tr>
+<tr><td>momencio</td><td>97</td><td class="siq-inline-ef1ecb578f1e">13 / 38 / 46</td></tr>
+<tr><td>Mobly <span class="siq-inline-2a3745f6c242">new</span></td><td>90</td><td class="siq-inline-ef1ecb578f1e">23 / 30 / 37</td></tr>
+<tr><td>Wave Connect <span class="siq-inline-2a3745f6c242">new</span></td><td>80</td><td class="siq-inline-ef1ecb578f1e">1 / 41 / 38</td></tr>
+<tr><td>BoothIQ <span class="siq-inline-2a3745f6c242">new</span></td><td>78</td><td class="siq-inline-ef1ecb578f1e">16 / 30 / 32</td></tr>
+<tr><td>Whova <span class="siq-inline-2a3745f6c242">new</span></td><td>51</td><td class="siq-inline-ef1ecb578f1e">21 / 17 / 13</td></tr>
+<tr class="rowhi"><td><b>Romify</b> <span class="siq-inline-30fecd335588">Romify</span></td><td>32</td><td class="siq-inline-ef1ecb578f1e">9 / 19 / 4</td></tr>
+<tr><td>Leadature</td><td>11</td><td class="siq-inline-ef1ecb578f1e">1 / 4 / 6</td></tr>
+<tr><td>vFairs</td><td>10</td><td class="siq-inline-ef1ecb578f1e">0 / 6 / 4</td></tr>
+<tr><td>Zuant</td><td>1</td><td class="siq-inline-ef1ecb578f1e">0 / 0 / 1</td></tr>
   </table>
-  <div class="bn" style="margin-top:16px"><div class="l">Reading the field</div><div><span style="font-size:14px;color:var(--text-secondary)">iCapture still leads across every engine. Popl is now a strong second in grounded search, notably stronger than it looked in the memory-only read, and its positioning sits directly on top of the universal-capture ground. Romify is on the board rather than absent from it, which is the change from August 3, but it sits well below the leaders.</span></div></div>
+  <div class="bn siq-inline-35a59f152033"><div class="l">Reading the field</div><div><span class="siq-inline-df76d9f77994">iCapture still leads across every engine. Popl is now a strong second in grounded search, notably stronger than it looked in the memory-only read, and its positioning sits directly on top of the universal-capture ground. Romify is on the board rather than absent from it, which is the change from August 3, but it sits well below the leaders.</span></div></div>
 </div>
 
 <div class="section">

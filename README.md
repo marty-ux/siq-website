@@ -14,7 +14,7 @@ Browser
        └─ First-party pageview collection via Airtable
 ```
 
-- Most public pages are self-contained HTML files in the repository root. The main marketing pages use `styles.css`; the home page and many report and tool pages also have page-specific inline CSS and JavaScript. Navigation and footers are repeated in the HTML rather than generated from a shared template.
+- All root HTML pages, including client reports and intake, load the same `styles.css`. Brand colors and shared design tokens are defined at the top of that file. Page-specific rules are scoped by each page's `<body data-page="...">` value; marketing pages also carry `data-site-core`. Keep new styles in this file and reference the brand tokens instead of adding page-level `<style>` blocks or color literals. Page-specific JavaScript remains in the HTML. Navigation and footers are repeated in the HTML rather than generated from a shared template.
 - `connectors.html` loads the public `connectors.json` directory and logo assets from `logos/`. Other images, SVGs, and social-preview assets live at the root or in `img/`.
 - `api/` contains Node.js Vercel functions. `api/_data/index.js` bundles client runbook and evidence data for authenticated reads. `api/_stackhealth-index.js` bundles dated Stack Health packs. The underscore-prefixed API data files are intended to be server-side data, not public pages.
 - `middleware.js` blocks direct requests for client JSON under `clients/<slug>/`; `vercel.json` also rewrites the client config URL to `api/blocked.js` and defines legacy redirects. Client report pages should request sensitive data through the passphrase-checked API routes, not embed it in HTML.
@@ -40,7 +40,7 @@ These read routes validate a passphrase on the server. `POST /api/save-runbook` 
 | Client workflow | `client-intake.html` collects onboarding inputs. `runbook.html`, `evidence-romify.html`, and `stack-health.html` fetch data from the API after a passphrase check. |
 | Reports and examples | Root-level `*-romify.html` pages, `aeo-report-coinflow.html`, `marketing-signal-assessment.html`, and `stack-health-acme.html` are standalone client, sample, or report pages. |
 
-The primary marketing navigation links to About, Solutions, Connectors, Assessment, Results, Insights, and Trust, with Contact as a call to action. The home page also links to the readiness and Dark Stack tools. Some client and report pages use their own layout rather than the shared marketing stylesheet.
+The primary marketing navigation links to About, Solutions, Connectors, Assessment, Results, Insights, and Trust, with Contact as a call to action. The home page also links to the readiness and Dark Stack tools. Client and report pages have their own layout rules within the shared stylesheet.
 
 ## Working locally
 
@@ -52,4 +52,4 @@ python3 -m http.server 8000
 
 Then open `http://localhost:8000/`. This previews HTML, CSS, images, and `connectors.json`. The `/api/*` routes and Vercel middleware need a Vercel-compatible local runtime or a deployment, so passphrase-checked reports will not fully work through the Python server. The repository has no package install or build command.
 
-When adding a marketing page, update the relevant navigation links, `sitemap.xml` when the page should be indexed, and any shared styling in `styles.css`. When adding a client data snapshot, update the corresponding server-side index (`api/_data/index.js` or `api/_stackhealth-index.js`) and keep sensitive payloads out of static HTML.
+When adding a page, give its `<body>` a unique `data-page` value, link `/styles.css`, and put page-specific rules under that selector in `styles.css`. Add `data-site-core` when it should use the shared marketing rules. Update the relevant navigation links and `sitemap.xml` when the page should be indexed. When adding a client data snapshot, update the corresponding server-side index (`api/_data/index.js` or `api/_stackhealth-index.js`) and keep sensitive payloads out of static HTML.

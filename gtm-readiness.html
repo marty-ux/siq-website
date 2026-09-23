@@ -17,8 +17,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -34,246 +32,13 @@
 <!-- HubSpot tracking pixel -->
 <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/51005472.js"></script>
 
-<style>
-  /* ============ GTM READINESS INDEX (page-local) ============ */
-  .mi-stage { display: none; }
-  .mi-stage.active { display: block; }
 
-  .mi-progress-wrap {
-    max-width: 720px;
-    margin: 0 auto var(--sp-12);
-  }
-  .mi-progress-track {
-    height: 4px;
-    background: var(--siq-border);
-    position: relative;
-  }
-  .mi-progress-fill {
-    height: 100%;
-    background: var(--siq-orange);
-    width: 0%;
-    transition: width 300ms ease;
-  }
-  .mi-progress-meta {
-    display: flex;
-    justify-content: space-between;
-    font-size: var(--fs-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--siq-text-muted);
-    margin-top: var(--sp-3);
-  }
-
-  .mi-card {
-    max-width: 720px;
-    margin: 0 auto;
-    background: var(--siq-bg-elevated);
-    border: 1px solid var(--siq-border);
-    padding: var(--sp-12);
-  }
-  @media (max-width: 768px) {
-    .mi-card { padding: var(--sp-6); }
-  }
-
-  .mi-question {
-    font-size: var(--fs-2xl);
-    font-weight: 600;
-    line-height: 1.3;
-    margin-bottom: var(--sp-8);
-  }
-
-  .mi-options {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-3);
-  }
-
-  .mi-option {
-    width: 100%;
-    text-align: left;
-    background: var(--siq-bg);
-    border: 1px solid var(--siq-border);
-    color: var(--siq-text-primary);
-    padding: var(--sp-4) var(--sp-6);
-    font-family: var(--font-sans);
-    font-size: var(--fs-base);
-    line-height: 1.5;
-    cursor: pointer;
-    transition: all var(--transition);
-  }
-  .mi-option:hover {
-    border-color: var(--siq-orange);
-    background: var(--siq-bg-surface);
-    transform: translateX(4px);
-  }
-  .mi-option:focus {
-    outline: none;
-    border-color: var(--siq-orange);
-    background: var(--siq-bg-surface);
-  }
-
-  .mi-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: var(--sp-8);
-  }
-  .mi-back {
-    background: transparent;
-    border: none;
-    color: var(--siq-text-muted);
-    font-family: var(--font-sans);
-    font-size: var(--fs-sm);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    cursor: pointer;
-    padding: var(--sp-2) 0;
-  }
-  .mi-back:hover { color: var(--siq-orange); }
-  .mi-back[disabled] { opacity: 0.3; cursor: not-allowed; }
-
-  .mi-dim-tag {
-    display: inline-block;
-    font-size: var(--fs-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--siq-blue);
-    margin-bottom: var(--sp-3);
-  }
-
-  /* Result screen */
-  .mi-result-stage {
-    font-size: var(--fs-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--siq-orange);
-    margin-bottom: var(--sp-3);
-  }
-  .mi-result-badge {
-    font-size: var(--fs-5xl);
-    font-weight: 700;
-    line-height: 1;
-    color: var(--siq-text-primary);
-    margin-bottom: var(--sp-4);
-  }
-  .mi-result-score {
-    font-size: var(--fs-md);
-    color: var(--siq-text-muted);
-    margin-bottom: var(--sp-8);
-  }
-  .mi-result-headline {
-    font-size: var(--fs-xl);
-    font-weight: 600;
-    color: var(--siq-orange);
-    margin-bottom: var(--sp-4);
-  }
-  .mi-result-copy {
-    font-size: var(--fs-md);
-    color: var(--siq-text-secondary);
-    margin-bottom: var(--sp-12);
-    line-height: 1.6;
-  }
-
-  .mi-bars {
-    display: grid;
-    gap: var(--sp-4);
-    margin-bottom: var(--sp-12);
-  }
-  .mi-bar-row { display: grid; grid-template-columns: 1fr auto; gap: var(--sp-4); align-items: center; }
-  .mi-bar-label { font-size: var(--fs-sm); color: var(--siq-text-secondary); }
-  .mi-bar-track {
-    grid-column: 1 / -1;
-    height: 8px;
-    background: var(--siq-border);
-    position: relative;
-  }
-  .mi-bar-fill {
-    height: 100%;
-    background: var(--siq-blue);
-    transition: width 600ms ease;
-  }
-  .mi-bar-score {
-    font-size: var(--fs-sm);
-    color: var(--siq-text-muted);
-    font-variant-numeric: tabular-nums;
-  }
-
-  .mi-cta-box {
-    background: var(--siq-bg);
-    border: 1px solid var(--siq-orange);
-    padding: var(--sp-8);
-    text-align: center;
-  }
-  .mi-cta-headline {
-    font-size: var(--fs-lg);
-    font-weight: 600;
-    margin-bottom: var(--sp-3);
-  }
-  .mi-cta-sub {
-    font-size: var(--fs-sm);
-    color: var(--siq-text-secondary);
-    margin-bottom: var(--sp-6);
-  }
-  .mi-cta-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-3);
-    justify-content: center;
-  }
-
-  /* Intro screen */
-  .mi-intro-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-6);
-    margin-top: var(--sp-6);
-    margin-bottom: var(--sp-8);
-  }
-  .mi-intro-meta-item {
-    font-size: var(--fs-sm);
-    color: var(--siq-text-muted);
-  }
-  .mi-intro-meta-item strong {
-    color: var(--siq-text-primary);
-    display: block;
-    font-size: var(--fs-lg);
-    font-weight: 600;
-    margin-bottom: var(--sp-1);
-  }
-
-  /* Email gate */
-  .mi-gate-form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-4);
-    margin-top: var(--sp-6);
-  }
-  .mi-gate-error {
-    color: var(--siq-danger);
-    font-size: var(--fs-sm);
-    min-height: 1.4em;
-  }
-
-  .mi-loading {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border: 2px solid rgba(255,255,255,0.3);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: mi-spin 600ms linear infinite;
-    margin-left: var(--sp-2);
-    vertical-align: middle;
-  }
-  @keyframes mi-spin { to { transform: rotate(360deg); } }
-.mi-card{--siq-bg:#FFFFFF;--siq-bg-elevated:var(--siq-ivory);--siq-bg-surface:var(--siq-ivory-ground);--siq-border:var(--siq-ink-line);--siq-text-primary:var(--siq-ink);--siq-text-secondary:var(--siq-ink-body);--siq-text-muted:var(--siq-ink-body);background:var(--siq-ivory) !important;box-shadow:0 40px 90px -50px rgba(0,0,0,0.55);} .mi-card input,.mi-card .mi-cta-box{background:#FFFFFF;}</style>
 
 <script>(function(){try{if(localStorage.getItem("siq_no")==="1")return;}catch(e){}function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,o.onload=function(){window.trackingFunctions.onLoad({appId:"678988ffe54cd602d0b96756"})},document.head.appendChild(o)}initApollo();})();</script>
-  <!-- siq first-party signal beacon --><script>(function(){try{if(localStorage.getItem("siq_no")==="1")return;var K="siq_vid",v=localStorage.getItem(K);if(v==="mthrc8423q99gzql"||v==="mtgop71aab363pkm"){localStorage.setItem("siq_no","1");return;}if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem(K,v);}var q=new URLSearchParams(location.search),d={vid:v,path:location.pathname,title:document.title,ref:document.referrer,utm_source:q.get("utm_source")||"",utm_medium:q.get("utm_medium")||"",utm_campaign:q.get("utm_campaign")||"",utm_term:q.get("utm_term")||"",utm_content:q.get("utm_content")||"",screen:innerWidth+"x"+innerHeight,type:"pageview"},s=JSON.stringify(d);if(navigator.sendBeacon){navigator.sendBeacon("/api/e",new Blob([s],{type:"application/json"}));}else{fetch("/api/e",{method:"POST",headers:{"Content-Type":"application/json"},body:s,keepalive:true});}}catch(e){}})();</script>
-<link rel="stylesheet" href="/site-nav.css">
-<script src="/site-nav.js" defer></script>
+  <!-- siq first-party signal beacon --><script>(function(){try{if(localStorage.getItem("siq_no")==="1")return;var K="siq_vid",v=localStorage.getItem(K);if(v==="mthrc8423q99gzql"||v==="mtgop71aab363pkm"){localStorage.setItem("siq_no","1");return;}if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem(K,v);}var q=new URLSearchParams(location.search),d={vid:v,path:location.pathname,title:document.title,ref:document.referrer,utm_source:q.get("utm_source")||"",utm_medium:q.get("utm_medium")||"",utm_campaign:q.get("utm_campaign")||"",utm_term:q.get("utm_term")||"",utm_content:q.get("utm_content")||"",screen:innerWidth+"x"+innerHeight,type:"pageview"},s=JSON.stringify(d);if(navigator.sendBeacon){navigator.sendBeacon("/api/e",new Blob([s],{type:"application/json"}));}else{fetch("/api/e",{method:"POST",headers:{"Content-Type":"application/json"},body:s,keepalive:true});}}catch(e){}})();</script><script src="/site-nav.js" defer></script>
+<link rel="stylesheet" href="/styles.css">
 </head>
-<body>
+<body data-page="gtm-readiness" data-site-core>
 
 <nav class="siq-site-nav" aria-label="Main navigation">
   <div class="siq-nav-inner">
@@ -305,7 +70,7 @@
   </div>
 </nav>
 
-<section class="hero" style="padding-bottom: var(--sp-12);">
+<section class="hero siq-inline-b84a82ea2f76">
   <div class="container">
     <div class="hero-inner">
       <h1>The GTM Readiness Index</h1>
@@ -314,10 +79,10 @@
   </div>
 </section>
 
-<section style="padding-top: 0;">
+<section class="siq-inline-fe76c5842d38">
   <div class="container">
 
-    <div class="mi-progress-wrap" id="mi-progress" style="display: none;">
+    <div class="mi-progress-wrap siq-inline-494b3d17d5fa" id="mi-progress">
       <div class="mi-progress-track"><div class="mi-progress-fill" id="mi-progress-fill"></div></div>
       <div class="mi-progress-meta">
         <span id="mi-progress-current">Question 1 of 12</span>
@@ -328,8 +93,8 @@
     <!-- ============ STAGE: INTRO ============ -->
     <div class="mi-stage active" id="mi-stage-intro">
       <div class="mi-card">
-        <h2 style="font-size: var(--fs-2xl); font-weight: 600; margin-bottom: var(--sp-3);">A 5-minute pulse on your GTM readiness.</h2>
-        <p style="color: var(--siq-text-secondary);">No deck. No pitch. 12 short questions across the four dimensions that decide where your revenue engine sits on the readiness curve. Your results stay private. We use them to send you a personalized diagnostic and benchmark you against mid-market peers.</p>
+        <h2 class="siq-inline-9752301ee1e6">A 5-minute pulse on your GTM readiness.</h2>
+        <p class="siq-inline-013c95ae92ab">No deck. No pitch. 12 short questions across the four dimensions that decide where your revenue engine sits on the readiness curve. Your results stay private. We use them to send you a personalized diagnostic and benchmark you against mid-market peers.</p>
 
         <div class="mi-intro-meta">
           <div class="mi-intro-meta-item"><strong>5 min</strong>Avg. completion time</div>
@@ -349,7 +114,7 @@
         <div class="mi-options" id="mi-q-options"></div>
         <div class="mi-nav">
           <button class="mi-back" id="mi-back" onclick="MI.back()">&larr; Back</button>
-          <span style="color: var(--siq-text-muted); font-size: var(--fs-sm);">Pick the one closest to true</span>
+          <span class="siq-inline-0b6907156ede">Pick the one closest to true</span>
         </div>
       </div>
     </div>
@@ -357,8 +122,8 @@
     <!-- ============ STAGE: EMAIL GATE ============ -->
     <div class="mi-stage" id="mi-stage-gate">
       <div class="mi-card">
-        <h2 style="font-size: var(--fs-2xl); font-weight: 600; margin-bottom: var(--sp-3);">Where should we send your results?</h2>
-        <p style="color: var(--siq-text-secondary);">We'll show your stage and diagnostic on this page right after, and email a copy you can share with your team.</p>
+        <h2 class="siq-inline-9752301ee1e6">Where should we send your results?</h2>
+        <p class="siq-inline-013c95ae92ab">We'll show your stage and diagnostic on this page right after, and email a copy you can share with your team.</p>
 
         <form class="mi-gate-form" id="mi-gate-form" onsubmit="MI.submitGate(event)" novalidate>
           <div class="form-row">
@@ -393,7 +158,7 @@
           </div>
           <div class="mi-gate-error" id="mi-gate-error" role="alert"></div>
           <button type="submit" class="btn btn-primary btn-lg" id="mi-gate-submit">Show My Results</button>
-          <p style="font-size: var(--fs-xs); color: var(--siq-text-muted); margin-top: var(--sp-2);">We'll never share your email. Powered by SiQ Cortex, the Scalient IQ read.</p>
+          <p class="siq-inline-ac944e57b874">We'll never share your email. Powered by SiQ Cortex, the Scalient IQ read.</p>
         </form>
       </div>
     </div>
@@ -408,7 +173,7 @@
         <h3 class="mi-result-headline" id="mi-r-headline">You've made the investment. Now make it talk.</h3>
         <p class="mi-result-copy" id="mi-r-copy">Diagnostic copy here.</p>
 
-        <h4 style="font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.12em; color: var(--siq-text-muted); margin-bottom: var(--sp-4);">Score by dimension</h4>
+        <h4 class="siq-inline-f09098548de4">Score by dimension</h4>
         <div class="mi-bars" id="mi-r-bars"></div>
 
         <div class="mi-cta-box">
@@ -420,7 +185,7 @@
           </div>
         </div>
 
-        <p style="font-size: var(--fs-xs); color: var(--siq-text-muted); margin-top: var(--sp-8); text-align: center;">Want to retake it? <a href="gtm-readiness" style="color: var(--siq-orange);">Start over</a>.</p>
+        <p class="siq-inline-892d0c5dd9be">Want to retake it? <a href="gtm-readiness" class="siq-inline-5d050838ca24">Start over</a>.</p>
       </div>
     </div>
 
@@ -460,8 +225,8 @@
         </ul>
       </div>
     </div>
-    <div class="footer-bottom"><span>&copy; 2026 Scalient IQ. All rights reserved. &middot; <a href="terms" style="color: var(--siq-text-muted);">Terms</a> &middot; <a href="privacy" style="color: var(--siq-text-muted);">Privacy</a></span><span>Built for revenue teams who'd rather know than guess.</span></div>
-    <p style="text-align:center; font-size: var(--fs-xs); color: var(--siq-text-muted); max-width: 900px; margin: var(--sp-4) auto 0; line-height:1.6;">Scalient IQ provides read-only, diagnostic go-to-market intelligence. Dollar figures and upside ranges are modeled estimates for discussion, not guarantees of revenue, pipeline, or performance.</p>
+    <div class="footer-bottom"><span>&copy; 2026 Scalient IQ. All rights reserved. &middot; <a href="terms" class="siq-inline-44deed0ec695">Terms</a> &middot; <a href="privacy" class="siq-inline-44deed0ec695">Privacy</a></span><span>Built for revenue teams who'd rather know than guess.</span></div>
+    <p class="siq-inline-4800d7347cc3">Scalient IQ provides read-only, diagnostic go-to-market intelligence. Dollar figures and upside ranges are modeled estimates for discussion, not guarantees of revenue, pipeline, or performance.</p>
   </div>
 </footer>
 

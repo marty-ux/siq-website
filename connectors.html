@@ -23,7 +23,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
 <!-- Schema.org JSON-LD -->
 <script type="application/ld+json">
 {
@@ -44,105 +43,16 @@
   }
 }
 </script>
-<style>
-  /* ===== Connector Directory (page-scoped) ===== */
-  .directory { padding-top: var(--sp-12); }
-  .dir-controls { max-width: var(--container-max); margin: 0 auto; }
-  .dir-row { display: flex; flex-wrap: wrap; gap: var(--sp-3); align-items: stretch; margin-bottom: var(--sp-4); }
-  .dir-search {
-    flex: 2 1 260px;
-    background: var(--siq-bg-elevated);
-    color: var(--siq-text-primary);
-    border: 1px solid var(--siq-border);
-    font-family: var(--font-sans);
-    font-size: var(--fs-base);
-    padding: var(--sp-4);
-  }
-  .dir-search:focus { outline: none; border-color: var(--siq-orange); }
-  .dir-select-wrap { position: relative; flex: 1 1 190px; max-width: 100%; }
-  .dir-select {
-    -webkit-appearance: none; -moz-appearance: none; appearance: none;
-    width: 100%; height: 100%;
-    background: var(--siq-bg-elevated);
-    color: var(--siq-text-primary);
-    border: 1px solid var(--siq-border);
-    font-family: var(--font-sans);
-    font-size: var(--fs-base);
-    padding: var(--sp-4);
-    padding-right: 44px;
-    cursor: pointer;
-  }
-  .dir-select:focus { outline: none; border-color: var(--siq-orange); }
-  .dir-select-wrap::after {
-    content: ""; position: absolute; right: var(--sp-4); top: 50%;
-    width: 9px; height: 9px; margin-top: -7px;
-    border-right: 2px solid var(--siq-text-muted); border-bottom: 2px solid var(--siq-text-muted);
-    transform: rotate(45deg); pointer-events: none;
-  }
-  .dir-select:disabled { opacity: 0.5; cursor: not-allowed; }
-  .dir-select option { background: var(--siq-bg-elevated); color: var(--siq-text-primary); }
-  .dir-count { font-size: var(--fs-sm); color: var(--siq-text-muted); margin-bottom: var(--sp-6); }
-  .dir-count strong { color: var(--siq-text-primary); font-weight: 700; }
-  .dir-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: var(--sp-4);
-  }
-  .conn-card {
-    background: var(--siq-bg-elevated);
-    border: 1px solid var(--siq-border);
-    padding: var(--sp-6);
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-2);
-    text-decoration: none;
-    color: inherit;
-    transition: border-color var(--transition), transform var(--transition);
-  }
-  .conn-card:hover { border-color: var(--siq-orange); transform: translateY(-2px); }
-  .conn-logo {
-    width: 48px;
-    height: 48px;
-    background: #FFFFFF;
-    border: 1px solid var(--siq-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
-    margin-bottom: var(--sp-2);
-  }
-  .conn-logo img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
-  .conn-cat {
-    font-size: var(--fs-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--siq-blue);
-    font-weight: 600;
-  }
-  .conn-card h3 { font-size: var(--fs-lg); margin: 0; }
-  .conn-card p { font-size: var(--fs-sm); color: var(--siq-text-secondary); margin: 0; }
-  .conn-link {
-    margin-top: auto;
-    padding-top: var(--sp-2);
-    font-size: var(--fs-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    font-weight: 600;
-    color: var(--siq-text-muted);
-  }
-  .conn-card:hover .conn-link { color: var(--siq-orange); }
-  .dir-empty { color: var(--siq-text-muted); padding: var(--sp-8) 0; }
-</style>
+
 <!-- Leadpipe pixel -->
 <script src="https://leadpipe.aws53.cloud/p/3d0178c9-0b3c-4d48-bf12-e0c5f8c7e76c.js" async></script>
 <!-- HubSpot tracking pixel -->
 <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/51005472.js"></script>
 <script>(function(){try{if(localStorage.getItem("siq_no")==="1")return;}catch(e){}function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,o.onload=function(){window.trackingFunctions.onLoad({appId:"678988ffe54cd602d0b96756"})},document.head.appendChild(o)}initApollo();})();</script>
-  <!-- siq first-party signal beacon --><script>(function(){try{if(localStorage.getItem("siq_no")==="1")return;var K="siq_vid",v=localStorage.getItem(K);if(v==="mthrc8423q99gzql"||v==="mtgop71aab363pkm"){localStorage.setItem("siq_no","1");return;}if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem(K,v);}var q=new URLSearchParams(location.search),d={vid:v,path:location.pathname,title:document.title,ref:document.referrer,utm_source:q.get("utm_source")||"",utm_medium:q.get("utm_medium")||"",utm_campaign:q.get("utm_campaign")||"",utm_term:q.get("utm_term")||"",utm_content:q.get("utm_content")||"",screen:innerWidth+"x"+innerHeight,type:"pageview"},s=JSON.stringify(d);if(navigator.sendBeacon){navigator.sendBeacon("/api/e",new Blob([s],{type:"application/json"}));}else{fetch("/api/e",{method:"POST",headers:{"Content-Type":"application/json"},body:s,keepalive:true});}}catch(e){}})();</script>
-<link rel="stylesheet" href="/site-nav.css">
-<script src="/site-nav.js" defer></script>
+  <!-- siq first-party signal beacon --><script>(function(){try{if(localStorage.getItem("siq_no")==="1")return;var K="siq_vid",v=localStorage.getItem(K);if(v==="mthrc8423q99gzql"||v==="mtgop71aab363pkm"){localStorage.setItem("siq_no","1");return;}if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem(K,v);}var q=new URLSearchParams(location.search),d={vid:v,path:location.pathname,title:document.title,ref:document.referrer,utm_source:q.get("utm_source")||"",utm_medium:q.get("utm_medium")||"",utm_campaign:q.get("utm_campaign")||"",utm_term:q.get("utm_term")||"",utm_content:q.get("utm_content")||"",screen:innerWidth+"x"+innerHeight,type:"pageview"},s=JSON.stringify(d);if(navigator.sendBeacon){navigator.sendBeacon("/api/e",new Blob([s],{type:"application/json"}));}else{fetch("/api/e",{method:"POST",headers:{"Content-Type":"application/json"},body:s,keepalive:true});}}catch(e){}})();</script><script src="/site-nav.js" defer></script>
+<link rel="stylesheet" href="/styles.css">
 </head>
-<body>
+<body data-page="connectors" data-site-core>
 <!-- ============ NAV ============ -->
 <nav class="siq-site-nav" aria-label="Main navigation">
   <div class="siq-nav-inner">
@@ -174,7 +84,7 @@
   </div>
 </nav>
 <!-- ============ HERO ============ -->
-<section class="hero" style="padding-bottom: var(--sp-8);">
+<section class="hero siq-inline-049333c18708">
   <div class="container">
     <div class="hero-inner">
       <h1>The GTM tools Scalient IQ connects with.</h1>
@@ -231,8 +141,8 @@
         </ul>
       </div>
     </div>
-    <div class="footer-bottom"><span>&copy; 2026 Scalient IQ. All rights reserved. &middot; <a href="terms" style="color: var(--siq-text-muted);">Terms</a> &middot; <a href="privacy" style="color: var(--siq-text-muted);">Privacy</a></span><span>Built for revenue teams who'd rather know than guess.</span></div>
-    <p style="text-align:center; font-size: var(--fs-xs); color: var(--siq-text-muted); max-width: 900px; margin: var(--sp-4) auto 0; line-height:1.6;">Scalient IQ provides read-only, diagnostic go-to-market intelligence. Dollar figures and upside ranges are modeled estimates for discussion, not guarantees of revenue, pipeline, or performance.</p>
+    <div class="footer-bottom"><span>&copy; 2026 Scalient IQ. All rights reserved. &middot; <a href="terms" class="siq-inline-298f335c13c8">Terms</a> &middot; <a href="privacy" class="siq-inline-298f335c13c8">Privacy</a></span><span>Built for revenue teams who'd rather know than guess.</span></div>
+    <p class="siq-inline-5a9165eb461d">Scalient IQ provides read-only, diagnostic go-to-market intelligence. Dollar figures and upside ranges are modeled estimates for discussion, not guarantees of revenue, pipeline, or performance.</p>
   </div>
 </footer>
 <script>
