@@ -2,17 +2,12 @@
   "redirects": [
     {
       "source": "/gtm-maturity",
-      "destination": "/gtm-readiness.html",
+      "destination": "/gtm-readiness",
       "permanent": true
     },
     {
-      "source": "/gtm-maturity.html",
-      "destination": "/gtm-readiness.html",
-      "permanent": true
-    },
-    {
-      "source": "/romify-intake.html",
-      "destination": "/client-intake.html",
+      "source": "/romify-intake",
+      "destination": "/client-intake",
       "permanent": true
     }
   ],
@@ -21,5 +16,6 @@
       "source": "/clients/:slug/config.json",
       "destination": "/api/blocked"
     }
-  ]
+  ],
+  "cleanUrls": true
 }
