@@ -1,12 +1,13 @@
 .siq-site-nav {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 100000;
   background: rgba(10, 11, 16, .94);
   border-bottom: 1px solid rgba(255, 255, 255, .14);
   backdrop-filter: blur(14px);
   font-family: 'DM Sans', Arial, sans-serif;
 }
+.siq-site-nav.siq-nav-edge { margin-left: -20px; margin-right: -20px; }
 .siq-site-nav, .siq-site-nav * { box-sizing: border-box; }
 .siq-site-nav .siq-nav-inner {
   max-width: 1440px;
