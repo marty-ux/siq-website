@@ -594,7 +594,7 @@ body:has(.rowhi) .hero [style*="color:var(--success)"], body:has(.rowhi) .hero [
 
 /* NOTE, recorded 2026-09-04 so the next person does not repeat my error.
    .bn is an IVORY box in eight of the nine readouts. It is navy ONLY in
-   siq-website/aeo-report-coinflow.html, which navy-fills .hero and .bn
+   siq-website/aeo-report-coinflow, which navy-fills .hero and .bn
    in its own CSS (commit 680f3d9). That per-file divergence is invisible
    to this skin, and adding .bn to the dark-block lists here would put
    light text on ivory in Demand Health, Marketing Signal, Romify AEO and
@@ -923,7 +923,38 @@ ul.rec > li, ul.rec > li b, ul.rec > li strong, ul.rec > li span { color: #F4F0E
   { color: #FF9B57 !important; }
 
 </style>
+<link rel="stylesheet" href="/site-nav.css">
+<script src="/site-nav.js" defer></script>
 </head><body data-theme="dark" data-assessment="bad" class="siq-locked">
+<nav class="siq-site-nav" aria-label="Main navigation">
+  <div class="siq-nav-inner">
+    <a class="siq-nav-logo" href="/" aria-label="Scalient IQ home"><img src="/logo.svg" alt="Scalient IQ"></a>
+    <ul class="siq-nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/solutions">Solutions</a></li>
+        <li><a href="/connectors">Connectors</a></li>
+        <li><a href="/assessment">Assessment</a></li>
+        <li><a href="/results">Results</a></li>
+        <li><a href="/insights">Insights</a></li>
+        <li><a href="/trust">Trust</a></li>
+    </ul>
+    <div class="siq-nav-actions"><a href="/contact">Contact</a><a class="siq-nav-book" href="https://calendly.com/marty-scalientiq/gtm-signal-review" target="_blank" rel="noopener">Book Signal Review</a></div>
+    <button class="siq-nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="siq-nav-mobile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  </div>
+  <div class="siq-nav-mobile" id="siq-nav-mobile" hidden>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/solutions">Solutions</a>
+      <a href="/connectors">Connectors</a>
+      <a href="/assessment">Assessment</a>
+      <a href="/results">Results</a>
+      <a href="/insights">Insights</a>
+      <a href="/trust">Trust</a>
+      <a href="/contact">Contact</a>
+      <a class="siq-nav-book" href="https://calendly.com/marty-scalientiq/gtm-signal-review" target="_blank" rel="noopener">Book Signal Review</a>
+  </div>
+</nav>
 <div id="siq-gate"><div class="siq-gate-box"><div class="siq-gate-logo">Scalient<span>IQ</span></div><div class="siq-gate-title">Stack Health Report</div><div class="siq-gate-sub">Confidential client report. Enter the access passphrase to view.</div><input id="siq-gate-input" type="password" placeholder="Access passphrase" autocomplete="off" /><button id="siq-gate-btn">View Report</button><div id="siq-gate-err">Incorrect passphrase. Please try again.</div></div></div>
 
 <div class="wrap" id="doc" style="visibility:hidden">
