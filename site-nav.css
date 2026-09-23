@@ -1,0 +1,41 @@
+.siq-site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(10, 11, 16, .94);
+  border-bottom: 1px solid rgba(255, 255, 255, .14);
+  backdrop-filter: blur(14px);
+  font-family: 'DM Sans', Arial, sans-serif;
+}
+.siq-site-nav, .siq-site-nav * { box-sizing: border-box; }
+.siq-site-nav .siq-nav-inner {
+  max-width: 1440px;
+  min-height: 70px;
+  padding: 12px 24px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.siq-site-nav .siq-nav-logo { display: inline-flex; flex: none; }
+.siq-site-nav .siq-nav-logo img { display: block; width: 155px; height: auto; }
+.siq-site-nav .siq-nav-links, .siq-site-nav .siq-nav-actions { display: flex; align-items: center; }
+.siq-site-nav .siq-nav-links { list-style: none; margin: 0 auto 0 0; padding: 0; gap: 20px; }
+.siq-site-nav a { color: #c5ccda; text-decoration: none; text-transform: none; letter-spacing: normal; font-size: 14px; font-weight: 500; white-space: nowrap; }
+.siq-site-nav a:hover, .siq-site-nav a[aria-current="page"] { color: #fff; }
+.siq-site-nav .siq-nav-actions { gap: 16px; }
+.siq-site-nav .siq-nav-book { background: #ff6600; color: #25120a; padding: 10px 14px; border-radius: 3px; font-weight: 700; }
+.siq-site-nav .siq-nav-book:hover { background: #ff8533; color: #25120a; }
+.siq-site-nav .siq-nav-toggle { display: none; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; background: transparent; border: 1px solid #727987; border-radius: 3px; color: #fff; cursor: pointer; }
+.siq-site-nav .siq-nav-toggle svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.siq-site-nav .siq-nav-toggle:focus-visible, .siq-site-nav a:focus-visible { outline: 2px solid #ff6600; outline-offset: 3px; }
+.siq-site-nav .siq-nav-mobile { display: none; }
+@media (max-width: 1080px) {
+  .siq-site-nav .siq-nav-inner { min-height: 64px; justify-content: space-between; }
+  .siq-site-nav .siq-nav-links, .siq-site-nav .siq-nav-actions { display: none; }
+  .siq-site-nav .siq-nav-toggle { display: inline-flex; }
+  .siq-site-nav .siq-nav-mobile[hidden] { display: none; }
+  .siq-site-nav .siq-nav-mobile:not([hidden]) { display: block; max-height: calc(100vh - 64px); overflow-y: auto; border-top: 1px solid rgba(255,255,255,.14); padding: 8px 24px 20px; }
+  .siq-site-nav .siq-nav-mobile a { display: block; padding: 11px 0; font-size: 16px; }
+  .siq-site-nav .siq-nav-mobile .siq-nav-book { display: inline-block; margin-top: 10px; padding: 11px 16px; }
+}
