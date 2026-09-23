@@ -156,7 +156,7 @@
         </tr>
         <tr>
           <th>PII Handling</th>
-          <td>SiQ Cortex processes business contact records (name, email, title, company) as provided by the client's CRM. <strong>No consumer PII. No financial data. No health data.</strong></td>
+          <td>Scalient IQ processes business contact records (name, email, title, company) as provided by the client's CRM. <strong>No consumer PII. No financial data. No health data.</strong></td>
         </tr>
       </tbody>
     </table>
@@ -239,7 +239,7 @@
     <div class="cta-banner">
       <span class="eyebrow">Resources</span>
       <h2>Want the Full Security Overview?</h2>
-      <p>The Scalient IQ Security &amp; Data Handling Overview (v1.1, April 2026) is available on request. PDF, formatted for InfoSec / IT review. We're also happy to jump on a call with your security team to walk through any of the above in detail.</p>
+      <p>The Scalient IQ Security &amp; Data Handling Overview is available on request. PDF, formatted for InfoSec / IT review. We're also happy to jump on a call with your security team to walk through any of the above in detail.</p>
       <div class="hero-cta">
         <button type="button" class="btn btn-primary btn-lg" onclick="SecurityPdfGate.open()">Request the PDF</button>
         <a href="contact.html" class="btn btn-secondary btn-lg">Schedule InfoSec Call</a>
@@ -290,15 +290,15 @@
         </div>
         <div id="sp-error" style="color:var(--siq-danger); font-size:var(--fs-sm); min-height:1.4em;"></div>
         <button type="submit" class="btn btn-primary btn-lg" id="sp-submit">Get the PDF</button>
-        <p style="font-size:var(--fs-xs); color:var(--siq-text-muted); margin-top:var(--sp-2);">We'll never share your email. Powered by SiQ Cortex.</p>
+        <p style="font-size:var(--fs-xs); color:var(--siq-text-muted); margin-top:var(--sp-2);">We'll never share your email.</p>
       </form>
     </div>
 
     <div id="security-pdf-success-stage" style="display:none; text-align:center;">
-      <span style="display:inline-block; font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:0.16em; color:var(--siq-success); background:rgba(22,163,74,0.1); padding:var(--sp-2) var(--sp-3); margin-bottom:var(--sp-4);">Ready</span>
-      <h3 style="font-size:var(--fs-xl); font-weight:600; margin-bottom:var(--sp-4);">Your PDF is ready.</h3>
-      <p style="color:var(--siq-text-secondary); margin-bottom:var(--sp-6); font-size:var(--fs-sm);">Click below to download the Security &amp; Data Handling Overview (v1.1, April 2026). We've also logged your request. Feel free to forward this directly to your InfoSec team.</p>
-      <a href="/SiQ-Security-Data-Handling-Overview.pdf" download class="btn btn-primary btn-lg" onclick="SecurityPdfGate.close();">Download the PDF</a>
+      <span style="display:inline-block; font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:0.16em; color:var(--siq-success); background:rgba(22,163,74,0.1); padding:var(--sp-2) var(--sp-3); margin-bottom:var(--sp-4);">Received</span>
+      <h3 style="font-size:var(--fs-xl); font-weight:600; margin-bottom:var(--sp-4);">Request received.</h3>
+      <p style="color:var(--siq-text-secondary); margin-bottom:var(--sp-6); font-size:var(--fs-sm);">We have logged your request and will send the Security &amp; Data Handling Overview to your inbox, formatted for InfoSec / IT review. If your security team needs it sooner, reply to that note and we will prioritize it.</p>
+      <a href="contact.html" class="btn btn-primary btn-lg" onclick="SecurityPdfGate.close();">Talk to InfoSec</a>
       <p style="font-size:var(--fs-xs); color:var(--siq-text-muted); margin-top:var(--sp-6);">Need to walk through it together? <a href="contact.html" style="color:var(--siq-orange);">Schedule an InfoSec call</a>.</p>
     </div>
   </div>
@@ -345,7 +345,7 @@ const SecurityPdfGate = {
     const payload = {
       firstname, email, company,
       lead_source_detail: this.LEAD_SOURCE,
-      asset_requested: 'SiQ Security & Data Handling Overview v1.1',
+      asset_requested: 'SiQ Security & Data Handling Overview',
       submitted_at: new Date().toISOString(),
       page_url: window.location.href
     };
